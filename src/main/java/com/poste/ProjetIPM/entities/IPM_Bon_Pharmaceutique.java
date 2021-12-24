@@ -14,6 +14,7 @@ public class IPM_Bon_Pharmaceutique extends IPM_Bon {
 
 
     private Integer quantite;
+    //private idbon bons;
     private String designation;
     private Integer prix_unitaire;
     private String suivant_ordonnance_docteur;
