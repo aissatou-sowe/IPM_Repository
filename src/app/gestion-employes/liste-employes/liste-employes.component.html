@@ -1,0 +1,415 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" >
+            <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+              <i class="material-icons">list</i>
+            </div>
+            <h2 class="text-center" style="background-color:whitesmoke; color: black; padding: 2px; width: 40%;">Liste des employés  </h2>
+            <button mat-raised-button type="button" style="float:right;margin-top:-1cm; font-size: 16px;" data-toggle="modal" data-target="#ajouter" class="btn btn-success">
+              <i class="material-icons" >add_circle</i> Ajouter un participant
+            </button>
+          </div>
+        
+          <div class="card-body table-full-width">
+            <div class="material-datatable">
+              <table id="datatable" class="table table-bordered table-striped" width="100%" style="width:100%"
+                class="table table-hover">
+                <thead class="text-black">
+                  <tr>()
+
+                    <th cope="col"><b> Numero Carnet</b></th>
+                    <th cope="col"><b> Nom</b></th>
+                    <th cope="col"><b> Prenom</b></th>
+                    <th cope="col"><b> Matricule</b></th>
+                    <th cope="col"><b> Reference</b></th>
+                    <th cope="col"><b> Service</b></th>
+                    <th cope="col"><b> Categorie</b></th>
+
+                    <th class="disabled-sorting text-center">Actions</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor=" let employe of employes" style="font-weight: 500;">
+                    <td class="text-center">{{employe.numero_carnet}}</td>
+                    <td>{{employe.nom}}</td>
+                    <td>{{employe.prenom}}</td>
+                    <!-- <td >{{employe.sexe}}</td> -->
+                    <td>{{employe.matricule}}</td>
+                    <td>{{employe.reference}}</td>
+                    <td>{{employe.ipmService?.type_service}}</td>
+                    <td>{{employe.ipm_categorie?.libelle}}</td>
+
+                    <td class="td-actions">
+
+                      <label mat-raised-button>
+                        <span style="margin:2px;" *ngIf="employe.statut!=''" class="badge badge-danger">X<i class="material-icons"></i></span>
+                        <span style="margin:2px;" *ngIf="employe.statut==''" class="btn btn-success"><i class="material-icons">check</i></span>
+                      </label> 
+                      <button mat-raised-button (click)="getEmploye(employe)" data-toggle="modal"
+                       data-target="#statu" style="margin:2px;" type="button" class="btn" style="background-color: rgb(101, 101, 110);">
+                        <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>
+                          
+                      </button>
+                      <button mat-raised-button style="margin:2px;" type="button" class="btn btn-info">
+                        <i class="material-icons"
+                          [routerLink]="['/gestion-employes/carnetEmploye/'+employe.idemp]">person</i>
+                      </button>
+                  
+                      <button mat-raised-button style="margin:2px;"type="button" class="btn btn-warning ">
+                        <i class="material-icons"
+                          [routerLink]="['/gestion-employes/ModifierEmployes/'+employe.idemp]">edit</i>
+                      </button>
+                      <!-- <button mat-raised-button type="button" class="btn btn-danger ">
+                                                    <i class="fa fa-trash-o" (click)="supprimerEmploye(employe)"></i>
+                                                </button> -->
+
+
+
+                    </td>
+
+                  </tr>
+
+                </tbody>
+                <button mat-raised-button (click)="upload()" type="button" style="font-size: 16px;background-color:rgba(17, 17, 227, 0.88); color: white; margin-left: 20px;">
+                  <i class="material-icons">file_download</i>Telecharger
+                </button>
+              </table>
+            </div>
+          </div>
+
+          <!--modal pour afficher le detail d'un employe-->
+          <div class="ecommerce">
+            <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-ecom">
+                <div class="modal-content ">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Information de l'employe</h4>
+                    <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      <i class="material-icons">clear</i>
+                    </button>
+
+                  </div>
+                  <div class="modal-body ">
+                    <div class="card ">
+                      <div class="card-body ">
+                        <label class="col-md-6">Numero Carnet</label>
+                        <label class="col-md-6">{{currentemploye.idemp}}</label>
+                        <label class="col-md-6">Nom</label>
+                        <label class="col-md-6">{{currentemploye.nom}}</label>
+                        <label class="col-md-6">Prenom</label>
+                        <label class="col-md-6">{{currentemploye.prenom}}</label>
+                        <label class="col-md-6">Sexe</label>
+                        <label class="col-md-6">{{currentemploye.sexe}}</label>
+                        <label class="col-md-6">Adresse</label>
+                        <label class="col-md-6">{{currentemploye.adresse_domicile}}</label>
+                        <label class="col-md-6">Date Naissance</label>
+                        <label class="col-md-6">{{currentemploye.date_nais}}</label>
+                        <label class="col-md-6">Lieu Naissance</label>
+                        <label class="col-md-6">{{currentemploye.lieu_nais}}</label>
+                        <label class="col-md-6">Telephone</label>
+                        <label class="col-md-6">{{currentemploye.telephone}}</label>
+                        <label class="col-md-6">Situation Matrimonial</label>
+                        <label class="col-md-6">{{currentemploye.situation_familial}}</label>
+                        <label class="col-md-6">Matricule</label>
+                        <label class="col-md-6">{{currentemploye.matricule}}</label>
+                        <label class="col-md-6">Reference</label>
+                        <label class="col-md-6">{{currentemploye.reference}}</label>
+                        <label class="col-md-6">Date Recrutement</label>
+                        <label class="col-md-6">{{currentemploye.date_recrutement}}</label>
+                        <label class="col-md-6">Service</label>
+                        <label class="col-md-6">{{currentemploye.ipmService?.type_service}}</label>
+                        <label class="col-md-6">Categorie</label>
+                        <label class="col-md-6">{{currentemploye.ipm_categorie?.libelle}}</label>
+                        <label class="col-md-6">Numero Carnet</label>
+                        <label class="col-md-6">{{currentemploye.numero_carnet}}</label>
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button mat-raised-button type="submit" class="btn btn-fill btn-fill" data-dismiss="modal"
+                        (click)="close">Retour</button>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--fin modal-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Formulaire remplir information de l'employé -->
+  <div class="modal fade" id="ajouter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="background-color: whitesmoke;color: black;">
+        <div class="modal-header">
+          <h3 class="modal-title" id="myModalLabel">Prise en Compte d'un nouvel employé</h3>
+          <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+           <b class="btn btn-danger"> <i class="material-icons" style="color: red;">close</i> fermer</b>
+          </button>
+        </div>
+        <div class="container-fluid">
+          <form class="form-horizontal">
+            <input type="hidden" class="form-control">
+            <div class="form-group card-header">
+              <div class="row">
+                <div class="col-md-6 form-group" [formGroup]="FormControlEmpployes">
+                  <mat-form-field class="example-full-width">
+                    <input matInput type="text" class="form-control" id="nom" placeholder="Nom" formControlName="nom">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group" [formGroup]="FormControlEmpployes">
+                  <mat-form-field class="example-full-width">
+                    <input matInput type="text" class="form-control" id="prenom" placeholder="Prenom"
+                      formControlName="prenom">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group" [formGroup]="FormControlEmpployes">
+                  <mat-form-field class="example-full-width">
+                    <input matInput type="text" class="form-control" id="lieu_nais" placeholder="Lieu de Naissance"
+                      formControlName="lieu_nais">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group" [formGroup]="FormControlEmpployes">
+                  <mat-form-field class="example-full-width">
+                    <input matInput type="text" class="form-control" id="adresse_domicile"
+                      placeholder="Adresse Domicile" formControlName="adresse_domicile">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group"[formGroup]="FormControlEmpployes">
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="picker1" (click)="picker1.open()" id="date_nais"
+                      placeholder="Date Naissance" formControlName="date_nais">
+                    <mat-datepicker-toggle matSuffix [for]="picker1">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+
+                  <!-- <mat-form-field >
+                                          <input matInput [matDatepicker]="picker" placeholder="Choose a date" (click)="picker.open()">
+                                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                          <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field> -->
+                </div>
+                <div class="col-md-6" [formGroup]="FormControlEmpployes" style="width: 200px;margin-top:-5px;">
+                  <!-- <mat-form-field appearance="fill"> -->
+                    <mat-form-field>
+                      <mat-select placeholder="Choisir le sexe" formControlName="sexe" class="form-control" id="sexe"
+                        >
+                        <mat-option *ngFor="let sex of sexe" [value]="sex.value">
+                          {{ sex.value }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                  <!-- <mat-option>Choissir le sexe ci-dessous
+                    <select [formControl]="selectFormControl" class="form-control" id="sexe" placeholder="Sexe"
+                      formControlName="sexe">
+
+                      <option value="masculin">Masculin</option>
+                      <option value="feminin">Feminin</option>
+
+                    </select>
+                  </mat-option> -->
+                </div>
+
+              </div>
+              <div class="row">
+              <div class="col-md-6 form-group" [formGroup]="FormControlEmpployes">
+                <mat-form-field class="example-full-width">
+                  <input matInput type="text" class="form-control" id="telephone" placeholder="" mask="(00) 000-00-00"
+                    formControlName="telephone">
+                  <small>Telephone: XX-XXX-XX-XX</small>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group"[formGroup]="FormControlEmpployes" >
+                <mat-form-field>
+
+
+                  <input matInput [matDatepicker]="picker2" (click)="picker2.open()" id="date_recrutement" style="margin-top: 32px;"
+                    placeholder="Date Recrutement" formControlName="date_recrutement">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 startView="year"></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+              <div class="row">
+                <div class="col-md-6 form-group" [formGroup]="FormControlEmpployes" style="margin-top:-5px;">
+                  <mat-form-field>
+                    <mat-select placeholder="situation familiale" formControlName="situation_familial" class="form-control" id="situation" 
+                      >
+                      <mat-option *ngFor="let situat of situation_familial" [value]="situat.value">
+                        {{ situat.value }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                  <mat-form-field>
+                    <mat-select placeholder="Entité" name="entity" [(ngModel)]="enti"
+                      (selectionChange)="selectService()">
+                      <mat-option *ngFor="let ent of entity" [value]="ent.idEntity">
+                        {{ ent.nom_entity }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+           
+              
+
+              <div class="row">
+              <div class="col-md-6 form-group" [formGroup]="FormControlEmpployes" style="margin-top:-5px;">
+                <mat-form-field class="example-full-width">
+                  <input matInput type="text" class="form-control" id="matricule" placeholder="Matricule *"
+                    formControlName="matricule" (keypress)="keyPressAlphaNumericWithCharacters($event)">
+                  <mat-error *ngIf="FormControlEmpployes.controls['matricule'].hasError('required')">
+                    le matricule doit etre <strong>Obligatoire</strong>
+                  </mat-error>
+                  <mat-error *ngIf="FormControlEmpployes.controls['matricule'].hasError('minlength')">
+                    le matricule doit composer au moins <strong>7 caractères</strong>
+                  </mat-error>
+                  <mat-error *ngIf="FormControlEmpployes.controls['matricule'].hasError('maxlength')">
+                    le matricule ne doit pas dépasser <strong>7 caractères</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                <mat-form-field>
+                  <mat-select placeholder="Service" name="service" [(ngModel)]="servi">
+                    <mat-option *ngFor="let serv of service" [value]="serv.idService">
+                      {{ serv.type_service }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 form-group" [formGroup]="FormControlEmpployes" style="margin-top:-5px;">
+                <mat-form-field class="example-full-width">
+                  <input matInput type="text" class="form-control" id="reference" placeholder="Reference"
+                    formControlName="reference">
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                <mat-form-field>
+                  <mat-select placeholder="Categorie" name="categorie" [(ngModel)]="cate">
+                    <mat-option *ngFor="let cat of categorie" [value]="cat.code_categorie">
+                      {{ cat.libelle }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+            
+            <div class="row">
+              <div class="col-md-12">
+                <span class="btn btn-file" style="font-size: 16px;background-color:rgba(17, 17, 227, 0.88); color: white; margin-left: 20px;margin-top: 1cm;"><i class="material-icons">file_download</i> Choisir Photo
+                  <input type="file" class="form-control" name="image" (change)="onFileChanged($event)">
+                  <img [src]="imgURL" height=" 100" width="100" *ngIf="imgURL" />
+                </span>
+                <div class="btn btn-file" style="margin-left:20% ; font-size: 16px;background-color:rgba(17, 17, 227, 0.88); color: white; margin-left: 20px;margin-top: 1cm;"><i class="material-icons">file_download</i>Justificatif
+                  <input type="file" class="form-control" name="file"
+                    (change)="selectJustificatif($event)" accept=".PNG ,.jpeg, .jpg,.pdf,.doc,.docx">
+                  <img [src]="JustifURL" height=" 100" width="100" *ngIf="JustifURL">
+  
+  
+  
+                </div>
+              </div>
+            
+            </div>
+            <div class="text-right" style="margin-top: -60px; padding-bottom: 1cm;">
+              <button mat-raised-button type="submit" class="btn btn-success" (click)="EmployeNow()"
+                data-dismiss="modal">
+                <span class="btn-label">
+                  <i class="material-icons">check</i>
+                </span>Enregistrer</button>
+            </div>
+          </form>
+          <!--Footer-->
+         
+
+
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!-- <div class="modal-dialog modal-lg">
+
+  </div> -->
+
+  <!--modal list service-->
+  <div class="modal fade" id="statu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" >
+      <div class="modal-content" style="background-color: whitesmoke;color: black;">
+          <div class="modal-header" style="background-color: whitesmoke;"
+          >
+              <h3 class="modal-title" id="noticeModal" style="font-weight:bold; padding-bottom: 10px;">
+                  Service:{{employe.ipmEntity?.nom_entity}} <br>
+                  Statut: {{employe.ipmStatutEmploye?.emplStatut}}
+              </h3>
+              <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  <i class="material-icons">close</i>
+              </button>
+          </div>
+          <div class="container-fluid">
+            <form class="form-horizontal">
+          <div class="modal-body" style="width: 700px;">
+            <div class="row">
+            <div class="col-md-6 form-group">
+              <mat-form-field>
+                <mat-select placeholder="Statut" name="statutEmploye" [(ngModel)]="codeStat">
+                  <mat-option *ngFor="let stu of statutEmploye"  [value]="stu.idStatut">
+                    {{ stu.emplStatut}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 form-group">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker3" (click)="picker3.open()" id="dateDemission" style="margin-top: 4px;"
+                  placeholder="Date Demission" formControlName="dateDemission">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3 startView="year"></mat-datepicker>
+              </mat-form-field>
+            </div>                
+              </div>
+              
+          </div>
+          <div class="text-center" style="margin-top: 40px; padding-bottom: 1cm;">
+            <button mat-raised-button type="submit" (click)="updateStatut()" class="btn btn-success"
+              data-dismiss="modal" [disabled]="desactive">
+              <span class="btn-label">
+                <i class="material-icons">check</i>
+              </span>Modifier Statut</button>
+          </div>
+        </form>
+        </div>
+      </div>
+  
+  </div>
+</div>
+
+<!--fin modal-->

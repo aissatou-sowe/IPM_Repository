@@ -1,0 +1,195 @@
+
+<div class="row">
+  <div class="col-md-8">
+      <div class="card " style="margin-left:4cm;">
+          <div class="card-header card-header-icon">
+              <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                  <i class="material-icons">list</i>
+              </div>
+          </div>
+          <div class="card-body ">
+              <div class="btn-group">
+                  <table>
+                      <thead>
+                          <th></th>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td> 
+                                <button mat-raised-button type="button" data-toggle="modal"
+                                data-target="#noticeModal" style="float:right;margin-top:-1cm; font-size: 16px;">
+                                  <i class="material-icons"  >add_circle</i> Ajouter un nouvel utilisateur
+                                </button>
+                                <!-- <button class="w-100"  data-toggle="modal"
+                    data-target="#noticeModal" style="font-size: 24px;">Saisir un nouveau Utilisateur</button> --></td> 
+                       </tr>
+                      </tbody>
+                  </table>
+                  
+              </div>
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-icon">
+                    <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                      <i class="material-icons">list</i>
+              
+                    </div>
+                    <h3  style="background-color:whitesmoke; color: black; pading: 5px; width: 40%;">liste
+                       Utilisateur
+                    </h3>
+                  </div>
+                  <div class="card-body">
+              
+                    <table class="table table-hover table-bordered">
+              
+                      <thead style="font-weight:bold;">
+              
+                        <th cope="col">Nom d'Utilisateur</th>
+                        <th cope="col">Fonction</th>                   
+                        <th cope="col">Action</th>
+              
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let element of listRole ; let i=index">
+                          <td><b>{{element.login}}</b></td>
+                          <td><b>{{element.typeRole}}</b></td>
+                          <td class="td_actions">
+                            <i class="material-icons" class="btn btn-danger" (click)=deleteDetails(i)><span
+                                class="fa fa-trash-o"></span></i>
+                          </td>
+                          <!-- <td>
+                            <button class="btn btn-info btn-block" 
+                           data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>
+                            </button></td> -->
+              
+              
+                        </tr>
+                      </tbody>
+                      <tfoot style="font-weight:bold;">
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+              
+                        </tr>
+                      </tfoot>
+              
+                    </table>
+                    <!-- <div class="modal-footer justify-content-center">
+                      <button class="btn btn-raised btn-round btn-success"
+                       (click)="ajoutRem()">Valider remboursement
+                      </button>
+                    </div> -->
+                  </div>
+              
+                </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content"style="width: 900px; margin-left:-3cm;margin-top: 3cm;">
+                    <div class="modal-header" style="background-color: whitesmoke;"
+                    >
+                        <h2 class="modal-title p-2" id="noticeModal" style="font-weight:400;">Utilisateur
+                        
+                        </h2>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="width: 900px;">
+
+                        
+                            <form #userForme="ngForm">
+                                <div class="row bordered" >
+                                  <div class="input-group col-md-4 bordered ">
+                                    <input type="text" name="matricule" class="form-control" placeholder="Matricule" id="matricule"
+                                      [(ngModel)]="matricule">
+                                      <button mat-raised-button (click)="getMatricule()" style="margin-top: -7px;padding: 4px;"
+                                      class="btn btn-fill btn-success"><i class="material-icons">search</i>Rechercher</button>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Username" id="login"
+                                    formControlName="login">
+                                  </mat-form-field>
+                                </div>   
+                                
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Mot de Passe" id="mot_passe"
+                                    formControlName="mot_passe">
+                                  </mat-form-field>
+                                </div>  
+                              </div>  
+                              <div class="row">
+                              <div class="col-md-6 form-group">
+                                <mat-form-field>
+                                  <mat-select placeholder="Fonction" name="roles" id="roles"
+                                   [(ngModel)]="jsonRole">
+                                    <mat-option *ngFor="let rol of listRole" [value]="rol.idRole">
+                                      {{ rol.typeRole }}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field> 
+                              </div>
+                            </div>
+                                  
+                                  
+                                <!-- <div class="row bordered" >
+                                <div class="col-md-4 form-group bordered "  *ngIf="message">
+                                    <label for="Taux_ipm"><b>Nom</b></label><br />
+                                    {{message.nom}}
+                                  </div>
+                                  <div class="col-md-4 form-group"  *ngIf="message">
+                                    <label for="Prenom"><b>Prenom</b></label><br />
+                                    {{message.prenom}}
+                                  </div>
+                                  <div class="col-md-4 form-group"  *ngIf="message">
+                                    <label for="Numero Carnet"><b>Numero Carnet</b></label><br />
+                                    {{message.numero_carnet}}
+                                  </div>
+                  
+                                </div>
+                                <div class="row" *ngIf="message">
+                                    
+                                      <div class="col-md-4 form-group">
+                                        <label for="cumul Charge"><b>cumul Charge</b></label><br />
+                                        {{message.cumul_charge}}
+                                      </div>
+                                      <div class="col-md-4 form-group">
+                                        <label for="Montant"><b>Montant Remboursement</b></label><br />
+                                        <input type="number" name="montant" class="form-control" placeholder="montant" id="montant"
+                                      [(ngModel)]="montantR">
+                                        
+                                      </div>
+                                      <div class="col-md-4" style="margin-top:1cm;">
+                                         <legend>date Facture</legend> 
+                                        <mat-form-field>
+                                        <input matInput [matDatepicker]="picker1" placeholder="date" id="dateRemboursement" name="dateRemboursement" [(ngModel)]="date" (click)="picker1.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1 startView="year"></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+
+                                </div> -->
+                              </form>
+                              <div class="modal-footer justify-content-center">
+                              <button mat-raised-button data-dismiss="modal"(click)="AjoutUser()"
+                                      class="btn btn-fill btn-success">Ajouter</button>
+                                </div>
+                            
+                                      <hr>
+                    </div>
+
+                   

@@ -1,0 +1,40 @@
+/* .form-control{
+  padding: 5px 10px;
+  background-color: rgb(20, 121, 223);
+  color: white;
+  border-color: black;
+  width: 100px;
+  height: 30px;
+}
+option:hover{
+  background-color: white;
+  color: rgb(52, 119, 179);
+} */
+
+    .btn-group button {
+        background-color: #1240d4;
+        border: none;
+        /* Green border */
+        color: white;
+        /* White text */
+        padding: 10px 100px;
+        /* Some padding */
+        cursor: pointer;
+        /* Pointer/hand icon */
+        float: left;
+        /* Float the buttons side by side */
+
+    }
+
+    /* Clear floats (clearfix hack) */
+    .btn-group:after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .btn-group button:not(:last-child) {
+        border-right: none;
+        /* Prevent double borders */
+    }
+

@@ -1,0 +1,114 @@
+<style>
+    .btn-group button {
+        background-color: #1240d4;
+        border: none;
+        /* Green border */
+        color: white;
+        /* White text */
+        padding: 10px 100px;
+        /* Some padding */
+        cursor: pointer;
+        /* Pointer/hand icon */
+        float: left;
+        /* Float the buttons side by side */
+
+    }
+
+    /* Clear floats (clearfix hack) */
+    .btn-group:after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .btn-group button:not(:last-child) {
+        border-right: none;
+        /* Prevent double borders */
+    }
+
+</style>
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card " style="margin-left:8cm;">
+                    <div class="card-header card-header-icon">
+                        <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                            <i class="material-icons">list</i>
+                        </div>
+                        <h3 style="background-color:whitesmoke; font-weight: 400; color: black; pading: 5px; width: 50%;" class="card-title">Liste des Entités</h3>
+                    </div>
+                    <div class="card-body" style="padding-left: 3.5cm;">
+                        <div class="btn-group">
+                            <table>
+                                <thead>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let list of listEntity">
+                                        <td> <button style="margin-bottom: 10px; font-size:17px;" class="w-100" (click)="getService(list)" data-toggle="modal"
+                                                data-target="#noticeModal">{{list.nom_entity}} </button></td>
+                                        <!-- <td><button>{{list.nom_entity}}</button></td>
+                    <td>  <button>{{list.nom_entity}}</button> -->
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--modal list service-->
+        <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content"style="width: 700px;">
+                    <div class="modal-header" style="background-color: whitesmoke;"
+                    >
+                        <h3 class="modal-title" id="noticeModal"
+                         style="font-weight:bold; padding-bottom: 10px;">liste des services
+                            de {{nomEntity}}
+                        </h3>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="width: 700px;">
+
+                        <div class="row">
+                                <table class="table table-hover table-bordered col-md-12">
+                                    <thead>
+                                        <tr style="background-color:rgb(213, 213, 213);">
+                                            <th style="font-weight: 500;">Code Service</th>
+                                            <th  style="font-weight: 500;">Type de Service</th>
+                                            <th  style="font-weight: 500;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let listserv of listService" style="font-weight: 400;">
+                                            <td>{{listserv.code_service}}</td>
+                                            <td>{{listserv.type_service}}</td>
+                                            <td class="td_actions text-right">
+                                                <button (click)="getEmploye(listserv)" mat-raised-button type="button" class="btn btn-warning  btn-round btn-xs"
+                                                    id="edit">
+                                                    <i class="fa fa-home"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!--fin modal-->
+       
+
+    </div>
+</div>
