@@ -39,15 +39,13 @@
         <div class="row p-4 rounded shadow" style="background-color: whitesmoke;width:66%;margin: 0 auto;">
           <div class="col-md-3">
             <img class="rounded-circle" src="{{currentemploye.photo}}" style="height :150px;margin-top: 1cm  ;" alt="">
-            <button>
-               <span class="material-icons"></span>
-            </button>
             <a *ngIf="currentemploye.photo">
-              <button mat-raised-button style="margin:2px;"type="button" class="btn btn-warning " data-toggle="modal" data-target="#modiftof">
+              <!-- <button mat-raised-button style="margin:2px;"type="button" class="btn btn-warning " data-toggle="modal" data-target="#modiftof">
                 <i class="material-icons"
                 >edit</i>
-              </button>
-            </a>
+              </button> -->
+            </a> 
+        
           </div>
           <div class="col-md-4">
             <div class="form-group">
@@ -75,7 +73,7 @@
         <div class="clearfix"></div>
 
         <!-- modif photo -->
-        <div class="modal fade" id="modiftof" tabindex="-1" role="dialog"
+        <!-- <div class="modal fade" id="modiftof" tabindex="-1" role="dialog"
                             aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-notice ">
                               <div class="modal-content" style="width: 500px;">
@@ -106,7 +104,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                           <!-- fin modif photo -->
 
       </form>
