@@ -39,7 +39,7 @@ export class EmployeService {
    }
 
    public getEmployeById(idemp: number):Observable<Employe>{
-     return this.http.get<Employe>(environment.URL+'employes/'+idemp) 
+     return this.http.get<Employe>(environment.URL+'employesanstof/'+idemp) 
     
    }
 

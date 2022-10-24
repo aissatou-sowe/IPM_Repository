@@ -60,14 +60,14 @@
       </mat-form-field>
     </div>
     <div [formGroup]="" class="col-md-6 form-group">
-      <mat-form-field>
-        
-        <mat-select placeholder="Service" name="service" id="service" class="form-control"  [(ngModel)]="type_service">
+      <label>Service </label><br>
+      {{type_service}}
+        <mat-select  name="service" id="service"  class="form-control"  [(ngModel)]="type_service">
           <mat-option *ngFor="let serv of service" [value]="serv.idService" (click)="getserv(serv)">
             {{ serv.type_service }}
           </mat-option>
         </mat-select>
-      </mat-form-field>    
+         
     </div>
     <div class="col-md-6 form-group">
       <mat-form-field class="example-full-width">
@@ -81,8 +81,8 @@
     </div>
     <div [formGroup]="" class="col-md-6 form-group">
       <mat-form-field>
-        {{currentemploye.ipm_categorie.libelle}}
-        <mat-select   id="categorie" class="form-control" [(ngModel)]="currentemploye.ipm_categorie.libelle" name="categorie">
+        {{this.type_categorie}}
+        <mat-select   id="categorie"  [(ngModel)]="type_categorie" name="categorie">
           <mat-option *ngFor="let cat of categorie" [value]="cat.code_categorie" (click)="getCategor(cat)" >
             {{ cat.libelle }}
           </mat-option>
