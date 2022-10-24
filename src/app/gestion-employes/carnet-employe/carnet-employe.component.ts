@@ -93,6 +93,8 @@ uploadSub: Subscription;
   lieu_naiss_enfant: string;
   adresse: string;
   imgEnfant: string;
+  selectChemin: any;
+  CheminURL: string | ArrayBuffer;
   constructor(@Inject(LOCALE_ID) private locale: string,
   private emp_service: EmployeService,
    private conj_service:ConjointService,
@@ -486,6 +488,16 @@ showNotification(from: any, align: any, idtype:any,note ) {
 
 
 // }
+modifPhoto(event:any){
+  this.selectChemin = event.target.files[0];
+
+  let readerr = new FileReader();
+  readerr.readAsDataURL(event.target.files[0]);
+  readerr.onload = (event) => {
+    this.CheminURL = readerr.result;
+  };
+
+}
 public EnfantNow(){
     
   this.enfant.ipm_employe=JSON.parse(JSON.stringify(this.currentemploye));

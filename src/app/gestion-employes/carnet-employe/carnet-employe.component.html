@@ -43,6 +43,10 @@
                <span class="material-icons"></span>
             </button>
             <a *ngIf="currentemploye.photo">
+              <button mat-raised-button style="margin:2px;"type="button" class="btn btn-warning " data-toggle="modal" data-target="#modiftof">
+                <i class="material-icons"
+                >edit</i>
+              </button>
             </a>
           </div>
           <div class="col-md-4">
@@ -69,6 +73,42 @@
         </div>
 
         <div class="clearfix"></div>
+
+        <!-- modif photo -->
+        <div class="modal fade" id="modiftof" tabindex="-1" role="dialog"
+                            aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-notice ">
+                              <div class="modal-content" style="width: 500px;">
+                                <div class="modal-header">
+                                  <h4 class="modal-title p-2 rounded"
+                                    style="background-color:whitesmoke; font-weight: 400;" id="myModalLabel">modification du photo</h4>
+                                  <button mat-button type="button" class=" btn btn-danger" data-dismiss="modal">
+                                    <i class="material-icons">close</i>Fermer
+                                  </button>
+                                </div>
+                                <form class="form-horizontal">
+                                  <input type="hidden" class="form-control">
+                                  <div class="form-group row card-header">
+                              
+                                    <div class="col-md-4 btn btn-file"> Changer Photo
+                                      <input type="file" class="form-control" name="image" (change)="getFile($event)">
+                                      <img [src]="imgURL" height=" 100" width="100" *ngIf="imgURL">
+                                    </div>
+                                   
+                                  </div>
+                                </form>
+                                <div class="modal-footer justify-content-center">
+                                  <button mat-raised-button type="button" class="btn btn-success btn-round"
+                                    (click)="modifier()">
+                                    <span class="btn-label">
+                                      <i class="material-icons">check</i>
+                                    </span>Enregistrer</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- fin modif photo -->
+
       </form>
     </div>
   </div>
