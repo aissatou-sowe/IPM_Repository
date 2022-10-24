@@ -25,7 +25,8 @@ export class EmployeService {
 
   public AjoutEmploye(employe){
     console.log(employe);
-    return this.http.post(environment.URL+'employe',employe,{responseType: 'text' as 'json'})
+    return this.http.post(environment.URL+'employe',employe,{responseType: 'text' as 'json'}
+    )
   }
    
 
