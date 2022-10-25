@@ -38,7 +38,7 @@ export class ModifierEmployesComponent implements OnInit {
                 this.getService();
             
                 this.id=this.route.snapshot.params['id'];
-                this.emp_service.getEmployeById(this.id).subscribe(
+                this.emp_service.getEmployeByIdSanstof(this.id).subscribe(
                   result => {
                     this.currentemploye = result;
                     console.log(this.currentemploye);

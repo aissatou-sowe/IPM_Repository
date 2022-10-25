@@ -39,13 +39,14 @@
         <div class="row p-4 rounded shadow" style="background-color: whitesmoke;width:66%;margin: 0 auto;">
           <div class="col-md-3">
             <img class="rounded-circle" src="{{currentemploye.photo}}" style="height :150px;margin-top: 1cm  ;" alt="">
+           
             <a *ngIf="currentemploye.photo">
-               <button mat-raised-button style="margin:2px;"type="button" class="btn btn-warning " data-toggle="modal" data-target="#modiftof">
+               <button mat-raised-button style="margin:2px;"type="button" class="btn btn-warning" data-toggle="modal" data-target="#modiftof">
                 <i class="material-icons"
                 >edit</i>
-              </button> 
-            </a> 
-        
+              </button>
+              <!-- dffdfdf -->
+            </a>
           </div>
           <div class="col-md-4">
             <div class="form-group">
@@ -86,18 +87,24 @@
                                 </div>
                                 <form class="form-horizontal">
                                   <input type="hidden" class="form-control">
-                                  <div class="form-group row card-header">
-                              
-                                    <div class="col-md-4 btn btn-file"> Changer Photo
+                                  <!--*<div class="form-group row card-header"> -->
+                                    <!-- <div class="col-md-4 btn btn-file"> Changer Photo
                                       <input type="file" class="form-control" name="image" (change)="getFile($event)">
                                       <img [src]="imgURL" height=" 100" width="100" *ngIf="imgURL">
-                                    </div>
-                                   
-                                  </div>
+                                    </div> -->
+                                    <img class="rounded-circle" src="{{currentemploye.photo}}"  style="height :150px;margin-top: 1cm; margin-left: 160px;" alt="">
+                                      <input type="file" (change)="editphoto($event)">
+                                       <i class="material-icons">
+                                        backup
+                                          </i>
+              
+                                  
+                                 
+                                  <!-- </div> -->
                                 </form>
                                 <div class="modal-footer justify-content-center">
                                   <button mat-raised-button type="button" class="btn btn-success btn-round"
-                                    (click)="modifier()">
+                                    (click)="Modifier()">
                                     <span class="btn-label">
                                       <i class="material-icons">check</i>
                                     </span>Enregistrer</button>

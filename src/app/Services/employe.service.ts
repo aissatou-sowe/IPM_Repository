@@ -40,9 +40,13 @@ export class EmployeService {
    }
 
    public getEmployeById(idemp: number):Observable<Employe>{
-     return this.http.get<Employe>(environment.URL+'employesanstof/'+idemp) 
+     return this.http.get<Employe>(environment.URL+'employes/'+idemp) 
     
    }
+   public getEmployeByIdSanstof(idemp: number):Observable<Employe>{
+    return this.http.get<Employe>(environment.URL+'employesanstof/'+idemp) 
+   
+  }
 
    deleteEmployeById(idemp: number){
     return this.http.delete(environment.URL+'employe/'+idemp, {responseType: 'text' as 'json'});

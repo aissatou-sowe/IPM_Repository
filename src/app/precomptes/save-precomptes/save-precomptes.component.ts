@@ -61,7 +61,7 @@ export class SavePrecomptesComponent implements OnInit {
           for (let element = 0; element < this.barem.length; element++) {
             if (this.listEmploye[ele].solde <= this.barem[element].max && 
               this.listEmploye[ele].solde > this.barem[element].min) {
-                if ( this.listEmploye[ele].solde > this.barem[element].montant) {
+                if (this.listEmploye[ele].solde > this.barem[element].montant) {
                   console.log(this.listEmploye[ele]);
               this.panier.ipm_employe = this.listEmploye[ele];
                this.panier.montantRembou = this.barem[element].montant;

@@ -15,6 +15,8 @@ import { HttpEventType } from '@angular/common/http';
 import { Entity } from 'src/app/Models/Entity';
 import { FormBuilder, Validators } from '@angular/forms';
 import { event } from 'jquery';
+import { ModifierEmployesComponent } from '../modifier-employes/modifier-employes.component';
+import { ToastrService } from 'ngx-toastr';
 declare var $:any
 @Component({
   selector: 'app-carnet-employe',
@@ -95,7 +97,8 @@ uploadSub: Subscription;
   imgEnfant: string;
   selectChemin: any;
   CheminURL: string | ArrayBuffer;
-  constructor(@Inject(LOCALE_ID) private locale: string,
+  selectEditphoto: any;
+  constructor(@Inject(LOCALE_ID) private locale: string,private toastr: ToastrService,
   private emp_service: EmployeService,
    private conj_service:ConjointService,
    private enf_service:EnfantService, private datePipe:DatePipe,
@@ -712,6 +715,42 @@ fileChange(event) {
       }
       
   }
+}
+
+//////////editPhoto
+editphoto(event:any){
+  this.selectEditphoto = event.target.files[0];
+
+  let readers = new FileReader();
+  readers.readAsDataURL(event.target.files[0]);
+  readers.onload = (evente2) => {
+    this.imgURL2 = readers.result;
+  };
+
+  
+}
+
+Modifier(){
+  this.currentemploye.photo=this.selectEditphoto.name
+  this.emp_service.ModifierEmploye(this.currentemploye).subscribe(
+     () =>{
+          this.emp_service.addUploadData(this.selectEditphoto).subscribe(
+            (data) => {
+              this.message = data;
+              console.log("the message ", data)
+              //return this.message
+            })
+         this.toastr.success("Modification Effectué avec succès")
+     // this.router.navigate(['/gestion-employes/ListeEmployes']) ;
+     }, (error) =>{
+      console.log(error);
+     // alert("Probleme lors de la modification !");
+      this.toastr.error("Erreur lors de la modification de l'image")
+    }
+   
+  ); 
+
+    
 }
 
 }
