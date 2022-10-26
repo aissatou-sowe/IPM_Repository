@@ -223,7 +223,7 @@ uploadSub: Subscription;
         this.telephone= this.currentconjoint.telephone
         this.imgURL=this.currentconjoint.photos
         //this.date_naiss_conj= this.currentconjoint.date_naiss_conj
-
+          console.log(this.currentconjoint)
 
       }
     );
@@ -725,6 +725,8 @@ editphoto(event:any){
   readers.readAsDataURL(event.target.files[0]);
   readers.onload = (evente2) => {
     this.imgURL2 = readers.result;
+   // this.currentemploye.photo=null
+
   };
 
   

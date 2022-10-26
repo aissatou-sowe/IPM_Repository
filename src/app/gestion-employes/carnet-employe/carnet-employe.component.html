@@ -92,7 +92,8 @@
                                       <input type="file" class="form-control" name="image" (change)="getFile($event)">
                                       <img [src]="imgURL" height=" 100" width="100" *ngIf="imgURL">
                                     </div> -->
-                                    <img class="rounded-circle" src="{{currentemploye.photo}}"  style="height :150px;margin-top: 1cm; margin-left: 160px;" alt="">
+                                    <img class="rounded-circle col-md-3"  src="{{currentemploye.photo}}"  style="height :150px;margin-top: 1cm; margin-left: 160px;" alt="" *ngIf="!imgURL2">
+                                    <img  class="rounded-circle col-md-3" [src]="imgURL2"   *ngIf="imgURL2" style="height :150px;margin-top: 1cm; margin-left: 100px;">
                                       <input type="file" (change)="editphoto($event)">
                                        <i class="material-icons">
                                         backup
@@ -159,8 +160,8 @@
                             <th style="font-weight: 500;">Lieu de Naissance</th>
                             <th style="font-weight: 500;">Sexe</th>
                             <th style="font-weight: 500;">Téléphone</th>
-
-                            <th style="font-weight: 500;">Photo</th>
+<!-- 
+                            <th style="font-weight: 500;">Photo</th> -->
                             <th style="font-weight: 500;" class="text-right">Actions</th>
                           </tr>
                         </thead>
@@ -173,12 +174,12 @@
                             <td>{{conjoint.lieu_naiss_conj}}</td>
                             <td>{{conjoint.sexe_conjoint}}</td>
                             <td>{{conjoint.telephone}}</td>
-                            <td>
+                            <!-- <td>
                               <a *ngIf="conjoint.photos!=''">
                                 <img class="rounded-circle" src="{{conjoint.photos}}" style="height :100px;" alt=""></a>
                               <a *ngIf="conjoint.photos==''"><img class="card-img-top img-responsive"
                                   src="/assets/img/angular2-logo-white.png" style="height :100px;" alt=""></a>
-                            </td>
+                            </td> -->
                             <td class="td-actions text-right">
                               <button mat-raised-button="button" type="button"
                                 class="mat-raised-button mat-button-base btn btn-warning"><span
@@ -188,12 +189,13 @@
                                 <div matripple="" class="mat-ripple mat-button-ripple"></div>
                                 <div class="mat-button-focus-overlay"></div>
                               </button>
-                              <!--<button mat-raised-button="" type="button"
-                                class="mat-raised-button mat-button-base btn btn-danger"><span
-                                  class="mat-button-wrapper"><i class="material-icons">close</i></span>
-                                <div matripple="" class="mat-ripple mat-button-ripple"></div>
-                                <div class="mat-button-focus-overlay"></div>
-                              </button> -->
+                              <button mat-raised-button="" type="button" 
+                              class="btn btn-info"><span 
+                                class="mat-button-wrapper"><i class="material-icons" (click)="getConjointById(conjoint)"
+                                data-toggle="modal" data-target="#detailModalConjoints">person</i></span>
+                              <div matripple="" class="mat-ripple mat-button-ripple"></div>
+                              <div class="mat-button-focus-overlay"></div>
+                            </button>
                             </td>
                           </tr>
                           <!--Ajouter Nouveau Conjoints-->
@@ -390,7 +392,7 @@
                             <th style="font-weight: 500;">Date de Naissance</th>
                             <th style="font-weight: 500;">Lieu de Naissance</th>
                             <th style="font-weight: 500;">Sexe</th>
-                            <th style="font-weight: 500;">Photo</th>
+                            <!-- <th style="font-weight: 500;">Photo</th> -->
                             <th style="font-weight: 500;" class="text-right">Actions</th>
                           </tr>
                         </thead>
@@ -405,12 +407,12 @@
                             <td>{{enfant.lieu_nais_enfant}}</td>
                             <!-- <td>{{enfant.adresse}}</td> -->
                             <td>{{enfant.sexe_enfant}}</td>
-                            <td rowspan="3"><a *ngIf="enfant.chemin!=''"><img class="rounded-circle"
+                            <!-- <td rowspan="3"><a *ngIf="enfant.chemin!=''"><img class="rounded-circle"
                                   src="{{enfant.chemin}}" style="height :100px;" alt="">
                               </a>
                               <a *ngIf="enfant.chemin==''"><img class="card-img-top img-responsive"
                                   src="/assets/img/angular2-logo-white.png" style="height :100px;" alt=""></a>
-                            </td>
+                            </td> -->
                             <td class="td-actions text-right">
                               <button mat-raised-button="" type="button"
                                 class="mat-raised-button mat-button-base btn btn-warning"><span
@@ -419,12 +421,12 @@
                                 <div matripple="" class="mat-ripple mat-button-ripple"></div>
                                 <div class="mat-button-focus-overlay"></div>
                               </button>
-                              <!-- <button mat-raised-button="" type="button"
-                              class="mat-raised-button mat-button-base btn btn-danger"><span
-                                class="mat-button-wrapper"><i class="material-icons">close</i></span>
+                               <button mat-raised-button="" type="button"
+                              class="btn btn-info"><span
+                                class="mat-button-wrapper"><i class="material-icons">person</i></span>
                               <div matripple="" class="mat-ripple mat-button-ripple"></div>
                               <div class="mat-button-focus-overlay"></div>
-                            </button> -->
+                            </button> 
                             </td>
                           </tr>
                           <!--Ajouter de Nouvel Enfant-->
@@ -654,6 +656,55 @@
       </div>
       <div class="modal-body">
         <img [src]="imgURL" height="100%" width="100%" *ngIf="imgURL">
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!----------------Modal Conjoints Details-->
+<div class="modal fade col-md-12" id="detailModalConjoints" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content " style="width: 700px;">
+      <div class="modal-header">
+        <h4 class="modal-title">Modal tof</h4>
+        <button mat-button type="button" class="close btn-danger" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">clear</i>
+        </button>
+      </div>
+      <div class="modal-body">
+    
+<div class="row p-4 rounded shadow" style="background-color: whitesmoke;width:66%;margin: 0 auto;">
+  <div class="">
+    <img class="rounded-circle" src="{{currentconjoint.photos}}" style="height :150px;margin-top: 1cm  ;" alt="">
+   
+    <a *ngIf="currentconjoint.photos">
+       <button mat-raised-button style="margin:2px;"type="button" class="btn btn-warning" data-toggle="modal" data-target="#modiftof">
+        <i class="material-icons"
+        >edit</i>
+      </button>
+      <!-- dffdfdf  -->
+    </a>
+  </div>
+  <div class="">
+    <div class="form-group">
+      <label>prenom : <b> {{prenom_conjoint}}</b></label> <br>
+      <label>Date de Naissance : <b> {{date_naiss_conj}}</b> </label> <br>
+      <label>Telephone : <b> {{telephone}}</b></label>
+     
+    </div>
+  </div>
+  <div class="">
+    <div class="form-group">
+      <label>Nom : <b>{{nom_conjoint}}</b></label><br>
+      <label>Sexe : <b> {{sexe_conjoint}}</b></label><br>
+      <label>Age : <b> {{ Age}}</b></label><br>
+     
+    </div>
+  </div>
+
+</div>
+
 
       </div>
 
