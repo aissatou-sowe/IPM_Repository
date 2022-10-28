@@ -19,9 +19,13 @@ export class EnfantService {
   }
 
   listeEnfant(idemp: number) : Observable<any>{
-    return this.http.get<any>(environment.URL+'/getenfantByid/'+idemp);
+    return this.http.get<any>(environment.URL+'getenfantByid/'+idemp);
   }
   
+  public getEnfantByIdsansPhoto(idenf: number):Observable<Enfant>{
+    return this.http.get<Enfant>(environment.URL+'enfantsansPhoto/'+idenf) 
+   
+  }
   public getEnfantById(idenf: number):Observable<Enfant>{
     return this.http.get<Enfant>(environment.URL+'enfant/'+idenf) 
    

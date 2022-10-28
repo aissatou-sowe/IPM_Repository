@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPM_Role } from 'src/app/Models/Role';
 import { IPM_Utilisateur } from 'src/app/Models/Utilisateur';
 import { UtilisateurService } from 'src/app/Services/utilisateur.service';
 declare var $;
+
 @Component({
   selector: 'app-connexion',
   templateUrl: './connexion.component.html',
@@ -19,24 +20,20 @@ export class ConnexionComponent implements OnInit {
   Login;
   Mot_passe;
   desactive:boolean=false;
+
   constructor(private user_Service:UtilisateurService,private router: Router, private route: ActivatedRoute,
-    private formUtilisateur: FormBuilder) { }
+    private formUtilisateur: FormBuilder) {
+      this.UserForm = new FormGroup({
+        login: new FormControl(),
+        mot_passe: new FormControl(),
+        roles: new FormControl(),
+
+      });
+     }
 
   ngOnInit(): void {
-    this.initfacteurform();
-  }
-
-///formulaire
-initfacteurform() {
-  this.UserForm = this.formUtilisateur.group({
-
-    iduser: [null],
-    login: [Validators.required],
-    mot_passe: [null, Validators.required],
-    roles: [''],
-
-  });
-/////////////////Tous les Roles
+   // this.initfacteurform();
+    /////////////////Tous les Roles
 this.user_Service.getAllRoles().subscribe(
   role => {
     // console.log(cat);
@@ -52,20 +49,44 @@ this.user_Service.getAllUser().subscribe(
     console.log(this.listUser);
   }
 );
+  }
+
+///formulaire
+initfacteurform() {
+  this.UserForm = this.formUtilisateur.group({
+
+    iduser: [null],
+    login: [Validators.required],
+    mot_passe: [null, Validators.required],
+    roles: [''],
+
+  });
+
 }
 AjoutUser(user){
   this.User.login=this.Login;
   this.User.mot_passe=this.Mot_passe;
   this.User.roles = JSON.parse(JSON.stringify(this.jsonRole))
+      console.log(this.User.roles);
   this.user_Service.SaveUserToRole(user).subscribe(
     (data) => {
       console.log(data);
+      this.showALERTE2('top', 'center')
+//this.desactive=true
     }
-  );
-this.showALERTE2('top', 'center')
-this.desactive=true
+  ),
+(error)=>{
+  console.error(error);
+  this.showALERTE2('bottom',3);
+} 
 
 }
+
+  ////////////////////Supprimer Details
+  deleteDetails(index: number) {
+    this.listRole.splice(index, 1);
+   // this.updateTotal();
+  }
 
 ///////////Notification
 showALERTE2(from: any, align: any) {

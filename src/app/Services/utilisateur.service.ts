@@ -27,7 +27,7 @@ export class UtilisateurService {
   }
 
   public getAllRoles():Observable<IPM_Role[]>{
-    return this.http.get<IPM_Role[]>(environment.URL+'AllRole');
+    return this.http.get<IPM_Role[]>(environment.URL+'AllRoles');
   }
   public getAllUser():Observable<IPM_Utilisateur[]>{
     return this.http.get<IPM_Utilisateur[]>(environment.URL+'allUser');

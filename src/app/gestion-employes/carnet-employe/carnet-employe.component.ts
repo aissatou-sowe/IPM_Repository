@@ -98,6 +98,9 @@ uploadSub: Subscription;
   selectChemin: any;
   CheminURL: string | ArrayBuffer;
   selectEditphoto: any;
+  imgURL3: string | ArrayBuffer;
+  selectEditphotoconjoint: any;
+  imgURL4: string | ArrayBuffer;
   constructor(@Inject(LOCALE_ID) private locale: string,private toastr: ToastrService,
   private emp_service: EmployeService,
    private conj_service:ConjointService,
@@ -209,8 +212,6 @@ uploadSub: Subscription;
   //   this.sexconjChoisi=sex.value
 
   // }
- 
-  
   getConjointById(conjoint){
     this.conj_service.getConjointById(conjoint.idconj).subscribe(
       result => {
@@ -221,8 +222,26 @@ uploadSub: Subscription;
         this.date_naiss_conj= this.currentconjoint.date_naiss_conj
         this.lieu_naiss_conj= this.currentconjoint.lieu_naiss_conj
         this.telephone= this.currentconjoint.telephone
+       // this.imgURL=this.currentconjoint.photos
+        this.date_naiss_conj= this.currentconjoint.date_naiss_conj
+          console.log(this.currentconjoint)
+
+      }
+    );
+  }
+  
+  getConjointByIdsansPhoto(conjoint){
+    this.conj_service.getConjointByIdsansPhoto(conjoint.idconj).subscribe(
+      result => {
+        this.currentconjoint = result;
+        this.nom_conjoint= this.currentconjoint.nom_conjoint
+        this.prenom_conjoint= this.currentconjoint.prenom_conjoint
+        this.sexe_conjoint= this.currentconjoint.sexe_conjoint
+        this.date_naiss_conj= this.currentconjoint.date_naiss_conj
+        this.lieu_naiss_conj= this.currentconjoint.lieu_naiss_conj
+        this.telephone= this.currentconjoint.telephone
         this.imgURL=this.currentconjoint.photos
-        //this.date_naiss_conj= this.currentconjoint.date_naiss_conj
+        this.date_naiss_conj= this.currentconjoint.date_naiss_conj
           console.log(this.currentconjoint)
 
       }
@@ -240,35 +259,65 @@ uploadSub: Subscription;
     this.currentconjoint.lieu_naiss_conj=this.lieu_naiss_conj
     this.currentconjoint.telephone= this.telephone
     
-    if(this.selectCertif){
-      this.currentconjoint.certificat=this.selectCertif.name
-    }
-    if(this.selectedFile){
-      this.currentconjoint.photos=this.selectedFile.name;
-        }
+    // if(this.selectCertif){
+    //   this.currentconjoint.certificat=this.selectCertif.name
+    // }
+    // if(this.selectedFile){
+    //   this.currentconjoint.photos=this.selectedFile.name;
+    //     }
     
       console.log(this.currentconjoint)
       this.conj_service.modifConjoint(this.currentconjoint).subscribe(data=>{this.ngOnInit()})
-      this.conj_service.uploadFile(this.selectedFile).subscribe(
-        (data)=> { 
-          this.message=data ;
-          console.log("the message ",data)
+      // this.conj_service.uploadFile(this.selectedFile).subscribe(
+      //   (data)=> { 
+      //     this.message=data ;
+      //     console.log("the message ",data)
           
-          return this.message
-        })
-        this.conj_service.uploadFileCertif(this.selectCertif).subscribe(
-          (data)=> { 
-            // this.message=data ;
-            // console.log("the message ",data)
+      //     return this.message
+      //   })
+      //   this.conj_service.uploadFileCertif(this.selectCertif).subscribe(
+      //     (data)=> { 
+      //       // this.message=data ;
+      //       // console.log("the message ",data)
             
-            // return this.message
-          })
+      //       // return this.message
+      //     })
 
 
 
 
   }
+  modifierPhotoConjoint(){
+    this.currentconjoint.photos=this.selectEditphotoconjoint.name
+    this.conj_service.modifPhotoConjoint(this.currentconjoint).subscribe(data=>{this.ngOnInit()})
+    this.conj_service.uploadFile(this.selectEditphotoconjoint).subscribe(
+        (data)=> { 
+          this.message=data ;
+          console.log("the message ",data)
+          
+          return this.message
+        }),(error)=>{
+          console.error(error);
+        }
+
+  }
   getEnfantById(enfant){
+    this.enf_service.getEnfantByIdsansPhoto(enfant.idenf).subscribe(
+      result => {
+        this.enfant = result;
+      
+        this.nom_enfant= this.enfant.nom_enfant
+        this.prenom_enfant= this.enfant.prenom_enfant
+        this.sexe_enfant= this.enfant.sexe_enfant
+        this.date_naiss_enfant= this.enfant.date_nais_enfant
+        this.lieu_naiss_enfant= this.enfant.lieu_nais_enfant
+        this.adresse= this.enfant.adresse
+        
+        
+      }
+    );
+  }
+  getEnfantbyPhoto(enfant){
     this.enf_service.getEnfantById(enfant.idenf).subscribe(
       result => {
         this.enfant = result;
@@ -284,6 +333,7 @@ uploadSub: Subscription;
       }
     );
   }
+
   modifEnfant(){
     this.enfant.nom_enfant=this.nom_enfant
     this.enfant.prenom_enfant=this.prenom_enfant
@@ -717,14 +767,28 @@ fileChange(event) {
   }
 }
 
-//////////editPhoto
+//////////editPhoto employé
 editphoto(event:any){
   this.selectEditphoto = event.target.files[0];
 
   let readers = new FileReader();
   readers.readAsDataURL(event.target.files[0]);
   readers.onload = (evente2) => {
-    this.imgURL2 = readers.result;
+    this.imgURL3 = readers.result;
+   // this.currentemploye.photo=null
+
+  };
+
+  
+}
+//edit photo conjoint
+editphotoConjoint(event:any){
+  this.selectEditphotoconjoint = event.target.files[0];
+
+  let readers = new FileReader();
+  readers.readAsDataURL(event.target.files[0]);
+  readers.onload = (evente2) => {
+    this.imgURL4 = readers.result;
    // this.currentemploye.photo=null
 
   };

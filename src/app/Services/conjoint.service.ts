@@ -30,6 +30,10 @@ export class ConjointService {
     return this.http.get<Conjoint>(environment.URL+'conjoint/'+idconj) 
    
   }
+  public getConjointByIdsansPhoto(idconj: number):Observable<Conjoint>{
+    return this.http.get<Conjoint>(environment.URL+'conjointsansphoto/'+idconj) 
+   
+  }
    uploadFile(file:File):Observable<any>{
     const formData: FormData= new FormData();
     // console.log("file.name :"+file.name) 
@@ -40,6 +44,10 @@ export class ConjointService {
 
   }
   modifConjoint(conjoint:Conjoint){
+    return this.http.put(environment.URL+"putconjointsansphoto",conjoint,{responseType: 'text' as 'json'});
+
+  }
+  modifPhotoConjoint(conjoint:Conjoint){
     return this.http.put(environment.URL+"putconjoint",conjoint,{responseType: 'text' as 'json'});
 
   }
