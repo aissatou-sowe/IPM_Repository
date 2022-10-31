@@ -17,8 +17,6 @@ export class ConnexionComponent implements OnInit {
   listUser:IPM_Utilisateur[];
   User:IPM_Utilisateur  =new IPM_Utilisateur();
   jsonRole: any;
-  Login;
-  Mot_passe;
   desactive:boolean=false;
 
   constructor(private user_Service:UtilisateurService,private router: Router, private route: ActivatedRoute,
@@ -63,12 +61,11 @@ initfacteurform() {
   });
 
 }
-AjoutUser(user){
-  this.User.login=this.Login;
-  this.User.mot_passe=this.Mot_passe;
-  this.User.roles = JSON.parse(JSON.stringify(this.jsonRole))
+AjoutUser(){
+  console.log(this.User);
+  this.User.roles = JSON.parse(JSON.stringify(this.jsonRole));
       console.log(this.User.roles);
-  this.user_Service.SaveUserToRole(user).subscribe(
+  this.user_Service.SaveUserToRole(this.User).subscribe(
     (data) => {
       console.log(data);
       this.showALERTE2('top', 'center')

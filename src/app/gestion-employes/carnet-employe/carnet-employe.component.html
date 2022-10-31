@@ -738,17 +738,17 @@
 
         <div class="row p-4 rounded shadow" style="background-color: whitesmoke;width:66%;margin: 0 auto;">
           <div class="col-md-4">
-            <img class="rounded-circle " src="{{currentconjoint.photos}}" style="height :150px;margin-top: 1cm  ;"
+            <img class="rounded-circle " src="{{imgURL}}" style="height :150px;margin-top: 1cm  ;"
               alt="">
-            <img class="rounded-circle " src="{{imgURL4}}" *ngIf="imgURL4" style="height :150px;margin-top: 1cm  ;"
+            <img class="rounded-circle " src="{{imgURL5}}" *ngIf="imgURL4" style="height :150px;margin-top: 1cm  ;"
               alt="">
 
 
             <a *ngIf="currentconjoint.photos">
               <h4 style="color:black;">Modifier la photo</h4>
-              <input style="margin:2px;" type="file" class="btn btn-warning" (change)="editphotoConjoint($event)">
+              <input style="margin:2px;" type="file" class="btn btn-warning" (change)="editphotoEnfant($event)">
               <button mat-button type="button" class="close btn-success" data-dismiss="modal" aria-hidden="true"
-                *ngIf="imgURL4" (click)="modifierPhotoConjoint()">
+                *ngIf="imgURL5" (click)="modifierPhotoEnfant()">
                 <i class="material-icons">edit</i>
               </button>
 

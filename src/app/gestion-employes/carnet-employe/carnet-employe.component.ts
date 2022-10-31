@@ -101,6 +101,8 @@ uploadSub: Subscription;
   imgURL3: string | ArrayBuffer;
   selectEditphotoconjoint: any;
   imgURL4: string | ArrayBuffer;
+  selectEditphotoenfant: any;
+  imgURL5: string | ArrayBuffer;
   constructor(@Inject(LOCALE_ID) private locale: string,private toastr: ToastrService,
   private emp_service: EmployeService,
    private conj_service:ConjointService,
@@ -301,6 +303,7 @@ uploadSub: Subscription;
         }
 
   }
+
   getEnfantById(enfant){
     this.enf_service.getEnfantByIdsansPhoto(enfant.idenf).subscribe(
       result => {
@@ -329,6 +332,7 @@ uploadSub: Subscription;
         this.lieu_naiss_enfant= this.enfant.lieu_nais_enfant
         this.adresse= this.enfant.adresse
         this.imgURL=this.enfant.chemin
+        console.log(this.imgURL);
         
       }
     );
@@ -341,30 +345,43 @@ uploadSub: Subscription;
     this.enfant.date_nais_enfant=this.date_naiss_enfant
     this.enfant.lieu_nais_enfant=this.lieu_naiss_enfant
     this.enfant.adresse=this.adresse
-    if(this.selectedFile){
-      this.enfant.chemin=this.selectedFile.name
-    }
+    // if(this.selectedFile){
+    //   this.enfant.chemin=this.selectedFile.name
+    // }
    
     
     console.log(this.enfant);
     this.enf_service.modifEnfant(this.enfant).subscribe(data=>{this.ngOnInit()})
-    if(this.selectedFile){
-      this.enf_service.uploadFile(this.selectedFile).subscribe(
-        (data)=> { 
+    // if(this.selectedFile){
+    //   this.enf_service.uploadFile(this.selectedFile).subscribe(
+    //     (data)=> { 
           
-        })  
-        }
-        if(this.selectExtrait){
-          this.enf_service.uploadFileExtrait(this.selectExtrait).subscribe(
-            (data)=> { 
+    //     })  
+    //     }
+    //     if(this.selectExtrait){
+    //       this.enf_service.uploadFileExtrait(this.selectExtrait).subscribe(
+    //         (data)=> { 
               
-              //console.log("the message",data)
-              
-              //return this.message
-            })
-                  }
+    //         })
+    //               }
       
 
+
+
+  }
+  modifierPhotoEnfant(){
+    this.currentenfant.chemin=this.selectEditphotoenfant.name
+    this.enf_service.modifPhotoEnfant(this.currentenfant).subscribe(data=>{this.ngOnInit()})
+    this.enf_service.uploadFile(this.selectEditphotoenfant).subscribe(
+        (data)=> { 
+          this.message=data ;
+          console.log("the message ",data)
+          this.toastr.info("Modification du phot avec succès");
+          return this.message
+        }),(error)=>{
+          console.error(error);
+          this.toastr.error("Echec");
+        }
 
   }
   ////////////----------------//////////////////
@@ -781,6 +798,21 @@ editphoto(event:any){
 
   
 }
+
+//edit photo conjoint
+editphotoEnfant(event:any){
+  this.selectEditphotoenfant = event.target.files[0];
+
+  let readers = new FileReader();
+  readers.readAsDataURL(event.target.files[0]);
+  readers.onload = (evente2) => {
+    this.imgURL5= readers.result;
+   // this.currentemploye.photo=null
+
+  };
+
+  
+}
 //edit photo conjoint
 editphotoConjoint(event:any){
   this.selectEditphotoconjoint = event.target.files[0];
@@ -795,7 +827,7 @@ editphotoConjoint(event:any){
 
   
 }
-
+///Modifié l'employé
 Modifier(){
   this.currentemploye.photo=this.selectEditphoto.name
   this.emp_service.ModifierEmploye(this.currentemploye).subscribe(

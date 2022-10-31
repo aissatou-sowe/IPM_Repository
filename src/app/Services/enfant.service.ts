@@ -34,6 +34,11 @@ export class EnfantService {
     return this.http.put(environment.URL+'putenfant',enfant,{responseType: 'text' as 'json'})
 
   }
+  
+  modifPhotoEnfant(enfant:Enfant){
+    return this.http.put(environment.URL+"putenfant",enfant,{responseType: 'text' as 'json'});
+
+  }
   //////////upload photo enfant
   uploadFile(file:File):Observable<any>{
     const formData: FormData= new FormData();
