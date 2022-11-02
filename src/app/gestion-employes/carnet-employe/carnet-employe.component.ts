@@ -17,6 +17,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { event } from 'jquery';
 import { ModifierEmployesComponent } from '../modifier-employes/modifier-employes.component';
 import { ToastrService } from 'ngx-toastr';
+import { DateAdapter } from '@angular/material/core';
 declare var $:any
 @Component({
   selector: 'app-carnet-employe',
@@ -85,13 +86,13 @@ uploadSub: Subscription;
   CertifURL: string | ArrayBuffer;
   ExtraitURL: string | ArrayBuffer;
   sexe_conjoint: string;
-  date_naiss_conj: string;
+  date_naiss_conj: Date
   lieu_naiss_conj: string;
   telephone: string;
   nom_enfant: string;
   prenom_enfant: string;
   sexe_enfant: string;
-  date_naiss_enfant: string;
+  date_naiss_enfant: Date;
   lieu_naiss_enfant: string;
   adresse: string;
   imgEnfant: string;
@@ -107,12 +108,14 @@ uploadSub: Subscription;
   private emp_service: EmployeService,
    private conj_service:ConjointService,
    private enf_service:EnfantService, private datePipe:DatePipe,
+    private dateAdapter: DateAdapter<Date>,
     private router: Router,
     private route : ActivatedRoute,private fb :FormBuilder ) { 
       this.jstoday = formatDate(Date.now(),'dd-MM-yyyy',this.locale);
       this.addCategorie=new Categorie();
       this.addService=new Service();
-      this.addEmploye=new Employe()
+      this.addEmploye=new Employe();
+      this.dateAdapter.setLocale('en-GB');
     }
 
   ngOnInit(): void {
@@ -426,16 +429,17 @@ uploadSub: Subscription;
      
       this.conjoint.ipm_employe=JSON.parse(JSON.stringify(this.currentemploye));
       console.log(this.conjoint);
-      var date = this.datePipe.transform(this.conjoint.date_naiss_conj, "dd-MM-yyyy");
-    this.conjoint.date_naiss_conj= date;
+    //   var date = this.datePipe.transform(this.conjoint.date_naiss_conj, "dd-MM-yyyy");
+    // this.conjoint.date_naiss_conj= date;
     this.conjoint.sexe_conjoint=this.sexChoisi
     console.log(this.conjoint)
       this.conjoint.photos=this.selectedFile.name;
       this.conjoint.certificat=this.selectCertif.name
       this.conj_service.AjoutConjoint(this.conjoint).subscribe(
-        (data)=>this.message=data)
+        (data)=>this.ngOnInit())
         this.conj_service.uploadFile(this.selectedFile).subscribe(
           (data)=> { 
+         
             this.message=data ;
             console.log("the message ",data)
             
@@ -576,13 +580,14 @@ public EnfantNow(){
     console.log(this.enfant);
     this.enfant.chemin=this.selectedFile.name;
     console.log(this.enfant);
-    var date = this.datePipe.transform(this.enfant.date_nais_enfant, "dd-MM-yyyy");
-    this.enfant.date_nais_enfant= date;
+    //  var date = this.datePipe.transform(this.enfant.date_nais_enfant, "dd-MM-yyyy");
+    //  this.enfant.date_nais_enfant= date;
     console.log(this.enfant)
     this.enfant.sexe_enfant=this.sexChoisi
     this.enfant.extrait_naiss=this.selectExtrait.name;
    this.enf_service.AjoutEnfant(this.enfant).subscribe(
     (data)=> { 
+      this.ngOnInit();
       this.message=data ;
       console.log("the message ",data)
       
@@ -603,14 +608,6 @@ public EnfantNow(){
             
             //return this.message
           })
-        // this.enf_service.uploadExtraitNaiss(this.selectedFileextrait).subscribe(
-        //   (data)=> { 
-        //     this.message=data ;
-        //     console.log("the message",data)
-            
-        //     return this.message
-        //   })
-        //alert('Successfully.');
     if(!this.message){
       this.showNotification1('top','center',1,'<b>enfant ajouté</b> :')
      // console.log(this.message);

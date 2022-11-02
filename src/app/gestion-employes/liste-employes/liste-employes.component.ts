@@ -490,7 +490,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
       this.emp_statut.modifierStatut(this.employe).subscribe(
         (res)=>{
               this.message=res;
-                this.toastr.success("Mise à jour avec Success avec comme statut");
+                this.toastr.success("Mise à jour avec Succès avec comme statut");
              })
         }
 ////////////////////////Justificatif

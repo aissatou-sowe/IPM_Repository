@@ -41,7 +41,7 @@ export const ROUTES: RouteInfo[] = [{
         children: [
             {path: 'rechercheEmploye', title: 'Liste des participants', ab:'RE'},
            // {path: 'carnetEmploye', title: 'Carnet Employé', ab:'CE'},
-            {path: 'Liste-des-Employes', title: 'Liste des Entités', ab:'AE'},
+            {path: 'Liste-des-Employes', title: 'Liste Par Entités', ab:'AE'},
             {path: 'ListeEmployes', title: 'Carnets', ab:'CE'},
             
             // {path: 'ModifierEmployes/:id', title: 'ModifierEmploye', ab:'ME'},
@@ -142,6 +142,18 @@ export const ROUTES: RouteInfo[] = [{
              {path: 'Cotisation', title: 'Liste des Cotisations', ab:'LC'},
     
         ] 
+    },
+    {
+        path: '/cotisation',
+        title: 'Cotisation',
+        type: 'sub',
+        icontype: 'group_user',
+        collapse: 'cotisation',
+        children: [
+            {path: 'AjoutCotisation', title: 'Cotisation', ab:'CE'},
+            {path: 'ListeCotisation', title: 'Liste des  Cotisations', ab:'LC'},
+            
+        ]
     },
     {
         path: '/utilisateur',

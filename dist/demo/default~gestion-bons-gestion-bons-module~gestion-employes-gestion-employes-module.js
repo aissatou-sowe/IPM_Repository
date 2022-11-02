@@ -108,13 +108,19 @@ var EnfantService = /** @class */ (function () {
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'enfant', enfant, { responseType: 'text' });
     };
     EnfantService.prototype.listeEnfant = function (idemp) {
-        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + '/getenfantByid/' + idemp);
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'getenfantByid/' + idemp);
+    };
+    EnfantService.prototype.getEnfantByIdsansPhoto = function (idenf) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'enfantsansPhoto/' + idenf);
     };
     EnfantService.prototype.getEnfantById = function (idenf) {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'enfant/' + idenf);
     };
     EnfantService.prototype.modifEnfant = function (enfant) {
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'putenfant', enfant, { responseType: 'text' });
+    };
+    EnfantService.prototype.modifPhotoEnfant = function (enfant) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + "putenfant", enfant, { responseType: 'text' });
     };
     //////////upload photo enfant
     EnfantService.prototype.uploadFile = function (file) {
@@ -1662,6 +1668,9 @@ var ConjointService = /** @class */ (function () {
     ConjointService.prototype.getConjointById = function (idconj) {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'conjoint/' + idconj);
     };
+    ConjointService.prototype.getConjointByIdsansPhoto = function (idconj) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'conjointsansphoto/' + idconj);
+    };
     ConjointService.prototype.uploadFile = function (file) {
         var formData = new FormData();
         // console.log("file.name :"+file.name) 
@@ -1671,6 +1680,9 @@ var ConjointService = /** @class */ (function () {
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + "uploade", formData);
     };
     ConjointService.prototype.modifConjoint = function (conjoint) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + "putconjointsansphoto", conjoint, { responseType: 'text' });
+    };
+    ConjointService.prototype.modifPhotoConjoint = function (conjoint) {
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + "putconjoint", conjoint, { responseType: 'text' });
     };
     ConjointService.prototype.uploadFileCertif = function (file) {

@@ -7,7 +7,7 @@ export class Conjoint{
        public  prenom_conjoint?:string,
        public sexe_conjoint?:string,
        public ipm_employe?: Employe,
-       public date_naiss_conj?:string,
+       public date_naiss_conj?:Date,
        public lieu_naiss_conj?:string,
        public telephone?:string,
        public photos?:string,

@@ -150,6 +150,29 @@ var PrestationService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "IeU+":
+/*!*******************************************!*\
+  !*** ./src/app/Models/CotisatonGlobal.ts ***!
+  \*******************************************/
+/*! exports provided: Cotisation */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Cotisation", function() { return Cotisation; });
+var Cotisation = /** @class */ (function () {
+    function Cotisation(idCotisation, montant_totals, date) {
+        this.idCotisation = idCotisation;
+        this.montant_totals = montant_totals;
+        this.date = date;
+    }
+    return Cotisation;
+}());
+
+
+
+/***/ }),
+
 /***/ "LBNV":
 /*!**********************************!*\
   !*** ./src/app/Models/Bareme.ts ***!
