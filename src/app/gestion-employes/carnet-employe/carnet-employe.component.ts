@@ -135,6 +135,7 @@ uploadSub: Subscription;
       result => {
         this.currentemploye = result;
         console.log(result)
+        console.log(this.currentemploye.ipmEntity?.nom_entity);
         //const ttoday=new Date();
         //const birthDate = new Date(this.currentemploye.date_nais);
         if (this.currentemploye.date_nais) {

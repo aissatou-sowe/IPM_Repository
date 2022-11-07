@@ -82,7 +82,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     private dateAdapter: DateAdapter<Date>, private datepipe: DatePipe,) {
     this.addCategorie = new Categorie();
     this.addService = new Service();
-    this.addEntity = new Entity(0, "", "");
+    this.addEntity = new Entity();
     this.addStatut=new IPM_StatutEmploye();
     this.dateAdapter.setLocale('en-GB');
   }
@@ -92,7 +92,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     this.getCategorie();
     this.getService();
     this.getEntity();
-    this.getStatutEmploye();
+   
     ///////////////////
     this.dataTable = {
       headerRow: ['Numero Carnet', 'Nom', 'Prenom', 'Sexe', 'Matricule', 'Reference', 'Service', 'Categorie', 'Actions'],
@@ -142,11 +142,12 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
             console.log(timeDiff);
             this.ages = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
           }
-          if (this.ages > 60 || ele.ipmStatutEmploye.emplStatut=="Demission" 
-          || ele.ipmStatutEmploye.emplStatut=="Licenciment") {
+          if (this.ages > 60 || ele.ipmStatutEmploye?.emplStatut=="Demission" 
+          || ele.ipmStatutEmploye?.emplStatut=="Licenciment") {
             console.log("Age atteinte impossible de ce beneficier à l'ipm :", this.ages)
             ele.statut = true
             console.log(ele);
+            console.log(ele.ipmStatutEmploye?.emplStatut)
             this.emp_service.ModifierEmploye(ele).subscribe(data=>{})
             console.log("age depasse")
           }
@@ -259,7 +260,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
 
     this.addEntity.idEntity = this.enti;
     this.employe.ipmEntity= JSON.parse(JSON.stringify(this.addEntity));
-
+    
     this.addCategorie.code_categorie = this.cate;
     this.employe.ipm_categorie = JSON.parse(JSON.stringify(this.addCategorie));
     this.employe.nom=this.FormControlEmpployes.get("nom").value;
@@ -271,7 +272,8 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     this.employe.lieu_nais=this.FormControlEmpployes.get("lieu_nais").value;
     this.employe.adresse_domicile=this.FormControlEmpployes.get("adresse_domicile").value;
     this.employe.telephone=this.FormControlEmpployes.get("telephone").value;
-    this.employe.date_nais =this.FormControlEmpployes.get("date_nais").value;;
+    this.employe.date_nais =this.FormControlEmpployes.get("date_nais").value;
+    this.employe.ipmStatutEmploye=this.statutEmploye[0];
     console.log(this.employe.date_nais);
     this.employe.date_recrutement = this.FormControlEmpployes.get("date_recrutement").value;
     console.log(this.employe.date_recrutement);
@@ -288,28 +290,35 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
         console.log(this.employe.date_nais);
 
         // return this.message
-      
-      });
-      this.emp_service.addUploadData(this.selectedFile).subscribe(
-        (data) => {
-          this.message = data;
-          console.log("the message ", data)
-          //return this.message
-        })
-        this.emp_service.addUploadJustif(this.selectJustif).subscribe(
-            (data) => {
-              
-              //return this.message
-            })
-    if (!this.message) {
-      this.showNotification('top', 'center', 1, '<b>employé ajouté avec succées!!!</b> :')
-      // console.log(this.message);
-      this.router.navigate(['/gestion-employes/ListeEmployes']);
-    }
-    else if (this.message == null) {
-      console.log("not existe");
+        this.emp_service.addUploadData(this.selectedFile).subscribe(
+          (data) => {
+            this.message = data;
+            console.log("the message ", data)
+            //return this.message
+          })
+          this.emp_service.addUploadJustif(this.selectJustif).subscribe(
+              (data) => {
+                this.message = data;
+                console.log("the message ", data)
+                //return this.message
+              })
+              this.showNotification('top', 'center', 1, '<b>employé ajouté avec succées!!!</b> :')
+    //   // console.log(this.message);
+    //   this.router.navigate(['/gestion-employes/ListeEmployes']);
+      }),(errr:any)=>{
+                console.error(errr);
       this.showNotification('top', 'center', 3, "<b>employé non ajouté</b> :")
-    }
+      }
+   
+    // if (!this.message) {
+    //   this.showNotification('top', 'center', 1, '<b>employé ajouté avec succées!!!</b> :')
+    //   // console.log(this.message);
+    //   this.router.navigate(['/gestion-employes/ListeEmployes']);
+    // }
+    // else if (this.message == null) {
+    //   console.log("not existe");
+    //   this.showNotification('top', 'center', 3, "<b>employé non ajouté</b> :")
+    // }
     
   }
 
@@ -471,6 +480,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
         res=>{
           this.employe=res;
           console.log(this.employe);
+          this.getStatutEmploye();
         }
       )
   }
@@ -479,7 +489,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
       stu => {
         // console.log(cat);
         this.statutEmploye = stu;
-        console.log(this.statutEmploye)
+        console.log(this.statutEmploye[0])
       }
     )
   }

@@ -4,7 +4,5 @@ export class Categorie{
         public echalonnage:string;
         public montant:string;
     constructor(
-        
-        
-    ){}
+         ){}
 }

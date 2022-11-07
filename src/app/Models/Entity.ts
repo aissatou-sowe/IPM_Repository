@@ -1,7 +1,7 @@
 export class Entity{
     constructor(
-        public idEntity,
-        public code_entity,
-        public nom_entity,       
+        public idEntity?:number,
+        public code_entity?:string,
+        public nom_entity?:string,       
     ){}
 }
