@@ -38,6 +38,10 @@ export class EmployeService {
      return this.http.put<Employe>(environment.URL+'employe',emp)
     
    }
+   public ModifierEmployeSansphoto(emp: Employe){
+    return this.http.put<Employe>(environment.URL+'employesansPhoto',emp)
+   
+  }
 
    public getEmployeById(idemp: number):Observable<Employe>{
      return this.http.get<Employe>(environment.URL+'employes/'+idemp) 

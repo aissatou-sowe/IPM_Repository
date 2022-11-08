@@ -24,6 +24,18 @@ export class ModifierEmployesComponent implements OnInit {
   type_categorie: string;
   serviceChoisi: any;
   categorieChoisi: any;
+  situation_familial=[{id:1,value:"Celibataire"},
+  {id:2,value:"Marier"},
+  {id:3,value:"Divorce"},
+  {id:4,value:"Veuf"}
+  ];
+  sexe=[{id:1,value:"Masculin"},
+  {id:2,value:"Féminin"}
+  ]
+  typesituation_familial: any;
+  situationChoisi: string;
+  sexeChoisi: any;
+  sexe_emploi: any;
 
 
   constructor(private emp_service: EmployeService,
@@ -41,6 +53,8 @@ export class ModifierEmployesComponent implements OnInit {
                 this.emp_service.getEmployeByIdSanstof(this.id).subscribe(
                   result => {
                     this.currentemploye = result;
+                    this.typesituation_familial=this.currentemploye.situation_familial
+                    this.sexe_emploi=this.currentemploye.sexe
                     console.log(this.currentemploye);
                     this.type_service=this.currentemploye.ipmService.type_service
                     this.type_categorie=this.currentemploye.ipm_categorie.libelle
@@ -60,6 +74,18 @@ export class ModifierEmployesComponent implements OnInit {
                 this.type_categorie=null
             
               }
+              getsituation(situat){
+                this.situationChoisi=situat.value
+                this.typesituation_familial=null
+                console.log(this.situationChoisi);
+            
+              }
+              getSexe(sexEmploi){
+                this.sexeChoisi=sexEmploi.value
+                this.sexe_emploi=null
+                console.log(this.sexeChoisi);
+            
+              }
             
               
             
@@ -74,10 +100,16 @@ export class ModifierEmployesComponent implements OnInit {
                   if (this.categorieChoisi) {
                     this.currentemploye.ipm_categorie=this.categorieChoisi;
                   }
+                  if (this.situationChoisi) {
+                    this.currentemploye.situation_familial=this.situationChoisi;
+                  }
+                  if (this.sexeChoisi) {
+                    this.currentemploye.sexe=this.sexeChoisi;
+                  }
                   
                 
                   console.log(this.currentemploye);
-                  this.emp_service.ModifierEmploye(this.currentemploye).subscribe(
+                  this.emp_service.ModifierEmployeSansphoto(this.currentemploye).subscribe(
                     
                     () =>{
                       

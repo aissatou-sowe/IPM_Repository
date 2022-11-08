@@ -122,7 +122,7 @@
   </div>
 </div>
 
-<div class="col-md-12">
+<div class="col-md-12" >
   <div class="card">
     <div class="card-header card-header-icon">
       <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
@@ -133,7 +133,7 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" *ngIf="condition!=true">
           <ul role="tablist" class="nav nav-pills nav-pills-rose flex-column">
             <li class="nav-item"><a data-toggle="tab" href="#link4" role="tablist" class="nav-link active"> Conjoint(e)
               </a>
@@ -141,7 +141,7 @@
             <li class="nav-item"><a data-toggle="tab" href="#link5" role="tablist" class="nav-link"> Enfant(s) </a></li>
           </ul>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8" *ngIf="condition!=true ">
           <div class="tab-content">
             <div id="link4" class="tab-pane active">
               <div class="col-md-12">
@@ -647,6 +647,11 @@
     </button>
   </div>
 </div>
+<ng-template #test>
+  <button mat-raised-button class="btn btn-danger" style="width: 100px;" (click)="retourner()"><i
+    class="material-icons">arrow_back</i> retour
+</button>
+</ng-template> 
 <!---->
 <div class="modal fade" id="noticeM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
