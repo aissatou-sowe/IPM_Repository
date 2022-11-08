@@ -18,6 +18,7 @@ import { DateAdapter } from '@angular/material/core';
 import { StatutEmployeService } from 'src/app/Services/statut-employe.service';
 import { IPM_StatutEmploye } from 'src/app/Models/IPM_StatutEmploye';
 import { ToastrService } from 'ngx-toastr';
+import { Console } from 'console';
 
 declare interface DataTable {
   headerRow: string[];
@@ -76,6 +77,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   desactive:boolean=false
   selectJustif: any;
   JustifURL: string | ArrayBuffer;
+  min: number;
   constructor(private emp_service: EmployeService,private emp_statut:StatutEmployeService,
     private router: Router, private fb: FormBuilder,private toastr: ToastrService,
     private route: ActivatedRoute, private datePipe: DatePipe, 
@@ -89,6 +91,9 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
 
   ngOnInit(): void {
     ////////////////
+    this.min = new Date().getFullYear()-18
+  
+        console.log(new Date().getFullYear()-18)
     this.getCategorie();
     this.getService();
     this.getEntity();
@@ -131,6 +136,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
           });
 
         })
+        
 
         console.log(emps);
         this.employes = emps;
@@ -138,12 +144,13 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
           if (ele.date_nais) {
             //convert date again to type Date 
             const bdate = new Date(ele.date_nais);
+            
             const timeDiff = Math.abs(Date.now() - bdate.getTime());
             console.log(timeDiff);
             this.ages = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
           }
-          if (this.ages > 60 || ele.ipmStatutEmploye?.emplStatut=="Demission" 
-          || ele.ipmStatutEmploye?.emplStatut=="Licenciment") {
+          if (this.ages > 60 || ele.ipmStatutEmploye?.emplStatut=="Démission" 
+          || ele.ipmStatutEmploye?.emplStatut=="licenciment") {
             console.log("Age atteinte impossible de ce beneficier à l'ipm :", this.ages)
             ele.statut = true
             console.log(ele);
@@ -193,7 +200,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   }
 
   getEmployeById(employe) {
-    this.emp_service.getEmployeById(employe.idemp).subscribe(
+    this.emp_service.getEmployeByIdSanstof(employe.idemp).subscribe(
       result => {
         this.currentemploye = result;
       }
@@ -257,7 +264,8 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   public EmployeNow() {
     this.addService.idService = this.servi;
     this.employe.ipmService= JSON.parse(JSON.stringify(this.addService));
-
+    this.addStatut.idStatut=1
+    this.employe.ipmStatutEmploye=JSON.parse(JSON.stringify(this.addStatut))
     this.addEntity.idEntity = this.enti;
     this.employe.ipmEntity= JSON.parse(JSON.stringify(this.addEntity));
     
@@ -476,7 +484,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   getEmploye(employe){
     // this.router.navigate(['/gestion-employes/employer-par-service/'+listserv.idService]);
     // console.log(listserv)
-      this.emp_service.getEmployeById(employe.idemp).subscribe(
+      this.emp_service.getEmployeByIdSanstof(employe.idemp).subscribe(
         res=>{
           this.employe=res;
           console.log(this.employe);
@@ -496,9 +504,13 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   /////Update Statut employe
   public updateStatut(){
     this.addStatut.idStatut=this.codeStat;
+    
     this.employe.ipmStatutEmploye=JSON.parse(JSON.stringify(this.addStatut));
-      this.emp_statut.modifierStatut(this.employe).subscribe(
+    console.log(this.employe)
+      this.emp_service.ModifierEmployeSansphoto(this.employe).subscribe(
         (res)=>{
+          console.log(this.employe)
+          this.ngOnInit();
               this.message=res;
                 this.toastr.success("Mise à jour avec Succès avec comme statut");
              })

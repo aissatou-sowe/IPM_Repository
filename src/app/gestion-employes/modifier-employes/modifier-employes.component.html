@@ -20,10 +20,18 @@
         <input matInput type="text" class="form-control" id="prenom" placeholder="Prenom" [(ngModel)]="currentemploye.prenom" name="prenom">
       </mat-form-field>
     </div>
-    <div class="col-md-6 form-group">
-      <mat-form-field class="example-full-width">
+    <div class="col-md-6 form-group"  style="margin-top:-25px;">
+      <!-- <mat-form-field class="example-full-width">
         <input matInput type="text" class="form-control" id="sexe" placeholder="Sexe" [(ngModel)]="currentemploye.sexe" name="sexe">
-      </mat-form-field>
+      </mat-form-field> -->
+      <label>Sexe </label><br>
+            {{sexe_emploi}}
+          <mat-select formControlName="sexe_emploi" class="form-control" id="sexe_emploi" 
+          >
+            <mat-option *ngFor="let sexEmploi of sexe" [value]="sexEmploi.value" (click)="getSexe(sexEmploi)">
+              {{ sexEmploi.value }}
+            </mat-option>
+          </mat-select>
     </div>
     <div class="col-md-6 form-group">
       <mat-form-field class="example-full-width">
@@ -54,10 +62,22 @@
         <mat-datepicker #picker></mat-datepicker> -->
       </mat-form-field>
     </div>
-    <div class="col-md-6 form-group">
-      <mat-form-field class="example-full-width">
+    
+      <div class="col-md-6 form-group" [formGroup]="FormControlEmpployes" style="margin-top:-20px;">
+        
+          <label>Situation familiale </label><br>
+            {{typesituation_familial}}
+          <mat-select formControlName="situation_familial" class="form-control" id="situation" 
+          [(ngModel)]="currentemploye.situation_familial">
+            <mat-option *ngFor="let situat of situation_familial" [value]="situat.value" (click)="getsituation(situat)">
+              {{ situat.value }}
+            </mat-option>
+          </mat-select>
+        
+      
+      <!-- <mat-form-field class="example-full-width">
         <input matInput type="text" class="form-control" id="situation_familial" placeholder="Situation Matrimonial" [(ngModel)]="currentemploye.situation_familial" name="situation_familial">
-      </mat-form-field>
+      </mat-form-field> -->
     </div>
     <div [formGroup]="" class="col-md-6 form-group">
       <label>Service </label><br>

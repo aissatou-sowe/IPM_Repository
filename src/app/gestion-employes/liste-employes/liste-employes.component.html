@@ -193,7 +193,7 @@
                 <div class="col-md-6 form-group"[formGroup]="FormControlEmpployes">
                   <mat-form-field>
                     <input matInput [matDatepicker]="picker1" (click)="picker1.open()" id="date_nais"
-                      placeholder="Date Naissance" formControlName="date_nais">
+                      placeholder="Date Naissance" formControlName="date_nais" min="2000-01-01" max="{{min}}-12-31">
                     <mat-datepicker-toggle matSuffix [for]="picker1">
                     </mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>

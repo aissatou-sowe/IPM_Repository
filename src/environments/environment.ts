@@ -5,7 +5,7 @@
 
 export const environment = {
   production: true,
- URL : 'http://localhost:8088/ipm/'
+ URL : 'http://localhost:8082/ipm/'
 // URL : 'http://10.14.14.232:8084/ipm-backend/',
 
 };
