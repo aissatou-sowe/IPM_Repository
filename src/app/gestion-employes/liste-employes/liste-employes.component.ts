@@ -273,7 +273,8 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     this.employe.adresse_domicile=this.FormControlEmpployes.get("adresse_domicile").value;
     this.employe.telephone=this.FormControlEmpployes.get("telephone").value;
     this.employe.date_nais =this.FormControlEmpployes.get("date_nais").value;
-    this.employe.ipmStatutEmploye=this.statutEmploye[0];
+    this.addStatut.idStatut=1
+    this.employe.ipmStatutEmploye=JSON.parse(JSON.stringify(this.addStatut));
     console.log(this.employe.date_nais);
     this.employe.date_recrutement = this.FormControlEmpployes.get("date_recrutement").value;
     console.log(this.employe.date_recrutement);
@@ -289,24 +290,23 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
         console.log("the message ", data)
         console.log(this.employe.date_nais);
 
-        // return this.message
-        this.emp_service.addUploadData(this.selectedFile).subscribe(
-          (data) => {
-            this.message = data;
-            console.log("the message ", data)
-            //return this.message
-          })
-          this.emp_service.addUploadJustif(this.selectJustif).subscribe(
-              (data) => {
-                this.message = data;
-                console.log("the message ", data)
-                //return this.message
-              })
-              this.showNotification('top', 'center', 1, '<b>employé ajouté avec succées!!!</b> :')
-    //   // console.log(this.message);
-    //   this.router.navigate(['/gestion-employes/ListeEmployes']);
-      }),(errr:any)=>{
-                console.error(errr);
+
+            // return this.message
+     this.emp_service.addUploadData(this.selectedFile).subscribe(
+      (data) => {
+        this.message = data;
+        console.log("the message ", data)
+        //return this.message
+      });
+      this.emp_service.addUploadJustif(this.selectJustif).subscribe(
+        (data) => {
+          this.message = data;
+          console.log("the message ", data)
+          //return this.message
+        });
+     this.showNotification('top', 'center', 1, '<b>employé ajouté avec succées!!!</b> :')
+    }),(errr)=>{
+        console.error(errr);
       this.showNotification('top', 'center', 3, "<b>employé non ajouté</b> :")
       }
    
