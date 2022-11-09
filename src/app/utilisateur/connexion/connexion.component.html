@@ -20,14 +20,13 @@
                                 data-target="#noticeModal" style="float:right;margin-top:-1cm; font-size: 16px;">
                                   <i class="material-icons"  >add_circle</i> Ajouter un nouvel utilisateur
                                 </button>
-                                <!-- <button class="w-100"  data-toggle="modal"
-                    data-target="#noticeModal" style="font-size: 24px;">Saisir un nouveau Utilisateur</button> --></td> 
+                               
                        </tr>
                       </tbody>
                   </table>
                   
               </div>
-              <div class="col-md-12">
+              <!-- <div class="col-md-12">
                 <div class="card">
                   <div class="card-header card-header-icon">
                     <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
@@ -57,10 +56,7 @@
                             <i class="material-icons" class="btn btn-danger" (click)=deleteDetails(i)><span
                                 class="fa fa-trash-o"></span></i>
                           </td>
-                          <!-- <td>
-                            <button class="btn btn-info btn-block" 
-                           data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>
-                            </button></td> -->
+                   
               
               
                         </tr>
@@ -77,15 +73,11 @@
                       </tfoot>
               
                     </table>
-                    <!-- <div class="modal-footer justify-content-center">
-                      <button class="btn btn-raised btn-round btn-success"
-                       (click)="ajoutRem()">Valider remboursement
-                      </button>
-                    </div> -->
+                   
                   </div>
               
                 </div>
-              </div>
+              </div> -->
 
           </div>
       </div>
@@ -121,7 +113,7 @@
                                 <div class="col-md-6">
                                   <mat-form-field class="example-full-width">
                                     <input matInput type="text" class="form-control" id="login"
-                                     placeholder="Username" [(ngModel)]="User.login" required="">
+                                     placeholder="Username" [(ngModel)]="User.login" name="login" required>
                             
                                   </mat-form-field>
                                 </div>   
@@ -129,12 +121,12 @@
                                 <div class="col-md-6">
                                   <mat-form-field class="example-full-width">
                                     <input matInput type="password" placeholder="Mot de Passe" id="mot_passe"
-                                    [(ngModel)]="User.mot_passe" required="">
+                                    [(ngModel)]="User.mot_passe" name="mot_passe" required>
                                   
                                   </mat-form-field>
                                 </div>  
                               </div>  
-                              <div class="row">
+                               <!-- <div class="row">
                               <div class="col-md-6 form-group">
                                 <mat-form-field>
                                   <mat-select placeholder="Fonction" name="roles" id="roles"
@@ -145,46 +137,7 @@
                                   </mat-select>
                                 </mat-form-field> 
                               </div>
-                            </div>
-                                  
-                                  
-                                <!-- <div class="row bordered" >
-                                <div class="col-md-4 form-group bordered "  *ngIf="message">
-                                    <label for="Taux_ipm"><b>Nom</b></label><br />
-                                    {{message.nom}}
-                                  </div>
-                                  <div class="col-md-4 form-group"  *ngIf="message">
-                                    <label for="Prenom"><b>Prenom</b></label><br />
-                                    {{message.prenom}}
-                                  </div>
-                                  <div class="col-md-4 form-group"  *ngIf="message">
-                                    <label for="Numero Carnet"><b>Numero Carnet</b></label><br />
-                                    {{message.numero_carnet}}
-                                  </div>
-                  
-                                </div>
-                                <div class="row" *ngIf="message">
-                                    
-                                      <div class="col-md-4 form-group">
-                                        <label for="cumul Charge"><b>cumul Charge</b></label><br />
-                                        {{message.cumul_charge}}
-                                      </div>
-                                      <div class="col-md-4 form-group">
-                                        <label for="Montant"><b>Montant Remboursement</b></label><br />
-                                        <input type="number" name="montant" class="form-control" placeholder="montant" id="montant"
-                                      [(ngModel)]="montantR">
-                                        
-                                      </div>
-                                      <div class="col-md-4" style="margin-top:1cm;">
-                                         <legend>date Facture</legend> 
-                                        <mat-form-field>
-                                        <input matInput [matDatepicker]="picker1" placeholder="date" id="dateRemboursement" name="dateRemboursement" [(ngModel)]="date" (click)="picker1.open()">
-                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker1 startView="year"></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
-
-                                </div> -->
+                            </div>  -->
                               </form>
                               <div class="modal-footer justify-content-center">
                               <button mat-raised-button data-dismiss="modal" (click)="AjoutUser()" [disabled]="!UserForm.valid"

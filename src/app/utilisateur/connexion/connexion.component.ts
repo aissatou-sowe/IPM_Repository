@@ -18,7 +18,7 @@ export class ConnexionComponent implements OnInit {
   User:IPM_Utilisateur  =new IPM_Utilisateur();
   jsonRole: any;
   desactive:boolean=false;
-
+  addRole:IPM_Role;
   constructor(private user_Service:UtilisateurService,private router: Router, private route: ActivatedRoute,
     private formUtilisateur: FormBuilder) {
       this.UserForm = new FormGroup({
@@ -27,6 +27,7 @@ export class ConnexionComponent implements OnInit {
         roles: new FormControl(),
 
       });
+      this.addRole=new IPM_Role();
      }
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ this.user_Service.getAllUser().subscribe(
 initfacteurform() {
   this.UserForm = this.formUtilisateur.group({
 
-    iduser: [null],
+    id: [null],
     login: [Validators.required],
     mot_passe: [null, Validators.required],
     roles: [''],
@@ -63,13 +64,13 @@ initfacteurform() {
 }
 AjoutUser(){
   console.log(this.User);
-  this.User.roles = JSON.parse(JSON.stringify(this.jsonRole));
-      console.log(this.User.roles);
+  //this.addRole.id=this.jsonRole;
+ // this.User.roles = JSON.parse(JSON.stringify(this.addRole));
+  console.log(this.User);
   this.user_Service.SaveUserToRole(this.User).subscribe(
     (data) => {
       console.log(data);
       this.showALERTE2('top', 'center')
-//this.desactive=true
     }
   ),
 (error)=>{

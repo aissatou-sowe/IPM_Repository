@@ -45,7 +45,6 @@ import { FixedpluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { ToastrModule } from 'ngx-toastr';
-
 import { AppRoutes } from './app.routing';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak/app.init';
@@ -81,7 +80,7 @@ import { ListRemboursementsComponent } from './remboursements/list-remboursement
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   declarations: []
 })
@@ -104,7 +103,7 @@ export class MaterialModule {}
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
         KeycloakAngularModule,
-     //   AngularFontAwesomeModule
+
     ],
     declarations: [
         AppComponent,
