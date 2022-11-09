@@ -213,7 +213,7 @@ var AjoutCotisationComponent = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<div class=\"card-body\">\n    <div class=\"row\">\n        <div class=\"col-md-6\">\n            <div class=\"card \" style=\"margin-left:8cm;\">\n                <div class=\"card-header card-header-icon\">\n                    <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\n                        <i class=\"material-icons\">list</i>\n                    </div>\n                    <h3 style=\"background-color:whitesmoke; \n                    font-weight: 400; color: \n                    black; pading: 5px; width: 50%;\" class=\"card-title\">Cotisations</h3>\n                </div>\n                <div class=\"card-body\" style=\"padding-left: 3.5cm;\">\n\n                    <form [formGroup]=\"uploadForm\">\n    \n         \n                        <!-- <input type=\"file\" (change)=\"onFileChange($event)\" multiple=\"false\" class=\"btn btn-outline-success\" /> -->\n                  <input type=\"file\" (change)=\"onFileChange($event)\" multiple=\"true\"  formControlName=\"myFile\"/>\n              \n                  <div class=\"modal-footer justify-content-center\">\n                  <button  class=\"btn btn-success\" (click)=\"onSubmit()\">\n                    <i class=\"material-icons\">checked</i>Ajout Cotisation</button>\n                  </div>\n                </form>\n\n                </div>\n            </div>\n        </div>\n    </div>\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\r\n<div class=\"card-body\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6\">\r\n            <div class=\"card \" style=\"margin-left:8cm;\">\r\n                <div class=\"card-header card-header-icon\">\r\n                    <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                        <i class=\"material-icons\">list</i>\r\n                    </div>\r\n                    <h3 style=\"background-color:whitesmoke; \r\n                    font-weight: 400; color: \r\n                    black; pading: 5px; width: 50%;\" class=\"card-title\">Cotisations</h3>\r\n                </div>\r\n                <div class=\"card-body\" style=\"padding-left: 3.5cm;\">\r\n\r\n                    <form [formGroup]=\"uploadForm\">\r\n    \r\n         \r\n                        <!-- <input type=\"file\" (change)=\"onFileChange($event)\" multiple=\"false\" class=\"btn btn-outline-success\" /> -->\r\n                  <input type=\"file\" (change)=\"onFileChange($event)\" multiple=\"true\"  formControlName=\"myFile\"/>\r\n              \r\n                  <div class=\"modal-footer justify-content-center\">\r\n                  <button  class=\"btn btn-success\" (click)=\"onSubmit()\">\r\n                    <i class=\"material-icons\">checked</i>Ajout Cotisation</button>\r\n                  </div>\r\n                </form>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n");
 
 /***/ }),
 
@@ -382,7 +382,7 @@ var routes = [
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p>liste-cotisation works!</p>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<p>liste-cotisation works!</p>\r\n");
 
 /***/ })
 

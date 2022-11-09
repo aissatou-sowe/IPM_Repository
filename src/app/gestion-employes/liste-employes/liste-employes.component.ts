@@ -281,7 +281,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     this.employe.adresse_domicile=this.FormControlEmpployes.get("adresse_domicile").value;
     this.employe.telephone=this.FormControlEmpployes.get("telephone").value;
     this.employe.date_nais =this.FormControlEmpployes.get("date_nais").value;
-    this.employe.ipmStatutEmploye=this.statutEmploye[0];
+    //this.employe.ipmStatutEmploye=this.statutEmploye[0];
     console.log(this.employe.date_nais);
     this.employe.date_recrutement = this.FormControlEmpployes.get("date_recrutement").value;
     console.log(this.employe.date_recrutement);

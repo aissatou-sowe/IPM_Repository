@@ -41,9 +41,10 @@
           <div class="col-md-3">
             <img class="rounded-circle" src="{{currentemploye.photo}}" style="height :150px;margin-top: 1cm  ;" alt="">
 
-            <a *ngIf="currentemploye.photo">
+            <!-- <a *ngIf="currentemploye.photo"> -->
+              <a>
               <button mat-raised-button style="margin:2px;" type="button" class="btn btn-warning" data-toggle="modal"
-                data-target="#modiftof">
+                data-target="#modiftof">charger photo
                 <i class="material-icons">edit</i>
               </button>
               <!-- dffdfdf -->
@@ -133,21 +134,22 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-md-4" *ngIf="condition!=true">
+        <div class="col-md-4" >
           <ul role="tablist" class="nav nav-pills nav-pills-rose flex-column">
-            <li class="nav-item"><a data-toggle="tab" href="#link4" role="tablist" class="nav-link active"> Conjoint(e)
+            <li class="nav-item" *ngIf="condition!=true">
+              <a data-toggle="tab" href="#link4" role="tablist" class="nav-link active"> Conjoint(e)
               </a>
             </li>
             <li class="nav-item"><a data-toggle="tab" href="#link5" role="tablist" class="nav-link"> Enfant(s) </a></li>
           </ul>
         </div>
-        <div class="col-md-8" *ngIf="condition!=true ">
+        <div class="col-md-8">
           <div class="tab-content">
             <div id="link4" class="tab-pane active">
               <div class="col-md-12">
                 <div class="">
 
-                  <div class="">
+                  <div class="" *ngIf="condition!=true">
                     <div class="table-responsive">
                       <button mat-raised-button type="button" data-toggle="modal" data-target="#conjoints"
                         class="mat-raised-button mat-button-base btn btn-success"><span class="mat-button-wrapper"><i
@@ -532,7 +534,7 @@
                                 </form>
                                 <div class="modal-footer justify-content-center">
                                   <button mat-raised-button type="button" class="btn btn-info btn-round"
-                                    (click)="modifEnfant()">Modification</button>
+                                    (click)="modifEnfant()" data-dismiss="modal">Modification</button>
                                 </div>
                               </div>
                             </div>

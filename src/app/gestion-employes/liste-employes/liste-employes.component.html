@@ -18,7 +18,7 @@
               <table id="datatable" class="table table-bordered table-striped" width="100%" style="width:100%"
                 class="table table-hover">
                 <thead class="text-black">
-                  <tr>()
+                  <tr>
 
                     <th cope="col"><b> Numero Carnet</b></th>
                     <th cope="col"><b> Nom</b></th>
@@ -193,7 +193,7 @@
                 <div class="col-md-6 form-group"[formGroup]="FormControlEmpployes">
                   <mat-form-field>
                     <input matInput [matDatepicker]="picker1" (click)="picker1.open()" id="date_nais"
-                      placeholder="Date Naissance" formControlName="date_nais" min="2000-01-01" max="{{min}}-12-31">
+                      placeholder="Date Naissance" formControlName="date_nais" max="{{min}}-12-31">
                     <mat-datepicker-toggle matSuffix [for]="picker1">
                     </mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
