@@ -4,14 +4,14 @@ export  function initializeKeycloak(keycloak: KeycloakService): () => Promise<an
     return () =>
         keycloak.init({
             config: {
-              //url: 'http://localhost:8080/auth',
+              url: 'http://localhost:8080/auth',
                 
-              url:'http://10.14.14.232:8180/auth/',
-               //realm: 'Authentification-IPM',
-                realm: 'Digital-Poste',
-             clientId: 'ipm-fronte',
+              //url:'http://10.14.14.232:8180/auth/',
+               realm: 'Authentification-IPM',
+                //realm: 'Digital-Poste',
+             //clientId: 'ipm-fronte',
   
-           //clientId:'ipm-client'
+           clientId:'ipm-client'
             } ,
             initOptions : {
                 onLoad:"check-sso",

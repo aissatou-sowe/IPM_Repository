@@ -25,8 +25,8 @@ export class AuthGuard extends KeycloakAuthGuard {
         // Force the user to log in if currently unauthenticated.
         if (!this.authenticated) {
             await this.keycloak.login({
-                redirectUri: window.location.origin +"/ipm-fronte/",
-                //redirectUri: window.location.origin + state.url,
+                //redirectUri: window.location.origin +"/ipm-fronte/",
+                redirectUri: window.location.origin + state.url,
 
             });
             this.router.navigateByUrl('**')

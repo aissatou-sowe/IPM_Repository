@@ -63,8 +63,8 @@ initfacteurform() {
 }
 AjoutUser(){
   console.log(this.User);
-  this.User.roles = JSON.parse(JSON.stringify(this.jsonRole));
-      console.log(this.User.roles);
+  // this.User.roles = JSON.parse(JSON.stringify(this.jsonRole));
+  //     console.log(this.User.roles);
   this.user_Service.SaveUserToRole(this.User).subscribe(
     (data) => {
       console.log(data);

@@ -197,7 +197,7 @@ export class SidebarComponent implements OnInit {
     this.keycloak.loadUserProfile().then(res => {
 
         this.username = res.firstName+" "+res.lastName
-        this.email = res.email
+        this.email = res.email                            
            console.log(this.username,this.email);
        // this.userByEmail(this.email)
 
