@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
 import { IPM_Role } from 'src/app/Models/Role';
 import { IPM_Utilisateur } from 'src/app/Models/Utilisateur';
 import { UtilisateurService } from 'src/app/Services/utilisateur.service';
@@ -19,8 +20,10 @@ export class ConnexionComponent implements OnInit {
   jsonRole: any;
   desactive:boolean=false;
   addRole:IPM_Role;
+  listRoles: string[];
+  rolesUser
   constructor(private user_Service:UtilisateurService,private router: Router, private route: ActivatedRoute,
-    private formUtilisateur: FormBuilder) {
+    private keycloakservice: KeycloakService, private formUtilisateur: FormBuilder) {
       this.UserForm = new FormGroup({
         login: new FormControl(),
         mot_passe: new FormControl(),
@@ -48,6 +51,15 @@ this.user_Service.getAllUser().subscribe(
     console.log(this.listUser);
   }
 );
+/////////////////////Keycloak Liste Roles/////////////////////////////////
+
+this.listRoles=this.keycloakservice.getKeycloakInstance().realmAccess.roles
+        console.log(this.keycloakservice.getKeycloakInstance().realmAccess.roles)
+
+        this.rolesUser=this.keycloakservice.getKeycloakInstance().realmAccess.roles
+ 
+
+/////////////////////////////Fin////////////////////////////////////////
   }
 
 ///formulaire
@@ -60,22 +72,22 @@ initfacteurform() {
     roles: [''],
 
   });
-
+////////////////////*****************////////////////////////////
 }
 AjoutUser(){
   console.log(this.User);
-  //this.addRole.id=this.jsonRole;
- // this.User.roles = JSON.parse(JSON.stringify(this.addRole));
+  //  this.addRole.id=this.jsonRole;
+  // this.User.roles = JSON.parse(JSON.stringify(this.addRole));
   console.log(this.User);
   this.user_Service.SaveUserToRole(this.User).subscribe(
     (data) => {
       console.log(data);
-      this.showALERTE2('top', 'center')
+      this.showNotification('top', 'center', 1, '<b>utilisateur ajouté avec succées!!!</b> :')
     }
   ),
 (error)=>{
   console.error(error);
-  this.showALERTE2('bottom',3);
+  this.showNotification('top', 'center', 3, "<b>utilisateur non ajouté</b> :");
 } 
 
 }
@@ -87,17 +99,17 @@ AjoutUser(){
   }
 
 ///////////Notification
-showALERTE2(from: any, align: any) {
+showNotification(from: any, align: any, idtype: any, note) {
   const type = ['', 'success', 'warning', 'danger', 'info', 'rose', 'primary'];
 
   // const color = Math.floor((Math.random() * 6) + 1);
 
   $.notify({
     icon: 'notifications',
-    message: '<b>Enregistrement avec succes </b> :'
+    message: note
   }, {
-    type: type[1],
-    timer: 9000,
+    type: type[idtype],
+    timer: 2000,
     placement: {
       from: from,
       align: align

@@ -88,18 +88,18 @@
             aria-hidden="true">
             <div class="modal-dialog" >
                 <div class="modal-content"style="width: 900px; margin-left:-3cm;margin-top: 3cm;">
-                    <div class="modal-header" style="background-color: whitesmoke;"
-                    >
-                        <h2 class="modal-title p-2" id="noticeModal" style="font-weight:400;">Utilisateur
+                    <div class="modal-header" style="background-color: whitesmoke;">
+                        <h2 class="modal-title p-2" id="noticeModal" style="font-weight:400;">Utilisateur</h2>
                         
-                        </h2>
+                      <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <b class="btn btn-danger"> <i class="material-icons" style="color: red;">close</i> fermer</b>
+                       </button>
                         <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="material-icons">close</i>
                         </button>
                     </div>
                     <div class="modal-body" style="width: 900px;">
 
-                        
                             <form class="theme-form">
                                 <div class="row bordered" >
                                   <!-- <div class="input-group col-md-4 bordered ">
@@ -120,31 +120,55 @@
                                 
                                 <div class="col-md-6">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput type="password" placeholder="Mot de Passe" id="mot_passe"
-                                    [(ngModel)]="User.mot_passe" name="mot_passe" required>
+                                    <input matInput type="password" placeholder="Mot de Passe" id="password"
+                                    [(ngModel)]="User.password" name="password" required>
                                   
                                   </mat-form-field>
                                 </div>  
                               </div>  
-                               <!-- <div class="row">
-                              <div class="col-md-6 form-group">
-                                <mat-form-field>
-                                  <mat-select placeholder="Fonction" name="roles" id="roles"
-                                  [(ngModel)]="jsonRole">
-                                    <mat-option *ngFor="let rol of listRole" [value]="rol.idRole">
-                                      {{ rol.typeRole }}
-                                    </mat-option>
-                                  </mat-select>
-                                </mat-form-field> 
+                            <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput type="text" class="form-control" id="prenom"
+                                   placeholder="Prenom" [(ngModel)]="User.prenom" name="prenom" required>
+                          
+                                </mat-form-field>
+                              </div>   
+                              
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput type="text" placeholder="Nom" id="nom"
+                                  [(ngModel)]="User.nom" name="nom" required>
+                                
+                                </mat-form-field>
                               </div>
-                            </div>  -->
+                            </div> 
+                            <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput type="email" class="form-control" id="email"
+                                   placeholder="Email" [(ngModel)]="User.email" name="email" required>
+                          
+                                </mat-form-field>
+                              </div>   
+                              
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput type="text" placeholder="Fonction" id="fonction"
+                                  [(ngModel)]="User.fonction" name="fonction" required>
+                                
+                                </mat-form-field>
+                              </div>
+
+                            </div> :
                               </form>
                               <div class="modal-footer justify-content-center">
-                              <button mat-raised-button data-dismiss="modal" (click)="AjoutUser()" [disabled]="!UserForm.valid"
-                                      class="btn btn-fill btn-success">Ajouter</button>
+                              <button mat-raised-button data-dismiss="modal" (click)="AjoutUser()"
+                                      class="btn btn-success">Ajouter</button>
                                 </div>
                             
                                       <hr>
                     </div>
 
+                    
                    

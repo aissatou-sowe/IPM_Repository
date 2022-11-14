@@ -103,6 +103,7 @@ export class MaterialModule {}
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
         KeycloakAngularModule,
+        MatStepperModule,
 
     ],
     declarations: [

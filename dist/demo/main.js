@@ -141,7 +141,7 @@ var MdChartComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\MesProjects_Angulars\material-dashboard-pro-angular-v2.5.0\Nouveau-Front-IPM\Front-IPM\Front-Modification\PROJET-IPM\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Users\HP\workspace\IPM_Front\PROJET-IPM\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -473,7 +473,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: true,
-    //URL : 'http://localhost:8088/ipm/'
+    //URL : 'http://localhost:8082/ipm/'
     URL: 'http://10.14.14.232:8084/ipm-backend/',
 };
 
@@ -1206,6 +1206,9 @@ var EmployeService = /** @class */ (function () {
     };
     EmployeService.prototype.ModifierEmploye = function (emp) {
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + 'employe', emp);
+    };
+    EmployeService.prototype.ModifierEmployeSansphoto = function (emp) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + 'employesansPhoto', emp);
     };
     EmployeService.prototype.getEmployeById = function (idemp) {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + 'employes/' + idemp);
@@ -2242,9 +2245,9 @@ function initializeKeycloak(keycloak) {
     return function () {
         return keycloak.init({
             config: {
-                // url: 'http://localhost:8180/auth',
+                //url: 'http://localhost:8080/auth',
                 url: 'http://10.14.14.232:8180/auth/',
-                // realm: 'IPM-Front',
+                //realm: 'Authentification-IPM',
                 realm: 'Digital-Poste',
                 clientId: 'ipm-fronte',
             },
