@@ -5,6 +5,7 @@ import { KeycloakService } from 'keycloak-angular';
 import { IPM_Role } from 'src/app/Models/Role';
 import { IPM_Utilisateur } from 'src/app/Models/Utilisateur';
 import { UtilisateurService } from 'src/app/Services/utilisateur.service';
+import { roleUser } from '../../Models/roleUser';
 declare var $;
 
 @Component({
@@ -17,11 +18,17 @@ export class ConnexionComponent implements OnInit {
   listRole: IPM_Role[];
   listUser:IPM_Utilisateur[];
   User:IPM_Utilisateur  =new IPM_Utilisateur();
+  role:IPM_Role=new IPM_Role();
+  UserRole:roleUser=new roleUser();
   jsonRole: any;
   desactive:boolean=false;
   addRole:IPM_Role;
   listRoles: string[];
   rolesUser
+  typeRole: string;
+  description: string;
+  roleChoisi: any;
+  userChoisi: any;
   constructor(private user_Service:UtilisateurService,private router: Router, private route: ActivatedRoute,
     private keycloakservice: KeycloakService, private formUtilisateur: FormBuilder) {
       this.UserForm = new FormGroup({
@@ -76,11 +83,34 @@ initfacteurform() {
 }
 AjoutUser(){
   console.log(this.User);
+  if (this.User.login && this.User.email && this.User.nom && this.User.password && this.User.prenom && this.User.fonction  ) {
+    this.user_Service.SaveUserToRole(this.User).subscribe(
+      (data) => {
+        console.log(data);
+        this.showNotification('top', 'center', 1, '<b>utilisateur ajouté avec succées!!!</b> :')
+      }
+    )}
+    else
+      //console.error(error);
+      this.showNotification('top', 'center', 3, "<b>utilisateur non ajouté</b> :");
+     
+    
+  
   //  this.addRole.id=this.jsonRole;
   // this.User.roles = JSON.parse(JSON.stringify(this.addRole));
   console.log(this.User);
+  
 
-  this.user_Service.SaveUserToRole(this.User).subscribe(
+
+}
+AjoutRole(){
+  
+  //  this.addRole.id=this.jsonRole;
+  // this.User.roles = JSON.parse(JSON.stringify(this.addRole));
+  this.role.typeRole=this.typeRole
+  this.role.description=this.description
+  console.log(this.role);
+  this.user_Service.SaveRole(this.role).subscribe(
     (data) => {
       console.log(data);
       this.showNotification('top', 'center', 1, '<b>utilisateur ajouté avec succées!!!</b> :')
@@ -90,6 +120,26 @@ AjoutUser(){
   console.error(error);
   this.showNotification('top', 'center', 3, "<b>utilisateur non ajouté</b> :");
 } 
+
+}
+selectUser(user){
+  console.log(user)
+  this.userChoisi=user
+}
+selectRole(role){
+  console.log(role)
+  this.roleChoisi=role
+}
+AjoutUserRole(){
+  this.UserRole.ipm_role=this.roleChoisi
+  this.UserRole.ipm_utilisateur=this.userChoisi
+  console.log(this.UserRole);
+  this.user_Service.SaveRoleUser(this.UserRole).subscribe(
+    (data) => {
+      console.log(data);
+      this.showNotification('top', 'center', 1, '<b>utilisateur ajouté avec succées!!!</b> :')
+    }
+  )
 
 }
 

@@ -5,9 +5,10 @@ export  function initializeKeycloak(keycloak: KeycloakService): () => Promise<an
         keycloak.init({
             config: {
               url: 'http://localhost:8180/auth',
-              //  url:'http://10.14.14.232:8180/auth/',
+                
+              //url:'http://10.14.14.232:8180/auth/',
                realm: 'IPM-Front',
-               // realm: 'Digital-Poste',
+                //realm: 'Digital-Poste',
              //clientId: 'ipm-fronte',
   
            clientId:'front-end'

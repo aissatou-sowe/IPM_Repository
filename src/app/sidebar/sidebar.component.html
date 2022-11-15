@@ -650,38 +650,53 @@
                                             </ul>
                                                  
                                                    
-                           <!--Cotisation--->
-                           <!-- <ul class="nav" *ngIf="isGerant()" >
+                           <!--Rapports--->
+                           <ul class="nav" *ngIf="isGerant()" >
                             <li routerLinkActive="active" class="nav-item">
                                 
-                                <a [routerLink]="[menuItems[9].path]" *ngIf="menuItems[9].type === 'link'" class="nav-link">
-                                    <i class="material-icons">{{menuItems[9].icontype}}</i>
-                                    <p>{{menuItems[9].title}}</p>
+                                <a [routerLink]="[menuItems[11].path]" *ngIf="menuItems[11].type === 'link'" class="nav-link">
+                                    <i class="material-icons">{{menuItems[11].icontype}}</i>
+                                    <p>{{menuItems[11].title}}</p>
                                 </a>
                                 
                     
-                                <a data-toggle="collapse" href="#{{menuItems[9].collapse}}" *ngIf="menuItems[9].type === 'sub'"
+                                <a data-toggle="collapse" href="#{{menuItems[11].collapse}}" *ngIf="menuItems[11].type === 'sub'"
                                     (click)="updatePS()" class="nav-link">
                     
-                                    <i class="material-icons">{{menuItems[9].icontype}}</i>
-                                    <p id="titre">{{menuItems[9].title}}<b class="caret"></b></p>
-                                </a> -->
-                                <!-- <div id="{{menuItems[9].collapse}}" class="collapse" *ngIf="menuItems[9].type === 'sub'">
+                                    <i class="material-icons">{{menuItems[11].icontype}}</i>
+                                    <p id="titre">{{menuItems[11].title}}<b class="caret"></b></p>
+                                </a>
+                                <div id="{{menuItems[11].collapse}}" class="collapse" *ngIf="menuItems[11].type === 'sub'">
                                   <ul class="nav" *ngIf="isGerant()">
                                     <li routerLinkActive="active" class="nav-item">
-                                        <a [routerLink]="[menuItems[9].path,menuItems[9].children[0].path]" class="nav-link">
+                                        <a [routerLink]="[menuItems[11].path,menuItems[11].children[0].path]" class="nav-link">
                 
                 
-                                            <span class="sidebar-mini">{{menuItems[9].children[0].ab}}</span>
-                                            <span class="sidebar-normal">{{menuItems[9].children[0].title}}</span>
+                                            <span class="sidebar-mini">{{menuItems[11].children[0].ab}}</span>
+                                            <span class="sidebar-normal">{{menuItems[11].children[0].title}}</span>
                                             
                                         </a>
                                     </li>
-                                    </ul> -->
+                                    </ul>
+                                    <ul class="nav" *ngIf="isGerant()">
+                                      <li routerLinkActive="active" class="nav-item">
+                                          <a [routerLink]="[menuItems[11].path,menuItems[11].children[1].path]" class="nav-link">
+                  
+                  
+                                              <span class="sidebar-mini">{{menuItems[11].children[1].ab}}</span>
+                                              <span class="sidebar-normal">{{menuItems[11].children[1].title}}</span>
+                                              
+                                          </a>
+                                      </li>
+                                      </ul>
+                                  </div>
+
+                                </li>
+                              </ul>
                                 
             
-                                 <!-- Fin-->
-                                <!--User--->
+                               
+                                <!--Fin Rapports--->
                            <!-- <ul class="nav" *ngIf="isGerant()">
                             <li routerLinkActive="active" class="nav-item">
                                 

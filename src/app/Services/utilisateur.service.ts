@@ -16,6 +16,19 @@ export class UtilisateurService {
   public SaveUserToRole(user){
     
     return this.http.post(environment.URL+'saveUser',user,{responseType: 'text' as 'json'})
+    .pipe(
+      catchError((this.erroHandler)
+      
+      
+    ))
+  }
+  public SaveRole(role){
+    
+    return this.http.post(environment.URL+'saveRole',role,{responseType: 'text' as 'json'})
+  }
+  public SaveRoleUser(UserRole){
+    
+    return this.http.post(environment.URL+'roleAddUser',UserRole,{responseType: 'text' as 'json'})
   }
   erroHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'erreur de telechargement ');

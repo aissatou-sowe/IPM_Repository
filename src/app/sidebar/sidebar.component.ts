@@ -167,6 +167,18 @@ export const ROUTES: RouteInfo[] = [{
             
         ]
     },
+      {
+        path: '/rapports',
+        title: 'Rapports',
+        type: 'sub',
+        icontype: 'group_user',
+        collapse: 'rapports',
+        children: [
+            {path: 'ChargesIndividuel', title: 'Charges Individuel', ab:'CI'},
+             {path: 'CreancesGlobales', title: 'Créances Globales', ab:'CG'},
+            
+        ]
+    },
 
     // {
     //     path: '/utilisateur',
@@ -197,7 +209,7 @@ export class SidebarComponent implements OnInit {
     this.keycloak.loadUserProfile().then(res => {
 
         this.username = res.firstName+" "+res.lastName
-        this.email = res.email
+        this.email = res.email                            
            console.log(this.username,this.email);
        // this.userByEmail(this.email)
 
