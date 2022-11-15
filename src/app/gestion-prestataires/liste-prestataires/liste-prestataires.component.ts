@@ -193,6 +193,8 @@ showNotification1(from: any, align: any) {
   });
   }
 ajouterPres(){
+  if(this.prestataire.adresse_prestataire && this.prestataire.ipm_type_prestataire 
+    && this.prestataire.code_categorie_pretataire && this.prestataire.lettreAgrement && this.prestataire.telephone ){
   this.addPrestataire.id_type_prestataire=this.code_presta;
   this.prestataire.ipm_type_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
     this.prestataire.lettreAgrement=this.selectLettreAg.name;
@@ -207,8 +209,10 @@ ajouterPres(){
       console.log(this.selctLettreAg);
     })
     this.toastr.success( 'Ajouter Faite avec Success');
+  }else
+  this.toastr.error('Veuillez Remplir les champs');
 }
-
+//Choisir la lettre
 selctLettreAgre(event:any){
   this.selectLettreAg = event.target.files[0];
 

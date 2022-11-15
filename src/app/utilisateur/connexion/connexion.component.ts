@@ -79,6 +79,7 @@ AjoutUser(){
   //  this.addRole.id=this.jsonRole;
   // this.User.roles = JSON.parse(JSON.stringify(this.addRole));
   console.log(this.User);
+
   this.user_Service.SaveUserToRole(this.User).subscribe(
     (data) => {
       console.log(data);
