@@ -262,6 +262,12 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     this.router.navigate(['/gestion-employes/ListeEmployes']);
  }*/
   public EmployeNow() {
+    if (this.employe.nom && this.employe.prenom && this.employe.date_nais
+      && this.employe.lieu_nais && this.employe.date_recrutement && this.employe.adresse_domicile 
+      && this.employe.situation_familial && this.employe.ipmEntity && this.employe.sexe
+      && this.employe.ipmService && this.employe.reference ) {
+      
+    
     this.addService.idService = this.servi;
     this.employe.ipmService= JSON.parse(JSON.stringify(this.addService));
     this.addStatut.idStatut=1
@@ -297,24 +303,23 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
         console.log("the message ", data)
         console.log(this.employe.date_nais);
 
-        // return this.message
-        this.emp_service.addUploadData(this.selectedFile).subscribe(
-          (data) => {
-            this.message = data;
-            console.log("the message ", data)
-            //return this.message
-          })
-          this.emp_service.addUploadJustif(this.selectJustif).subscribe(
-              (data) => {
-                this.message = data;
-                console.log("the message ", data)
-                //return this.message
-              })
-              this.showNotification('top', 'center', 1, '<b>employé ajouté avec succées!!!</b> :')
-    //   // console.log(this.message);
-    //   this.router.navigate(['/gestion-employes/ListeEmployes']);
-      }),(errr:any)=>{
-                console.error(errr);
+
+            // return this.message
+     this.emp_service.addUploadData(this.selectedFile).subscribe(
+      (data) => {
+        this.message = data;
+        console.log("the message ", data)
+        //return this.message
+      });
+      this.emp_service.addUploadJustif(this.selectJustif).subscribe(
+        (data) => {
+          this.message = data;
+          console.log("the message ", data)
+          //return this.message
+        });
+     this.showNotification('top', 'center', 1, '<b>employé ajouté avec succées!!!</b> :')
+    }),(errr)=>{
+        console.error(errr);
       this.showNotification('top', 'center', 3, "<b>employé non ajouté</b> :")
       }
    
@@ -327,8 +332,12 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     //   console.log("not existe");
     //   this.showNotification('top', 'center', 3, "<b>employé non ajouté</b> :")
     // }
-    
-  }
+  
+
+  }else
+  this.showNotification('top', 'center', 3, "<b>employé non ajouté</b> :")
+
+}
 
   public getService() {
     this.emp_service.getService().subscribe(
