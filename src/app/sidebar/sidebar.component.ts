@@ -283,7 +283,7 @@ export class SidebarComponent implements OnInit {
     }
     isSecretaire() {
         this.hasAccess = false
-        if (this.keycloak.getUserRoles().includes("secretaire")) {
+        if (this.keycloak.getUserRoles().includes("bineta")) {
             this.hasAccess = true
             
         }
