@@ -167,6 +167,18 @@ export const ROUTES: RouteInfo[] = [{
             
         ]
     },
+      {
+        path: '/rapports',
+        title: 'Rapports',
+        type: 'sub',
+        icontype: 'group_user',
+        collapse: 'rapports',
+        children: [
+            {path: 'ChargesIndividuel', title: 'Charges Individuel', ab:'CI'},
+             {path: 'CreancesGlobales', title: 'Créances Globales', ab:'CG'},
+            
+        ]
+    },
 
     // {
     //     path: '/utilisateur',

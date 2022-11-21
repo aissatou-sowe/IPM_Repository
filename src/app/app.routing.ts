@@ -59,6 +59,10 @@ export const AppRoutes: Routes = [
   path: 'cotisation',
   loadChildren: './cotisation/cotisation.module#CotisationModule'
 },
+{
+  path: 'rapports',
+  loadChildren: './rapports/rapports.module#RapportsModule'
+},
    {
         path: '',
         loadChildren: './userpage/user.module#UserModule'
