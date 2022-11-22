@@ -270,6 +270,7 @@ this.Ageconjoin = ttoday.getFullYear() - b.getFullYear();
 
   public findByMatricule(){
       ///////Rechercher l'employé
+  debugger
     this.emp_service.getEmployeByMatricule(this.matricule).subscribe(
       data=>{
         

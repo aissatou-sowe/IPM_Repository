@@ -116,6 +116,9 @@ export class EmployeService {
    public getEntity():Observable<Entity[]>{
     return this.http.get<Entity[]>(environment.URL+'entity');
   }
+  public getEntityByid(id:number):Observable<Entity>{
+    return this.http.get<Entity>(environment.URL+'entity/'+id);
+  }
   // upload(file: File): Observable<HttpEvent<any>> {
   //   const formData: FormData = new FormData();
 

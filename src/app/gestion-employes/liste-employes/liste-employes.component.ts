@@ -13,7 +13,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Entity } from 'src/app/Models/Entity';
 import { Service } from 'src/app/Models/Service';
 import { isNull, THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { DatePipe } from '@angular/common';
+import { DatePipe, isPlatformServer } from '@angular/common';
 import { DateAdapter } from '@angular/material/core';
 import { StatutEmployeService } from 'src/app/Services/statut-employe.service';
 import { IPM_StatutEmploye } from 'src/app/Models/IPM_StatutEmploye';
@@ -262,6 +262,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     this.router.navigate(['/gestion-employes/ListeEmployes']);
  }*/
   public EmployeNow() {
+    
     if (this.employe.nom && this.employe.prenom && this.employe.date_nais
       && this.employe.lieu_nais && this.employe.date_recrutement && this.employe.adresse_domicile 
       && this.employe.situation_familial && this.employe.ipmEntity && this.employe.sexe
