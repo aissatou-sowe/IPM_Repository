@@ -8,10 +8,11 @@ import { MaterialModule } from '../app.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatRadioModule } from '@angular/material/radio';
 import { routes } from './rapports-routing.module';
+import { SituationAnnuelleComponent } from './situation-annuelle/situation-annuelle.component';
 //import { RapportsModule } from './rapports.module';
 
 @NgModule({
-  declarations: [CreancesGbalesComponent, ChargesIndividuelComponent],
+  declarations: [CreancesGbalesComponent, ChargesIndividuelComponent, SituationAnnuelleComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
