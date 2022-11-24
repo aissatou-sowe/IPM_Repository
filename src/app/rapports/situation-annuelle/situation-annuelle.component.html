@@ -13,45 +13,20 @@
         <form #form="ngForm">
   
           <div class="row">
-          
-  
-          
-          
-          <!-- <div class="col-md-3 form-group" style="margin-top: -12px;">
-            <label for="Numéro"><b>Numéro Facture</b></label>
-            
-            <input type="number" class="form-control" id="Numéro" name="Numéro" [(ngModel)]="NumeroFacture">
-          </div> -->
-          <div class="col-md-3" style="margin-top: 0px;">
-              <!-- <legend>date Facture</legend> -->
-              <mat-form-field>
-              <input matInput [matDatepicker]="picker" placeholder=" la date du" id="date1" name="date1" [(ngModel)]="date1" (click)="picker.open()">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker startView="year"></mat-datepicker>
-              </mat-form-field>
-          </div>
-          <div class="col-md-3" style="margin-top: 0px;">
-            <!-- <legend>date Facture</legend> -->
+
+       
+          <div class="col-md-3" style="margin-bottom: 2px;">
             <mat-form-field>
-            <input matInput [matDatepicker]="picker1" placeholder="Au" id="date2" name="date2" [(ngModel)]="date2" (click)="picker1.open()">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1 startView="year"></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="col-md-3 form-group" style="margin-top: -1px;">
-          <mat-form-field>
-            <mat-select placeholder="Entité" name="entity"
-              >
-              <mat-option *ngFor="let ent of listEntiy" [value]="ent.idEntity" >
-                {{ ent.nom_entity }} 
-              </mat-option>
-  
+            <mat-select ([ngModel])="selectedYear" placeholder="Choisir une année">
+              <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option> 
             </mat-select>
+    
           </mat-form-field>
-        </div>
+          </div>
+     >
         <div class="card-footer" style="padding-left: 40%;">
           <button mat-raised-button type="submit" 
-           (click)="form.resetForm()" class="btn btn-fill btn-success"><i
+           (click)="getCumulAnnee()" class="btn btn-fill btn-success"><i
               class="material-icons">search</i>Rechercher</button>
         </div>
           
@@ -61,7 +36,7 @@
         </div>
         
         <!--liste creances-->
-  <div class="col-md-12" *ngIf="listCreanceGlobales">
+  <div class="col-md-12" *ngIf="detailsCotisations">
       <div class="card">
         <div class="card-header card-header-icon">
           <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
@@ -69,7 +44,7 @@
     
           </div>
           <h2 class="text-center" 
-          style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;">liste creance globale de {{enti.nom_entity}} du {{d1}} au {{d2}}
+          style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;">liste Cotisations Globales
           </h2>
         </div>
         <div class="card-body">
@@ -79,30 +54,23 @@
     
             <thead style="font-weight:bold;">
     
-              <th cope="col"> Matricule</th>
-              <th cope="col">Nom Participant</th>
-              <th cope="col">Prenom Participant</th>
-              
-              <th cope="col">MontantFacture</th>
-              <th cope="col">ChargeIpm</th>
-              <th cope="col">ChargeAgent</th>
-          
+              <th cope="col">Mois</th>
+              <th cope="col">Montants Totals</th>
               <th cope="col">Action</th>
     
             </thead>
             <tbody>
-              <tr *ngFor="let element of listCreanceGlobales; let i=index">
-                <td><b>{{element.ipm_employe?.matricule}}</b></td>
-                <td><b>{{element.ipm_employe?.nom}}</b></td>
-                <td><b>{{element.ipm_employe?.prenom}}</b></td>
-                <td><b>{{element.montant_facture}}</b></td>
-                <!-- <td>{{element.ipm_prestation?.code_prestation}}</td> -->
-                <td><b>{{element.part_ipm}}</b></td>
-                <td><b>{{element.part_patient}}</b></td>
+              <tr *ngFor="let element of detailsCotisations; let i=index">
+                <td>{{element.ipm_employe?.justificatif}}<b></b></td>
+                <td>{{element.ipm_cotisation?.montant_totals}}<b></b></td>
+              
+
                 
                 <td class="td_actions">
-                  <i class="material-icons" class="btn btn-danger" ><span
-                      class="fa fa-trash-o"></span></i>
+              
+                  <i class="material-icons" class="btn btn-info" (click)="getDetailsCotisation(element)" data-toggle="modal"
+                  data-target="#noticeModal"><span 
+                      class="fa fa-plus fa-fw"></span> </i>
                 </td>
                 <!-- <td>
                   <button class="btn btn-info btn-block" 
@@ -144,6 +112,57 @@
   </div>
   
     <!--fin liste-->
+
+           <!--modal list service-->
+           <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           aria-hidden="true">
+           <div class="modal-dialog" >
+               <div class="modal-content"style="width: 1000px;">
+                   <div class="modal-header" style="background-color: whitesmoke;">
+                       <h3 class="modal-title" id="noticeModal"
+                        style="font-weight:bold; padding-bottom: 10px;">Details Cotisations
+                       
+                       </h3>
+                       <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                           <i class="material-icons">close</i>
+                       </button>
+                   </div>
+                   <div class="modal-body" style="width: 1000px;">
+
+                       <div class="row">
+                               <table class="table table-hover table-bordered col-md-12">
+                                   <thead>
+                                       <tr style="background-color:rgb(213, 213, 213);">
+                                           <th style="font-weight: 500;">Matricule</th>
+                                           <th  style="font-weight: 500;">Nom</th>
+                                           <th  style="font-weight: 500;">Prénom</th>
+                                           <th  style="font-weight: 500;">Montant Cotisation</th>
+                                           <th  style="font-weight: 500;">Action</th>
+                                       </tr>
+                                   </thead>
+                                   <tbody>
+                                       <tr *ngFor="let listelement of listCotisations" style="font-weight: 400;">
+                                        <td>{{listelement.ipm_employe?.matricule}}</td>
+                                        <td>{{listelement.ipm_employe?.nom}}</td>
+                                        <td>{{listelement.ipm_employe?.prenom}}</td>
+                                           <td>{{listelement.montant}}</td>
+                                           <td class="td_actions text-right">
+                                               <button mat-raised-button type="button" class="btn btn-warning  btn-round btn-xs"
+                                                   id="edit">
+                                                   <i class="fa fa-home"></i></button>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+                       
+                   </div>
+                   
+               </div>
+           </div>
+       </div>
+
+       <!--fin modal-->
     
     
   

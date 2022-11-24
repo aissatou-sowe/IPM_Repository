@@ -176,8 +176,8 @@ export const ROUTES: RouteInfo[] = [{
         children: [
             {path: 'ChargesIndividuel', title: 'Charges Individuel', ab:'CI'},
              {path: 'CreancesGlobales', title: 'Créances Globales', ab:'CG'},
-            
-        ]
+             {path: 'SituationAnnuelle', title: 'Situation Annuelle', ab:'SA'},
+        ] 
     },
 
     // {
