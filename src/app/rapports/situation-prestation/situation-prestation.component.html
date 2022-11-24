@@ -1,3 +1,4 @@
+
 <!---->
 <div class="main-content">
     <div class="container-fluid">
@@ -7,7 +8,7 @@
         <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
           <i class="material-icons">search</i>
         </div>
-        <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">situation individuelle </h2>
+        <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">Rapport globale </h2>
     </div>
       <div class="card-body">
         <form #form="ngForm">
@@ -38,7 +39,23 @@
             <mat-datepicker #picker1 startView="year"></mat-datepicker>
             </mat-form-field>
         </div>
-        
+        <!-- <div class="col-md-3 form-group" style="margin-top: -1px;">
+          <mat-form-field>
+            <mat-select placeholder="Prestation" name="Prestation"
+              >
+              <mat-option *ngFor="let presta of listPrestation" [value]="presta.code_prestation" (click)="getPrestation(presta)">
+                {{ presta.libelle }} 
+              </mat-option>
+  
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <input matInput type="text" placeholder="Matricule" id="Matricule"
+                name="Matricule" [(ngModel)]="matricule" >
+            </mat-form-field>
+          </div>
         <div class="card-footer" style="padding-left: 40%;">
           <button mat-raised-button type="submit" 
            (click)="getSituation();form.resetForm()" class="btn btn-fill btn-success"><i
@@ -51,49 +68,51 @@
         </div>
         
         <!--liste creances-->
-  <div *ngIf="listCharge">
+  <div class="col-md-12" *ngIf="listPrestatio">
       <div class="card">
-        <!-- <div class="card-header card-header-icon">
+        <div class="card-header card-header-icon">
           <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
             <i class="material-icons">list</i>
     
-          </div >
+          </div>
           <h2 class="text-center" 
-          style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;">liste des situatons individuelle du {{d1}} au {{d2}}
+          style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;">liste des prestattion du {{d1}} au {{d2}}
           </h2>
-        </div > -->
-        <div class="material-datatable">
+        </div>
         <div class="card-body">
-          
-          <table id="donne" class="table table-striped">
+          <div class="material-datatable">
+          <table id="datatable" class="table table-bordered " 
+           #TABLE cellspacing="0" width="100%" style="width:100%" >
     
-            <thead>
+            <thead style="font-weight:bold;">
     
-              <th> Matricule</th>
-              <th>Nom Participant</th>
-              <th>Prenom Participant</th>
+              <th cope="col"> Matricule</th>
+              <th cope="col">Nom Participant</th>
+              <th cope="col">Prenom Participant</th>
               
-              <th>MontantFacture</th>
-              <th>ChargeIpm</th>
-              <th>ChargeAgent</th>
+              <th cope="col">MontantFacture</th>
+              <th cope="col">ChargeIpm</th>
+              <th cope="col">ChargeAgent</th>
           
-              <!-- <th>Action</th> -->
+              <th cope="col">Action</th>
     
             </thead>
             <tbody>
-              <tr *ngFor="let element of listCharge">
+              <tr *ngFor="let element of listPrestatio; let i=index">
                 <td><b>{{element.ipm_employe?.matricule}}</b></td>
                 <td><b>{{element.ipm_employe?.nom}}</b></td>
                 <td><b>{{element.ipm_employe?.prenom}}</b></td>
-                <td><b>{{element.montant_facture}}</b></td>
+                <td><b>{{element.ipm_prestation?.libelle}}</b></td>
                 <!-- <td>{{element.ipm_prestation?.code_prestation}}</td> -->
-                <td><b>{{element.part_ipm}}</b></td>
-                <td><b>{{element.part_patient}}</b></td>
+                <td><b>{{element.dateSaisie}}</b></td>
+                <td><b>{{element.ipm_prestation?.libelle}}</b></td>
                 
-                <!-- <td class="td_actions">
-                  <i class="material-icons" class="btn btn-danger" ><span
-                      class="fa fa-trash-o"></span></i>
-                </td> -->
+                <td class="td_actions">
+                    <button mat-raised-button style="margin:2px;" type="button" class="btn btn-info" (click)="getPrestaton(element)">
+                        <i class="material-icons"
+                          >person</i>
+                      </button>
+                </td>
                 <!-- <td>
                   <button class="btn btn-info btn-block" 
                  data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>

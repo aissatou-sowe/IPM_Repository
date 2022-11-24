@@ -9,10 +9,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatRadioModule } from '@angular/material/radio';
 import { routes } from './rapports-routing.module';
 import { SituationAnnuelleComponent } from './situation-annuelle/situation-annuelle.component';
+import { SituationParPrestationComponent } from './situation-par-prestation/situation-par-prestation.component';
+import { SituationPrestationComponent } from './situation-prestation/situation-prestation.component';
+import { SituationDesBonsComponent } from './situation-des-bons/situation-des-bons.component';
 //import { RapportsModule } from './rapports.module';
 
 @NgModule({
-  declarations: [CreancesGbalesComponent, ChargesIndividuelComponent, SituationAnnuelleComponent],
+  declarations: [CreancesGbalesComponent, ChargesIndividuelComponent, SituationAnnuelleComponent,SituationParPrestationComponent,
+    SituationPrestationComponent,
+    SituationDesBonsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
