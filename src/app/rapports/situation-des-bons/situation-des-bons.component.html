@@ -1,0 +1,64 @@
+    
+  <div class="card">
+    <div class="card-header card-header-icon" >
+      <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+        <i class="material-icons">search</i>
+      </div>
+      <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">Rapport globale </h2>
+  </div>
+    <div class="card-body">
+      <form #form="ngForm">
+
+        <div class="row">
+        
+
+        
+        
+        <!-- <div class="col-md-3 form-group" style="margin-top: -12px;">
+          <label for="Numéro"><b>Numéro Facture</b></label>
+          
+          <input type="number" class="form-control" id="Numéro" name="Numéro" [(ngModel)]="NumeroFacture">
+        </div> -->
+        <div class="col-md-3" style="margin-top: 0px;">
+            <!-- <legend>date Facture</legend> -->
+            <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder=" la date du" id="date1" name="date1" [(ngModel)]="date1" (click)="picker.open()">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="year"></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3" style="margin-top: 0px;">
+          <!-- <legend>date Facture</legend> -->
+          <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="Au" id="date2" name="date2" [(ngModel)]="date2" (click)="picker1.open()">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1 startView="year"></mat-datepicker>
+          </mat-form-field>
+      </div>
+      <div class="col-md-3 form-group" style="margin-top: -1px;">
+        <mat-form-field>
+          <mat-select placeholder="Prestation" name="Prestation"
+            >
+            <mat-option *ngFor="let presta of listPrestation" [value]="presta.code_prestation" (click)="getPrestation(presta)">
+              {{ presta.libelle }} 
+            </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input matInput type="text" placeholder="Matricule" id="Matricule"
+              name="Matricule" [(ngModel)]="matricule" >
+          </mat-form-field>
+        </div> -->
+      <div class="card-footer" style="padding-left: 40%;">
+        <button mat-raised-button type="submit" 
+         (click)="getSituation();form.resetForm()" class="btn btn-fill btn-success"><i
+            class="material-icons">search</i>Rechercher</button>
+      </div>
+        
+      </div>
+      </form>
+      </div>
+      </div>

@@ -174,10 +174,15 @@ export const ROUTES: RouteInfo[] = [{
         icontype: 'group_user',
         collapse: 'rapports',
         children: [
-            {path: 'ChargesIndividuel', title: 'Charges Individuel', ab:'CI'},
+            {path: 'ChargesIndividuel', title: 'situation Individuel', ab:'CI'},
              {path: 'CreancesGlobales', title: 'Créances Globales', ab:'CG'},
-             {path: 'SituationAnnuelle', title: 'Situation Annuelle', ab:'SA'},
-        ] 
+             {path: 'SituationAnnuelle', title: 'situation Annuelle', ab:'CG'},
+
+             {path: 'SituationPrestation', title: 'situation Prestation', ab:'CG'},
+             {path: 'Situation-des-bons', title: 'situation-des-bons', ab:'CG'},
+
+
+        ]
     },
 
     // {
