@@ -53,7 +53,7 @@ export class BonConsultationComponent implements OnInit {
   prestationC:any;
   idp: any;
   lprestataires: Prestataire[];
-  bonlettre: IPM_Bon_Consultation=new IPM_Bon_Consultation(0,"","","","",null,null,null,null,null,null,null,null,null);
+  bonlettre: IPM_Bon_Consultation=new IPM_Bon_Consultation(0,"","","","",null,null,null,null,null,null,null,null,null,null);
   addPrestataire :Prestataire;
   motif:string;
   addconjoint:Conjoint;
@@ -295,7 +295,7 @@ public BonConsultation(){
    //this.addPrestataire.code_prestataire=this.idp;
    this.bonlettre.ipm_prestataire=this.prestatair;
    this.bonlettre.ipm_prestation=this.prestation;
-
+   this.bonlettre.dateEtablissement=new Date();
    this.bonlettre.motif=this.motif
    if (this.enfChoisi) {
     this.bonlettre.ipm_enfant=this.enfChoisi
@@ -330,7 +330,7 @@ public BonConjoint(){
    this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addconjoint.idconj=this.idbconj
    this.bonlettre.ipm_conjoint=JSON.parse(JSON.stringify(this.addconjoint))
- 
+   this.bonlettre.dateEtablissement=new Date();
    console.log(this.bonlettre.ipm_conjoint);
   
   // console.log( this.b.ipm_employe);
@@ -361,7 +361,7 @@ public BonEnfant(){
    
    //console.log( this.b.ipm_employe);
    //console.log(this.b.ipm_prestataire);
-
+   this.bonlettre.dateEtablissement=new Date();
 //this.bonlettre.ordonnance=this.selectOrdonne.name
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
         (data)=>{ 

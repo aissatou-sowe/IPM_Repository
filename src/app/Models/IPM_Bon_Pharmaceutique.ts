@@ -21,9 +21,10 @@ export class  IPM_Bon_Pharmaceutique extends IPM_Bon{
        public ordonnance:string,
         public ipm_conjoint:Conjoint,
         public ipm_prestation:Prestation,
-        public numero_bon_pharmacie:string)
+        public numero_bon_pharmacie:string,
+        public dateEtablissement:Date)
       
        { 
-       super(idbon,total,ipm_employe,ipm_prestataire,ipm_enfant,ipm_conjoint,ipm_prestation);
+       super(idbon,total,ipm_employe,ipm_prestataire,ipm_enfant,ipm_conjoint,ipm_prestation,dateEtablissement);
        }
 }

@@ -60,8 +60,8 @@ export class BonLettreComponent implements OnInit {
    motif:string;
    matr:string;
    dateform =new Date();
-   b:IPM_Bon=new IPM_Bon(0,"",null,null,null,null,null);
-   bonlettre:IPM_Bon_Lettre_Garantie = new IPM_Bon_Lettre_Garantie(0,"","","",null,null,null,null,null,null)
+   b:IPM_Bon=new IPM_Bon(0,"",null,null,null,null,null,null);
+   bonlettre:IPM_Bon_Lettre_Garantie = new IPM_Bon_Lettre_Garantie(0,"","","",null,null,null,null,null,null,null)
    nomm:string;
    p: any;
    addconjoint:Conjoint;
@@ -231,7 +231,7 @@ showNotification(from: any, align: any, idtype:any,note ) {
 public BonNowLettre(){
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
-   
+   this.bonlettre.dateEtablissement=new Date();
    this.addPrestataire.code_prestataire=this.idp;
    this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
 
@@ -263,7 +263,7 @@ public BonNowLettre(){
 public BonConjoint(){
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
-   
+   this.bonlettre.dateEtablissement=new Date();
    this.addPrestataire.code_prestataire=this.idp;
    this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addconjoint.idconj=this.idbconj
@@ -290,7 +290,7 @@ public BonConjoint(){
 public BonEnfant(){
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
-   
+   this.bonlettre.dateEtablissement=new Date();
    this.addPrestataire.code_prestataire=this.idp;
    this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addenfant.idenf=this.idbenf

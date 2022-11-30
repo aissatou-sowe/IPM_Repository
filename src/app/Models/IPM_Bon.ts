@@ -12,7 +12,8 @@ export class IPM_Bon{
         public ipm_prestataire:Prestataire,
         public  ipm_enfant:Enfant,
         public  ipm_conjoint:Conjoint ,
-        public ipm_prestation:Prestation
+        public ipm_prestation:Prestation,
+        public dateEtablissement:Date
   ){}
 
 }

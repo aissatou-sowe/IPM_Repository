@@ -86,7 +86,7 @@ export const ROUTES: RouteInfo[] = [{
         icontype: 'roofing',
         collapse: 'gestionprestataires',
         children: [
-            {path: 'Ajouterprestataires', title: 'Ajouter prestataires', ab:'AP'},
+            {path: 'Ajouterprestataires', title: 'Ajouter Types prestataires', ab:'AP'},
             {path: 'Listeprestataires', title: 'Listes Prestataires', ab:'LP'},
             // {path: 'ModifierEmployes/:id', title: 'ModifierEmploye', ab:'ME'},
             // {path: 'SupprimerEmployes', title: 'SupprimerEmploye', ab:'SE'}
@@ -100,7 +100,11 @@ export const ROUTES: RouteInfo[] = [{
         icontype: 'bloodtype',
         collapse: 'gestionprestations',
         children: [
+<<<<<<< HEAD
            //1 {path: 'AjoutPrestation', title: 'Ajouter Prestations', ab:'AP'},
+=======
+           // {path: 'AjoutPrestation', title: 'Ajouter Prestations', ab:'AP'},
+>>>>>>> 2f5e203e6e2e1ac9adabfe016a4e2cee816b6f5f
             {path: 'ListPrestation', title: 'Liste Prestations', ab:'LP'},
             // {path: 'ModifierEmployes/:id', title: 'ModifierEmploye', ab:'ME'},
             // {path: 'SupprimerEmployes', title: 'SupprimerEmploye', ab:'SE'}

@@ -26,6 +26,7 @@ export class CreancesGbalesComponent implements OnInit {
   d2: string;
   tout:string="tout"
 
+  entities:any;
   
 
   constructor(private dateAdapter: DateAdapter<Date>, private datepipe: DatePipe,private rapportServ:RapportServiceService) {
@@ -89,6 +90,7 @@ export class CreancesGbalesComponent implements OnInit {
              [10, 25, 50, "All"]
            ],
            responsive: true,
+           retrieve:true,
            language: {
              search: "_INPUT_",
              searchPlaceholder: "Recherche",

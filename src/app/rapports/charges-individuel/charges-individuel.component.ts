@@ -35,6 +35,7 @@ this.rapportServ.getSituationIndividuel(this.d1,this.d2).subscribe(data=>{
            [10, 25, 50, "All"]
          ],
          responsive: true,
+         retreive:true,
          language: {
            search: "_INPUT_",
            searchPlaceholder: "Recherche",

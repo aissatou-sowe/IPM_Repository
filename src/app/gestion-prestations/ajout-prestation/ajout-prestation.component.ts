@@ -30,8 +30,12 @@ prestation:Prestation=new Prestation(0,"",0,0,null);
 
   ngOnInit(): void {
     this.getPrestataire();
+<<<<<<< HEAD
     this.getTypeP()
    
+=======
+   this.getTypeP();
+>>>>>>> 2f5e203e6e2e1ac9adabfe016a4e2cee816b6f5f
   }
   public onRegister(){
     this.addPrestataire.code_prestataire=this.pres;
@@ -53,9 +57,13 @@ public getTypeP(){
     serv => {
      // console.log(serv);
       this.typepresta = serv;
-      this.temptype=serv
+     // this.temptype=serv
 
+<<<<<<< HEAD
       console.log(this.typepresta)
+=======
+      console.log(this.typepresta);
+>>>>>>> 2f5e203e6e2e1ac9adabfe016a4e2cee816b6f5f
     }
   )
 }

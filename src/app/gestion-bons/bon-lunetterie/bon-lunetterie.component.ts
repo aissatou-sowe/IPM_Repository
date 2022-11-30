@@ -49,7 +49,7 @@ export class BonLunetterieComponent implements OnInit {
   addconjoint:Conjoint;
    addenfant:Enfant;
   prestatair;
-  bonlettre:IPM_Bon_Lunetterie=new IPM_Bon_Lunetterie(0,null,null,null,null,null,null,null,null,null,null,null);
+  bonlettre:IPM_Bon_Lunetterie=new IPM_Bon_Lunetterie(0,null,null,null,null,null,null,null,null,null,null,null,null);
   matricule;
   AgeEmploye: number;
   AgeEnfant: number;
@@ -218,7 +218,7 @@ export class BonLunetterieComponent implements OnInit {
 public BonConsultation(){
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
-   
+   this.bonlettre.dateEtablissement=new Date();
    //this.addPrestataire.code_prestataire=this.idp;
    this.bonlettre.ipm_prestataire=this.prestatair;
 
@@ -253,7 +253,7 @@ public BonConsultation(){
 public BonConjoint(){
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
-   
+   this.bonlettre.dateEtablissement=new Date();
    this.addPrestataire.code_prestataire=this.idp;
    this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addconjoint.idconj=this.idbconj
@@ -279,7 +279,7 @@ public BonConjoint(){
 public BonEnfant(){
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
-   
+   this.bonlettre.dateEtablissement=new Date();
    this.addPrestataire.code_prestataire=this.idp;
    this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addenfant.idenf=this.idbenf
