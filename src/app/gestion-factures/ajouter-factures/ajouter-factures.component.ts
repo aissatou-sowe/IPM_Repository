@@ -582,9 +582,9 @@ export class AjouterFacturesComponent implements OnInit {
     this.factureglobal.part_patient = this.totalChargeAgent
     this.factureglobal.ipm_prestataire = JSON.parse(JSON.stringify(this.jsonPrest))
     
-    this.factureglobal.date_facture=this.dateFacture
+    this.factureglobal.dateFacture=this.dateFacture
     this.factureglobal.numerofacture =this.NumeroFacture
-    this.factureglobal.date_saisie= new Date()
+    this.factureglobal.dateSaisie= new Date()
 
     this.fact_service.AjoutFacture(this.factureglobal).subscribe(
       (data: string) => {

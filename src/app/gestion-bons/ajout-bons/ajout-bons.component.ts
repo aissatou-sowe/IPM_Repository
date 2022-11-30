@@ -54,7 +54,7 @@ export class AjoutBonsComponent implements OnInit {
   enfants : Array<any>=[];
   enfant: Enfant= new Enfant(0,"","",null,"","",null,"");
    //bon:any
-   bon:IPM_Bon_Pharmaceutique=new IPM_Bon_Pharmaceutique(0,0,null,"",null,null,"",null,null,null,null,null,null,"")
+   bon:IPM_Bon_Pharmaceutique=new IPM_Bon_Pharmaceutique(0,0,null,"",null,null,"",null,null,null,null,null,null,"",null)
    bonph:IPM_Bon_Pharmaceutique[];
    message: any;
    bonss : any;

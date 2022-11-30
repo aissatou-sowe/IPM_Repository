@@ -62,8 +62,8 @@ export class ListeBonsComponent implements OnInit {
   matr:string;
   listBon;
   //dateform =new Date();
-  b:IPM_Bon=new IPM_Bon(0,"",null,null,null,null,null);
-  bon:IPM_Bon_Pharmaceutique=new IPM_Bon_Pharmaceutique(0,0,null,"",null,null,"",null,null,null,null,null,null,"")
+  b:IPM_Bon=new IPM_Bon(0,"",null,null,null,null,null,null);
+  bon:IPM_Bon_Pharmaceutique=new IPM_Bon_Pharmaceutique(0,0,null,"",null,null,"",null,null,null,null,null,null,"",null)
   nomm:string;
   p: any;
   addconjoint:Conjoint;
@@ -397,6 +397,7 @@ console.log(this.numBEm);
 // this.router.navigate(['/gestion-bons/Listebons']);
 console.log(this.designation,this.nombre_article);
    this.bon.designation=this.designation;
+   this.bon.dateEtablissement=new Date();
   this.bon.nombre_article=this.nombre_article;
   //this.bon.prix_unitaire=this.prix_unitaire;
   this.bon.ordonnance=this.selectOrdonne.name
@@ -423,7 +424,7 @@ public BonConjoint(){
    this.bon.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addconjoint.idconj=this.idbconj
    this.bon.ipm_conjoint=JSON.parse(JSON.stringify(this.addconjoint))
- 
+  this.bon.dateEtablissement=new Date();
    console.log(this.bon.ipm_conjoint);
    console.log(this.b);
    console.log( this.b.ipm_employe);
@@ -454,7 +455,7 @@ public BonEnfant(){
    this.bon.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addenfant.idenf=this.idbenf
    this.bon.ipm_enfant=JSON.parse(JSON.stringify(this.addenfant))
- 
+   this.bon.dateEtablissement=new Date();
    console.log(this.bon.ipm_enfant);
    console.log(this.b);
    console.log( this.b.ipm_employe);

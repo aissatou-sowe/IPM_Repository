@@ -193,14 +193,14 @@ showNotification1(from: any, align: any) {
   });
   }
 ajouterPres(){
-  if(this.prestataire.adresse_prestataire && this.prestataire.ipm_type_prestataire 
-    && this.prestataire.code_categorie_pretataire && this.prestataire.lettreAgrement && this.prestataire.telephone ){
   this.addPrestataire.id_type_prestataire=this.code_presta;
   this.prestataire.ipm_type_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
     this.prestataire.lettreAgrement=this.selectLettreAg.name;
+  if(this.prestataire.adresse_prestataire && this.prestataire.ipm_type_prestataire 
+    && this.prestataire.code_categorie_pretataire && this.prestataire.lettreAgrement && this.prestataire.telephone){
   this.pres_service.AjouterPrestataire(this.prestataire).
   subscribe( ()=>{
-   // this.ngOnInit();
+    this.ngOnInit();
     console.log(this.prestataire)
     //this.router.navigate(['/Listeprestataires'])
   })

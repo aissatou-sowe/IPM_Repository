@@ -58,6 +58,7 @@ export class FactureEmployesComponent implements OnInit {
   numerofacture:number;
   factuGlobale: Facture;
   date_prestation:Date
+  code_presta:any;
   constructor(private builder: FormBuilder,private emp_service: EmployeService, 
     private router: Router, private route: ActivatedRoute,
     private pres_service: PrestataireService,private prestation:PrestationService,
@@ -274,6 +275,7 @@ showNotification(from: any, align: any, idtype: any, note) {
      // detailsfact.numerofacture=this.factureForm.get('numerofacture').value,
       //detailsfact.date_facture=this.date_facture,
       detailsfact.datePrestation=this.factureForm.get('date_prestation').value;
+      console.log(detailsfact.datePrestation);
       detailsfact.ipm_employe= this.message;
        //detailsfact.ipm_prestation.libelle=this.prestation_choisi; 
       // detailsfact.ipm_prestation.code_prestation=this.id_prestation_choisi;
@@ -341,11 +343,11 @@ editDetails(index: number) {
     this.Factures.part_ipm=this.totalChargeIpm
     this.Factures.part_patient=this.totalChargeAgent
     this.Factures.numerofacture=this.numerofacture
-    this.Factures.date_facture=this.date_facture
-    this.Factures.date_saisie=new Date()
+    this.Factures.dateFacture=this.date_facture
+    this.Factures.dateSaisie=new Date();
     console.log(this.jsonPrest)
     console.log(this.ipm_prestataires)
-
+    
    //this.Factures.ipm_prestataire=JSON.parse(JSON.stringify(this.ipm_prestataires));
     console.log(this.Factures);
     //this.donnee=JSON.parse(JSON.stringify(this.Factures))

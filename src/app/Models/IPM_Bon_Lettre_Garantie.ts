@@ -16,9 +16,9 @@ export class IPM_Bon_Lettre_Garantie extends IPM_Bon{
         public  ipm_enfant:Enfant,
         public ordonnance:string,
         public  ipm_conjoint:Conjoint,
-        public ipm_prestation:Prestation)
+        public ipm_prestation:Prestation,public dateEtablissement:Date)
        
         { 
-        super(idbon,total,ipm_employe,ipm_prestataire,ipm_enfant,ipm_conjoint,ipm_prestation);
+        super(idbon,total,ipm_employe,ipm_prestataire,ipm_enfant,ipm_conjoint,ipm_prestation,dateEtablissement);
         }
 }
