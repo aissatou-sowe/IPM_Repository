@@ -37,7 +37,7 @@ export const routes: Routes = [
 {
   path: '',
   children: [ {
-    path: 'situation-par-prestation/:d1/:d2/:id',
+    path: 'situation-par-prestation',
     component: SituationParPrestationComponent
   }]
 },
@@ -47,7 +47,7 @@ export const routes: Routes = [
     path: 'Situation-des-bons',
     component: SituationDesBonsComponent
   }]
-},
+}
 
 ];
 

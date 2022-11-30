@@ -24,6 +24,7 @@ export class CreancesGbalesComponent implements OnInit {
   DesatverBouton:boolean=false
   d1: string;
   d2: string;
+  tout:string="tout"
 
   
 
@@ -44,6 +45,7 @@ export class CreancesGbalesComponent implements OnInit {
     this.d1 =this.datepipe.transform(this.date1, 'dd-MM-yyyy');
     this.d2 =this.datepipe.transform(this.date2, 'dd-MM-yyyy');
     console.log()
+    if(this.enti){
     this.rapportServ.getGlobaleParEntity(this.d1,this.d2,this.enti.idEntity).subscribe(
       result=>{
         this.DesatverBouton=true
@@ -59,6 +61,23 @@ export class CreancesGbalesComponent implements OnInit {
 
     })
     this.listCreanceGlobales
+  }else 
+  console.log(this.d1,this.d2)
+  this.rapportServ.getSituationIndividuel(this.d1,this.d2).subscribe(
+    result=>{
+      this.DesatverBouton=true
+    this.listCreanceGlobales=result
+    //this.list=this.listCreanceGlobales.length
+    console.log(this.listCreanceGlobales.length)
+    this.getTableau();
+    if (this.listCreanceGlobales.length==0) {
+      this.showNotification('top','center',3,"<b> verifer la date ou l'entite</b> :")
+
+      
+    }
+
+  })
+  this.listCreanceGlobales
 
   }
   getTableau(){
@@ -93,6 +112,11 @@ export class CreancesGbalesComponent implements OnInit {
   getEntity(ent){
     console.log(ent)
     this.enti=ent
+  }
+  getEntout(){
+    console.log("modou")
+
+
   }
   
   

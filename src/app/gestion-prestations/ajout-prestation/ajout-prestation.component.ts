@@ -14,6 +14,7 @@ export class AjoutPrestationComponent implements OnInit {
   message: any;
   p:any;
   pres:number;
+  prest:number;
 prestataire:Prestataire[];
 myvalue:number;
 pourcentage:any;
@@ -29,6 +30,7 @@ prestation:Prestation=new Prestation(0,"",0,0,null);
 
   ngOnInit(): void {
     this.getPrestataire();
+    this.getTypeP()
    
   }
   public onRegister(){
@@ -53,13 +55,13 @@ public getTypeP(){
       this.typepresta = serv;
       this.temptype=serv
 
-     // console.log(this.service)
+      console.log(this.typepresta)
     }
   )
 }
 public selectTypePres(){
   this.typepresta=this.temptype
-   this.typepresta=this.typepresta.filter(serv=>serv.ipm_type_prestataire.code_prestataire==this.pres)
+  this.prestataire=this.typepresta.filter(serv=>serv.ipm_type_prestataire.code_prestataire==this.pres)
 
    console.log(this.pres)
  //  console.log(this.service)

@@ -38,10 +38,10 @@ export class PrestationService {
     return this.http.get<any>(environment.URL+'prestation');
   }
   public getAllPestataires():Observable<Prestataire[]>{
-    return this.http.get<Prestataire[]>(environment.URL+'prestataire');
+    return this.http.get<Prestataire[]>(environment.URL+'allprestataire');
   }
   public getTypePrestataire():Observable<TypePrestataire[]>{
-            return this.http.get<TypePrestataire[]>(environment.URL+'typeprestataire');
+            return this.http.get<TypePrestataire[]>(environment.URL+'alltypeprestataire');
   }
   public getAllPrestation():Observable<Prestation[]>{
     return this.http.get<Prestation[]>(environment.URL+'prestation');

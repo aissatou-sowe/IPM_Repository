@@ -12,7 +12,7 @@
                   <img img src="/ipm-fronte/assets/img_poste/laposte.png"/>
               </div>
             </a>
-              <a href="https://www.creative-tim.com" class="simple-text logo-normal text-white">
+              <a href="/ipm-fronte/assets/img_poste/laposte.png" class="simple-text logo-normal text-white">
                 IPM-POSTE
               </a>
           </div>
@@ -416,7 +416,7 @@
                                         </a>
                                     </li>
                                     </ul>
-                                    <ul class="nav" *ngIf="isGerant() || isOperateur() ">
+                                    <!-- <ul class="nav" *ngIf="isGerant() || isOperateur() ">
                                     <li routerLinkActive="active" class="nav-item">
                                       <a [routerLink]="[menuItems[5].path,menuItems[5].children[1].path]" class="nav-link">
               
@@ -426,7 +426,7 @@
                                           
                                       </a>
                                   </li>
-                                </ul> 
+                                </ul>  -->
               
                                 
                               
@@ -701,8 +701,6 @@
                                             </a>
                                         </li>
                                         </ul>
-<<<<<<< HEAD
-=======
                                         <ul class="nav" *ngIf="isGerant()">
                                           <li routerLinkActive="active" class="nav-item">
                                               <a [routerLink]="[menuItems[11].path,menuItems[11].children[3].path]" class="nav-link">
@@ -717,15 +715,19 @@
                                           <ul class="nav" *ngIf="isGerant()">
                                             <li routerLinkActive="active" class="nav-item">
                                                 <a [routerLink]="[menuItems[11].path,menuItems[11].children[4].path]" class="nav-link">
-                        
-                        
                                                     <span class="sidebar-mini">{{menuItems[11].children[4].ab}}</span>
-                                                    <span class="sidebar-normal">{{menuItems[11].children[4].title}}</span>
-                                                    
+                                                    <span class="sidebar-normal">{{menuItems[11].children[4].title}}</span>                          
                                                 </a>
                                             </li>
                                             </ul>
->>>>>>> 283c8c2a83c0043f374b4de223cb1368f5791332
+                                            <ul class="nav" *ngIf="isGerant()">
+                                              <li routerLinkActive="active" class="nav-item">
+                                                  <a [routerLink]="[menuItems[11].path,menuItems[11].children[5].path]" class="nav-link">
+                                                      <span class="sidebar-mini">{{menuItems[11].children[5].ab}}</span>
+                                                      <span class="sidebar-normal">{{menuItems[11].children[5].title}}</span>                          
+                                                  </a>
+                                              </li>
+                                              </ul>
                                   </div>
 
                                 </li>

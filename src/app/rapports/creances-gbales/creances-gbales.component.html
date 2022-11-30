@@ -7,7 +7,7 @@
       <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
         <i class="material-icons">search</i>
       </div>
-      <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">Rapport globale </h2>
+      <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">Rapport globale par entité </h2>
   </div>
     <div class="card-body">
       <form #form="ngForm">
@@ -40,9 +40,17 @@
       </div>
       <div class="col-md-3 form-group" style="margin-top: -1px;">
         <mat-form-field>
-          <mat-select placeholder="Entité" name="entity"
+          <mat-select placeholder="Entité" name="entity" [(ngModel)]="entity"
             >
+            <mat-option [value]="tout" (click)="getEntout()">
+              {{"tout" }}
+               
+            
+            </mat-option>
+           
             <mat-option *ngFor="let ent of listEntiy" [value]="ent.idEntity" (click)="getEntity(ent)">
+          
+
               {{ ent.nom_entity }} 
             </mat-option>
 
@@ -78,6 +86,7 @@
          #TABLE cellspacing="0" width="100%" style="width:100%" >
   
           <thead style="font-weight:bold;">
+            <tr>
   
             <th cope="col"> Matricule</th>
             <th cope="col">Nom Participant</th>
@@ -87,9 +96,10 @@
             <th cope="col">ChargeIpm</th>
             <th cope="col">ChargeAgent</th>
         
-            <th cope="col">Action</th>
-  
+            <!-- <th cope="col">Action</th> -->
+          </tr>
           </thead>
+        
           <tbody>
             <tr *ngFor="let element of listCreanceGlobales; let i=index">
               <td><b>{{element.ipm_employe?.matricule}}</b></td>
@@ -100,10 +110,10 @@
               <td><b>{{element.part_ipm}}</b></td>
               <td><b>{{element.part_patient}}</b></td>
               
-              <td class="td_actions">
+              <!-- <td class="td_actions">
                 <i class="material-icons" class="btn btn-danger" ><span
                     class="fa fa-trash-o"></span></i>
-              </td>
+              </td> -->
               <!-- <td>
                 <button class="btn btn-info btn-block" 
                data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>

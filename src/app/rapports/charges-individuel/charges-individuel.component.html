@@ -7,7 +7,7 @@
         <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
           <i class="material-icons">search</i>
         </div>
-        <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">situation individuelle </h2>
+        <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 70%;">situation des individus par péroide </h2>
     </div>
       <div class="card-body">
         <form #form="ngForm">
@@ -53,7 +53,7 @@
         <!--liste creances-->
   <div *ngIf="listCharge">
       <div class="card">
-        <!-- <div class="card-header card-header-icon">
+        <div class="card-header card-header-icon">
           <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
             <i class="material-icons">list</i>
     
@@ -61,13 +61,14 @@
           <h2 class="text-center" 
           style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;">liste des situatons individuelle du {{d1}} au {{d2}}
           </h2>
-        </div > -->
+        </div >
         <div class="material-datatable">
         <div class="card-body">
           
           <table id="donne" class="table table-striped">
     
             <thead>
+              <tr>
     
               <th> Matricule</th>
               <th>Nom Participant</th>
@@ -78,7 +79,7 @@
               <th>ChargeAgent</th>
           
               <!-- <th>Action</th> -->
-    
+            </tr>
             </thead>
             <tbody>
               <tr *ngFor="let element of listCharge">

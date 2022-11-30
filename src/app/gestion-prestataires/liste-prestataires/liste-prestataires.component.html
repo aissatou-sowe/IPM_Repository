@@ -154,6 +154,7 @@ aria-hidden="true">
               </mat-form-field>
             </div>
           </div>
+          <div class="row">
           <div class="col-md-6 form-group">
             <mat-form-field>
               <mat-select placeholder="Type Prestataires" name="listTypePrestataire" [(ngModel)]="code_presta">
@@ -164,16 +165,19 @@ aria-hidden="true">
             </mat-form-field> 
           </div>
         
-          <div class="row">
-            <div class="col-md-12">    
-              <mat-option>---Choisir le type de catégorie     
-          <select id="code_categorie_pretataire"
+          
+            <div class="col-md-6">    
+              <mat-form-field>   
+          <mat-select id="code_categorie_pretataire"
           name="code_categorie_pretataire" placeholder="Code Categorie"
-           [(ngModel)]="prestataire.code_categorie_pretataire" class='form-control'>
-            <option value="1">1:Agree</option>
-            <option value="2">2:Non Agree</option>
-            </select>
-          </mat-option> 
+           [(ngModel)]="prestataire.code_categorie_pretataire">
+           
+            <mat-option [value]="1">1:Agree</mat-option >
+            <mat-option  [value]="2">2:Non Agree</mat-option >
+            
+          
+        </mat-select>
+      </mat-form-field> 
             </div>
             <div class="btn btn-file" style="margin-left:30% ;">Lettre d'Agrément
               <input type="file" class="form-control" name="file"

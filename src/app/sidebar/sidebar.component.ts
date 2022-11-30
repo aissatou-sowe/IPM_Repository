@@ -100,7 +100,7 @@ export const ROUTES: RouteInfo[] = [{
         icontype: 'bloodtype',
         collapse: 'gestionprestations',
         children: [
-            {path: 'AjoutPrestation', title: 'Ajouter Prestations', ab:'AP'},
+           //1 {path: 'AjoutPrestation', title: 'Ajouter Prestations', ab:'AP'},
             {path: 'ListPrestation', title: 'Liste Prestations', ab:'LP'},
             // {path: 'ModifierEmployes/:id', title: 'ModifierEmploye', ab:'ME'},
             // {path: 'SupprimerEmployes', title: 'SupprimerEmploye', ab:'SE'}
@@ -177,9 +177,9 @@ export const ROUTES: RouteInfo[] = [{
             {path: 'ChargesIndividuel', title: 'situation Individuel', ab:'CI'},
              {path: 'CreancesGlobales', title: 'Créances Globales', ab:'CG'},
              {path: 'SituationAnnuelle', title: 'situation Annuelle', ab:'CG'},
-
              {path: 'SituationPrestation', title: 'situation Prestation', ab:'CG'},
              {path: 'Situation-des-bons', title: 'situation-des-bons', ab:'CG'},
+             {path: 'situation-par-prestation', title: 'situation-par-prestation', ab:'CG'},
 
 
         ]

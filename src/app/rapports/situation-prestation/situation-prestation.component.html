@@ -86,26 +86,32 @@
     
             <thead style="font-weight:bold;">
     
-              <th cope="col"> Matricule</th>
-              <th cope="col">Nom Participant</th>
-              <th cope="col">Prenom Participant</th>
-              
-              <th cope="col">MontantFacture</th>
+              <th cope="col"> Facture</th>
+              <th cope="col">Prestataire</th>
+              <th cope="col">Traitement</th>
+              <th cope="col">Date Prestation</th>
+
               <th cope="col">ChargeIpm</th>
               <th cope="col">ChargeAgent</th>
+              <th cope="col">MontantFacture</th>
+
           
               <th cope="col">Action</th>
     
             </thead>
             <tbody>
               <tr *ngFor="let element of listPrestatio; let i=index">
-                <td><b>{{element.ipm_employe?.matricule}}</b></td>
-                <td><b>{{element.ipm_employe?.nom}}</b></td>
-                <td><b>{{element.ipm_employe?.prenom}}</b></td>
+                <td><b>{{element.ipmFacture?.numerofacture}}</b></td>
+                <td><b>{{element.ipmFacture?.ipm_prestataire.nom_prestataire}}</b></td>
+                
                 <td><b>{{element.ipm_prestation?.libelle}}</b></td>
                 <!-- <td>{{element.ipm_prestation?.code_prestation}}</td> -->
                 <td><b>{{element.dateSaisie}}</b></td>
-                <td><b>{{element.ipm_prestation?.libelle}}</b></td>
+                <td><b>{{element.part_ipm}}</b></td>
+                <td><b>{{element.part_patient}}</b></td>
+                <td><b>{{element.montant_facture}}</b></td>
+
+
                 
                 <td class="td_actions">
                     <button mat-raised-button style="margin:2px;" type="button" class="btn btn-info" (click)="getPrestaton(element)">
