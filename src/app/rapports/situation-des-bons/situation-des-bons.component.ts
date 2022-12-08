@@ -166,7 +166,6 @@ printSituationBons(){
           doc.setTextColor("blue")
           doc.setFontSize(15)
           doc.text("Bon de " +nomP  +" du " +datedebut  + " au " +datefin,15,60) 
-
          doc.setFontSize(12)
 
      }
