@@ -20,6 +20,7 @@ export class CreancesGbalesComponent implements OnInit {
   date1:any
   enti:any;
   listCreanceGlobales: IPM_Details_Facture[];
+  listCreanceEntites:IPM_Details_Facture[]
   list: number;
   DesatverBouton:boolean=false
   d1: string;
@@ -50,38 +51,50 @@ export class CreancesGbalesComponent implements OnInit {
     this.rapportServ.getGlobaleParEntity(this.d1,this.d2,this.enti.idEntity).subscribe(
       result=>{
         this.DesatverBouton=true
-      this.listCreanceGlobales=result
+      this.listCreanceEntites=result
       //this.list=this.listCreanceGlobales.length
-      console.log(this.listCreanceGlobales.length)
-      this.getTableau();
-      if (this.listCreanceGlobales.length==0) {
+      console.log(this.listCreanceEntites.length)
+      $(function(){
+        (<any>$('#datatable')).DataTable({
+            "pagingType": "full_numbers",
+             "lengthMenu": [
+               [10, 25, 50, -1],
+               [10, 25, 50, "All"]
+             ],
+             responsive: true,
+             retrieve:true,
+             language: {
+               search: "_INPUT_",
+               searchPlaceholder: "Recherche",
+               info: " _START_/_END_ sur _TOTAL_ demandes",
+               paginate: {
+                "first":        "Début",
+                "previous":     "Précédent",
+                "next":         "Suivant",
+                "last":         "Fin"
+            },
+            lengthMenu:"Afficher par _MENU_",
+            infoFiltered:""
+             },
+             
+        
+           });
+      
+      })
+      if (this.listCreanceEntites.length==0) {
         this.showNotification('top','center',3,"<b> verifer la date ou l'entite</b> :")
 
         
       }
 
     })
-    this.listCreanceGlobales
+   // this.listCreanceGlobales
   }else 
   console.log(this.d1,this.d2)
   this.rapportServ.getSituationIndividuel(this.d1,this.d2).subscribe(
     result=>{
       this.DesatverBouton=true
     this.listCreanceGlobales=result
-    //this.list=this.listCreanceGlobales.length
-    console.log(this.listCreanceGlobales.length)
-    this.getTableau();
-    if (this.listCreanceGlobales.length==0) {
-      this.showNotification('top','center',3,"<b> verifer la date ou l'entite</b> :")
-
-      
-    }
-
-  })
-  this.listCreanceGlobales
-
-  }
-  getTableau(){
     $(function(){
       (<any>$('#datatable')).DataTable({
           "pagingType": "full_numbers",
@@ -109,7 +122,22 @@ export class CreancesGbalesComponent implements OnInit {
          });
     
     })
-    this.listCreanceGlobales
+    //this.list=this.listCreanceGlobales.length
+    console.log(this.listCreanceGlobales.length)
+    this.getTableau();
+    if (this.listCreanceGlobales.length==0) {
+      this.showNotification('top','center',3,"<b> verifer la date ou l'entite</b> :")
+
+      
+    }
+
+  })
+
+
+  }
+  getTableau(){
+    
+    
   }
   getEntity(ent){
     console.log(ent)

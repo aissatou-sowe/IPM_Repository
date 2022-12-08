@@ -197,12 +197,8 @@ ajouterPres(){
   this.prestataire.ipm_type_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
     this.prestataire.lettreAgrement=this.selectLettreAg.name;
   if(this.prestataire.adresse_prestataire && this.prestataire.ipm_type_prestataire 
-<<<<<<< HEAD
     && this.prestataire.code_categorie_pretataire && this.prestataire.telephone ){
   
-=======
-    && this.prestataire.code_categorie_pretataire && this.prestataire.lettreAgrement && this.prestataire.telephone){
->>>>>>> 2f5e203e6e2e1ac9adabfe016a4e2cee816b6f5f
   this.pres_service.AjouterPrestataire(this.prestataire).
   subscribe( ()=>{
     this.ngOnInit();

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { sum } from 'chartist';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { ObjectUnsubscribedError } from 'rxjs';
 import { IPM_Details_Facture } from 'src/app/Models/IPM_Detils_Factures';
 import { FactureService } from 'src/app/Services/facture.service';
@@ -69,6 +72,7 @@ listFactures:IPM_Details_Facture[];
                [10, 25, 50, "All"]
              ],
              responsive: true,
+             retrieve:true,
              language: {
                search: "_INPUT_",
                searchPlaceholder: "Recherche",
@@ -115,9 +119,12 @@ listFactures:IPM_Details_Facture[];
     this.facture.certifier=true;
     console.log(this.facture)
     //a revoir apres la présentattion
-     //this.fact_service.UpdateFacture(this.facture).subscribe(
-     //  (data)=>{}
-    // )
+     this.fact_service.UpdateFacture(this.facture).subscribe(
+      (data)=>{
+        this.ngOnInit();
+      }
+
+    )
     // this.fact_service.updateOnEmploye(this.chargeEmploie).subscribe(
     //  (data)=>{
         console.log(this.listFactureCertif)
@@ -211,7 +218,6 @@ this.detailfacture=fact
   }
   retourner(){
     this.router.navigate(['/gestion-factures/ListeFacture']);
-
   }
   showALERTE2(from: any, align: any) {
     const type = ['', 'success', 'warning', 'danger', 'info', 'rose', 'primary'];
@@ -247,7 +253,7 @@ this.detailfacture=fact
 
     $.notify({
       icon: 'notifications',
-      message: '<b> enregistrement fait avec succes  </b> :'
+      message: '<b> facture  certifié avec succès </b> :'
     }, {
       type: type[1],
       timer: 13000,
@@ -267,5 +273,70 @@ this.detailfacture=fact
         '</div>'
     });
   }
+    ///////////////////////// Imprimer Duplicata facture
+  imprimerfacture(){
+  console.log(this.listFactures)
+  let doc=new jsPDF();
+  var imgData = '/assets/img_poste/laposte.png'
+  let col=[["Matricule","Prenom","Nom","Prestation","Montant Facture","Charge IPM","Charge Agent"]]
+  let rows=[]
+  for (let factemp of this.listFactures) {
+    let tmp = [factemp.ipm_employe?.matricule, factemp.ipm_employe?.prenom, factemp.ipm_employe?.nom, factemp.ipm_prestation?.libelle, factemp.montant_facture, factemp.part_ipm, factemp.part_patient]
+    rows.push(tmp)
+    var prestataire=factemp.ipmFacture?.ipm_prestataire.nom_prestataire;
+  
+  }
+  var somme=this.listFactures.reduce((sum,current)=>sum+current.montant_facture,0)
+  var sommeCharagent=this.listFactures.reduce((sum,current)=>sum+current.part_ipm,0)
+  var sommeChargeIPM=this.listFactures.reduce((sum,current)=>sum+current.part_patient,0)
+  console.log(somme);
+  let f=[["","","","Total Montants",somme,sommeCharagent,sommeChargeIPM]]
+  var num=this.numero;
+ 
+    console.log(num)
+  autoTable(doc,{
+    startY:75,
+    head:col,
+    body:rows,
+    foot:f,
+     margin:{ horizontal:10},
+     styles:{overflow:"linebreak"},
+     bodyStyles:{valign:"top"},
+     theme:"striped",
+     didDrawPage: function(data){
+      //this.bon.ipm_employe=this.message;
+      doc.addImage(imgData ,'JPEG',15,5,30,30)
+     doc.setFontSize(15)
+     doc.text("",72,46)
+    // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
+    doc.setLineWidth(2)
+    doc.setDrawColor("#3A6EA5")
+    doc.rect(60,30,100,15)
+    doc.setFillColor(240,240,240)
+    //  doc.rect(13,40,185,32,'F')
+    //  doc.setFillColor(240,240,240)
+     
+     doc.setFontSize(15)
+     doc.setTextColor("#3A6EA5")
+     doc.text("Duplicata Facture",77,40)
+     doc.setTextColor("")
+      const date=new Date()
+         doc.setFontSize(13)
+          doc.text("Dakar, le :",150,18)
+          doc.text("Numero Facture:",15,60)
+          doc.text(''+num,50,60)
+          doc.text("Prestataire:",15,72) 
+          doc.text(""+prestataire,40,72)     
+      doc.text(date.toLocaleDateString("fr-FR"),172,18)
+         doc.setFontSize(12)
+
+     }
+  });
+  
+  doc.output('dataurlnewwindow');
+
+
+}
+/////////////////Fin Duplicata Facture 
 
 }
