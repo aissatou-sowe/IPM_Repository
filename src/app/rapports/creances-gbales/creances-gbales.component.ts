@@ -22,6 +22,7 @@ export class CreancesGbalesComponent implements OnInit {
   date1: any
   enti: any;
   listCreanceGlobales: IPM_Details_Facture[];
+  listCreanceEntites: IPM_Details_Facture[]
   list: number;
   DesatverBouton: boolean = false
   d1: string;
@@ -52,12 +53,13 @@ export class CreancesGbalesComponent implements OnInit {
     this.d2 = this.datepipe.transform(this.date2, 'dd-MM-yyyy');
     this.tout = "liste creance  des Participants  du"
     console.log()
-
     if (this.enti) {
-
-
       this.rapportServ.getGlobaleParEntity(this.d1, this.d2, this.enti.idEntity).subscribe(
         result => {
+          this.DesatverBouton = true
+          this.listCreanceEntites = result
+          //this.list=this.listCreanceGlobales.length
+          console.log(this.listCreanceEntites.length)
           $(function () {
             (<any>$('#datatable')).DataTable({
               "pagingType": "full_numbers",
@@ -85,26 +87,115 @@ export class CreancesGbalesComponent implements OnInit {
             });
 
           })
-          this.listCreanceParEntity = result
-          //this.list=this.listCreanceGlobales.length
-          console.log(this.listCreanceParEntity.length)
-
-          if (this.listCreanceParEntity.length == 0) {
-
+          if (this.listCreanceEntites.length == 0) {
             this.showNotification('top', 'center', 3, "<b> verifer la date ou l'entite</b> :")
 
+            if (this.enti) {
+
+
+              this.rapportServ.getGlobaleParEntity(this.d1, this.d2, this.enti.idEntity).subscribe(
+                result => {
+                  $(function () {
+                    (<any>$('#datatable')).DataTable({
+                      "pagingType": "full_numbers",
+                      "lengthMenu": [
+                        [10, 25, 50, -1],
+                        [10, 25, 50, "All"]
+                      ],
+                      responsive: true,
+                      retrieve: true,
+                      language: {
+                        search: "_INPUT_",
+                        searchPlaceholder: "Recherche",
+                        info: " _START_/_END_ sur _TOTAL_ demandes",
+                        paginate: {
+                          "first": "Début",
+                          "previous": "Précédent",
+                          "next": "Suivant",
+                          "last": "Fin"
+                        },
+                        lengthMenu: "Afficher par _MENU_",
+                        infoFiltered: ""
+                      },
+
+
+                    });
+
+                  })
+                  this.listCreanceParEntity = result
+                  //this.list=this.listCreanceGlobales.length
+                  console.log(this.listCreanceParEntity.length)
+
+                  if (this.listCreanceParEntity.length == 0) {
+
+                    this.showNotification('top', 'center', 3, "<b> verifer la date ou l'entite</b> :")
+
+
+                  }
+
+                })
+
+
+            } else
+              console.log(this.enti)
+
+
+            this.rapportServ.getSituationIndividuel(this.d1, this.d2).subscribe(
+              result => {
+                $(function () {
+                  (<any>$('#datatable')).DataTable({
+                    "pagingType": "full_numbers",
+                    "lengthMenu": [
+                      [10, 25, 50, -1],
+                      [10, 25, 50, "All"]
+                    ],
+                    responsive: true,
+                    retrieve: true,
+                    language: {
+                      search: "_INPUT_",
+                      searchPlaceholder: "Recherche",
+                      info: " _START_/_END_ sur _TOTAL_ demandes",
+                      paginate: {
+                        "first": "Début",
+                        "previous": "Précédent",
+                        "next": "Suivant",
+                        "last": "Fin"
+                      },
+                      lengthMenu: "Afficher par _MENU_",
+                      infoFiltered: ""
+                    },
+
+
+                  });
+
+                })
+                this.listCreanceGlobales = result
+                //this.list=this.listCreanceGlobales.length
+                console.log(this.listCreanceGlobales.length)
+
+                if (this.listCreanceGlobales.length == 0) {
+
+                  this.showNotification('top', 'center', 3, "<b> verifer la date ou l'entite</b> :")
+
+
+                }
+
+              })
+
+            this.attente2 == null
 
           }
 
-        })
 
 
-    } else
-      console.log(this.enti)
-
-
+        })}
+      
+   else
+      console.log(this.d1, this.d2)
     this.rapportServ.getSituationIndividuel(this.d1, this.d2).subscribe(
       result => {
+        this.DesatverBouton = true
+        this.listCreanceGlobales = result
         $(function () {
           (<any>$('#datatable')).DataTable({
             "pagingType": "full_numbers",
@@ -132,12 +223,10 @@ export class CreancesGbalesComponent implements OnInit {
           });
 
         })
-        this.listCreanceGlobales = result
         //this.list=this.listCreanceGlobales.length
         console.log(this.listCreanceGlobales.length)
-
+        this.getTableau();
         if (this.listCreanceGlobales.length == 0) {
-
           this.showNotification('top', 'center', 3, "<b> verifer la date ou l'entite</b> :")
 
 
@@ -145,7 +234,6 @@ export class CreancesGbalesComponent implements OnInit {
 
       })
 
-    this.attente2 == null
 
   }
   getTableau() {
@@ -166,154 +254,154 @@ export class CreancesGbalesComponent implements OnInit {
 
 
   }
-  imprimer(){
-    let doc=new jsPDF();
+  imprimer() {
+    let doc = new jsPDF();
     var imgData = '/assets/img_poste/laposte.png'
-    
-     let col=[["Matricule","Nom","Prénom","Montant ","Charge IPM","Charge Agent"]]
-    let rows=[]
-      
-        //let tmp=[this.designation,this.nombre_article]
-        for (let liste of this.listCreanceGlobales) {
-          let tmp = [liste.ipm_employe?.matricule, liste.ipm_employe?.nom,liste.ipm_employe?.prenom, liste.montant_facture, liste.part_ipm, liste.part_patient]
-          rows.push(tmp)
-          var ipm1=liste.ipm_employe?.nom
-          
-          var ipm2=liste.ipm_employe?.prenom
-          var ipm3=liste.ipm_employe?.matricule
-        }
-        var somme1=this.listCreanceGlobales.reduce((sum,current)=>sum+current.part_ipm,0);
-        var somme2=this.listCreanceGlobales.reduce((sum,current)=>sum+current.part_patient,0);
-        var somme3=this.listCreanceGlobales.reduce((sum,current)=>sum+current.montant_facture,0);
-        var entite =this.attente
-        var date1=this.d1
-        var date2=this.d2
 
-        let f=[["","","Total ",somme3,somme1,somme2]]
+    let col = [["Matricule", "Nom", "Prénom", "Montant ", "Charge IPM", "Charge Agent"]]
+    let rows = []
 
-      
-  
-    
-     autoTable(doc,{
-      startY:70,
-      head:col,
-      body:rows,
-      foot:f,
-       margin:{ horizontal:10},
-       styles:{overflow:"linebreak"},
-       bodyStyles:{valign:"top"},
-       theme:"striped",
-       didDrawPage: function(data){
+    //let tmp=[this.designation,this.nombre_article]
+    for (let liste of this.listCreanceGlobales) {
+      let tmp = [liste.ipm_employe?.matricule, liste.ipm_employe?.nom, liste.ipm_employe?.prenom, liste.montant_facture, liste.part_ipm, liste.part_patient]
+      rows.push(tmp)
+      var ipm1 = liste.ipm_employe?.nom
+
+      var ipm2 = liste.ipm_employe?.prenom
+      var ipm3 = liste.ipm_employe?.matricule
+    }
+    var somme1 = this.listCreanceGlobales.reduce((sum, current) => sum + current.part_ipm, 0);
+    var somme2 = this.listCreanceGlobales.reduce((sum, current) => sum + current.part_patient, 0);
+    var somme3 = this.listCreanceGlobales.reduce((sum, current) => sum + current.montant_facture, 0);
+    var entite = this.attente
+    var date1 = this.d1
+    var date2 = this.d2
+
+    let f = [["", "", "Total ", somme3, somme1, somme2]]
+
+
+
+
+    autoTable(doc, {
+      startY: 70,
+      head: col,
+      body: rows,
+      foot: f,
+      margin: { horizontal: 10 },
+      styles: { overflow: "linebreak" },
+      bodyStyles: { valign: "top" },
+      theme: "striped",
+      didDrawPage: function (data) {
         //this.bon.ipm_employe=this.message;
-        doc.addImage(imgData ,'JPEG',15,5,30,30)
-       doc.setFontSize(15)
-       doc.text("",72,46)
-      // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
-      doc.setLineWidth(2)
-      doc.setDrawColor("#3A6EA5")
-      doc.rect(60,30,105,20)
-      //doc.setFillColor(240,240,240)
-       //doc.rect(13,65,185,23,'F')
-       //doc.setFillColor(240,240,240)
-       
-       doc.setFontSize(15)
-       doc.setTextColor("#3A6EA5")
-       
-       doc.text("Créance globale périodique ",85,40)
-       doc.text("de " +entite,105,47)
-       doc.text("rapport périodique du "+date1+" au "+date2,20,65)
+        doc.addImage(imgData, 'JPEG', 15, 5, 30, 30)
+        doc.setFontSize(15)
+        doc.text("", 72, 46)
+        // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
+        doc.setLineWidth(2)
+        doc.setDrawColor("#3A6EA5")
+        doc.rect(60, 30, 105, 20)
+        //doc.setFillColor(240,240,240)
+        //doc.rect(13,65,185,23,'F')
+        //doc.setFillColor(240,240,240)
 
-       doc.setTextColor("")
-        const date=new Date()
-           doc.setFontSize(12)
-            doc.text("Dakar, le :",150,10)
-            doc.setFontSize(12)
-            doc.text("Institut de Prévoyance Maladie ",50,10)
-            doc.text("du personnel de la Poste ",60,17)
-            
-        doc.text(date.toLocaleDateString("fr-FR"),172,10)
-           
-           
-            doc.setFontSize(12)
-          
-       }
+        doc.setFontSize(15)
+        doc.setTextColor("#3A6EA5")
+
+        doc.text("Créance globale périodique ", 85, 40)
+        doc.text("de " + entite, 105, 47)
+        doc.text("rapport périodique du " + date1 + " au " + date2, 20, 65)
+
+        doc.setTextColor("")
+        const date = new Date()
+        doc.setFontSize(12)
+        doc.text("Dakar, le :", 150, 10)
+        doc.setFontSize(12)
+        doc.text("Institut de Prévoyance Maladie ", 50, 10)
+        doc.text("du personnel de la Poste ", 60, 17)
+
+        doc.text(date.toLocaleDateString("fr-FR"), 172, 10)
+
+
+        doc.setFontSize(12)
+
+      }
     });
-    
+
     doc.output("dataurlnewwindow");
-    
+
   }
 
-  imprimerTout(){
-    let doc=new jsPDF();
+  imprimerTout() {
+    let doc = new jsPDF();
     var imgData = '/assets/img_poste/laposte.png'
-    
-     let col=[["Matricule","Nom","Prénom","Montant ","Charge IPM","Charge Agent"]]
-    let rows=[]
-      
-        //let tmp=[this.designation,this.nombre_article]
-        for (let liste of this.listCreanceGlobales) {
-          let tmp = [liste.ipm_employe?.matricule, liste.ipm_employe?.nom,liste.ipm_employe?.prenom, liste.montant_facture, liste.part_ipm, liste.part_patient]
-          rows.push(tmp)
-          var ipm1=liste.ipm_employe?.nom
-          
-          var ipm2=liste.ipm_employe?.prenom
-          var ipm3=liste.ipm_employe?.matricule
-        }
-        var somme1=this.listCreanceGlobales.reduce((sum,current)=>sum+current.part_ipm,0);
-        var somme2=this.listCreanceGlobales.reduce((sum,current)=>sum+current.part_patient,0);
-        var somme3=this.listCreanceGlobales.reduce((sum,current)=>sum+current.montant_facture,0);
-        var date1=this.d1
-        var date2=this.d2
-        
-        let f=[["","","Total ",somme3,somme1,somme2]]
 
-      
-  
-    
-     autoTable(doc,{
-      startY:70,
-      head:col,
-      body:rows,
-      foot:f,
-       margin:{ horizontal:10},
-       styles:{overflow:"linebreak"},
-       bodyStyles:{valign:"top"},
-       theme:"striped",
-       didDrawPage: function(data){
+    let col = [["Matricule", "Nom", "Prénom", "Montant ", "Charge IPM", "Charge Agent"]]
+    let rows = []
+
+    //let tmp=[this.designation,this.nombre_article]
+    for (let liste of this.listCreanceGlobales) {
+      let tmp = [liste.ipm_employe?.matricule, liste.ipm_employe?.nom, liste.ipm_employe?.prenom, liste.montant_facture, liste.part_ipm, liste.part_patient]
+      rows.push(tmp)
+      var ipm1 = liste.ipm_employe?.nom
+
+      var ipm2 = liste.ipm_employe?.prenom
+      var ipm3 = liste.ipm_employe?.matricule
+    }
+    var somme1 = this.listCreanceGlobales.reduce((sum, current) => sum + current.part_ipm, 0);
+    var somme2 = this.listCreanceGlobales.reduce((sum, current) => sum + current.part_patient, 0);
+    var somme3 = this.listCreanceGlobales.reduce((sum, current) => sum + current.montant_facture, 0);
+    var date1 = this.d1
+    var date2 = this.d2
+
+    let f = [["", "", "Total ", somme3, somme1, somme2]]
+
+
+
+
+    autoTable(doc, {
+      startY: 70,
+      head: col,
+      body: rows,
+      foot: f,
+      margin: { horizontal: 10 },
+      styles: { overflow: "linebreak" },
+      bodyStyles: { valign: "top" },
+      theme: "striped",
+      didDrawPage: function (data) {
         //this.bon.ipm_employe=this.message;
-        doc.addImage(imgData ,'JPEG',15,5,30,30)
-       doc.setFontSize(15)
-       doc.text("",72,46)
-      // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
-      doc.setLineWidth(2)
-      doc.setDrawColor("#3A6EA5")
-      doc.rect(60,30,105,20)
-      //doc.setFillColor(240,240,240)
-       //doc.rect(13,65,185,23,'F')
-       //doc.setFillColor(240,240,240)
-       
-       doc.setFontSize(15)
-       doc.setTextColor("#3A6EA5")
-       
-       doc.text("Créance globale périodique ",85,42)
-       doc.text("rapport périodique du "+date1+" au "+date2,20,60)
-       doc.setTextColor("")
-        const date=new Date()
-           doc.setFontSize(12)
-            doc.text("Dakar, le :",150,10)
-            doc.setFontSize(12)
-            doc.text("Institut de Prévoyance Maladie ",50,10)
-            doc.text("du personnel de la Poste ",60,17)
-            
-        doc.text(date.toLocaleDateString("fr-FR"),172,10)
-            doc.setFontSize(12)
-          
-          
-       }
+        doc.addImage(imgData, 'JPEG', 15, 5, 30, 30)
+        doc.setFontSize(15)
+        doc.text("", 72, 46)
+        // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
+        doc.setLineWidth(2)
+        doc.setDrawColor("#3A6EA5")
+        doc.rect(60, 30, 105, 20)
+        //doc.setFillColor(240,240,240)
+        //doc.rect(13,65,185,23,'F')
+        //doc.setFillColor(240,240,240)
+
+        doc.setFontSize(15)
+        doc.setTextColor("#3A6EA5")
+
+        doc.text("Créance globale périodique ", 85, 42)
+        doc.text("rapport périodique du " + date1 + " au " + date2, 20, 60)
+        doc.setTextColor("")
+        const date = new Date()
+        doc.setFontSize(12)
+        doc.text("Dakar, le :", 150, 10)
+        doc.setFontSize(12)
+        doc.text("Institut de Prévoyance Maladie ", 50, 10)
+        doc.text("du personnel de la Poste ", 60, 17)
+
+        doc.text(date.toLocaleDateString("fr-FR"), 172, 10)
+        doc.setFontSize(12)
+
+
+      }
     });
-    
+
     doc.output("dataurlnewwindow");
-    
+
   }
 
 

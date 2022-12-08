@@ -2,6 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { IPM_Bon } from 'src/app/Models/IPM_Bon';
 import { Prestation } from 'src/app/Models/Prestations';
 import { RapportServiceService } from 'src/app/Services/rapport-service.service';
@@ -111,6 +113,67 @@ export class SituationDesBonsComponent implements OnInit {
           '<a href="{3}" target="{4}" data-notify="url"></a>' +
         '</div>'
     });
+}
+
+
+//Imprimer Situation Annuelle
+printSituationBons(){
+  let doc=new jsPDF();
+  var imgData = '/assets/img_poste/laposte.png'
+  let col=[["Matricule","Prenom","Nom","Prestataire"]]
+  let rows=[]
+  for (let situBons of this.listBonGlobalsPrestation) {
+    let tmp = [situBons.ipm_employe?.matricule,situBons.ipm_employe?.prenom,situBons.ipm_employe?.nom,situBons.ipm_prestataire?.nom_prestataire]
+    rows.push(tmp);
+     var nomP=this.d3
+     var datedebut=this.d1;
+     var datefin=this.d2;
+  }
+  autoTable(doc,{
+    startY:75,
+    head:col,
+    body:rows,
+   // foot:f,
+     margin:{ horizontal:10},
+     styles:{overflow:"linebreak"},
+     bodyStyles:{valign:"top"},
+     theme:"striped",
+     didDrawPage: function(data){
+      //this.bon.ipm_employe=this.message;
+      doc.addImage(imgData ,'JPEG',15,5,30,30)
+     doc.setFontSize(15)
+     doc.text("",72,46)
+    // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
+    doc.setLineWidth(2)
+    doc.setDrawColor("#3A6EA5")
+    doc.rect(60,30,100,15)
+    doc.setFillColor(240,240,240)
+    //  doc.rect(13,40,185,32,'F')
+    //  doc.setFillColor(240,240,240)
+     
+     doc.setFontSize(20)
+     doc.setTextColor("#3A6EA5")
+     doc.text("Situation Bon " +nomP,74,40)
+    // doc.text(''+nomP,106,40)
+    //  doc.setTextColor("")
+      const date=new Date()
+         doc.setFontSize(13)
+         doc.setTextColor("")
+         doc.text("Institut de Prévoyance Maladie",50,10);
+         doc.text("du personnel de la Poste",60,17)
+          doc.text("Dakar, le :",150,18)
+          doc.text(date.toLocaleDateString("fr-FR"),172,18)
+          doc.setTextColor("blue")
+          doc.setFontSize(15)
+          doc.text("Bon de " +nomP  +" du " +datedebut  + " au " +datefin,15,60) 
+
+         doc.setFontSize(12)
+
+     }
+  });
+  
+  doc.output('dataurlnewwindow');
+
 }
 
 }

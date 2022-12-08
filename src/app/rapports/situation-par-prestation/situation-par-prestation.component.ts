@@ -9,6 +9,7 @@ import { Prestation } from 'src/app/Models/Prestations';
 import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import jsPDF from 'jspdf';
+import { IPM_Details_Facture } from 'src/app/Models/IPM_Detils_Factures';
 
 @Component({
   selector: 'app-situation-par-prestation',
@@ -22,7 +23,7 @@ export class SituationParPrestationComponent implements OnInit {
   date2: any;
   d1: string;
   d2: string;
-  list: import("c:/Users/HP/workspace/IPM_Front/PROJET-IPM/src/app/Models/IPM_Detils_Factures").IPM_Details_Facture[];
+  list: IPM_Details_Facture[];
   prestationChoisi: any;
 
   constructor(private dateAdapter: DateAdapter<Date>, private datepipe: DatePipe,

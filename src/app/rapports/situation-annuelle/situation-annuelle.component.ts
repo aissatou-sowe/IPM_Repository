@@ -4,6 +4,8 @@ import { Component, Input, OnInit,ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DateAdapter, VERSION } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { element } from 'protractor';
 import { Cotisation } from 'src/app/Models/CotisatonGlobal';
 import { DetailCotisation } from 'src/app/Models/IPM_Cotisation';
@@ -54,6 +56,8 @@ export class SituationAnnuelleComponent implements OnInit {
               console.log(lmt.value,new Date(element.ipm_cotisation?.date).getMonth(),lmt.id)
               
               element.ipm_employe.justificatif=lmt.value;
+              console.log(element.ipm_employe.justificatif);
+
              console.log(element.ipm_employe?.justificatif);
             }
 
@@ -77,7 +81,8 @@ export class SituationAnnuelleComponent implements OnInit {
         this.rapportServ.getDetailsCotisationByEmploye(element.ipm_cotisation?.idCotisation).subscribe(
           result => {
             this.listCotisations= result;
-            console.log(this.listCotisations);
+            console.log(element);
+            this.mois1=element.ipm_employe.justificatif
           }
         )
   }
@@ -108,6 +113,72 @@ export class SituationAnnuelleComponent implements OnInit {
           '<a href="{3}" target="{4}" data-notify="url"></a>' +
         '</div>'
     });
+}
+
+//Imprimer Situation Annuelle
+printSituationAnnuelle(){
+  let doc=new jsPDF();
+  var imgData = '/assets/img_poste/laposte.png'
+  let col=[["Matricule","Prenom","Nom","Montant Cotisé","Date Cotisation"]]
+  let rows=[]
+  for (let situAnnee of this.listCotisations) {
+    let tmp = [situAnnee.ipm_employe?.matricule,situAnnee.ipm_employe?.prenom,situAnnee.ipm_employe?.nom,situAnnee.montant,situAnnee.ipm_cotisation?.date]
+    rows.push(tmp);
+    var montantCotisa=situAnnee.ipm_cotisation?.montant_totals;
+    var mois=this.mois1;
+    console.log(this.mois1);
+  }
+  // var somme=this.listFactures.reduce((sum,current)=>sum+current.montant_facture,0)
+  // var sommeCharagent=this.listFactures.reduce((sum,current)=>sum+current.part_ipm,0)
+  // var sommeChargeIPM=this.listFactures.reduce((sum,current)=>sum+current.part_patient,0)
+  // console.log(somme);
+  // let f=[["","","","Total Montants",somme,sommeCharagent,sommeChargeIPM]]
+   
+ 
+
+  autoTable(doc,{
+    startY:75,
+    head:col,
+    body:rows,
+   // foot:f,
+     margin:{ horizontal:10},
+     styles:{overflow:"linebreak"},
+     bodyStyles:{valign:"top"},
+     theme:"striped",
+     didDrawPage: function(data){
+      //this.bon.ipm_employe=this.message;
+      doc.addImage(imgData ,'JPEG',15,5,30,30)
+     doc.setFontSize(15)
+     doc.text("",72,46)
+    // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
+    doc.setLineWidth(2)
+    doc.setDrawColor("#3A6EA5")
+    doc.rect(60,30,100,15)
+    doc.setFillColor(240,240,240)
+    //  doc.rect(13,40,185,32,'F')
+    //  doc.setFillColor(240,240,240)
+    doc.setTextColor("")
+    doc.text("Institut de Prévoyance Maladie",50,10);
+    doc.text("du personnel de la Poste",60,17)
+     doc.setFontSize(15)
+     doc.setTextColor("#3A6EA5")
+     doc.text("Rapport Situation Annuelle",77,40)
+     doc.setTextColor("")
+      const date=new Date()
+         doc.setFontSize(13)
+          doc.text("Dakar, le :",150,18)
+          doc.text("Mois de:",15,60)
+          doc.text(''+mois,35,60)
+          doc.text("Montant Totals:",15,72) 
+          doc.text(""+montantCotisa,50,72)     
+      doc.text(date.toLocaleDateString("fr-FR"),172,18)
+         doc.setFontSize(12)
+
+     }
+  });
+  
+  doc.output('dataurlnewwindow');
+
 }
   
   

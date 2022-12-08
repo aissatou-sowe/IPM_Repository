@@ -16,8 +16,6 @@
           <div class="row">
           
   
-          
-          
           <!-- <div class="col-md-3 form-group" style="margin-top: -12px;">
             <label for="Numéro"><b>Numéro Facture</b></label>
             
@@ -106,7 +104,7 @@
                 
                 <td><b>{{element.ipm_prestation?.libelle}}</b></td>
                 <!-- <td>{{element.ipm_prestation?.code_prestation}}</td> -->
-                <td><b>{{element.ipmFacture.dateSaisie | date: 'd MMM , y'}}</b></td>
+                <td><b>{{element.ipmFacture.dateSaisie | date:'d MMM,y'}}</b></td>
                 <td><b>{{element.part_ipm}}</b></td>
                 <td><b>{{element.part_patient}}</b></td>
                 <td><b>{{element.montant_facture}}</b></td>

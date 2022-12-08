@@ -32,6 +32,7 @@ prestation:Prestation=new Prestation(0,"",0,0,null);
     this.getPrestataire();
     this.getTypeP()
    
+   this.getTypeP();
   }
   public onRegister(){
     this.addPrestataire.code_prestataire=this.pres;
@@ -56,6 +57,7 @@ public getTypeP(){
       //this.temptype=serv
 
       console.log(this.typepresta)
+      console.log(this.typepresta);
     }
   )
 }
