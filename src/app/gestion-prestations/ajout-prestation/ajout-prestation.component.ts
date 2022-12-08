@@ -46,7 +46,7 @@ public getPrestataire(){
 this.prestation_service.getAllPestataires().subscribe(
   pre => {
     this.prestataire=pre;
-    this.temptype=pre
+    //this.temptype=pre
   });
 }
 public getTypeP(){
@@ -54,7 +54,7 @@ public getTypeP(){
     serv => {
      // console.log(serv);
       this.typepresta = serv;
-     // this.temptype=serv
+      //this.temptype=serv
 
       console.log(this.typepresta)
       console.log(this.typepresta);
