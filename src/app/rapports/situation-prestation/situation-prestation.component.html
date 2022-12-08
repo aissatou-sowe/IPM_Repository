@@ -8,7 +8,7 @@
         <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
           <i class="material-icons">search</i>
         </div>
-        <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">Rapport globale </h2>
+        <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">Situation individuelle </h2>
     </div>
       <div class="card-body">
         <form #form="ngForm">
@@ -75,9 +75,9 @@
             <i class="material-icons">list</i>
     
           </div>
-          <h2 class="text-center" 
-          style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;">liste des prestattion du {{d1}} au {{d2}}
-          </h2>
+          <h3 class="text-center" 
+          style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;">liste des prestations de {{prenom}} {{nom}} du {{d1}} au {{d2}}
+          </h3>
         </div>
         <div class="card-body">
           <div class="material-datatable">
@@ -96,7 +96,7 @@
               <th cope="col">MontantFacture</th>
 
           
-              <th cope="col">Action</th>
+              <!-- <th cope="col">Action</th> -->
     
             </thead>
             <tbody>
@@ -106,19 +106,19 @@
                 
                 <td><b>{{element.ipm_prestation?.libelle}}</b></td>
                 <!-- <td>{{element.ipm_prestation?.code_prestation}}</td> -->
-                <td><b>{{element.dateSaisie}}</b></td>
+                <td><b>{{element.ipmFacture.dateSaisie | date: 'd MMM , y'}}</b></td>
                 <td><b>{{element.part_ipm}}</b></td>
                 <td><b>{{element.part_patient}}</b></td>
                 <td><b>{{element.montant_facture}}</b></td>
 
 
                 
-                <td class="td_actions">
+                <!-- <td class="td_actions">
                     <button mat-raised-button style="margin:2px;" type="button" class="btn btn-info" (click)="getPrestaton(element)">
                         <i class="material-icons"
                           >person</i>
                       </button>
-                </td>
+                </td> -->
                 <!-- <td>
                   <button class="btn btn-info btn-block" 
                  data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>
@@ -149,6 +149,8 @@
         </div>
           <!-- <div class="modal-footer justify-content-center"></div> -->
             <button class="btn btn-raised btn-round btn-success"  (click)="imprimer() ">imprimer
+            </button>
+            <button class="btn btn-raised btn-round btn-info" style="margin-left: 80%; margin-top: -2cm;"  (click)="getremboursement() ">remboursement
             </button>
           
         </div>

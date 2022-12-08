@@ -8,6 +8,7 @@ import { DetailCotisation } from '../Models/IPM_Cotisation';
 import { Cotisation } from '../Models/CotisatonGlobal';
 import { Prestation } from '../Models/Prestations';
 import { IPM_Bon } from '../Models/IPM_Bon';
+import { IPM_DetaRembourse } from '../Models/IPM_DetaRembourse';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,9 @@ export class RapportServiceService {
   }
   public getSituatonParindividus(date1:String,date2:String,id:String):Observable<IPM_Details_Facture[]>{
     return this.http.get<IPM_Details_Facture[]>(environment.URL+'getIndividuelPrestations/'+date1+'/'+date2+'/'+id);
+  }
+  public getSituatonRemboursement(date1:String,date2:String,id:String):Observable<IPM_DetaRembourse[]>{
+    return this.http.get<IPM_DetaRembourse[]>(environment.URL+'getIndividuelRembour/'+date1+'/'+date2+'/'+id);
   }
 
   public getBonByPeriodeAndtypeBon(date1:String,date2:String,idprestation:String):Observable<IPM_Bon[]>{

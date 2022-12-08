@@ -24,6 +24,10 @@ export class SituationPrestationComponent implements OnInit {
   matricule;
   list: IPM_Details_Facture[];
   id: any;
+  nom: string;
+  prenom: string;
+  matr: any;
+  listRemboursement: import("c:/Users/HP/workspace/IPM_Front/PROJET-IPM/src/app/Models/IPM_DetaRembourse").IPM_DetaRembourse[];
 
   constructor(private dateAdapter: DateAdapter<Date>, private datepipe: DatePipe,
     private rapportServ:RapportServiceService,private router:Router) { 
@@ -32,10 +36,10 @@ export class SituationPrestationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.rapportServ.getPrestation().subscribe(data=>{
-      this.listPrestation=data
-      //console.log(this.prestatonChoisi,presta.code_prestation)
-    })
+    // this.rapportServ.getPrestation().subscribe(data=>{
+    //   this.listPrestation=data
+    //   //console.log(this.prestatonChoisi,presta.code_prestation)
+    // })
   }
 
   getPrestation(presta){
@@ -46,12 +50,22 @@ export class SituationPrestationComponent implements OnInit {
    getSituation(){
     this.d1 =this.datepipe.transform(this.date1, 'dd-MM-yyyy');
     this.d2 =this.datepipe.transform(this.date2, 'dd-MM-yyyy');
-    
+    this.matr=this.matricule
     this.rapportServ.getSituatonParindividus(this.d1,this.d2,this.matricule).subscribe(
       result=>{
         this.listPrestatio=result
         console.log(this.listPrestatio)
+        for (let liste of this.listPrestatio) {
+        this.nom=liste.ipm_employe?.nom
+        this.prenom=liste.ipm_employe?.prenom
+        }
       })
+      this.rapportServ.getSituatonRemboursement(this.d1,this.d2,this.matr).subscribe(
+        result=>{
+          console.log(this.d1,this.d2,this.matr)
+          console.log(result)
+          this.listRemboursement=result
+        })
 
    }
    getPrestaton(element){
@@ -68,7 +82,7 @@ export class SituationPrestationComponent implements OnInit {
    }
    imprimer(){
     let doc=new jsPDF();
-    var imgData = '/assets/img_poste/header1.png'
+    var imgData = '/assets/img_poste/laposte.png'
     
      let col=[["Facture","Prestataire","Traitement","Date Prestation ","Charge IPM","Charge Agent","Montant Facture"]]
     let rows=[]
@@ -78,10 +92,18 @@ export class SituationPrestationComponent implements OnInit {
           let tmp = [liste.ipmFacture?.numerofacture, liste.ipmFacture?.ipm_prestataire.nom_prestataire, liste.ipm_prestation?.libelle, liste.ipmFacture.dateSaisie, liste.part_ipm, liste.part_patient, liste.montant_facture]
           rows.push(tmp)
           var ipm1=liste.ipm_employe?.nom
-
+          this.nom=liste.ipm_employe?.nom
+          this.prenom=liste.ipm_employe?.prenom
           var ipm2=liste.ipm_employe?.prenom
           var ipm3=liste.ipm_employe?.matricule
         }
+        var somme1=this.listPrestatio.reduce((sum,current)=>sum+current.part_ipm,0);
+        var somme2=this.listPrestatio.reduce((sum,current)=>sum+current.part_patient,0);
+        var somme3=this.listPrestatio.reduce((sum,current)=>sum+current.montant_facture,0);
+
+
+        let f=[["","","","Total ",somme1,somme2,somme3]]
+
       
   
     
@@ -89,34 +111,38 @@ export class SituationPrestationComponent implements OnInit {
       startY:95,
       head:col,
       body:rows,
+      foot:f,
        margin:{ horizontal:10},
        styles:{overflow:"linebreak"},
        bodyStyles:{valign:"top"},
        theme:"striped",
        didDrawPage: function(data){
         //this.bon.ipm_employe=this.message;
-        doc.addImage(imgData ,'JPEG',15,5,180,20)
+        doc.addImage(imgData ,'JPEG',15,5,30,30)
        doc.setFontSize(15)
        doc.text("",72,46)
       // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
       doc.setLineWidth(2)
       doc.setDrawColor("#3A6EA5")
       doc.rect(60,30,105,20)
-      doc.setFillColor(240,240,240)
-       doc.rect(13,65,185,23,'F')
+      //doc.setFillColor(240,240,240)
+       //doc.rect(13,65,185,23,'F')
        //doc.setFillColor(240,240,240)
        
        doc.setFontSize(15)
        doc.setTextColor("#3A6EA5")
        
-       doc.text("RELEVE PARTICIPANT",85,42)
+       doc.text("RELEVE  PARTICIPANT",85,42)
        //doc.text("POUR PRODUIT PHARMACEUTIQUE",70,45)
        doc.setTextColor("")
         const date=new Date()
-           doc.setFontSize(13)
-            doc.text("Dakar, le :",150,60)
+           doc.setFontSize(12)
+            doc.text("Dakar, le :",150,10)
+            doc.setFontSize(12)
+            doc.text("Institut de Prévoyance Maladie ",50,10)
+            doc.text("du personnel de la Poste ",60,17)
             
-        doc.text(date.toLocaleDateString("fr-FR"),172,60)
+        doc.text(date.toLocaleDateString("fr-FR"),172,10)
             doc.setFontSize(12)
            doc.text("Matricule Participant:",15,75)
             doc.text(ipm3,60,75)
@@ -128,9 +154,96 @@ export class SituationPrestationComponent implements OnInit {
        }
     });
     
-    doc.save("prestation.pdf");
+    doc.output("dataurlnewwindow")
     
   }
+  getremboursement(){
+    
+    let doc=new jsPDF();
+    var imgData = '/assets/img_poste/laposte.png'
+    
+     let col=[["Date Remboursement","Montant Remboursement"]]
+    let rows=[]
+      
+        //let tmp=[this.designation,this.nombre_article]
+        for (let liste of this.listRemboursement) {
+          let tmp = [liste.ipmRemboursement?.dateRemboursement,liste.montant]
+          rows.push(tmp)
+          var ipm1=liste.ipm_employe?.nom
+          this.nom=liste.ipm_employe?.nom
+          this.prenom=liste.ipm_employe?.prenom
+          var ipm2=liste.ipm_employe?.prenom
+          var ipm3=liste.ipm_employe?.matricule
+        }
+        var somme1=this.listRemboursement.reduce((sum,current)=>sum+current.montant,0);
+        
+
+        let f=[["Total ",somme1]]
+
+      
+  
+    
+     autoTable(doc,{
+      startY:95,
+      head:col,
+      body:rows,
+      foot:f,
+       margin:{ horizontal:10},
+       styles:{overflow:"linebreak"},
+       bodyStyles:{valign:"top"},
+       theme:"striped",
+       didDrawPage: function(data){
+        //this.bon.ipm_employe=this.message;
+        doc.addImage(imgData ,'JPEG',15,5,30,30)
+       doc.setFontSize(15)
+       doc.text("",72,46)
+      // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
+      doc.setLineWidth(2)
+      doc.setDrawColor("#3A6EA5")
+      doc.rect(60,30,105,20)
+      //doc.setFillColor(240,240,240)
+       //doc.rect(13,65,185,23,'F')
+       //doc.setFillColor(240,240,240)
+       
+       doc.setFontSize(15)
+       doc.setTextColor("#3A6EA5")
+       
+       doc.text("Relevé remboursement par participant",71,42)
+       //doc.text("POUR PRODUIT PHARMACEUTIQUE",70,45)
+       doc.setTextColor("")
+        const date=new Date()
+           doc.setFontSize(12)
+            doc.text("Dakar, le :",150,10)
+            doc.setFontSize(12)
+            doc.text("Institut de Prévoyance Maladie ",50,10)
+            doc.text("du personnel de la Poste ",60,17)
+            
+        doc.text( date.toLocaleDateString(),172,10)
+       
+            doc.setFontSize(12)
+           doc.text("Matricule Participant:",15,75)
+            doc.text(ipm3,60,75)
+          //  doc.text(ipm2,80,75) 
+            doc.text("Prenom & Nom:",15,85)
+            doc.text(""+ipm2 +" "+" "+" "+ipm1,60,85)
+            doc.setFontSize(12)
+          
+       }
+    });
+    
+    doc.output("dataurlnewwindow")
+  }
+
+
+
+
+
+
+
+
+
+
+
   
 
 
