@@ -81,7 +81,7 @@
                     <div class="col-md-3 form-group">
                       <div class="form-group">
                         <label class="bmd-label-floating">Numero Carnet:</label>
-                        {{message.idemp}}
+                        {{message.numero_carnet}}
                       </div>
                     </div>
                     <div class="col-md-3 form-group">
@@ -180,13 +180,21 @@
                     </mat-form-field>
                   </div>
                 </div>
-
-
                 <div class="modal-footer justify-content-center">
+                  <button mat-raised-button type="button" (click)="BonNow()" class="btn btn-success btn-round"
+                    data-dismiss="modal">
+                    Enregistrer</button>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button mat-raised-button type="button" (click)="upload()" class="btn btn-green btn-round" data-dismiss="modal">
+                    Exporter</button>
+                </div>
+
+                <!-- <div class="modal-footer justify-content-center">
                   <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal"
                     data-target="#noticeModal">Voir Bon Pharmaceutique</button>
 
-                </div>
+                </div> -->
                 <div>
                   <!-- <h4>{{message}} </h4> -->
                 </div>
@@ -300,12 +308,20 @@
 
 
 
-
                 <div class="modal-footer justify-content-center">
+                  <button mat-raised-button type="button" (click)="BonConjoint()" class="btn btn-success btn-round"
+                    data-dismiss="modal">
+                    Enregistrer</button>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button mat-raised-button type="button" (click)="uploadConjoint()" class="btn btn-green btn-round" data-dismiss="modal">
+                    Exporter</button>
+                </div>
+                <!-- <div class="modal-footer justify-content-center">
                   <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal"
                     data-target="#noticeConjoint"> Details Conjoint</button>
 
-                </div>
+                </div> -->
                 <div>
 
                 </div>
@@ -420,12 +436,20 @@
 
 
 
-
-                <div class="modal-footer justify-content-center">
+                                    <div class="modal-footer justify-content-center">
+                                      <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal" [disabled]="desactive"
+                                        (click)="BonEnfant()">Enregistrer
+                                      </button>
+                                      <button mat-raised-button type="button" (click)="uploadEnfant()" class=" btn btn-raised btn-round btn btn-danger btn-round"
+                                        >
+                                        Exporter</button>
+                    
+                                    </div>                     
+                <!-- <div class="modal-footer justify-content-center">
                   <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal"
                     data-target="#noticeenfant">Details Enfant</button>
 
-                </div>
+                </div> -->
                 <div>
                   <!-- <h4>{{message}} </h4> -->
                 </div>

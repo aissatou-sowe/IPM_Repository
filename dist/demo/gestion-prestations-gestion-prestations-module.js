@@ -148,7 +148,7 @@ var GestionPrestationsModule = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-6\">\r\n    <div class=\"card\">\r\n        <form>\r\n          <div class=\"card-header card-header-rose card-header-icon\">\r\n            <div class=\"card-icon\">\r\n              <i class=\"material-icons\">mail_outline</i>\r\n            </div>\r\n            <h4 class=\"card-title\">Prise en Compte des prestations</h4>\r\n          </div>\r\n            <div class=\"card-body\">\r\n              <!-- <mat-form-field class=\"example-full-width\">\r\n                 <input type=\"number\" matInput  id=\"code_prestation\" placeholder=\"Code Prestation*\"\r\n                  [(ngModel)]=\"prestation.code_prestation\" \r\n                  name=\"code_prestation\"> \r\n                 \r\n               </mat-form-field>-->\r\n                <mat-form-field class=\"example-full-width\">\r\n                  <input type=\"text\" matInput id=\"libelle\" placeholder=\"Libeelle*\" [(ngModel)]=\"prestation.libelle\"\r\n                   name=\"libelle\">\r\n                </mat-form-field>\r\n\r\n                <mat-form-field class=\"example-full-width\">\r\n                  <input type=\"number\" matInput id=\"taux_agrees\" placeholder=\"Taux Agrees *\"\r\n                  [(ngModel)]=\"prestation.taux_agrees\" name=\"taux_agrees\">\r\n                 \r\n                </mat-form-field>\r\n                <mat-form-field class=\"example-full-width\">\r\n                  <input type=\"number\" matInput id=\"taux_non_agrees\" [(ngModel)]=\"prestation.taux_non_agrees\" \r\n                  placeholder=\"Taux Non Agrees *\" name=\"taux_non_agrees\">\r\n                 \r\n                </mat-form-field>\r\n                <div class=\"col-md-6 form-group\">\r\n                  <mat-form-field>\r\n                    <mat-select placeholder=\"Prestataire\" name=\"ipm_prestataire\" [(ngModel)]=\"pres\">\r\n                      <mat-option *ngFor=\"let pre of prestataire\" [value]=\"pre.code_prestataire\">\r\n                        {{ pre.nom_prestataire}}\r\n                      </mat-option>\r\n                    </mat-select>\r\n                  </mat-form-field>   \r\n                </div>\r\n                <div class=\"col-md-6 form-group\">\r\n                  <mat-form-field>\r\n                    <mat-select placeholder=\"TypePrestataire\" name=\"ipm_type_prestataire\" [(ngModel)]=\"pres\"\r\n                     (selectionChange)=\"selectTypePres()\">\r\n                      <mat-option *ngFor=\"let pre of typeP\" [value]=\"pre.id_type_prestataire\">\r\n                        {{ pre.nom_type_prestaire}}\r\n                      </mat-option>\r\n                    </mat-select>\r\n                  </mat-form-field>   \r\n                </div>\r\n                <!-- <div class=\"category form-category\">* Required fields</div> -->\r\n                <div class=\"card-footer text-right\">\r\n                  <!-- <mat-checkbox class=\"example-margin mb-0\">Subscribe to newsletter</mat-checkbox> -->\r\n                  \r\n                  <button mat-raised-button type=\"submit\" class=\"btn btn-success\" (click)=\"onRegister()\">Enregistrer</button>\r\n                </div>\r\n              </div>\r\n        </form>\r\n    </div>\r\n\r\n</div>\r\n\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-6\">\r\n    <div class=\"card\">\r\n        <form>\r\n          <div class=\"card-header card-header-rose card-header-icon\">\r\n            <div class=\"card-icon\">\r\n              <i class=\"material-icons\">mail_outline</i>\r\n            </div>\r\n            <h4 class=\"card-title\">Prise en Compte des prestations</h4>\r\n          </div>\r\n            <div class=\"card-body\">          \r\n                <div class=\"col-md-6 form-group\">\r\n                  <mat-form-field>\r\n                    <mat-select placeholder=\"TypePrestataire\" name=\"ipm_type_prestataire\" [(ngModel)]=\"pres\"\r\n                     (selectionChange)=\"selectTypePres()\">\r\n                      <mat-option *ngFor=\"let pre of typepresta\" [value]=\"pre.id_type_prestataire\">\r\n                        {{ pre.nom_type_prestaire}}\r\n                      </mat-option>\r\n                    </mat-select>\r\n                  </mat-form-field>   \r\n                </div>\r\n                <div class=\"col-md-6 form-group\">\r\n                  <mat-form-field>\r\n<<<<<<< HEAD\r\n                    <mat-select placeholder=\"Prestataire\" name=\"ipm_prestataire\" [(ngModel)]=\"prest\">\r\n=======\r\n                    <mat-select placeholder=\"Prestataire\" name=\"ipm_prestataire\" [(ngModel)]=\"pres\">\r\n>>>>>>> 2f5e203e6e2e1ac9adabfe016a4e2cee816b6f5f\r\n                      <mat-option *ngFor=\"let pre of prestataire\" [value]=\"pre.code_prestataire\">\r\n                        {{ pre.nom_prestataire}}\r\n                      </mat-option>\r\n                    </mat-select>\r\n                  </mat-form-field>   \r\n                </div>\r\n                \r\n                <!-- <div class=\"category form-category\">* Required fields</div> -->\r\n                <div class=\"card-footer text-right\">\r\n                  <!-- <mat-checkbox class=\"example-margin mb-0\">Subscribe to newsletter</mat-checkbox> -->\r\n                  \r\n                  <button mat-raised-button type=\"submit\" class=\"btn btn-success\" (click)=\"onRegister()\">Enregistrer</button>\r\n                </div>\r\n              </div>\r\n        </form>\r\n    </div>\r\n\r\n</div>\r\n\r\n");
 
 /***/ }),
 
@@ -366,6 +366,8 @@ var AjoutPrestationComponent = /** @class */ (function () {
     }
     AjoutPrestationComponent.prototype.ngOnInit = function () {
         this.getPrestataire();
+        this.getTypeP();
+        this.getTypeP();
     };
     AjoutPrestationComponent.prototype.onRegister = function () {
         var _this = this;
@@ -378,7 +380,7 @@ var AjoutPrestationComponent = /** @class */ (function () {
         var _this = this;
         this.prestation_service.getAllPestataires().subscribe(function (pre) {
             _this.prestataire = pre;
-            _this.temptype = pre;
+            //this.temptype=pre
         });
     };
     AjoutPrestationComponent.prototype.getTypeP = function () {
@@ -386,14 +388,15 @@ var AjoutPrestationComponent = /** @class */ (function () {
         this.prestation_service.getTypePrestataire().subscribe(function (serv) {
             // console.log(serv);
             _this.typepresta = serv;
-            _this.temptype = serv;
-            // console.log(this.service)
+            //this.temptype=serv
+            console.log(_this.typepresta);
+            console.log(_this.typepresta);
         });
     };
     AjoutPrestationComponent.prototype.selectTypePres = function () {
         var _this = this;
         this.typepresta = this.temptype;
-        this.typepresta = this.typepresta.filter(function (serv) { return serv.ipm_type_prestataire.code_prestataire == _this.pres; });
+        this.prestataire = this.typepresta.filter(function (serv) { return serv.ipm_type_prestataire.code_prestataire == _this.pres; });
         console.log(this.pres);
         //  console.log(this.service)
     };

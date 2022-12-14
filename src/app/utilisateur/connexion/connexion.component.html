@@ -82,9 +82,9 @@
         </div>
       </div>
       <div class="card-body ">
-        
-        </div>
-        <!-- <div class="col-md-12">
+
+      </div>
+      <!-- <div class="col-md-12">
                 <div class="card">
                   <div class="card-header card-header-icon">
                       <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
@@ -106,7 +106,6 @@
                                      <button style="margin-bottom: 10px; font-size:17px;" data-target="#noticeModal" class="w-100" data-toggle="modal">Nouveau Role</button>
                                        <button style="margin-bottom: 10px; font-size:17px;" data-target="#noticeModal" class="w-100" data-toggle="modal">Attribution de Role</button> 
 
-<<<<<<< HEAD
                                   </tr>
                               </tbody>
                           </table>
@@ -116,17 +115,15 @@
               </div>
           </div>
       </div>
-      <!--modal list service-->
-     
-      <!--fin modal-->
-     
+      modal list service-->
 
-=======
-      </div>
+      <!--fin modal-->
+
+
     </div>
->>>>>>> 3208e413135e7fb9e79159250a31a3ff0a2617e8
   </div>
 </div>
+
 
 <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -215,7 +212,8 @@
 </div>
 
 <!--modal role-->
-<div class="modal fade" id="noticeModalrole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="noticeModalrole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" style="width: 900px; margin-left:-3cm;margin-top: 3cm;">
       <div class="modal-header" style="background-color: whitesmoke;">
@@ -232,13 +230,13 @@
 
         <form class="theme-form">
           <div class="row bordered">
-            
+
           </div>
           <div class="row">
             <div class="col-md-6">
               <mat-form-field class="example-full-width">
-                <input matInput type="text" class="form-control" id="typeRole" placeholder="nom "
-                  [(ngModel)]="typeRole" name="typeRole" required>
+                <input matInput type="text" class="form-control" id="typeRole" placeholder="nom " [(ngModel)]="typeRole"
+                  name="typeRole" required>
 
               </mat-form-field>
             </div>
@@ -250,10 +248,10 @@
               </mat-form-field>
             </div>
 
-            
+
           </div>
-          
-          
+
+
         </form>
         <div class="modal-footer justify-content-center">
           <button mat-raised-button data-dismiss="modal" (click)="AjoutRole()" class="btn btn-success">Ajouter</button>
@@ -268,7 +266,8 @@
 
 <!-- fin modal role-->
 <!--  modal  roleUser-->
-<div class="modal fade" id="noticeModalroleUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="noticeModalroleUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" style="width: 900px; margin-left:-3cm;margin-top: 3cm;">
       <div class="modal-header" style="background-color: whitesmoke;">
@@ -283,38 +282,38 @@
       </div>
       <div class="modal-body" style="width: 900px;">
 
-        
+
 
         <form>
 
           <div class="row">
-          
-  
-          <div class="col-md-6 form-group" style="margin-top: -10px;" >
-            <mat-form-field>
-              <mat-select placeholder="Utilisateur" formControlName="Utilisateur" class="form-control" id="Utilisateur" 
-                  >
-                <mat-option *ngFor="let user of listUser" [value]="user.email" (click)="selectUser(user)">
-                  {{ user.email }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+
+
+            <div class="col-md-6 form-group" style="margin-top: -10px;">
+              <mat-form-field>
+                <mat-select placeholder="Utilisateur" formControlName="Utilisateur" class="form-control"
+                  id="Utilisateur">
+                  <mat-option *ngFor="let user of listUser" [value]="user.email" (click)="selectUser(user)">
+                    {{ user.email }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 form-group" style="margin-top: -10px;">
+              <mat-form-field>
+                <mat-select placeholder=" selectionner Role" formControlName="role" class="form-control" id="role">
+                  <mat-option *ngFor="let role of listRole" [value]="role.typeRole" (click)="selectRole(role)">
+                    {{ role.typeRole }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
           </div>
-          <div class="col-md-6 form-group" style="margin-top: -10px;">
-            <mat-form-field>
-              <mat-select placeholder=" selectionner Role" formControlName="role" class="form-control" id="role" 
-                  >
-              <mat-option *ngFor="let role of listRole" [value]="role.typeRole" (click)="selectRole(role)">
-                {{ role.typeRole }}
-              </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          
-        </div>
         </form>
         <div class="modal-footer justify-content-center">
-          <button mat-raised-button data-dismiss="modal" (click)="AjoutUserRole()" class="btn btn-success">Ajouter</button>
+          <button mat-raised-button data-dismiss="modal" (click)="AjoutUserRole()"
+            class="btn btn-success">Ajouter</button>
         </div>
 
 
@@ -323,5 +322,3 @@
   </div>
 </div>
 <!-- fin modal roleUser-->
-
-

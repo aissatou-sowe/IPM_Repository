@@ -36,7 +36,7 @@
                         <tr *ngFor=" let fac of liste">
                             <td ><b>{{fac.numerofacture}}</b></td>
                         <td ><b>{{fac.ipm_prestataire.nom_prestataire}}</b></td>
-                        <td class="text-center"><b>{{fac.date_facture | date}}</b></td>
+                        <td class="text-center"><b>{{fac.dateFacture | date}}</b></td>
 
                       <td class="text-center"><b>{{fac.montantTotal | number:'.2'}}</b></td>
                     <td class="text-center"><b>{{fac.part_ipm | number:'.2'}}</b></td>

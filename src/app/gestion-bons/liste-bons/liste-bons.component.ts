@@ -384,10 +384,10 @@ console.log(this.numBEm);
   
   this.addPrestataire.code_prestataire=this.idp;
   this.bon.ipm_prestataire=this.prestatair;
-  // this.bon.numero_bon_pharmacie=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-  // +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-  // '' +this.ageE);
-  console.log(this.bon.numero_bon_pharmacie);
+  this.bon.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+  +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+  '' +this.ageE);
+ console.log(this.bon.numeroBon);
 
   // this.bont.AjoutBon(this.b).subscribe(
   //   (data)=>{this.message=data});
@@ -435,6 +435,9 @@ public BonConjoint(){
    this.bon.nombre_article=this.nombre_article;
    //this.bon.prix_unitaire=this.prix_unitaire;
    this.bon.ordonnance=this.selectOrdonne.name
+   this.bon.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.Ageconjoint);
     this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(
         (data)=>{ this.router.navigate(['/gestion-bons/Listebons'])
       });
@@ -460,6 +463,9 @@ public BonEnfant(){
    console.log(this.b);
    console.log( this.b.ipm_employe);
    console.log(this.b.ipm_prestataire);
+   this.bon.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEnfant);
  // this.router.navigate(['/gestion-bons/Listebons']);
  console.log(this.designation,this.nombre_article);
     this.bon.designation=this.designation;
@@ -501,7 +507,9 @@ upload(){
    var Ncarnet=this.message.numero_carnet
    var ipm4=this.message.ipmService?.type_service
    var ipm=this.message.matricule
-   var numBon=this.bon.numero_bon_pharmacie
+   var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.ageE);
    
   autoTable(doc,{
     startY:100,

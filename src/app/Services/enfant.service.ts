@@ -31,7 +31,7 @@ export class EnfantService {
    
   }
   public modifEnfant(enfant:Enfant){
-    return this.http.put(environment.URL+'putenfant',enfant,{responseType: 'text' as 'json'})
+    return this.http.put(environment.URL+'putenfantsansPhoto',enfant,{responseType: 'text' as 'json'})
 
   }
   

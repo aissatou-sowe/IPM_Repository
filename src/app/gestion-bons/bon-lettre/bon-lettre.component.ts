@@ -61,7 +61,7 @@ export class BonLettreComponent implements OnInit {
    matr:string;
    dateform =new Date();
    b:IPM_Bon=new IPM_Bon(0,"",null,null,null,null,null,null);
-   bonlettre:IPM_Bon_Lettre_Garantie = new IPM_Bon_Lettre_Garantie(0,"","","",null,null,null,null,null,null,null)
+   bonlettre:IPM_Bon_Lettre_Garantie = new IPM_Bon_Lettre_Garantie(0,"","","",null,null,null,null,null,null,null,null)
    nomm:string;
    p: any;
    addconjoint:Conjoint;
@@ -76,6 +76,7 @@ export class BonLettreComponent implements OnInit {
   AgeConjoint: number;
   AgeEmploye: number;
   desactive:boolean=false
+  maDate: Date = new Date();
   ///////////////////////
  
   constructor(private emp_service:EmployeService,private router: Router,
@@ -245,6 +246,9 @@ public BonNowLettre(){
     
   }
   this.bonlettre.ordonnance=this.selectOrdonne.name
+  this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
    this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
     (data)=>{ this.router.navigate(['/gestion-bons/BonLettre'])
   });
@@ -275,6 +279,9 @@ public BonConjoint(){
    console.log(this.b.ipm_prestataire);
   this.bonlettre.ordonnance=this.selectOrdonne.name
    //this.bon.prix_unitaire=this.prix_unitaire;
+   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeConjoint);
     this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
         (data)=>{ this.router.navigate(['/gestion-bons/BonLettre'])
       });
@@ -302,6 +309,9 @@ public BonEnfant(){
    console.log(this.b.ipm_prestataire);
 
 this.bonlettre.ordonnance=this.selectOrdonne.name
+this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEnfant);
     this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
         (data)=>{ this.router.navigate(['/gestion-bons/BonLettre'])
       });

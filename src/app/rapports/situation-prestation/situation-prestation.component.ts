@@ -82,7 +82,9 @@ export class SituationPrestationComponent implements OnInit {
    }
    imprimer(){
     let doc=new jsPDF();
-    var imgData = '/assets/img_poste/laposte.png'
+    //var imgData = '/assets/img_poste/laposte.png'
+    var imgData ='/ipm-fronte/assets/img_poste/laposte.png'
+
     
      let col=[["Facture","Prestataire","Traitement","Date Prestation ","Charge IPM","Charge Agent","Montant Facture"]]
     let rows=[]
@@ -160,7 +162,9 @@ export class SituationPrestationComponent implements OnInit {
   getremboursement(){
     
     let doc=new jsPDF();
-    var imgData = '/assets/img_poste/laposte.png'
+    //var imgData = '/assets/img_poste/laposte.png'
+    var imgData ='/ipm-fronte/assets/img_poste/laposte.png'
+
     
      let col=[["Date Remboursement","Montant Remboursement"]]
     let rows=[]

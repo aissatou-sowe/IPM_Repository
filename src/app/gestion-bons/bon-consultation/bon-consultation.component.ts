@@ -73,6 +73,7 @@ export class BonConsultationComponent implements OnInit {
   numBEm: string;
   numBC: string;
   numBEnf: string;
+  maDate: Date = new Date();
   constructor(private emp_service:EmployeService,private router: Router,private pres_service:PrestataireService,
     private route : ActivatedRoute,private conj_service:ConjointService,private enf_service:EnfantService,
     private datePipe:DatePipe,private Serviceprestation: PrestationService,
@@ -307,6 +308,9 @@ public BonConsultation(){
   }
   //this.bonlettre.ordonnance=this.selectOrdonne.name
   console.log(this.bonlettre);
+  this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
    this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
     (data)=>{ 
   });
@@ -337,6 +341,9 @@ public BonConjoint(){
    //console.log(this.b.ipm_prestataire);
  // this.bonlettre.ordonnance=this.selectOrdonne.name
    //this.bon.prix_unitaire=this.prix_unitaire;
+   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeConjoint);
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
         (data)=>{
       });
@@ -363,6 +370,9 @@ public BonEnfant(){
    //console.log(this.b.ipm_prestataire);
    this.bonlettre.dateEtablissement=new Date();
 //this.bonlettre.ordonnance=this.selectOrdonne.name
+this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEnfant);
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
         (data)=>{ 
       });

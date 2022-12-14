@@ -435,6 +435,11 @@ export class CarnetEmployeComponent implements OnInit {
   }
   //Ajout du Conjoint de l'employé
   public ConjointNow() {
+    this.conjoint.nom_conjoint=this.nom_conjoint
+    this.conjoint.prenom_conjoint=this.prenom_conjoint
+    this.conjoint.telephone=this.telephone
+    this.conjoint.lieu_naiss_conj=this.lieu_naiss_conj
+    this.conjoint.date_naiss_conj=this.date_naiss_conj
 
     this.conjoint.ipm_employe = JSON.parse(JSON.stringify(this.currentemploye));
     console.log(this.conjoint);

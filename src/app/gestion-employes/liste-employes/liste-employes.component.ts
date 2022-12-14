@@ -263,11 +263,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
  }*/
   public EmployeNow() {
     
-    if (this.employe.nom && this.employe.prenom && this.employe.date_nais
-      && this.employe.lieu_nais && this.employe.date_recrutement && this.employe.adresse_domicile 
-      && this.employe.situation_familial && this.employe.ipmEntity && this.employe.sexe
-      && this.employe.ipmService && this.employe.reference ) {
-      
+    
     
     this.addService.idService = this.servi;
     this.employe.ipmService= JSON.parse(JSON.stringify(this.addService));
@@ -296,6 +292,11 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     this.employe.photo = this.selectedFile.name;
     this.employe.justificatif=this.selectJustif.name;
     console.log(this.employe);
+    if (this.employe.nom && this.employe.prenom && this.employe.date_nais
+      && this.employe.lieu_nais && this.employe.date_recrutement && this.employe.adresse_domicile 
+      && this.employe.situation_familial && this.employe.ipmEntity && this.employe.sexe
+      && this.employe.ipmService && this.employe.reference ) {
+      
 
     this.emp_service.AjoutEmploye(this.employe).subscribe(
       (data) => {
@@ -424,7 +425,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
 
     var inp = String.fromCharCode(event.keyCode);
     // Allow numbers, alpahbets, space, underscore
-    if (/[A-Z/0-9]/.test(inp)) {
+    if (/[A-Z0-9]/.test(inp)) {
       return true;
     } else {
       event.preventDefault();

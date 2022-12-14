@@ -141,7 +141,7 @@ __webpack_require__.r(__webpack_exports__);
 var Facture = /** @class */ (function () {
     function Facture(idfacture, 
     // public code_acte?:string,
-    numerofacture, date_facture, date_saisie, 
+    numerofacture, dateFacture, dateSaisie, 
     // public matricule?:string,
     // public montant_facture?:number,
     // public taux_ipm?:number,
@@ -155,8 +155,8 @@ var Facture = /** @class */ (function () {
     montantTotal) {
         this.idfacture = idfacture;
         this.numerofacture = numerofacture;
-        this.date_facture = date_facture;
-        this.date_saisie = date_saisie;
+        this.dateFacture = dateFacture;
+        this.dateSaisie = dateSaisie;
         this.part_ipm = part_ipm;
         this.part_patient = part_patient;
         this.ipm_prestataire = ipm_prestataire;
@@ -179,7 +179,7 @@ var Facture = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<style>\r\n    tr{font-weight: bold;}\r\n</style>\r\n<div class=\"col-md-12 mt-5\">\r\n    <div class=\"card\">\r\n        <div class=\"card-header card-header-icon\" >\r\n            <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n              <i class=\"material-icons\">list</i>\r\n            </div>\r\n            <h2 style=\"background-color:whitesmoke; color: black; pading: 2px; width: 100%;\"> Facture numero :{{numero}} \r\n                <button mat-raised-button  style=\"float: right;\" class=\"btn btn-fill btn-success\" data-dismiss=\"modal\" (click)=\"CertifierEmploye()\"\r\n                *ngIf=\"certifier!=true else test\">Certifier\r\n                </button>\r\n            \r\n            \r\n            \r\n            <ng-template #test>\r\n                <h4 class=\" text-white text-center bg-success p-2\" style=\"float: right; font-size: 20px;\">\r\n                    <i class=\"material-icons\">checked</i>\r\n                    la facture est déja certfiée\r\n                </h4>\r\n            </ng-template> </h2>\r\n\r\n            \r\n          </div>\r\n        <div class=\"material-datatable\">\r\n            <div class=\"card-body\">\r\n\r\n\r\n\r\n                <table id=\"datatable\" class=\"table table-hover table-bordered\" cellspacing=\"0\"\r\n                    width=\"100%\" style=\"width:100%\">\r\n\r\n                    <thead>\r\n\r\n                        <tr style=\"background-color: whitesmoke\">\r\n                            \r\n                            <th class=\"text-center\" cope=\"col\" ><b>Matricule</b></th>\r\n                            <th class=\"text-center\" cope=\"col\"><b>Prenom</b></th>\r\n                            <th class=\"text-center\" cope=\"col\"><b>Nom</b></th>\r\n                            <th class=\"text-center\" cope=\"col\"><b>Prestation</b></th>\r\n                            <!-- <th cope=\"col\">Code Prestation</th> -->\r\n\r\n                            <th class=\"text-center\" cope=\"col\"><b>Montant Facture</b></th>\r\n                            <th class=\"text-center\" cope=\"col\"><b>Charge_ipm</b></th>\r\n                            <th class=\"text-center\" cope=\"col\"><b>Charge_agent</b></th>\r\n                         <!-- <th class=\"text-center\" cope=\"col\"><b>Date</b></th> -->\r\n                            <th class=\"text-center\" cope=\"col\"><b>Action</b></th>\r\n\r\n                        </tr>\r\n                    </thead>\r\n\r\n                    <tbody>\r\n                        <tr *ngFor=\"let fact of listFactures\">\r\n                            <td class=\"text-center\">{{fact.ipm_employe?.matricule}}</td>\r\n                            <td class=\"text-center\">{{fact.ipm_employe?.prenom}}</td>\r\n                            <td class=\"text-center\">{{fact.ipm_employe?.nom}}</td>\r\n                            <td class=\"text-center\">{{fact.ipm_prestation?.libelle}}</td>\r\n                            <!-- <td>{{fac.ipm_prestation?.code_prestation}}</td>\r\n                         -->\r\n                            <td class=\"text-center\">{{fact.montant_facture | number:'.2'}}</td>\r\n                            <td class=\"text-center\">{{fact.part_ipm | number:'.2'}}</td>\r\n                            <td class=\"text-center\">{{fact.part_patient | number:'.2'}}</td>\r\n                            <!-- <td class=\"text-center\">{{fact.date_facture}}</td> -->\r\n                            <td class=\"td_actions text-right\">\r\n                                <button mat-raised-button (click)=\"getFactureById(fact)\" type=\"button\"\r\n                                    class=\"btn btn-round btn-xs\" id=\"edit\">\r\n                                    <i class=\"material-icons\" data-toggle=\"modal\"\r\n                                        data-target=\"#Modal2\">help</i></button>\r\n                            </td>\r\n                            <!-- <td>\r\n                            <div [ngSwitch]=\"fac.certifier\" *ngIf=\"\">\r\n                                <div *ngSwitchCase=\"true\">\r\n                                    \r\n                                  <mat-checkbox checked=\"true\"></mat-checkbox>\r\n                                </div>\r\n                                \r\n                                <div *ngSwitchDefault>\r\n                                    \r\n                                  <mat-checkbox (click)=\"getCertified(fac)\"></mat-checkbox>\r\n                                </div>\r\n                            </div>\r\n                          \r\n                        </td> -->\r\n\r\n                        </tr>\r\n                    </tbody>\r\n\r\n\r\n                </table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n<button mat-raised-button class=\"btn btn-fill btn-danger\"  style=\"margin-left: 28.5cm;\" (click)=\"retourner()\"\r\n    >retour\r\n</button>\r\n\r\n\r\n\r\n<!--formulaire-->\r\n<div class=\"modal fade\" id=\"Modal2\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header bg-success\">\r\n                <h4 class=\"modal-title text-white\" id=\"Modal2\" style=\"font-weight:bold;\">Detail\r\n                </h4>\r\n                <button mat-button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n                    <i class=\"material-icons\">close</i>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-12 col-sm-offset-2\">\r\n                        <form>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"nom\">nom :{{nom}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"prenom\">prenom :\r\n                                        {{prenom}}</label>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Matricule\">Matricule\r\n                                        :{{matricule}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Prestation\">Prestation :\r\n                                        {{prestation}}</label>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Prestataire\">Prestataire\r\n                                        {{prestataire}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Date de Facture\">Date de\r\n                                        Facture : {{dateFacture}}</label>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Date d'enregistrement\">Date\r\n                                        d'enregistremen: {{dateEnregistrement}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Montant\">Montant\r\n                                        :{{montant}}</label>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Part IPM\">Part IPM\r\n                                        :{{part_ipm}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Part Patient\">Part Patient\r\n                                        :{{part_patient}}</label>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Solde\">SOLDE\r\n                                        :{{solde}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Cumul Charge\">Cumul Charge\r\n                                        :{{cumulCharge}}</label>\r\n\r\n                                </div>\r\n                            </div>\r\n\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n<!--end formulaire-->");
+/* harmony default export */ __webpack_exports__["default"] = ("<style>\r\n    tr{font-weight: bold;}\r\n</style>\r\n<div class=\"col-md-12 mt-5\">\r\n    <div class=\"card\">\r\n        <div class=\"card-header card-header-icon\" >\r\n            <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n              <i class=\"material-icons\">list</i>\r\n            </div>\r\n            <h2 style=\"background-color:whitesmoke; color: black; pading: 2px; width: 100%;\"> Facture numero :{{numero}} \r\n                <button mat-raised-button  style=\"float: right;\" class=\"btn btn-fill btn-success\" data-dismiss=\"modal\" (click)=\"CertifierEmploye()\"\r\n                *ngIf=\"certifier!=true else test\">Certifier\r\n                </button>\r\n            \r\n            \r\n            \r\n            <ng-template #test>\r\n                <h4 class=\" text-white text-center bg-success p-2\" style=\"float: right; font-size: 20px;\">\r\n                    <i class=\"material-icons\">checked</i>\r\n                    la facture est déja certfiée\r\n                </h4>\r\n            </ng-template> </h2>\r\n\r\n            \r\n          </div>\r\n        <div class=\"material-datatable\">\r\n            <div class=\"card-body\">\r\n\r\n\r\n\r\n                <table id=\"datatable\" class=\"table table-hover table-bordered\" cellspacing=\"0\"\r\n                    width=\"100%\" style=\"width:100%\">\r\n\r\n                    <thead>\r\n\r\n                        <tr style=\"background-color: whitesmoke\">\r\n                            \r\n                            <th class=\"text-center\" cope=\"col\" ><b>Matricule</b></th>\r\n                            <th class=\"text-center\" cope=\"col\"><b>Prenom</b></th>\r\n                            <th class=\"text-center\" cope=\"col\"><b>Nom</b></th>\r\n                            <th class=\"text-center\" cope=\"col\"><b>Prestation</b></th>\r\n                            <!-- <th cope=\"col\">Code Prestation</th> -->\r\n\r\n                            <th class=\"text-center\" cope=\"col\"><b>Montant Facture</b></th>\r\n                            <th class=\"text-center\" cope=\"col\"><b>Charge_ipm</b></th>\r\n                            <th class=\"text-center\" cope=\"col\"><b>Charge_agent</b></th>\r\n                         <!-- <th class=\"text-center\" cope=\"col\"><b>Date</b></th> -->\r\n                            <th class=\"text-center\" cope=\"col\"><b>Action</b></th>\r\n\r\n                        </tr>\r\n                    </thead>\r\n\r\n                    <tbody>\r\n                        <tr *ngFor=\"let fact of listFactures\">\r\n                            <td class=\"text-center\">{{fact.ipm_employe?.matricule}}</td>\r\n                            <td class=\"text-center\">{{fact.ipm_employe?.prenom}}</td>\r\n                            <td class=\"text-center\">{{fact.ipm_employe?.nom}}</td>\r\n                            <td class=\"text-center\">{{fact.ipm_prestation?.libelle}}</td>\r\n                            <!-- <td>{{fac.ipm_prestation?.code_prestation}}</td>\r\n                         -->\r\n                            <td class=\"text-center\">{{fact.montant_facture | number:'.2'}}</td>\r\n                            <td class=\"text-center\">{{fact.part_ipm | number:'.2'}}</td>\r\n                            <td class=\"text-center\">{{fact.part_patient | number:'.2'}}</td>\r\n                            <!-- <td class=\"text-center\">{{fact.date_facture}}</td> -->\r\n                            <td class=\"td_actions text-right\">\r\n                                <button mat-raised-button (click)=\"getFactureById(fact)\" type=\"button\"\r\n                                    class=\"btn btn-round btn-xs\" id=\"edit\">\r\n                                    <i class=\"material-icons\" data-toggle=\"modal\"\r\n                                        data-target=\"#Modal2\">help</i></button>\r\n                                        \r\n                                             \r\n                            </td>\r\n                            <!-- <td>\r\n                            <div [ngSwitch]=\"fac.certifier\" *ngIf=\"\">\r\n                                <div *ngSwitchCase=\"true\">\r\n                                    \r\n                                  <mat-checkbox checked=\"true\"></mat-checkbox>\r\n                                </div>\r\n                                \r\n                                <div *ngSwitchDefault>\r\n                                    \r\n                                  <mat-checkbox (click)=\"getCertified(fac)\"></mat-checkbox>\r\n                                </div>\r\n                            </div>\r\n                          \r\n                        </td> -->\r\n\r\n                        </tr>\r\n                    </tbody>\r\n                \r\n\r\n                </table>\r\n                <button mat-raised-button class=\"btn btn-fill btn-success btn-round\" \r\n                style=\"margin-right: 28.5cm;\" (click)=\"imprimerfacture()\">imprimer\r\n               </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n<button mat-raised-button class=\"btn btn-fill btn-danger\"  style=\"margin-left: 28.5cm;\" (click)=\"retourner()\"\r\n    >retour\r\n</button>\r\n\r\n\r\n\r\n<!--formulaire-->\r\n<div class=\"modal fade\" id=\"Modal2\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header bg-success\">\r\n                <h4 class=\"modal-title text-white\" id=\"Modal2\" style=\"font-weight:bold;\">Detail\r\n                </h4>\r\n                <button mat-button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n                    <i class=\"material-icons\">close</i>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-12 col-sm-offset-2\">\r\n                        <form>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"nom\">nom :{{nom}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"prenom\">prenom :\r\n                                        {{prenom}}</label>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Matricule\">Matricule\r\n                                        :{{matricule}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Prestation\">Prestation :\r\n                                        {{prestation}}</label>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Prestataire\">Prestataire\r\n                                        {{prestataire}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Date de Facture\">Date de\r\n                                        Facture : {{dateFacture}}</label>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Date d'enregistrement\">Date\r\n                                        d'enregistremen: {{dateEnregistrement}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Montant\">Montant\r\n                                        :{{montant}}</label>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Part IPM\">Part IPM\r\n                                        :{{part_ipm}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Part Patient\">Part Patient\r\n                                        :{{part_patient}}</label>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Solde\">SOLDE\r\n                                        :{{solde}}</label>\r\n\r\n                                </div>\r\n                                <div class=\"form-group col-md-2\"></div>\r\n                                <div class=\"form-group col-md-5\">\r\n                                    <label style=\"font-weight:bold;\" for=\"Cumul Charge\">Cumul Charge\r\n                                        :{{cumulCharge}}</label>\r\n\r\n                                </div>\r\n                            </div>\r\n\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n<!--end formulaire-->");
 
 /***/ }),
 
@@ -197,8 +197,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _certification_component_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./certification.component.css */ "FC1X");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var src_app_Services_facture_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/Services/facture.service */ "0WQY");
-/* harmony import */ var _Models_IPM_Facture__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Models/IPM_Facture */ "Uzns");
+/* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jspdf */ "i680");
+/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jspdf-autotable */ "DaQG");
+/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jspdf_autotable__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var src_app_Services_facture_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/Services/facture.service */ "0WQY");
+/* harmony import */ var _Models_IPM_Facture__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Models/IPM_Facture */ "Uzns");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -214,6 +217,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var CertificationComponent = /** @class */ (function () {
     function CertificationComponent(fact_service, route, router) {
         this.fact_service = fact_service;
@@ -223,7 +228,7 @@ var CertificationComponent = /** @class */ (function () {
         this.isCheik = false;
         this.listEmploie = [];
         this.listCertifier = [];
-        this.facture = new _Models_IPM_Facture__WEBPACK_IMPORTED_MODULE_5__["Facture"]();
+        this.facture = new _Models_IPM_Facture__WEBPACK_IMPORTED_MODULE_7__["Facture"]();
     }
     CertificationComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -242,6 +247,7 @@ var CertificationComponent = /** @class */ (function () {
                         [10, 25, 50, "All"]
                     ],
                     responsive: true,
+                    retrieve: true,
                     language: {
                         search: "_INPUT_",
                         searchPlaceholder: "Recherche",
@@ -279,9 +285,9 @@ var CertificationComponent = /** @class */ (function () {
         this.facture.certifier = true;
         console.log(this.facture);
         //a revoir apres la présentattion
-        //this.fact_service.UpdateFacture(this.facture).subscribe(
-        //  (data)=>{}
-        // )
+        this.fact_service.UpdateFacture(this.facture).subscribe(function (data) {
+            _this.ngOnInit();
+        });
         // this.fact_service.updateOnEmploye(this.chargeEmploie).subscribe(
         //  (data)=>{
         console.log(this.listFactureCertif);
@@ -387,7 +393,7 @@ var CertificationComponent = /** @class */ (function () {
         // const color = Math.floor((Math.random() * 6) + 1);
         $.notify({
             icon: 'notifications',
-            message: '<b> enregistrement fait avec succes  </b> :'
+            message: '<b> facture  certifié avec succès </b> :'
         }, {
             type: type[1],
             timer: 13000,
@@ -407,8 +413,68 @@ var CertificationComponent = /** @class */ (function () {
                 '</div>'
         });
     };
+    ///////////////////////// Imprimer Duplicata facture
+    CertificationComponent.prototype.imprimerfacture = function () {
+        var _a, _b, _c, _d, _e;
+        console.log(this.listFactures);
+        var doc = new jspdf__WEBPACK_IMPORTED_MODULE_4__["default"]();
+        //var imgData = '/assets/img_poste/laposte.png'
+        var imgData = '/ipm-fronte/assets/img_poste/laposte.png';
+        var col = [["Matricule", "Prenom", "Nom", "Prestation", "Montant Facture", "Charge IPM", "Charge Agent"]];
+        var rows = [];
+        for (var _i = 0, _f = this.listFactures; _i < _f.length; _i++) {
+            var factemp = _f[_i];
+            var tmp = [(_a = factemp.ipm_employe) === null || _a === void 0 ? void 0 : _a.matricule, (_b = factemp.ipm_employe) === null || _b === void 0 ? void 0 : _b.prenom, (_c = factemp.ipm_employe) === null || _c === void 0 ? void 0 : _c.nom, (_d = factemp.ipm_prestation) === null || _d === void 0 ? void 0 : _d.libelle, factemp.montant_facture, factemp.part_ipm, factemp.part_patient];
+            rows.push(tmp);
+            var prestataire = (_e = factemp.ipmFacture) === null || _e === void 0 ? void 0 : _e.ipm_prestataire.nom_prestataire;
+        }
+        var somme = this.listFactures.reduce(function (sum, current) { return sum + current.montant_facture; }, 0);
+        var sommeCharagent = this.listFactures.reduce(function (sum, current) { return sum + current.part_ipm; }, 0);
+        var sommeChargeIPM = this.listFactures.reduce(function (sum, current) { return sum + current.part_patient; }, 0);
+        console.log(somme);
+        var f = [["", "", "", "Total Montants", somme, sommeCharagent, sommeChargeIPM]];
+        var num = this.numero;
+        console.log(num);
+        jspdf_autotable__WEBPACK_IMPORTED_MODULE_5___default()(doc, {
+            startY: 75,
+            head: col,
+            body: rows,
+            foot: f,
+            margin: { horizontal: 10 },
+            styles: { overflow: "linebreak" },
+            bodyStyles: { valign: "top" },
+            theme: "striped",
+            didDrawPage: function (data) {
+                //this.bon.ipm_employe=this.message;
+                doc.addImage(imgData, 'JPEG', 15, 5, 30, 30);
+                doc.setFontSize(15);
+                doc.text("", 72, 46);
+                // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
+                doc.setLineWidth(2);
+                doc.setDrawColor("#3A6EA5");
+                doc.rect(60, 30, 100, 15);
+                doc.setFillColor(240, 240, 240);
+                //  doc.rect(13,40,185,32,'F')
+                //  doc.setFillColor(240,240,240)
+                doc.setFontSize(15);
+                doc.setTextColor("#3A6EA5");
+                doc.text("Duplicata Facture", 77, 40);
+                doc.setTextColor("");
+                var date = new Date();
+                doc.setFontSize(13);
+                doc.text("Dakar, le :", 150, 18);
+                doc.text("Numero Facture:", 15, 60);
+                doc.text('' + num, 50, 60);
+                doc.text("Prestataire:", 15, 72);
+                doc.text("" + prestataire, 40, 72);
+                doc.text(date.toLocaleDateString("fr-FR"), 172, 18);
+                doc.setFontSize(12);
+            }
+        });
+        doc.output('dataurlnewwindow');
+    };
     CertificationComponent.ctorParameters = function () { return [
-        { type: src_app_Services_facture_service__WEBPACK_IMPORTED_MODULE_4__["FactureService"] },
+        { type: src_app_Services_facture_service__WEBPACK_IMPORTED_MODULE_6__["FactureService"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
     ]; };
@@ -418,7 +484,7 @@ var CertificationComponent = /** @class */ (function () {
             template: _raw_loader_certification_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
             styles: [_certification_component_css__WEBPACK_IMPORTED_MODULE_1__["default"]]
         }),
-        __metadata("design:paramtypes", [src_app_Services_facture_service__WEBPACK_IMPORTED_MODULE_4__["FactureService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        __metadata("design:paramtypes", [src_app_Services_facture_service__WEBPACK_IMPORTED_MODULE_6__["FactureService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], CertificationComponent);
     return CertificationComponent;
 }());

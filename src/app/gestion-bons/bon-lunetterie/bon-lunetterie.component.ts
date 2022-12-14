@@ -49,11 +49,12 @@ export class BonLunetterieComponent implements OnInit {
   addconjoint:Conjoint;
    addenfant:Enfant;
   prestatair;
-  bonlettre:IPM_Bon_Lunetterie=new IPM_Bon_Lunetterie(0,null,null,null,null,null,null,null,null,null,null,null,null);
+  bonlettre:IPM_Bon_Lunetterie=new IPM_Bon_Lunetterie(0,null,null,null,null,null,null,null,null,null,null,null,null,null);
   matricule;
   AgeEmploye: number;
   AgeEnfant: number;
   AgeConjoint: any;
+  maDate: Date = new Date();
   constructor(private emp_service:EmployeService,private router: Router,private pres_service:PrestataireService,
     private route : ActivatedRoute,private conj_service:ConjointService,private enf_service:EnfantService,private datePipe:DatePipe,
     private bon_lettreService:BonlettreService) { }
@@ -233,6 +234,9 @@ public BonConsultation(){
   }
   //this.bonlettre.ordonnance=this.selectOrdonne.name
   console.log(this.bonlettre);
+  this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
    this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(
     (data)=>{ 
       
@@ -258,7 +262,9 @@ public BonConjoint(){
    this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addconjoint.idconj=this.idbconj
    this.bonlettre.ipm_conjoint=JSON.parse(JSON.stringify(this.addconjoint))
- 
+   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeConjoint);
    console.log(this.bonlettre.ipm_conjoint);
   
   // console.log( this.b.ipm_employe);
@@ -291,6 +297,9 @@ public BonEnfant(){
    //console.log(this.b.ipm_prestataire);
 
 //this.bonlettre.ordonnance=this.selectOrdonne.name
+this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEnfant);
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
         (data)=>{ 
       });

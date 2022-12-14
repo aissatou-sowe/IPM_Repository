@@ -84,7 +84,9 @@ export class SituationParPrestationComponent implements OnInit {
   }
   imprimer(){
     let doc=new jsPDF();
-    var imgData = '/assets/img_poste/laposte.png'
+    //var imgData = '/assets/img_poste/laposte.png'
+    var imgData ='/ipm-fronte/assets/img_poste/laposte.png'
+
     
      let col=[["Facture","Prenom","Nom","Matricule","Prestataire","Date Prestation ","Charge IPM","Charge Agent","Montant Facture"]]
     let rows=[]
