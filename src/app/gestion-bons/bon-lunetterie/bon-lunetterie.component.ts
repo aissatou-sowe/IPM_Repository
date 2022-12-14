@@ -49,11 +49,12 @@ export class BonLunetterieComponent implements OnInit {
   addconjoint:Conjoint;
    addenfant:Enfant;
   prestatair;
-  bonlettre:IPM_Bon_Lunetterie=new IPM_Bon_Lunetterie(0,null,null,null,null,null,null,null,null,null,null,null,null);
+  bonlettre:IPM_Bon_Lunetterie=new IPM_Bon_Lunetterie(0,null,null,null,null,null,null,null,null,null,null,null,null,null);
   matricule;
   AgeEmploye: number;
   AgeEnfant: number;
   AgeConjoint: any;
+  selectOrDevit: any;
   constructor(private emp_service:EmployeService,private router: Router,private pres_service:PrestataireService,
     private route : ActivatedRoute,private conj_service:ConjointService,private enf_service:EnfantService,private datePipe:DatePipe,
     private bon_lettreService:BonlettreService) { }
@@ -203,9 +204,9 @@ export class BonLunetterieComponent implements OnInit {
     )
 
   } 
-  selectOrdonn(event:any){
+  selectDevit(event:any){
     //selectCertif
-    this.selectOrdonne = event.target.files[0];
+    this.selectOrDevit = event.target.files[0];
   
     let readerr = new FileReader();
     readerr.readAsDataURL(event.target.files[0]);
@@ -221,7 +222,7 @@ public BonConsultation(){
    this.bonlettre.dateEtablissement=new Date();
    //this.addPrestataire.code_prestataire=this.idp;
    this.bonlettre.ipm_prestataire=this.prestatair;
-
+   this.bonlettre.devit=this.selectOrDevit.name
    this.bonlettre.motif=this.motif
    if (this.enfChoisi) {
     this.bonlettre.ipm_enfant=this.enfChoisi
@@ -234,9 +235,8 @@ public BonConsultation(){
   //this.bonlettre.ordonnance=this.selectOrdonne.name
   console.log(this.bonlettre);
    this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(
-    (data)=>{ 
-      
-  });
+    (data)=>{});
+    this.bon_lettreService.uploadFileDevit(this.selectOrDevit).subscribe( (data)=>{})
   this.desactive=true
 
     //this.toastr.success( 'Ajouter Faite avec Success');

@@ -14,7 +14,8 @@ export class ModifierEmployesComponent implements OnInit {
 
   currentemploye: Employe= new Employe();
   id : number;
-  service: Service[];
+  service: any[];
+  servic:any[]
   categorie: Categorie[];
   servi:number;
   cate:number;
@@ -36,6 +37,7 @@ export class ModifierEmployesComponent implements OnInit {
   situationChoisi: string;
   sexeChoisi: any;
   sexe_emploi: any;
+  idEnt: any;
 
 
   constructor(private emp_service: EmployeService,
@@ -47,12 +49,14 @@ export class ModifierEmployesComponent implements OnInit {
               ngOnInit(): void {
 
                 this.getCategorie();
-                this.getService();
+                
             
                 this.id=this.route.snapshot.params['id'];
                 this.emp_service.getEmployeByIdSanstof(this.id).subscribe(
                   result => {
                     this.currentemploye = result;
+                    this.idEnt=this.currentemploye.ipmEntity?.idEntity
+                    console.log(this.idEnt);
                     this.typesituation_familial=this.currentemploye.situation_familial
                     this.sexe_emploi=this.currentemploye.sexe
                     console.log(this.currentemploye);
@@ -62,6 +66,7 @@ export class ModifierEmployesComponent implements OnInit {
             
                   }
                 );
+                this.getService();
               }
               getserv(serv){
                 this.serviceChoisi=serv
@@ -133,8 +138,9 @@ export class ModifierEmployesComponent implements OnInit {
                 public getService(){
                   this.emp_service.getService().subscribe(
                     serv => {
-                     // console.log(serv);
+                      console.log(this.idEnt);
                       this.service = serv;
+                      this.service=this.service.filter(serv =>serv.ipmEntity.idEntity==this.idEnt)
                      // console.log(this.service)
                     }
                   )

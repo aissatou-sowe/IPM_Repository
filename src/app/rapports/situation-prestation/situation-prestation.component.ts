@@ -4,6 +4,7 @@ import { DateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { IPM_DetaRembourse } from 'src/app/Models/IPM_DetaRembourse';
 import { IPM_Details_Facture } from 'src/app/Models/IPM_Detils_Factures';
 import { Prestation } from 'src/app/Models/Prestations';
 import { RapportServiceService } from 'src/app/Services/rapport-service.service';
@@ -27,7 +28,7 @@ export class SituationPrestationComponent implements OnInit {
   nom: string;
   prenom: string;
   matr: any;
-  listRemboursement: import("c:/Users/HP/workspace/IPM_Front/PROJET-IPM/src/app/Models/IPM_DetaRembourse").IPM_DetaRembourse[];
+  listRemboursement: IPM_DetaRembourse[];
 
   constructor(private dateAdapter: DateAdapter<Date>, private datepipe: DatePipe,
     private rapportServ:RapportServiceService,private router:Router) { 

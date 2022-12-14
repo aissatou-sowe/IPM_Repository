@@ -21,6 +21,7 @@ export class  IPM_Bon_Lunetterie extends IPM_Bon{
       public  ipm_prestation:Prestation,
      // public ordonnance:string,
       public motif :string,
+      public devit:string,
         public  ipm_conjoint:Conjoint,public dateEtablissement:Date)
      
       { 

@@ -28,7 +28,7 @@ export class CreancesGbalesComponent implements OnInit {
   d1: string;
   d2: string;
   tout: string = "tout"
-
+ entity:any;
   entities: any;
   attente: any;
   attente2: string;
@@ -90,112 +90,18 @@ export class CreancesGbalesComponent implements OnInit {
           if (this.listCreanceEntites.length == 0) {
             this.showNotification('top', 'center', 3, "<b> verifer la date ou l'entite</b> :")
 
-            if (this.enti) {
-
-
-              this.rapportServ.getGlobaleParEntity(this.d1, this.d2, this.enti.idEntity).subscribe(
-                result => {
-                  $(function () {
-                    (<any>$('#datatable')).DataTable({
-                      "pagingType": "full_numbers",
-                      "lengthMenu": [
-                        [10, 25, 50, -1],
-                        [10, 25, 50, "All"]
-                      ],
-                      responsive: true,
-                      retrieve: true,
-                      language: {
-                        search: "_INPUT_",
-                        searchPlaceholder: "Recherche",
-                        info: " _START_/_END_ sur _TOTAL_ demandes",
-                        paginate: {
-                          "first": "Début",
-                          "previous": "Précédent",
-                          "next": "Suivant",
-                          "last": "Fin"
-                        },
-                        lengthMenu: "Afficher par _MENU_",
-                        infoFiltered: ""
-                      },
-
-
-                    });
-
-                  })
-                  this.listCreanceParEntity = result
-                  //this.list=this.listCreanceGlobales.length
-                  console.log(this.listCreanceParEntity.length)
-
-                  if (this.listCreanceParEntity.length == 0) {
-
-                    this.showNotification('top', 'center', 3, "<b> verifer la date ou l'entite</b> :")
-
-
-                  }
-
-                })
-
-
-            } else
-              console.log(this.enti)
-
-
-            this.rapportServ.getSituationIndividuel(this.d1, this.d2).subscribe(
-              result => {
-                $(function () {
-                  (<any>$('#datatable')).DataTable({
-                    "pagingType": "full_numbers",
-                    "lengthMenu": [
-                      [10, 25, 50, -1],
-                      [10, 25, 50, "All"]
-                    ],
-                    responsive: true,
-                    retrieve: true,
-                    language: {
-                      search: "_INPUT_",
-                      searchPlaceholder: "Recherche",
-                      info: " _START_/_END_ sur _TOTAL_ demandes",
-                      paginate: {
-                        "first": "Début",
-                        "previous": "Précédent",
-                        "next": "Suivant",
-                        "last": "Fin"
-                      },
-                      lengthMenu: "Afficher par _MENU_",
-                      infoFiltered: ""
-                    },
-
-
-                  });
-
-                })
-                this.listCreanceGlobales = result
-                //this.list=this.listCreanceGlobales.length
-                console.log(this.listCreanceGlobales.length)
-
-                if (this.listCreanceGlobales.length == 0) {
-
-                  this.showNotification('top', 'center', 3, "<b> verifer la date ou l'entite</b> :")
-
-
-                }
-
-              })
-
-            this.attente2 == null
+       
 
           }
-
-
-
-        })}
-      
-   else
-      console.log(this.d1, this.d2)
+        })
+    }
+    else
+    console.log(this.d1, this.d2);
     this.rapportServ.getSituationIndividuel(this.d1, this.d2).subscribe(
       result => {
-        this.DesatverBouton = true
         this.listCreanceGlobales = result
+        //this.list=this.listCreanceGlobales.length
+        console.log(this.listCreanceGlobales.length)
         $(function () {
           (<any>$('#datatable')).DataTable({
             "pagingType": "full_numbers",
@@ -223,16 +129,17 @@ export class CreancesGbalesComponent implements OnInit {
           });
 
         })
-        //this.list=this.listCreanceGlobales.length
-        console.log(this.listCreanceGlobales.length)
-        this.getTableau();
+
+
         if (this.listCreanceGlobales.length == 0) {
+
           this.showNotification('top', 'center', 3, "<b> verifer la date ou l'entite</b> :")
 
 
         }
 
       })
+
 
 
   }
@@ -248,11 +155,6 @@ export class CreancesGbalesComponent implements OnInit {
   }
   getEntout() {
     this.attente = ""
-
-
-
-
-
   }
   imprimer() {
     let doc = new jsPDF();
@@ -262,7 +164,7 @@ export class CreancesGbalesComponent implements OnInit {
     let rows = []
 
     //let tmp=[this.designation,this.nombre_article]
-    for (let liste of this.listCreanceGlobales) {
+    for (let liste of this.listCreanceEntites) {
       let tmp = [liste.ipm_employe?.matricule, liste.ipm_employe?.nom, liste.ipm_employe?.prenom, liste.montant_facture, liste.part_ipm, liste.part_patient]
       rows.push(tmp)
       var ipm1 = liste.ipm_employe?.nom
