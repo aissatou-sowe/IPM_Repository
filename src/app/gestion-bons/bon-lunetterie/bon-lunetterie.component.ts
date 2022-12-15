@@ -58,6 +58,8 @@ export class BonLunetterieComponent implements OnInit {
   maDate: Date = new Date();
   mess: Employe;
   mess1: string;
+  code_presta: number;
+  prestat: any;
   constructor(private emp_service:EmployeService,private router: Router,private pres_service:PrestataireService,
     private route : ActivatedRoute,private conj_service:ConjointService,private enf_service:EnfantService,private datePipe:DatePipe,
     private bon_lettreService:BonlettreService) { }
@@ -194,7 +196,9 @@ export class BonLunetterieComponent implements OnInit {
    })}
    getnom(prest){
     this.prestatair = prest;
-    console.log(this.prestatair);
+    console.log(prest);
+    this.prestat=prest
+    this.idp=prest.code_prestataire;
 
     this.pres_service.getAllPrestataires().subscribe(
       pres => {
@@ -202,7 +206,7 @@ export class BonLunetterieComponent implements OnInit {
         console.log(prest.nom_prestataire);
        
         this.p=prest.nom_prestataire;
-        this.idp=prest.code_prestataire;
+        
         
         
 
@@ -257,104 +261,15 @@ public BonConsultation(){
   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
    '' +this.AgeEmploye);
-   if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&  this.bonlettre.numeroBon &&
-    this.bonlettre.designation &&  this.bonlettre.nombre_article && this.bonlettre.motif &&this.bonlettre.dateEtablissement && this.bonlettre.devit){
+   if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+    this.bonlettre.dateEtablissement && this.bonlettre.devit){
    this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(
-    (data)=>{});
+    (data)=>{this.upload();});
     this.bon_lettreService.uploadFileDevit(this.selectOrDevit).subscribe( (data)=>{})
   this.desactive=true
  console.log(this.motif);
  this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :')
- let doc=new jsPDF();
- var imgData = '/assets/img_poste/header1.png'
- 
-   let col=[["Quantité","Designation","P.unitaire","Montant"]]
-  let rows=[] 
-  var ipm1=this.message?.prenom
-  var ipm2=this.message?.nom
-  console.log(ipm2);
-  var prestataire=this.p
-  var Ncarnet=this.message.numero_carnet
-  var ipm3=this.message.ipmService?.type_service
-  var ipm4=this.message?.matricule
-  var ipm5=this.message?.reference
-  autoTable(doc,{
- //   startY:75,
- //   head:col,
- //    body:rows,
- //   margin:{ horizontal:10},
- //   styles:{overflow:"linebreak"},
- //   bodyStyles:{valign:"top"},
- //   theme:"grid",
-    didDrawPage: function(data){
-     //this.bon.ipm_employe=this.message;
-     doc.addImage(imgData ,'JPEG',15,5,180,20)
-     doc.setFontSize(15)
-     doc.text("",72,46)
-    // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
-    doc.setLineWidth(2)
-    doc.setDrawColor("#3A6EA5")
-    doc.rect(60,30,105,20)
-    doc.setFillColor(240,240,240)
-     doc.rect(13,65,185,35,'F')
-     //RECTANGLE PAGE
-     doc.setLineWidth(2)
-    doc.setDrawColor("#3A6EA5")
-    doc.rect(10,100,190,170)
-     doc.setFontSize(15)
-     doc.setTextColor("#3A6EA5")
-     
-     doc.text("BON DE COMMANDE",85,36)
-     doc.text("POUR LUNETTERIE",85,45)
-     doc.setTextColor("")
-      const date=new Date()
-         doc.setFontSize(13)
-          doc.text("Dakar, le :",150,60)
-          
-      doc.text(date.toLocaleDateString("fr-FR"),172,60)
-         doc.setFontSize(12)
-         doc.text("Malade:",15,75)
-         doc.text(ipm1,40,75)
-         doc.text(ipm2,80,75) 
-         doc.text("Matricule:",120,75)
-         doc.text(ipm4,140,75)
-         doc.setFontSize(12)
-         doc.text("N Carnet :",15,85)
-         doc.text(""+Ncarnet,40,85)
-         // doc.text("Nombre D'article :",120,85)
-         // doc.text(""+Narticle,160,85)
-         // doc.text("Malade:",15,95)
-         // doc.text(ipm5,40,95)
-         // doc.text(ipm6,80,95)
-         doc.text("Service :",100,95)
-         doc.text(ipm3,120,95)
-         doc.text("Prestataire :",15,95)
-         doc.text(prestataire,40,95)
-       //  doc.text("N° Ref:",15,95)
-       //  doc.text(ipm5,50,95)
-       doc.setFontSize(12)
-        doc.text("Monsieur,",15,110)
-        doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
-       //  doc.text("de:",15,125)
-       //  doc.text("----------------------",15,130)
-        doc.text("  institution :",15,130)
-        doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
-        doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
-       
-        doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
-        doc.text("Le Gérant National",150,200)
-        doc.setTextColor("#8C1C13")
-        doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
-        doc.text("--------------------------------------------------------------------------",15,250)
-        doc.setTextColor("")
-        doc.setFontSize(10)
-        doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
-        doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
-        
-    }
-   })
- 
- doc.output('dataurlnewwindow');
+
    }else {
 
     this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :")
@@ -368,6 +283,8 @@ public BonConjoint(){
    this.bonlettre.ipm_employe=this.message;
    this.bonlettre.dateEtablissement=new Date();
    this.addPrestataire.code_prestataire=this.idp;
+   this.bonlettre.devit=this.selectOrDevit.name
+   this.bonlettre.motif=this.motif
    this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addconjoint.idconj=this.idbconj
    this.bonlettre.ipm_conjoint=JSON.parse(JSON.stringify(this.addconjoint))
@@ -380,27 +297,41 @@ public BonConjoint(){
    //console.log(this.b.ipm_prestataire);
  // this.bonlettre.ordonnance=this.selectOrdonne.name
    //this.bon.prix_unitaire=this.prix_unitaire;
+   if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+    this.bonlettre.dateEtablissement && this.bonlettre.devit){
     this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(
-        (data)=>{
+        (data)=>{this.uploadConjoint();
       });
+      this.bon_lettreService.uploadFileDevit(this.selectOrDevit).subscribe( (data)=>{})
+  this.desactive=true
       
         console.log(this.bonlettre.ipm_prestataire)
         console.log(this.bonlettre)
+
+        this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :')
+
+      }else {
+   
+       this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :")
+      }
        
        
  }
 
  /////////////////Save Bon Enfants
-public BonEnfant(){
+ public BonEnfant(){
   // this.nom=this.bon.ipm_employe.prenom
+  console.log(this.idp);
    this.bonlettre.ipm_employe=this.message;
+   this.bonlettre.motif=this.motif
    this.bonlettre.dateEtablissement=new Date();
-   this.addPrestataire.code_prestataire=this.idp;
-   this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
-   this.addenfant.idenf=this.idbenf
-   //this.bonlettre.ipm_enfant=JSON.parse(JSON.stringify(this.addenfant))
+   this.bonlettre.devit=this.selectOrDevit.name
+  // this.addPrestataire.code_prestataire=this.idp;
+   this.bonlettre.ipm_prestataire=this.prestat;
+  // this.addenfant.idenf=this.idbenf
+   this.bonlettre.ipm_enfant=this.enfChoisi
  
-   console.log(this.bonlettre.ipm_enfant);
+   console.log(this.bonlettre);
    
    //console.log( this.b.ipm_employe);
    //console.log(this.b.ipm_prestataire);
@@ -409,19 +340,33 @@ public BonEnfant(){
 this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
    '' +this.AgeEnfant);
-    this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
-        (data)=>{ 
+   if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+    this.bonlettre.dateEtablissement && this.bonlettre.devit){
+    this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(
+        (data)=>{ this.uploadEnfant()
       });
+      this.bon_lettreService.uploadFileDevit(this.selectOrDevit).subscribe( (data)=>{})
+
         console.log(this.bonlettre.ipm_prestataire)
         console.log(this.bonlettre)
+        this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :')
+
+      }else {
+   
+       this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :")
+      }
        
     } 
     upload(){
       let doc=new jsPDF();
       var imgData = '/assets/img_poste/header1.png'
       
-        let col=[["Quantité","Designation","P.unitaire","Montant"]]
+        let col=[["Designation","P.unitaire","Montant"]]
        let rows=[] 
+       for (let index = 1; index < 3; index++) {
+        let tmp=[]
+        rows.push(tmp)
+      }
        var ipm1=this.message?.prenom
        var ipm2=this.message?.nom
        console.log(ipm2);
@@ -430,14 +375,17 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
        var ipm3=this.message.ipmService?.type_service
        var ipm4=this.message?.matricule
        var ipm5=this.message?.reference
+       var numBonEmp= Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+       +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+       '' +this.AgeEmploye;
        autoTable(doc,{
-      //   startY:75,
-      //   head:col,
-      //    body:rows,
-      //   margin:{ horizontal:10},
-      //   styles:{overflow:"linebreak"},
-      //   bodyStyles:{valign:"top"},
-      //   theme:"grid",
+        startY:100,
+        head:col,
+         body:rows,
+        margin:{ horizontal:10},
+        styles:{overflow:"linebreak"},
+        bodyStyles:{valign:"top"},
+        theme:"grid",
          didDrawPage: function(data){
           //this.bon.ipm_employe=this.message;
           doc.addImage(imgData ,'JPEG',15,5,180,20)
@@ -450,9 +398,9 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
          doc.setFillColor(240,240,240)
           doc.rect(13,65,185,35,'F')
           //RECTANGLE PAGE
-          doc.setLineWidth(2)
-         doc.setDrawColor("#3A6EA5")
-         doc.rect(10,100,190,170)
+          //doc.setLineWidth(2)
+         //doc.setDrawColor("#3A6EA5")
+         //doc.rect(10,100,190,170)
           doc.setFontSize(15)
           doc.setTextColor("#3A6EA5")
           
@@ -462,6 +410,8 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
            const date=new Date()
               doc.setFontSize(13)
                doc.text("Dakar, le :",150,60)
+               doc.text("N° Bon:",13,60)
+               doc.text(""+numBonEmp,30,60)
                
            doc.text(date.toLocaleDateString("fr-FR"),172,60)
               doc.setFontSize(12)
@@ -484,30 +434,29 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
               doc.text(prestataire,40,95)
             //  doc.text("N° Ref:",15,95)
             //  doc.text(ipm5,50,95)
-            doc.setFontSize(12)
-             doc.text("Monsieur,",15,110)
-             doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
-            //  doc.text("de:",15,125)
-            //  doc.text("----------------------",15,130)
-             doc.text("  institution :",15,130)
-             doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
-             doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
+            // doc.setFontSize(12)
+            //  doc.text("Monsieur,",15,110)
+            //  doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
+            // //  doc.text("de:",15,125)
+            // //  doc.text("----------------------",15,130)
+            //  doc.text("  institution :",15,130)
+            //  doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
+            //  doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
             
-             doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
-             doc.text("Le Gérant National",150,200)
-             doc.setTextColor("#8C1C13")
-             doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
-             doc.text("--------------------------------------------------------------------------",15,250)
-             doc.setTextColor("")
-             doc.setFontSize(10)
-             doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
-             doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
+            //  doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
+            //  doc.text("Le Gérant National",150,200)
+            //  doc.setTextColor("#8C1C13")
+            //  doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
+            //  doc.text("--------------------------------------------------------------------------",15,250)
+            //  doc.setTextColor("")
+            //  doc.setFontSize(10)
+            //  doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
+            //  doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
              
          }
         })
       
-      doc.save("lettreGantie.pdf");
-      // let data = document.getElementById('noticeModal'); 
+        doc.output('dataurlnewwindow');      // let data = document.getElementById('noticeModal'); 
       // const printContents = document.getElementById('noticeModal').innerHTML;
       //    const originalContents = document.body.innerHTML;
       //    document.body.innerHTML = printContents;
@@ -518,8 +467,12 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
       let doc=new jsPDF();
       var imgData = '/assets/img_poste/header1.png'
       
-        let col=[["Quantité","Designation","P.unitaire","Montant"]]
+        let col=[["Designation","P.unitaire","Montant"]]
        let rows=[] 
+       for (let index = 1; index < 3; index++) {
+        let tmp=[]
+        rows.push(tmp)
+      }
        var ipm1=this.message?.prenom
        var ipm2=this.message?.nom
        console.log(ipm2);
@@ -529,14 +482,17 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
        var ipm4=this.message?.matricule
        var ipm5=this.messageconjoint?.prenom_conjoint
        var ipm6=this.messageconjoint?.nom_conjoint
+       var numBonConj= (Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+       +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+       '' +this.AgeConjoint);
        autoTable(doc,{
-      //   startY:75,
-      //   head:col,
-      //    body:rows,
-      //   margin:{ horizontal:10},
-      //   styles:{overflow:"linebreak"},
-      //   bodyStyles:{valign:"top"},
-      //   theme:"grid",
+        startY:100,
+        head:col,
+         body:rows,
+        margin:{ horizontal:10},
+        styles:{overflow:"linebreak"},
+        bodyStyles:{valign:"top"},
+        theme:"grid",
          didDrawPage: function(data){
           //this.bon.ipm_employe=this.message;
           doc.addImage(imgData ,'JPEG',15,5,180,20)
@@ -549,11 +505,11 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
          doc.setFillColor(240,240,240)
           doc.rect(13,65,185,35,'F')
           //RECTANGLE PAGE
-          doc.setLineWidth(2)
-         doc.setDrawColor("#3A6EA5")
-         doc.rect(10,100,190,170)
-          doc.setFontSize(15)
-          doc.setTextColor("#3A6EA5")
+        //   doc.setLineWidth(2)
+        //  doc.setDrawColor("#3A6EA5")
+        //  doc.rect(10,100,190,170)
+        //   doc.setFontSize(15)
+        //   doc.setTextColor("#3A6EA5")
           
           doc.text("BON DE COMMANDE",85,36)
           doc.text("POUR LUNETTERIE",85,45)
@@ -561,6 +517,8 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
            const date=new Date()
               doc.setFontSize(13)
                doc.text("Dakar, le :",150,60)
+               doc.text("N° Bon:",13,60)
+               doc.text(""+numBonConj,30,60)
                
            doc.text(date.toLocaleDateString("fr-FR"),172,60)
               doc.setFontSize(12)
@@ -586,30 +544,29 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
               doc.text(prestataire,40,95)
             //  doc.text("N° Ref:",15,95)
             //  doc.text(ipm5,50,95)
-            doc.setFontSize(12)
-             doc.text("Monsieur,",15,110)
-             doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
-            //  doc.text("de:",15,125)
-            //  doc.text("----------------------",15,130)
-             doc.text("  institution :",15,130)
-             doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
-             doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
+            // doc.setFontSize(12)
+            //  doc.text("Monsieur,",15,110)
+            //  doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
+            // //  doc.text("de:",15,125)
+            // //  doc.text("----------------------",15,130)
+            //  doc.text("  institution :",15,130)
+            //  doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
+            //  doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
             
-             doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
-             doc.text("Le Gérant National",150,200)
-             doc.setTextColor("#8C1C13")
-             doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
-             doc.text("--------------------------------------------------------------------------",15,250)
-             doc.setTextColor("")
-             doc.setFontSize(10)
-             doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
-             doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
+            //  doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
+            //  doc.text("Le Gérant National",150,200)
+            //  doc.setTextColor("#8C1C13")
+            //  doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
+            //  doc.text("--------------------------------------------------------------------------",15,250)
+            //  doc.setTextColor("")
+            //  doc.setFontSize(10)
+            //  doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
+            //  doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
              
          }
         })
       
-      doc.save("lettreGantie.pdf");
-      // let data = document.getElementById('noticeModal'); 
+        doc.output('dataurlnewwindow');      // let data = document.getElementById('noticeModal'); 
       // const printContents = document.getElementById('noticeModal').innerHTML;
       //    const originalContents = document.body.innerHTML;
       //    document.body.innerHTML = printContents;
@@ -620,8 +577,12 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
       let doc=new jsPDF();
       var imgData = '/assets/img_poste/header1.png'
       
-        let col=[["Quantité","Designation","P.unitaire","Montant"]]
+        let col=[["Designation","P.unitaire","Montant"]]
        let rows=[] 
+       for (let index = 1; index < 3; index++) {
+        let tmp=[]
+        rows.push(tmp)
+      }
        var ipm1=this.message?.prenom
        var ipm2=this.message?.nom
        console.log(ipm2);
@@ -631,14 +592,17 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
        var ipm4=this.message?.matricule
        var ipm5=this.messageenfant.prenom_enfant
        var ipm6=this.messageenfant?.nom_enfant
+       var numBonEnf=Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+       +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+       '' +this.AgeEnfant;
        autoTable(doc,{
-      //   startY:75,
-      //   head:col,
-      //    body:rows,
-      //   margin:{ horizontal:10},
-      //   styles:{overflow:"linebreak"},
-      //   bodyStyles:{valign:"top"},
-      //   theme:"grid",
+        startY:100,
+        head:col,
+         body:rows,
+        margin:{ horizontal:10},
+        styles:{overflow:"linebreak"},
+        bodyStyles:{valign:"top"},
+        theme:"grid",
          didDrawPage: function(data){
           //this.bon.ipm_employe=this.message;
           doc.addImage(imgData ,'JPEG',15,5,180,20)
@@ -651,11 +615,11 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
          doc.setFillColor(240,240,240)
           doc.rect(13,65,185,35,'F')
           //RECTANGLE PAGE
-          doc.setLineWidth(2)
-         doc.setDrawColor("#3A6EA5")
-         doc.rect(10,100,190,170)
-          doc.setFontSize(15)
-          doc.setTextColor("#3A6EA5")
+        //   doc.setLineWidth(2)
+        //  doc.setDrawColor("#3A6EA5")
+        //  doc.rect(10,100,190,170)
+        //   doc.setFontSize(15)
+        //   doc.setTextColor("#3A6EA5")
           
           doc.text("BON DE COMMANDE",85,36)
           doc.text("POUR LUNETTERIE",85,45)
@@ -663,6 +627,8 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
            const date=new Date()
               doc.setFontSize(13)
                doc.text("Dakar, le :",150,60)
+               doc.text("N° Bon:",13,60)
+               doc.text(""+numBonEnf,30,60)
                
            doc.text(date.toLocaleDateString("fr-FR"),172,60)
               doc.setFontSize(12)
@@ -688,29 +654,29 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
               doc.text(prestataire,40,95)
             //  doc.text("N° Ref:",15,95)
             //  doc.text(ipm5,50,95)
-            doc.setFontSize(12)
-             doc.text("Monsieur,",15,110)
-             doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
-            //  doc.text("de:",15,125)
-            //  doc.text("----------------------",15,130)
-             doc.text("  institution :",15,130)
-             doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
-             doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
+            // doc.setFontSize(12)
+            //  doc.text("Monsieur,",15,110)
+            //  doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
+            // //  doc.text("de:",15,125)
+            // //  doc.text("----------------------",15,130)
+            //  doc.text("  institution :",15,130)
+            //  doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
+            //  doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
             
-             doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
-             doc.text("Le Gérant National",150,200)
-             doc.setTextColor("#8C1C13")
-             doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
-             doc.text("--------------------------------------------------------------------------",15,250)
-             doc.setTextColor("")
-             doc.setFontSize(10)
-             doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
-             doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
+            //  doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
+            //  doc.text("Le Gérant National",150,200)
+            //  doc.setTextColor("#8C1C13")
+            //  doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
+            //  doc.text("--------------------------------------------------------------------------",15,250)
+            //  doc.setTextColor("")
+            //  doc.setFontSize(10)
+            //  doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
+            //  doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
              
          }
         })
       
-      doc.save("lettreGantie.pdf");
+      doc.output('dataurlnewwindow');
       // let data = document.getElementById('noticeModal'); 
       // const printContents = document.getElementById('noticeModal').innerHTML;
       //    const originalContents = document.body.innerHTML;
