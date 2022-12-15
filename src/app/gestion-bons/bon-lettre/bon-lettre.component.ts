@@ -402,6 +402,9 @@ upload(){
    var ipm3=this.message.ipmService?.type_service
    var ipm4=this.message?.matricule
    var ipm5=this.message?.reference
+   var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
    autoTable(doc,{
   //   startY:75,
   //   head:col,
@@ -445,6 +448,8 @@ upload(){
           doc.setFontSize(12)
           doc.text("N Carnet :",15,85)
           doc.text(""+Ncarnet,40,85)
+          doc.text("N Bon :",55,85)
+          doc.text(""+numBon,75,85)
           // doc.text("Nombre D'article :",120,85)
           // doc.text(""+Narticle,160,85)
           // doc.text("Malade:",15,95)

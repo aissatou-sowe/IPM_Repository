@@ -92,7 +92,7 @@ export class ListeBonsComponent implements OnInit {
   mess1: string;
   addEmploye:Employe;
   idemploye: any;
-  constructor(@Inject(LOCALE_ID) private dateform: string,private emp_service:EmployeService,private router: Router,
+  constructor( @Inject(DOCUMENT) private _document: Document ,@Inject(LOCALE_ID) private dateform: string,private emp_service:EmployeService,private router: Router,
     private route : ActivatedRoute,private pres_service:PrestataireService,
     private bonpharma:BonPharmacieService,private bont:BonService,  
         private conj_service:ConjointService,private enf_service:EnfantService,private toastr: ToastrService,
@@ -277,6 +277,7 @@ this.Ageconjoin = ttoday.getFullYear() - b.getFullYear();
   public findByMatricule(){
       ///////Rechercher l'employé
  // debugger
+console.log(this.matricule);
     this.emp_service.getEmployeByMatricule(this.matricule).subscribe(
       (data)=>{     
         this.mess=data;
@@ -452,6 +453,11 @@ console.log(this.designation,this.nombre_article);
       
 }
 
+retourserach()
+{
+  console.log('************************************');
+  window.location.reload();
+}
 /////////////////Save Bon Conjoint
 public BonConjoint(){
   // this.nom=this.bon.ipm_employe.prenom
@@ -493,9 +499,9 @@ public BonConjoint(){
  /////////////////Save Bon Enfants
 public BonEnfant(){
   // this.nom=this.bon.ipm_employe.prenom
-  this.addEmploye.idemp=this.idemploye
+ // this.addEmploye.idemp=this.idemploye
 
-   this.bon.ipm_employe=JSON.parse(JSON.stringify(this.addEmploye))
+   this.bon.ipm_employe=this.message;
    this.addPrestataire.code_prestataire=this.idp;
    this.bon.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addenfant.idenf=this.idbenf
@@ -516,7 +522,7 @@ public BonEnfant(){
    this.bon.ordonnance=this.selectOrdonne.name
    console.log(this.bon)
 
-  // if(this.bon.ipm_prestataire && this.bon.ipm_enfant && this.bon.numeroBon && this.bon.designation &&  this.bon.nombre_article && this.bon.ordonnance &&this.bon.dateEtablissement){
+   if(this.bon.ipm_prestataire && this.bon.ipm_employe && this.bon.ipm_enfant && this.bon.numeroBon && this.bon.designation &&  this.bon.nombre_article && this.bon.ordonnance &&this.bon.dateEtablissement){
     this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(
       (data)=>{ this.router.navigate(['/gestion-bons/Listebons'])
     });
@@ -526,9 +532,9 @@ public BonEnfant(){
       console.log(this.bon)
       this.showNotification('top', 'center', 1, "<b>bon pharmacie ajouté</b> :")
       this.uploadEnfant();
-  //  }else{
-  //   this.showNotification('top', 'center', 3, "<b>bon pharmacie non ajouté</b> :")
-  //  }
+   }else{
+     this.showNotification('top', 'center', 3, "<b>bon pharmacie non ajouté</b> :")
+    }
        
        
  }
@@ -561,7 +567,6 @@ upload(){
    var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
    '' +this.ageE);
-   
   autoTable(doc,{
     startY:100,
     head:col,
@@ -571,7 +576,7 @@ upload(){
      bodyStyles:{valign:"top"},
      theme:"grid",
      didDrawPage: function(data){
-      //this.bon.ipm_employe=this.message;
+      //this.bon.ipm_employe=this.mes²sage;
       doc.addImage(imgData ,'JPEG',15,5,180,20)
      doc.setFontSize(15)
      doc.text("",72,46)
@@ -657,6 +662,9 @@ uploadConjoint(){
    var ipm= this.message.matricule
    var Narticle=this.nombre_article
    var Ncarnet=this.message.numero_carnet
+   var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.ageE);
   autoTable(doc,{
     startY:100,
     head:col,
@@ -698,6 +706,8 @@ uploadConjoint(){
          doc.setFontSize(12)
          doc.text("N Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
+         doc.text("N Bon :",55,85)
+         doc.text(""+numBon,75,85)
          doc.text("Nombre D'article :",120,85)
          doc.text(""+Narticle,160,85)
          doc.text("Malade:",15,95)

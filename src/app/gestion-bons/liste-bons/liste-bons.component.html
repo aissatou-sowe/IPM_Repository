@@ -41,7 +41,7 @@
 
             
             <div class="card-footer" style="padding-left: 80%;">
-              <button mat-raised-button type="submit" class="nav-link " data-toggle="tab" href="#link1"
+              <button mat-raised-button type="submit" class="nav-link" data-toggle="tab" href="#link1"
                 (click)="findByMatricule()" class="btn btn-fill btn-success"><i
                   class="material-icons">search</i>Rechercher</button>
             </div>
@@ -227,10 +227,16 @@
                     data-dismiss="modal">
                     Enregistrer</button>
                 </div>
-                <!-- <div class="modal-footer justify-content-center">
-                  <button mat-raised-button type="button" (click)="upload()" class="btn btn-green btn-round" data-dismiss="modal">
-                    Exporter</button>
-                </div> -->
+                <div class="modal-footer justify-content-center">
+                  <!-- <button mat-raised-button type="button" (click)="upload()" class="btn btn-green btn-round" data-dismiss="modal">
+                    Exporter</button> -->
+                    <div class="col-md-6" style="font-weight:bold;color: black;float: right;">
+                      <i mat-raised-button type="button" class="nav-link"
+                      data-toggle="tab" href="#link0" (click)="retourserach()"  role="tablist" class="btn btn-info btn-round">
+                      <span class="fa fa-plus fa-fw"></span></i>
+                    
+                    </div>
+                </div> 
 
                 <!-- <div class="modal-footer justify-content-center">
                   <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal"

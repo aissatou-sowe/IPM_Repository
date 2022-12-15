@@ -278,6 +278,10 @@ public BonConsultation(){
   var ipm3=this.message.ipmService?.type_service
   var ipm4=this.message?.matricule
   var ipm5=this.message?.reference
+  var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+  +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+  '' +this.AgeEmploye);
+  
   autoTable(doc,{
  //   startY:75,
  //   head:col,
@@ -330,8 +334,8 @@ public BonConsultation(){
          doc.text(ipm3,120,95)
          doc.text("Prestataire :",15,95)
          doc.text(prestataire,40,95)
-       //  doc.text("N° Ref:",15,95)
-       //  doc.text(ipm5,50,95)
+         doc.text("N Bon :",55,85)
+         doc.text(""+numBon,75,85)
        doc.setFontSize(12)
         doc.text("Monsieur,",15,110)
         doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
@@ -430,6 +434,9 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
        var ipm3=this.message.ipmService?.type_service
        var ipm4=this.message?.matricule
        var ipm5=this.message?.reference
+       var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+       +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+       '' +this.AgeEmploye);
        autoTable(doc,{
       //   startY:75,
       //   head:col,
@@ -455,7 +462,8 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
          doc.rect(10,100,190,170)
           doc.setFontSize(15)
           doc.setTextColor("#3A6EA5")
-          
+          doc.text("N Bon :",55,85)
+          doc.text(""+numBon,75,85)
           doc.text("BON DE COMMANDE",85,36)
           doc.text("POUR LUNETTERIE",85,45)
           doc.setTextColor("")
@@ -473,6 +481,7 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
               doc.setFontSize(12)
               doc.text("N Carnet :",15,85)
               doc.text(""+Ncarnet,40,85)
+        
               // doc.text("Nombre D'article :",120,85)
               // doc.text(""+Narticle,160,85)
               // doc.text("Malade:",15,95)

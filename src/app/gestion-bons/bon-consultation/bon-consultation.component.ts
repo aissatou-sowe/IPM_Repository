@@ -449,7 +449,9 @@ upload(){
    var Ncarnet=this.message.numero_carnet
    var ipm4=this.message.ipmService?.type_service
    var ipm=this.message.matricule
-   
+   var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
   autoTable(doc,{
     startY:100,
     head:col,
@@ -494,6 +496,8 @@ upload(){
          doc.text(prestatio,143,85)
          doc.text("N Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
+         doc.text("N Bon :",55,85)
+         doc.text(""+numBon,75,85)
         //  doc.text("Nombre D'article :",120,85)
         //  doc.text(""+Narticle,160,85)
 
@@ -544,6 +548,9 @@ uploadConjoint(){
    var ipm= this.message.matricule
    var prestatio=this.prestationC
    var Ncarnet=this.message.numero_carnet
+   var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
   autoTable(doc,{
     startY:100,
     head:col,
@@ -584,6 +591,8 @@ uploadConjoint(){
          doc.text(ipm,140,75)
          doc.setFontSize(12)
          doc.text("N Carnet :",15,85)
+         doc.text("N Bon :",55,85)
+         doc.text(""+numBon,75,85)
          doc.text(""+Ncarnet,40,85)
          doc.text("Prestation :",120,85)
          doc.text(prestatio,160,85)
@@ -628,6 +637,9 @@ uploadEnfant(){
    var ipm= this.message.matricule
    var prestatio=this.prestationC
    var Ncarnet=this.message.numero_carnet
+   var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
   autoTable(doc,{
     startY:100,
     head:col,
@@ -669,6 +681,8 @@ uploadEnfant(){
          doc.setFontSize(12)
          doc.text("N Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
+         doc.text("N Bon :",55,85)
+         doc.text(""+numBon,75,85)
          doc.text("Prestation :",120,85)
          doc.text(prestatio,160,85)
          doc.text("Malade:",15,95)
