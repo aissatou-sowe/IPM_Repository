@@ -28,7 +28,7 @@ export class CreancesGbalesComponent implements OnInit {
   d1: string;
   d2: string;
   tout: string = "tout"
- entity:any;
+  entity:any;
   entities: any;
   attente: any;
   attente2: string;
@@ -51,12 +51,12 @@ export class CreancesGbalesComponent implements OnInit {
   getCreanceglobale() {
     this.d1 = this.datepipe.transform(this.date1, 'dd-MM-yyyy');
     this.d2 = this.datepipe.transform(this.date2, 'dd-MM-yyyy');
-    this.tout = "liste creance  des Participants  du"
-    console.log()
+    
+    
     if (this.enti) {
       this.rapportServ.getGlobaleParEntity(this.d1, this.d2, this.enti.idEntity).subscribe(
         result => {
-          this.DesatverBouton = true
+          
           this.listCreanceEntites = result
           //this.list=this.listCreanceGlobales.length
           console.log(this.listCreanceEntites.length)
@@ -87,66 +87,60 @@ export class CreancesGbalesComponent implements OnInit {
             });
 
           })
+        })
           if (this.listCreanceEntites.length == 0) {
             this.showNotification('top', 'center', 3, "<b> verifer la date ou l'entite</b> :")
 
-       
-
-          }
-        })
-    }
-    else
-    console.log(this.d1, this.d2);
-    this.rapportServ.getSituationIndividuel(this.d1, this.d2).subscribe(
-      result => {
-        this.listCreanceGlobales = result
-        //this.list=this.listCreanceGlobales.length
-        console.log(this.listCreanceGlobales.length)
-        $(function () {
-          (<any>$('#datatable')).DataTable({
-            "pagingType": "full_numbers",
-            "lengthMenu": [
-              [10, 25, 50, -1],
-              [10, 25, 50, "All"]
-            ],
-            responsive: true,
-            retrieve: true,
-            language: {
-              search: "_INPUT_",
-              searchPlaceholder: "Recherche",
-              info: " _START_/_END_ sur _TOTAL_ demandes",
-              paginate: {
-                "first": "Début",
-                "previous": "Précédent",
-                "next": "Suivant",
-                "last": "Fin"
-              },
-              lengthMenu: "Afficher par _MENU_",
-              infoFiltered: ""
-            },
-
-
-          });
-
-        })
-
-
-        if (this.listCreanceGlobales.length == 0) {
-
-          this.showNotification('top', 'center', 3, "<b> verifer la date ou l'entite</b> :")
-
 
         }
+      
+   
+
+
+  }
+  else 
+  this.rapportServ.getSituationIndividuel(this.d1, this.d2).subscribe(
+    result => {
+      $(function () {
+        (<any>$('#datatable')).DataTable({
+          "pagingType": "full_numbers",
+          "lengthMenu": [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+          ],
+          responsive: true,
+          retrieve: true,
+          language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Recherche",
+            info: " _START_/_END_ sur _TOTAL_ demandes",
+            paginate: {
+              "first": "Début",
+              "previous": "Précédent",
+              "next": "Suivant",
+              "last": "Fin"
+            },
+            lengthMenu: "Afficher par _MENU_",
+            infoFiltered: ""
+          },
+
+
+        });
 
       })
+      this.listCreanceGlobales = result
+      //this.list=this.listCreanceGlobales.length
+      console.log(this.listCreanceGlobales.length)
+
+     
+
+    })
 
 
 
-  }
-  getTableau() {
+}
 
-
-  }
+  
   getEntity(ent) {
     console.log(ent)
     this.enti = ent
@@ -158,7 +152,8 @@ export class CreancesGbalesComponent implements OnInit {
   }
   imprimer() {
     let doc = new jsPDF();
-    var imgData = '/assets/img_poste/laposte.png'
+    //var imgData = '/assets/img_poste/laposte.png'
+    var imgData ='/ipm-fronte/assets/img_poste/laposte.png'
 
     let col = [["Matricule", "Nom", "Prénom", "Montant ", "Charge IPM", "Charge Agent"]]
     let rows = []
@@ -172,9 +167,9 @@ export class CreancesGbalesComponent implements OnInit {
       var ipm2 = liste.ipm_employe?.prenom
       var ipm3 = liste.ipm_employe?.matricule
     }
-    var somme1 = this.listCreanceGlobales.reduce((sum, current) => sum + current.part_ipm, 0);
-    var somme2 = this.listCreanceGlobales.reduce((sum, current) => sum + current.part_patient, 0);
-    var somme3 = this.listCreanceGlobales.reduce((sum, current) => sum + current.montant_facture, 0);
+    var somme1 = this.listCreanceEntites.reduce((sum, current) => sum + current.part_ipm, 0);
+    var somme2 = this.listCreanceEntites.reduce((sum, current) => sum + current.part_patient, 0);
+    var somme3 = this.listCreanceEntites.reduce((sum, current) => sum + current.montant_facture, 0);
     var entite = this.attente
     var date1 = this.d1
     var date2 = this.d2
@@ -235,7 +230,9 @@ export class CreancesGbalesComponent implements OnInit {
 
   imprimerTout() {
     let doc = new jsPDF();
-    var imgData = '/assets/img_poste/laposte.png'
+    //var imgData = '/assets/img_poste/laposte.png'
+    var imgData ='/ipm-fronte/assets/img_poste/laposte.png'
+
 
     let col = [["Matricule", "Nom", "Prénom", "Montant ", "Charge IPM", "Charge Agent"]]
     let rows = []

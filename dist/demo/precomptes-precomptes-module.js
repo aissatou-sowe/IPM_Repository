@@ -52,51 +52,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "5GYJ":
-/*!***********************************!*\
-  !*** ./src/app/Models/Employe.ts ***!
-  \***********************************/
-/*! exports provided: Employe */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Employe", function() { return Employe; });
-var Employe = /** @class */ (function () {
-    function Employe(idemp, nom, prenom, sexe, adresse_domicile, date_nais, lieu_nais, telephone, date_recrutement, matricule, reference, numero_carnet, situation_familial, solde, cumul_charge, niveau_salarial, ipm_categorie, ipmService, ipmEntity, photo, statut, ipmStatutEmploye, justificatif
-    //public certifier?:boolean,
-    ) {
-        this.idemp = idemp;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.sexe = sexe;
-        this.adresse_domicile = adresse_domicile;
-        this.date_nais = date_nais;
-        this.lieu_nais = lieu_nais;
-        this.telephone = telephone;
-        this.date_recrutement = date_recrutement;
-        this.matricule = matricule;
-        this.reference = reference;
-        this.numero_carnet = numero_carnet;
-        this.situation_familial = situation_familial;
-        this.solde = solde;
-        this.cumul_charge = cumul_charge;
-        this.niveau_salarial = niveau_salarial;
-        this.ipm_categorie = ipm_categorie;
-        this.ipmService = ipmService;
-        this.ipmEntity = ipmEntity;
-        this.photo = photo;
-        this.statut = statut;
-        this.ipmStatutEmploye = ipmStatutEmploye;
-        this.justificatif = justificatif;
-    }
-    return Employe;
-}());
-
-
-
-/***/ }),
-
 /***/ "7PvS":
 /*!************************************************************************************!*\
   !*** ./src/app/precomptes/list-precomptes-mois/list-precomptes-mois.component.css ***!

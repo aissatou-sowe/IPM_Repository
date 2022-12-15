@@ -49,12 +49,15 @@ export class BonLunetterieComponent implements OnInit {
   addconjoint:Conjoint;
    addenfant:Enfant;
   prestatair;
-  bonlettre:IPM_Bon_Lunetterie=new IPM_Bon_Lunetterie(0,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  bonlettre:IPM_Bon_Lunetterie=new IPM_Bon_Lunetterie(0,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   matricule;
   AgeEmploye: number;
   AgeEnfant: number;
   AgeConjoint: any;
   selectOrDevit: any;
+  maDate: Date = new Date();
+  mess: Employe;
+  mess1: string;
   constructor(private emp_service:EmployeService,private router: Router,private pres_service:PrestataireService,
     private route : ActivatedRoute,private conj_service:ConjointService,private enf_service:EnfantService,private datePipe:DatePipe,
     private bon_lettreService:BonlettreService) { }
@@ -80,7 +83,24 @@ export class BonLunetterieComponent implements OnInit {
   public findByMatricule(){
     ///////Rechercher l'employé
   this.emp_service.getEmployeByMatricule(this.matricule).subscribe(
-    data=>{this.message = data;
+    data=>{
+      this.mess=data;
+      if (this.mess) {
+        console.log(this.mess);         
+      }
+      else {
+        this.mess1="yess"
+        console.log("charlessssssssssssss")
+        this.showNotification('top','center',3,"<b>matricule n'existe pas</b> :")
+    }    
+      if(data.statut==false)
+       { this.message = data;
+        console.log(this.message);}
+        else{
+          console.log(this.message)
+          this.mess1="yess"
+        this.showNotification('top','center',3,"<b>agent de numero matricule "+this.matricule+" ne beneficie plus de L'IPM</b> :")
+      }
       this.matr=this.message.idemp
       const date = this.datePipe.transform(this.message.date_nais, "dd-MM-yyyy");
     //const date =this.message.date_nais
@@ -234,18 +254,111 @@ public BonConsultation(){
   }
   //this.bonlettre.ordonnance=this.selectOrdonne.name
   console.log(this.bonlettre);
+  this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
+   if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&  this.bonlettre.numeroBon &&
+    this.bonlettre.designation &&  this.bonlettre.nombre_article && this.bonlettre.motif &&this.bonlettre.dateEtablissement && this.bonlettre.devit){
    this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(
     (data)=>{});
     this.bon_lettreService.uploadFileDevit(this.selectOrDevit).subscribe( (data)=>{})
   this.desactive=true
-
-    //this.toastr.success( 'Ajouter Faite avec Success');
-  
-  // console.log( this.b.ipm_employe);
-  // console.log(this.b.ipm_prestataire);
-   
- // this.router.navigate(['/gestion-bons/Listebons']);
  console.log(this.motif);
+ this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :')
+ let doc=new jsPDF();
+ var imgData = '/assets/img_poste/header1.png'
+ 
+   let col=[["Quantité","Designation","P.unitaire","Montant"]]
+  let rows=[] 
+  var ipm1=this.message?.prenom
+  var ipm2=this.message?.nom
+  console.log(ipm2);
+  var prestataire=this.p
+  var Ncarnet=this.message.numero_carnet
+  var ipm3=this.message.ipmService?.type_service
+  var ipm4=this.message?.matricule
+  var ipm5=this.message?.reference
+  autoTable(doc,{
+ //   startY:75,
+ //   head:col,
+ //    body:rows,
+ //   margin:{ horizontal:10},
+ //   styles:{overflow:"linebreak"},
+ //   bodyStyles:{valign:"top"},
+ //   theme:"grid",
+    didDrawPage: function(data){
+     //this.bon.ipm_employe=this.message;
+     doc.addImage(imgData ,'JPEG',15,5,180,20)
+     doc.setFontSize(15)
+     doc.text("",72,46)
+    // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
+    doc.setLineWidth(2)
+    doc.setDrawColor("#3A6EA5")
+    doc.rect(60,30,105,20)
+    doc.setFillColor(240,240,240)
+     doc.rect(13,65,185,35,'F')
+     //RECTANGLE PAGE
+     doc.setLineWidth(2)
+    doc.setDrawColor("#3A6EA5")
+    doc.rect(10,100,190,170)
+     doc.setFontSize(15)
+     doc.setTextColor("#3A6EA5")
+     
+     doc.text("BON DE COMMANDE",85,36)
+     doc.text("POUR LUNETTERIE",85,45)
+     doc.setTextColor("")
+      const date=new Date()
+         doc.setFontSize(13)
+          doc.text("Dakar, le :",150,60)
+          
+      doc.text(date.toLocaleDateString("fr-FR"),172,60)
+         doc.setFontSize(12)
+         doc.text("Malade:",15,75)
+         doc.text(ipm1,40,75)
+         doc.text(ipm2,80,75) 
+         doc.text("Matricule:",120,75)
+         doc.text(ipm4,140,75)
+         doc.setFontSize(12)
+         doc.text("N Carnet :",15,85)
+         doc.text(""+Ncarnet,40,85)
+         // doc.text("Nombre D'article :",120,85)
+         // doc.text(""+Narticle,160,85)
+         // doc.text("Malade:",15,95)
+         // doc.text(ipm5,40,95)
+         // doc.text(ipm6,80,95)
+         doc.text("Service :",100,95)
+         doc.text(ipm3,120,95)
+         doc.text("Prestataire :",15,95)
+         doc.text(prestataire,40,95)
+       //  doc.text("N° Ref:",15,95)
+       //  doc.text(ipm5,50,95)
+       doc.setFontSize(12)
+        doc.text("Monsieur,",15,110)
+        doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
+       //  doc.text("de:",15,125)
+       //  doc.text("----------------------",15,130)
+        doc.text("  institution :",15,130)
+        doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
+        doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
+       
+        doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
+        doc.text("Le Gérant National",150,200)
+        doc.setTextColor("#8C1C13")
+        doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
+        doc.text("--------------------------------------------------------------------------",15,250)
+        doc.setTextColor("")
+        doc.setFontSize(10)
+        doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
+        doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
+        
+    }
+   })
+ 
+ doc.output('dataurlnewwindow');
+   }else {
+
+    this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :")
+   }
 
 }
   
@@ -258,7 +371,9 @@ public BonConjoint(){
    this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addconjoint.idconj=this.idbconj
    this.bonlettre.ipm_conjoint=JSON.parse(JSON.stringify(this.addconjoint))
- 
+   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeConjoint);
    console.log(this.bonlettre.ipm_conjoint);
   
   // console.log( this.b.ipm_employe);
@@ -291,6 +406,9 @@ public BonEnfant(){
    //console.log(this.b.ipm_prestataire);
 
 //this.bonlettre.ordonnance=this.selectOrdonne.name
+this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEnfant);
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
         (data)=>{ 
       });

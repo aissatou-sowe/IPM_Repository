@@ -61,7 +61,7 @@ export class BonLettreComponent implements OnInit {
    matr:string;
    dateform =new Date();
    b:IPM_Bon=new IPM_Bon(0,"",null,null,null,null,null,null);
-   bonlettre:IPM_Bon_Lettre_Garantie = new IPM_Bon_Lettre_Garantie(0,"","","",null,null,null,null,null,null,null)
+   bonlettre:IPM_Bon_Lettre_Garantie = new IPM_Bon_Lettre_Garantie(0,"","","",null,null,null,null,null,null,null,null)
    nomm:string;
    p: any;
    addconjoint:Conjoint;
@@ -76,6 +76,9 @@ export class BonLettreComponent implements OnInit {
   AgeConjoint: number;
   AgeEmploye: number;
   desactive:boolean=false
+  maDate: Date = new Date();
+  mess: any;
+  mess1: string;
   ///////////////////////
  
   constructor(private emp_service:EmployeService,private router: Router,
@@ -113,6 +116,26 @@ export class BonLettreComponent implements OnInit {
     ///////Rechercher l'employé
   this.emp_service.getEmployeByMatricule(this.matricule).subscribe(
     data=>{this.message = data;
+
+      if (this.mess) {
+        console.log(this.mess);         
+      }
+      else {
+        this.mess1="yess"
+        this.mess1=''
+        console.log("charlessssssssssssss")
+        this.showNotification('top','center',3,"<b>matricule n'existe pas</b> :")
+    }    
+  
+    if(data.statut==false) {
+       this.message = data;
+      }
+       else{
+        console.log("age")
+        this.mess1="yess"
+        this.mess1=''
+      this.showNotification('top','center',3,"<b>agent de numero matricule "+this.matricule+" ne beneficie plus de L'IPM</b> :")
+    }
       this.matr=this.message.idemp
     console.log(this.matr);
     this.enfant=this.message;
@@ -245,6 +268,9 @@ public BonNowLettre(){
     
   }
   this.bonlettre.ordonnance=this.selectOrdonne.name
+  this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
    this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
     (data)=>{ this.router.navigate(['/gestion-bons/BonLettre'])
   });
@@ -275,6 +301,9 @@ public BonConjoint(){
    console.log(this.b.ipm_prestataire);
   this.bonlettre.ordonnance=this.selectOrdonne.name
    //this.bon.prix_unitaire=this.prix_unitaire;
+   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeConjoint);
     this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
         (data)=>{ this.router.navigate(['/gestion-bons/BonLettre'])
       });
@@ -302,6 +331,9 @@ public BonEnfant(){
    console.log(this.b.ipm_prestataire);
 
 this.bonlettre.ordonnance=this.selectOrdonne.name
+this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEnfant);
     this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
         (data)=>{ this.router.navigate(['/gestion-bons/BonLettre'])
       });

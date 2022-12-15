@@ -11,6 +11,7 @@ export class IPM_Bon_Lettre_Garantie extends IPM_Bon{
         public total:string,
          public categorie_hospitalisation:string,
          public motif:string,
+         public numeroBon:string,
         public ipm_employe:Employe,
         public ipm_prestataire:Prestataire,
         public  ipm_enfant:Enfant,

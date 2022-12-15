@@ -53,7 +53,7 @@ return this.http.post(environment.URL+'prestataire',prestataire,{responseType: '
       // console.log("file.size :"+file.size) 
       formData.append('file', file,file.name);
      // formData.append('enfant', enfant);
-      return this.http.post(environment.URL+"uploadeCertif", formData);
+      return this.http.post(environment.URL+"lettreAgrement", formData);
   
     }
 

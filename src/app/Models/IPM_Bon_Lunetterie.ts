@@ -19,7 +19,7 @@ export class  IPM_Bon_Lunetterie extends IPM_Bon{
       public ipm_prestataire:Prestataire,
       public  ipm_enfant:Enfant,
       public  ipm_prestation:Prestation,
-     // public ordonnance:string,
+      public numeroBon:string,
       public motif :string,
       public devit:string,
         public  ipm_conjoint:Conjoint,public dateEtablissement:Date)

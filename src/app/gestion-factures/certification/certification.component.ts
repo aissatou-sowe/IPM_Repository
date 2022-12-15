@@ -144,13 +144,20 @@ listFactures:IPM_Details_Facture[];
      // //console.log(this.chargeEmploie);
      this.update=this.objetEmploye
      console.log(this.update,this.update.solde);
-     // console.log(this.objetEmploye,this.objetEmploye.solde,this.update);
-     // debugger
-      //  this.fact_service.updateOnEmploye(this.update).subscribe(data=>{this. showALERTE("top","center")},
-      //    err=>{this. showALERTE2("top","center")})
+
+       this.fact_service.updateOnEmploye(this.update).subscribe(data=>
+        {if(index+1==this.listFactureCertif.length)
+          {this. showALERTE("top","center")}},
+          err=>{
+            if(index+1==this.listFactureCertif.length)
+            this. showALERTE2("top","center")})
     })
-    this.fact_service.updateLemploye(this.chargeEmploie).subscribe(data=>{this. showALERTE("top","center")},
-      err=>{this. showALERTE2("top","center")})
+    // this.fact_service.updateLemploye(this.chargeEmploie).subscribe(data=>
+    //   {if(index+1==this.listFactureCertif.length)
+    //   {this. showALERTE("top","center")}},
+    //   err=>{
+    //     if(index+1==this.listFactureCertif.length)
+    //     this. showALERTE2("top","center")})
       //  (data)=>{
     //this.elements.push(element);
   }
@@ -277,7 +284,9 @@ this.detailfacture=fact
   imprimerfacture(){
   console.log(this.listFactures)
   let doc=new jsPDF();
-  var imgData = '/assets/img_poste/laposte.png'
+  //var imgData = '/assets/img_poste/laposte.png'
+  var imgData ='/ipm-fronte/assets/img_poste/laposte.png'
+
   let col=[["Matricule","Prenom","Nom","Prestation","Montant Facture","Charge IPM","Charge Agent"]]
   let rows=[]
   for (let factemp of this.listFactures) {

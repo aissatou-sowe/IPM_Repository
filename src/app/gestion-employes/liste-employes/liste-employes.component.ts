@@ -263,6 +263,9 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
  }*/
   public EmployeNow() {
         
+    
+    
+    
     this.addService.idService = this.servi;
     this.employe.ipmService= JSON.parse(JSON.stringify(this.addService));
     this.addStatut.idStatut=1
@@ -296,6 +299,11 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
       
 
     console.log(this.employe);
+    if (this.employe.nom && this.employe.prenom && this.employe.date_nais
+      && this.employe.lieu_nais && this.employe.date_recrutement && this.employe.adresse_domicile 
+      && this.employe.situation_familial && this.employe.ipmEntity && this.employe.sexe
+      && this.employe.ipmService && this.employe.reference ) {
+      
 
     this.emp_service.AjoutEmploye(this.employe).subscribe(
       (data) => {
@@ -338,6 +346,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   }else
   this.showNotification('top', 'center', 3, "<b>employé non ajouté</b> :")
 
+}
 }
 
   public getService() {

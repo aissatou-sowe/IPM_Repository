@@ -118,7 +118,9 @@ export class SituationAnnuelleComponent implements OnInit {
 //Imprimer Situation Annuelle
 printSituationAnnuelle(){
   let doc=new jsPDF();
-  var imgData = '/assets/img_poste/laposte.png'
+  //var imgData = '/assets/img_poste/laposte.png'
+  var imgData ='/ipm-fronte/assets/img_poste/laposte.png'
+
   let col=[["Matricule","Prenom","Nom","Montant Cotisé","Date Cotisation"]]
   let rows=[]
   for (let situAnnee of this.listCotisations) {

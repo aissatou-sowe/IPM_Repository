@@ -119,7 +119,9 @@ export class SituationDesBonsComponent implements OnInit {
 //Imprimer Situation Annuelle
 printSituationBons(){
   let doc=new jsPDF();
-  var imgData = '/assets/img_poste/laposte.png'
+  //var imgData = '/assets/img_poste/laposte.png'
+  var imgData ='/ipm-fronte/assets/img_poste/laposte.png'
+
   let col=[["Matricule","Prenom","Nom","Prestataire"]]
   let rows=[]
   for (let situBons of this.listBonGlobalsPrestation) {

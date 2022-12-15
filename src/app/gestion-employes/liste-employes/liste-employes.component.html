@@ -34,7 +34,10 @@
                 </thead>
                 <tbody>
                   <tr *ngFor=" let employe of employes" style="font-weight: 500;">
-                    <td class="text-center">{{employe.numero_carnet}}</td>
+                    <td class="text-center">
+                      <span *ngIf="employe.statut!=''" class="badge badge-danger">{{employe.numero_carnet}}</span>
+                    <span *ngIf="employe.statut==''" class="badge badge-success">{{employe.numero_carnet}}</span>
+                    </td>
                     <td>{{employe.nom}}</td>
                     <td>{{employe.prenom}}</td>
                     <!-- <td >{{employe.sexe}}</td> -->
@@ -45,10 +48,10 @@
 
                     <td class="td-actions">
 
-                      <label mat-raised-button>
+                      <!-- <label mat-raised-button>
                         <span style="margin:2px;" *ngIf="employe.statut!=''" class="badge badge-danger">X<i class="material-icons"></i></span>
                         <span style="margin:2px;" *ngIf="employe.statut==''" class="btn btn-success"><i class="material-icons">check</i></span>
-                      </label> 
+                      </label>  -->
                       <button mat-raised-button (click)="getEmploye(employe)" data-toggle="modal"
                        data-target="#statu" style="margin:2px;" type="button" class="btn" style="background-color: rgb(101, 101, 110);">
                         <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>

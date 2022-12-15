@@ -73,6 +73,9 @@ export class BonConsultationComponent implements OnInit {
   numBEm: string;
   numBC: string;
   numBEnf: string;
+  maDate: Date = new Date();
+  mess: any;
+  mess1: string;
   constructor(private emp_service:EmployeService,private router: Router,private pres_service:PrestataireService,
     private route : ActivatedRoute,private conj_service:ConjointService,private enf_service:EnfantService,
     private datePipe:DatePipe,private Serviceprestation: PrestationService,
@@ -118,7 +121,24 @@ export class BonConsultationComponent implements OnInit {
     ///////Rechercher l'employé
   this.emp_service.getEmployeByMatricule(this.matricule).subscribe(
     data=>{
-      if(data.statut==false) { this.message = data;
+      this.mess=data;
+        if (this.mess) {
+          console.log(this.mess);         
+        }
+        else {
+          this.mess1="yess"
+          console.log("charlessssssssssssss")
+          this.showNotification('top','center',3,"<b>matricule n'existe pas</b> :")
+      }    
+    
+      if(data.statut==false) {
+         this.message = data;
+        }
+         else{
+          console.log("age")
+          this.mess1="yess"
+        this.showNotification('top','center',3,"<b>agent de numero matricule "+this.matricule+" ne beneficie plus de L'IPM</b> :")
+      }
 
         this.matr=this.message.idemp
         console.log(this.matr);
@@ -138,10 +158,9 @@ export class BonConsultationComponent implements OnInit {
        this.AgeEmploye--;
       // console.log(this.messageconjoint.date_naiss_conj);
      }
-        console.log(this.message);}else{
-          console.log(this.message)
-        this.showNotification('top','center',3,"<b>agent de numero matricule "+this.matricule+" ne beneficie plus de L'IPM</b> :")
-      }
+        console.log(this.message);
+    
+       
     this.emp_service.getlistBonConsult(this.message.idemp).subscribe(res=>{
       this.listBon=res
       console.log(res)
@@ -307,18 +326,17 @@ public BonConsultation(){
   }
   //this.bonlettre.ordonnance=this.selectOrdonne.name
   console.log(this.bonlettre);
+  this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
+   if(this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon && this.bonlettre.designation &&  this.bonlettre.nombre_article  &&this.bonlettre.dateEtablissement){
    this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
     (data)=>{ 
+      this.upload();
   });
 
-    //this.toastr.success( 'Ajouter Faite avec Success');
-  
-  // console.log( this.b.ipm_employe);
-  // console.log(this.b.ipm_prestataire);
-   
- // this.router.navigate(['/gestion-bons/Listebons']);
- console.log(this.motif);
-
+ 
+   }
 }
   
   /////////////////Save Bon Conjoint
@@ -337,14 +355,18 @@ public BonConjoint(){
    //console.log(this.b.ipm_prestataire);
  // this.bonlettre.ordonnance=this.selectOrdonne.name
    //this.bon.prix_unitaire=this.prix_unitaire;
+   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeConjoint);
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
         (data)=>{
+              
+  
       });
       
         console.log(this.bonlettre.ipm_prestataire)
         console.log(this.bonlettre)
-       
-       
+   
  }
 
  /////////////////Save Bon Enfants
@@ -363,6 +385,9 @@ public BonEnfant(){
    //console.log(this.b.ipm_prestataire);
    this.bonlettre.dateEtablissement=new Date();
 //this.bonlettre.ordonnance=this.selectOrdonne.name
+this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEnfant);
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
         (data)=>{ 
       });
