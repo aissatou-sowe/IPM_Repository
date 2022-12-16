@@ -54,7 +54,7 @@ export class SituationAnnuelleComponent implements OnInit {
           this.listOfMonths.forEach(lmt => {
             if (new Date(element.ipm_cotisation?.date).getMonth()+1==lmt.id) {
               console.log(lmt.value,new Date(element.ipm_cotisation?.date).getMonth(),lmt.id)
-              
+            
               element.ipm_employe.justificatif=lmt.value;
               console.log(element.ipm_employe.justificatif);
 

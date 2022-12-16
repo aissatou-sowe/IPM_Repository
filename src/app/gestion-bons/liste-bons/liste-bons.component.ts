@@ -428,7 +428,7 @@ console.log(this.designation,this.nombre_article);
   this.bon.ordonnance=this.selectOrdonne.name
   if(this.bon.ipm_prestataire 
     && this.bon.numeroBon && this.bon.designation && 
-     this.bon.nombre_article &&this.bon.dateEtablissement){
+     this.bon.nombre_article &&this.bon.ordonnance && this.bon.dateEtablissement){
     this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(
   
       (data)=>{this.upload();
@@ -480,61 +480,67 @@ public BonConjoint(){
    this.bon.ordonnance=this.selectOrdonne.name
    this.bon.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.Ageconjoint);
-   if(this.bon.ipm_employe && this.bon.ipm_prestataire && this.bon.numeroBon && this.bon.designation &&  this.bon.nombre_article && this.bon.ordonnance &&this.bon.dateEtablissement && this.bon.ipm_conjoint){
+   '' +this.Ageconjoin);
+   if(this.bon.ipm_prestataire 
+    && this.bon.designation && 
+     this.bon.nombre_article && this.bon.ordonnance && this.bon.dateEtablissement){
     this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(
-        (data)=>{ this.router.navigate(['/gestion-bons/Listebons'])
+        (data)=>{this.uploadConjoint();
       });
-      this.bonpharma.uploadFile(this.selectOrdonne).subscribe( (data)=>{})
-      this.uploadConjoint();
+      this.bonpharma.uploadFile(this.selectOrdonne).subscribe( (data)=>{
+        
+      })
+
         console.log(this.bon.ipm_prestataire)
         console.log(this.bon)
         this.showNotification('top', 'center', 1, '<b>bon pharmacie ajouté avec succées!!!</b> :')
-    }else {
-      this.showNotification('top', 'center', 3, "<b>bon pharmacie non ajouté</b> :")
-    }
+
+    
+      }else {
+        this.showNotification('top', 'center', 3, "<b>bon pharmacie non ajouté</b> :")
+      }
+       
        
  }
 
  /////////////////Save Bon Enfants
-public BonEnfant(){
+ public BonEnfant(){
   // this.nom=this.bon.ipm_employe.prenom
- // this.addEmploye.idemp=this.idemploye
-
    this.bon.ipm_employe=this.message;
+   
    this.addPrestataire.code_prestataire=this.idp;
    this.bon.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
    this.addenfant.idenf=this.idbenf
    this.bon.ipm_enfant=JSON.parse(JSON.stringify(this.addenfant))
    this.bon.dateEtablissement=new Date();
+   this.bon.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEnfant);
    console.log(this.bon.ipm_enfant);
    console.log(this.b);
    console.log( this.b.ipm_employe);
    console.log(this.b.ipm_prestataire);
-   this.bon.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEnfant);
  // this.router.navigate(['/gestion-bons/Listebons']);
  console.log(this.designation,this.nombre_article);
     this.bon.designation=this.designation;
    this.bon.nombre_article=this.nombre_article;
    //this.bon.prix_unitaire=this.prix_unitaire;
    this.bon.ordonnance=this.selectOrdonne.name
-   console.log(this.bon)
-
-   if(this.bon.ipm_prestataire && this.bon.ipm_employe && this.bon.ipm_enfant && this.bon.numeroBon && this.bon.designation &&  this.bon.nombre_article && this.bon.ordonnance &&this.bon.dateEtablissement){
+   if(this.bon.ipm_prestataire 
+    && this.bon.numeroBon && this.bon.designation && 
+     this.bon.nombre_article &&this.bon.ordonnance && this.bon.dateEtablissement){
     this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(
-      (data)=>{ this.router.navigate(['/gestion-bons/Listebons'])
-    });
-    console.log(this.selectOrdonne)
-    this.bonpharma.uploadFile(this.selectOrdonne).subscribe( (data)=>{})
-      console.log(this.bon.ipm_prestataire)
-      console.log(this.bon)
-      this.showNotification('top', 'center', 1, "<b>bon pharmacie ajouté</b> :")
-      this.uploadEnfant();
-   }else{
-     this.showNotification('top', 'center', 3, "<b>bon pharmacie non ajouté</b> :")
-    }
+        (data)=>{this.uploadEnfant();
+      });
+      this.bonpharma.uploadFile(this.selectOrdonne).subscribe( (data)=>{})
+        console.log(this.bon.ipm_prestataire)
+        console.log(this.bon)
+        this.showNotification('top', 'center', 1, '<b>bon pharmacie ajouté avec succées!!!</b> :')
+
+    
+      }else {
+        this.showNotification('top', 'center', 3, "<b>bon pharmacie non ajouté</b> :")
+      }
        
        
  }
@@ -597,6 +603,9 @@ upload(){
       const date=new Date()
          doc.setFontSize(13)
           doc.text("Dakar, le :",150,60)
+          doc.text("N° BON : ",13,60)
+          doc.text(" "+numBon,30,60)
+
           
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)
@@ -609,8 +618,8 @@ upload(){
          doc.text(ipm,140,75)
          doc.text("N Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
-         doc.text("N Bon :",55,85)
-         doc.text(""+numBon,75,85)
+        //  doc.text("N Bon :",55,85)
+        //  doc.text(""+numBon,75,85)
          doc.text("Nombre D'article :",120,85)
          doc.text(""+Narticle,160,85)
 
@@ -662,9 +671,9 @@ uploadConjoint(){
    var ipm= this.message.matricule
    var Narticle=this.nombre_article
    var Ncarnet=this.message.numero_carnet
-   var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   var numBonConj=Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.ageE);
+   '' +this.Ageconjoin
   autoTable(doc,{
     startY:100,
     head:col,
@@ -695,6 +704,9 @@ uploadConjoint(){
       const date=new Date()
          doc.setFontSize(13)
           doc.text("Dakar, le :",150,60)
+          doc.text("N° BON: ",13,60)
+          doc.text(""+numBonConj,30,60)
+
           
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)
@@ -706,8 +718,6 @@ uploadConjoint(){
          doc.setFontSize(12)
          doc.text("N Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
-         doc.text("N Bon :",55,85)
-         doc.text(""+numBon,75,85)
          doc.text("Nombre D'article :",120,85)
          doc.text(""+Narticle,160,85)
          doc.text("Malade:",15,95)
@@ -753,6 +763,9 @@ uploadEnfant(){
    var ipm= this.message.matricule
    var Narticle=this.nombre_article
    var Ncarnet=this.message.numero_carnet
+   var numBonEnf=Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEnfant
    autoTable(doc,{
     startY:100,
     head:col,
@@ -783,6 +796,10 @@ uploadEnfant(){
       const date=new Date()
          doc.setFontSize(13)
           doc.text("Dakar, le :",150,60)
+          doc.text("N° BON: ",13,60)
+          doc.text(" "+numBonEnf,30,60)
+
+
           
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)

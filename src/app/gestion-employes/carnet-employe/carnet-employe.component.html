@@ -149,9 +149,9 @@
               <div class="col-md-12">
                 <div class="">
 
-                  <div class="" *ngIf="condition!=true">
+                  <div class="" *ngIf="condition!=true" >
                     <div class="table-responsive">
-                      <button mat-raised-button type="button" data-toggle="modal" data-target="#conjoints"
+                      <button mat-raised-button type="button" *ngIf="controlSexe" data-toggle="modal" data-target="#conjoints"
                         class="mat-raised-button mat-button-base btn btn-success"><span class="mat-button-wrapper"><i
                             class="material-icons">add_circle</i> Ajouter un conjoint</span></button>
                       <table class="table table-hover table-bordered rounded" style="background-color:whitesmoke;">
@@ -403,6 +403,7 @@
                         <thead>
                           <tr style="background-color:#d5d5d5 ;">
                             <!-- <th class="text-center">#</th> -->
+                            <th style="font-weight: 500;">Age</th>
                             <th style="font-weight: 500;">Nom </th>
                             <th style="font-weight: 500;">Prenom </th>
                             <th style="font-weight: 500;">Date de Naissance</th>
@@ -416,6 +417,10 @@
                           <tr class="ng-star-inserted" *ngFor=" let enfant of enfants"
                             style="font-weight: 500; text-align: center;">
                             <!-- <td class="text-center">1</td>-->
+                            <td class="text-center">
+                              <span *ngIf="enfant.active==''" class="badge badge-danger">{{enfant.agenfant}}</span>
+                            <span *ngIf="enfant.active!=''" class="badge badge-success">{{enfant.agenfant}}</span>
+                            </td>
                             <td>{{enfant.nom_enfant}}</td>
                             <td>{{enfant.prenom_enfant}}</td>
                             <td>{{enfant.date_nais_enfant | date: 'dd/MM/yyyy'}}</td>

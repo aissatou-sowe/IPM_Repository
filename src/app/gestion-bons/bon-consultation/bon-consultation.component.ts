@@ -329,13 +329,16 @@ public BonConsultation(){
   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
    '' +this.AgeEmploye);
-   if(this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon && this.bonlettre.designation &&  this.bonlettre.nombre_article  &&this.bonlettre.dateEtablissement){
+   if(this.bonlettre.ipm_prestataire && this.bonlettre.ipm_employe && this.bonlettre.ipm_prestation  &&this.bonlettre.dateEtablissement){
    this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
     (data)=>{ 
       this.upload();
   });
-
+  this.showNotification('top', 'center', 1, '<b>bon Consultation ajouté avec succées!!!</b> :')
  
+   }else {
+   
+    this.showNotification('top', 'center', 3, "<b>bon Consultation non ajouté</b> :")
    }
 }
   
@@ -344,13 +347,15 @@ public BonConjoint(){
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
    
-   this.addPrestataire.code_prestataire=this.idp;
-   this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
-   this.addconjoint.idconj=this.idbconj
-   this.bonlettre.ipm_conjoint=JSON.parse(JSON.stringify(this.addconjoint))
+  //  this.addPrestataire.code_prestataire=this.idp;
+  //  this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
+  //  this.addconjoint.idconj=this.idbconj
+  //  this.bonlettre.ipm_conjoint=JSON.parse(JSON.stringify(this.addconjoint))
+   this.bonlettre.ipm_prestataire=this.prestatair;
+   this.bonlettre.ipm_prestation=this.prestation;
    this.bonlettre.dateEtablissement=new Date();
    console.log(this.bonlettre.ipm_conjoint);
-  
+   this.bonlettre.ipm_conjoint=this.conjChoisi
   // console.log( this.b.ipm_employe);
    //console.log(this.b.ipm_prestataire);
  // this.bonlettre.ordonnance=this.selectOrdonne.name
@@ -358,14 +363,21 @@ public BonConjoint(){
    this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
    '' +this.AgeConjoint);
+   if(this.bonlettre.dateEtablissement &&  this.bonlettre.ipm_conjoint &&  this.bonlettre.ipm_prestataire &&  this.bonlettre.ipm_prestation){
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
         (data)=>{
-              
+               this.uploadConjoint();
   
       });
       
         console.log(this.bonlettre.ipm_prestataire)
         console.log(this.bonlettre)
+        this.showNotification('top', 'center', 1, '<b>bon Consultation ajouté avec succées!!!</b> :')
+ 
+      }else {
+      
+       this.showNotification('top', 'center', 3, "<b>bon Consultation non ajouté</b> :")
+      }
    
  }
 
@@ -374,12 +386,14 @@ public BonEnfant(){
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
    
-   this.addPrestataire.code_prestataire=this.idp;
-   this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
-   this.addenfant.idenf=this.idbenf
-   //this.bonlettre.ipm_enfant=JSON.parse(JSON.stringify(this.addenfant))
- 
-   console.log(this.bonlettre.ipm_enfant);
+  //  this.addPrestataire.code_prestataire=this.idp;
+  //  this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
+  // this.addenfant.idenf=this.enfChoisi
+   this.bonlettre.ipm_enfant=this.enfChoisi
+  this.bonlettre.ipm_prestataire=this.prestatair;
+  this.bonlettre.ipm_prestation=this.prestation;
+   console.log(this.bonlettre.ipm_prestataire, this.bonlettre.ipm_enfant);
+   console.log(this.bonlettre.ipm_prestation);
    
    //console.log( this.b.ipm_employe);
    //console.log(this.b.ipm_prestataire);
@@ -388,12 +402,20 @@ public BonEnfant(){
 this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
    '' +this.AgeEnfant);
+   if(this.bonlettre.ipm_prestataire && this.bonlettre.ipm_enfant &&
+    this.bonlettre.dateEtablissement && this.bonlettre.ipm_prestation){
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
         (data)=>{ 
+          this.uploadEnfant();
       });
         console.log(this.bonlettre.ipm_prestataire)
         console.log(this.bonlettre)
-       
+        this.showNotification('top', 'center', 1, '<b>bon Consultation ajouté avec succées!!!</b> :')
+ 
+   }else {
+   
+    this.showNotification('top', 'center', 3, "<b>bon Consultation non ajouté</b> :")
+   }
     } 
 showNotification(from: any, align: any, idtype:any,note ) {
   const type = ['', 'success', 'warning', 'danger','info', 'rose', 'primary'];
@@ -494,10 +516,10 @@ upload(){
          doc.text(ipm,140,75)
          doc.text("Prestation :",120,85)
          doc.text(prestatio,143,85)
-         doc.text("N Carnet :",15,85)
+         doc.text("N° Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
-         doc.text("N Bon :",55,85)
-         doc.text(""+numBon,75,85)
+         doc.text("N° Bon : ",15,60)
+         doc.text(""+numBon,35,60)
         //  doc.text("Nombre D'article :",120,85)
         //  doc.text(""+Narticle,160,85)
 
@@ -518,7 +540,7 @@ upload(){
      }
   });
   
-  doc.save("bonConsultation.pdf");
+  doc.output('dataurlnewwindow');
   // let data = document.getElementById('noticeModal'); 
   // const printContents = document.getElementById('noticeModal').innerHTML;
   //    const originalContents = document.body.innerHTML;
@@ -607,7 +629,7 @@ uploadConjoint(){
      }
   });
   
-  doc.save("bonpharmacie.pdf");
+  doc.output('dataurlnewwindow');
   // let data = document.getElementById('noticeModal'); 
   // const printContents = document.getElementById('noticeModal').innerHTML;
   //    const originalContents = document.body.innerHTML;
@@ -639,7 +661,7 @@ uploadEnfant(){
    var Ncarnet=this.message.numero_carnet
    var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEmploye);
+   '' +this.AgeEnfant);
   autoTable(doc,{
     startY:100,
     head:col,
@@ -675,16 +697,16 @@ uploadEnfant(){
          doc.setFontSize(12)
          doc.text("Participant:",15,75)
          doc.text(ipm1,40,75)
-         doc.text(ipm2,80,75) 
+         doc.text(ipm2,75,75) 
          doc.text("Matricule:",120,75)
          doc.text(ipm,140,75)
          doc.setFontSize(12)
-         doc.text("N Carnet :",15,85)
+         doc.text("N° Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
-         doc.text("N Bon :",55,85)
-         doc.text(""+numBon,75,85)
+         doc.text("N° Bon : ",15,60)
+         doc.text(""+numBon,35,60)
          doc.text("Prestation :",120,85)
-         doc.text(prestatio,160,85)
+         doc.text(prestatio,150,85)
          doc.text("Malade:",15,95)
          doc.text(ipm5,40,95)
          doc.text(ipm6,80,95)
@@ -696,8 +718,8 @@ uploadEnfant(){
      }
   });
   
-  doc.save("bonpharmacie.pdf");
-  // let data = document.getElementById('noticeModal'); 
+  doc.output('dataurlnewwindow');
+    // let data = document.getElementById('noticeModal'); 
   // const printContents = document.getElementById('noticeModal').innerHTML;
   //    const originalContents = document.body.innerHTML;
   //    document.body.innerHTML = printContents;

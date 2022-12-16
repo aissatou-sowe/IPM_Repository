@@ -222,8 +222,8 @@
           <tr *ngFor="let element of panier; let i=index">
             <td><b>{{element.matricule}}</b></td>
             <td><b>{{element.ipm_employe?.prenom}}</b></td>
-            <td><b>{{prestation_choisi}}</b></td>
-            <!-- <td>{{element.ipm_prestation?.code_prestation}}</td> -->
+            <!-- <td><b>{{prestation_choisi}}</b></td> -->
+            <td>{{element.ipm_prestation?.libelle}}</td>
             <td><b>{{element.taux_ipm}}</b></td>
             <td><b>{{element.montant_facture}}</b></td>
             <td><b>{{element.part_ipm}}</b></td>

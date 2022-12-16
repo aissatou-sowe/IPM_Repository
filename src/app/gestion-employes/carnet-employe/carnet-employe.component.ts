@@ -18,6 +18,7 @@ import { event } from 'jquery';
 import { ModifierEmployesComponent } from '../modifier-employes/modifier-employes.component';
 import { ToastrService } from 'ngx-toastr';
 import { DateAdapter } from '@angular/material/core';
+import { element } from 'protractor';
 declare var $: any
 @Component({
   selector: 'app-carnet-employe',
@@ -106,6 +107,7 @@ export class CarnetEmployeComponent implements OnInit {
   selectEditphotoenfant: any;
   imgURL5: string | ArrayBuffer;
   condition:boolean;
+ controlSexe:boolean=false;
   constructor(@Inject(LOCALE_ID) private locale: string, private toastr: ToastrService,
     private emp_service: EmployeService,
     private conj_service: ConjointService,
@@ -142,6 +144,7 @@ export class CarnetEmployeComponent implements OnInit {
           console.log(this.currentemploye.situation_familial,this.condition)
           
         }
+      
         console.log(this.currentemploye.ipmEntity?.nom_entity);
         //const ttoday=new Date();
         //const birthDate = new Date(this.currentemploye.date_nais);
@@ -166,6 +169,7 @@ export class CarnetEmployeComponent implements OnInit {
         }
       }
     );
+
     ///
     //lister les conjoints en fonction de leur employe
     this.ide = this.route.snapshot.params['id'];
@@ -174,6 +178,13 @@ export class CarnetEmployeComponent implements OnInit {
         console.log(conjs);
         this.conjoints = conjs;
         console.log(this.conjoints)
+        this.conjoints.forEach(element=>{
+          if(element.ipm_employe.sexe=="Féminin" && element.length==1){
+            this.controlSexe=true
+          }
+        })
+       
+
       });
     //lister les enfants en fonction de leur employe
     this.iden = this.route.snapshot.params['id'];
@@ -193,12 +204,15 @@ export class CarnetEmployeComponent implements OnInit {
           if (this.agenfant > 21) {
             console.log("Age atteinte impossible de ce beneficier à l'ipm :", this.agenfant)
             ele.active = false
+            ele.agenfant=this.agenfant;
+            console.log(ele.agenfant)
             console.log(ele.active);
             console.log("age depasse")
           }
           else if (this.agenfant < 21) {
             console.log("Voici l'age :", this.agenfant)
             ele.active = true
+            ele.agenfant=this.agenfant;
             console.log(ele.active);
             console.log("age non depasse")
 
