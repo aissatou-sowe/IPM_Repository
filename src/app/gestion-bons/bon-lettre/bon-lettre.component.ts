@@ -79,6 +79,7 @@ export class BonLettreComponent implements OnInit {
   maDate: Date = new Date();
   mess: any;
   mess1: string;
+  agenft: number;
   ///////////////////////
  
   constructor(private emp_service:EmployeService,private router: Router,
@@ -115,7 +116,7 @@ export class BonLettreComponent implements OnInit {
   public findByMatricule(){
     ///////Rechercher l'employé
   this.emp_service.getEmployeByMatricule(this.matricule).subscribe(
-    data=>{this.message = data;
+    data=>{this.mess = data;
 
       if (this.mess) {
         console.log(this.mess);         
@@ -129,6 +130,8 @@ export class BonLettreComponent implements OnInit {
   
     if(data.statut==false) {
        this.message = data;
+        this.showNotification('top','center',1,'<b>agent existe</b> :')
+
       }
        else{
         console.log("age")
@@ -159,6 +162,32 @@ export class BonLettreComponent implements OnInit {
     this.enf_service.listeEnfant(this.message.idemp).subscribe(
       enfs => {      
         this.enfants = enfs;
+        
+        this.enfants.forEach(ele => {
+          if (ele.date_nais_enfant) {
+            //convert date again to type Date
+            const bdate = new Date(ele.date_nais_enfant);
+            const timeDiff = Math.abs(Date.now() - bdate.getTime());
+            this.agenft = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+
+          }
+          console.log(this.agenft)
+          if (this.agenft > 21) {
+            console.log("Age atteinte impossible de ce beneficier à l'ipm :", this.agenft)
+            ele.active = false
+            console.log(ele.active);
+            console.log("age depasse")
+          }
+          else if (this.agenft < 21) {
+            console.log("Voici l'age :", this.agenft)
+            ele.active = true
+            console.log(ele.active);
+            console.log("age non depasse")
+
+          }
+        })
+        console.log(this.enfants)
+      this.enfants = this.enfants.filter(serv => serv.active ==true)
         console.log(this.enfants)
       });
     ///////Rechercher les conjoints en fontion de l'employé
@@ -169,14 +198,14 @@ export class BonLettreComponent implements OnInit {
           console.log(this.conjoints)
         });
     
-    if(this.message){
-      this.showNotification('top','center',1,'<b>agent existe</b> :')
-      console.log(this.message);
-    }
-  else if(!this.message){
-      console.log("not existe");
-      this.showNotification('top','center',3,"<b>agent n'existe pas</b> :")
-    }
+  //   if(this.message){
+  //     this.showNotification('top','center',1,'<b>agent existe</b> :')
+  //     console.log(this.message);
+  //   }
+  // else if(!this.message){
+  //     console.log("not existe");
+  //     //this.showNotification('top','center',3,"<b>agent n'existe pas</b> :")
+  //   }
   }
     );
   
@@ -271,15 +300,23 @@ public BonNowLettre(){
   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
    '' +this.AgeEmploye);
+   if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+    this.bonlettre.dateEtablissement && this.bonlettre.ordonnance){
    this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
-    (data)=>{ this.router.navigate(['/gestion-bons/BonLettre'])
+    (data)=>{ this.upload();
   });
   this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe((data)=>{})
 
-    this.toastr.success( 'Ajouter Faite avec Success');
+    //this.toastr.success( 'Ajouter Faite avec Success');
    console.log(this.b);
    console.log( this.b.ipm_employe);
    console.log(this.b.ipm_prestataire);
+   this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :')
+
+  }else {
+
+   this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :")
+  }
    
  // this.router.navigate(['/gestion-bons/Listebons']);
  console.log(this.motif);
@@ -304,14 +341,21 @@ public BonConjoint(){
    this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
    '' +this.AgeConjoint);
+   if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+    this.bonlettre.dateEtablissement && this.bonlettre.ordonnance){
     this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
-        (data)=>{ this.router.navigate(['/gestion-bons/BonLettre'])
+        (data)=>{ this.uploadConjoint()
       });
       this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe((data)=>{})
 
         console.log(this.bonlettre.ipm_prestataire)
         console.log(this.bonlettre)
-       
+        this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :')
+
+      }else {
+    
+       this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :")
+      }
        
  }
 
@@ -334,12 +378,20 @@ this.bonlettre.ordonnance=this.selectOrdonne.name
 this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
    '' +this.AgeEnfant);
+   if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+    this.bonlettre.dateEtablissement && this.bonlettre.ordonnance){
     this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
-        (data)=>{ this.router.navigate(['/gestion-bons/BonLettre'])
+        (data)=>{ this.uploadEnfant()
       });
 this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe((data)=>{})
         console.log(this.bonlettre.ipm_prestataire)
         console.log(this.bonlettre)
+        this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :')
+
+      }else {
+    
+       this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :")
+      }
        
     }  
 
@@ -402,6 +454,9 @@ upload(){
    var ipm3=this.message.ipmService?.type_service
    var ipm4=this.message?.matricule
    var ipm5=this.message?.reference
+   var numBonEm=Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye;
    autoTable(doc,{
   //   startY:75,
   //   head:col,
@@ -434,12 +489,15 @@ upload(){
        const date=new Date()
           doc.setFontSize(13)
            doc.text("Dakar, le :",150,60)
+           doc.text("Dakar, le :",150,60)
+           doc.text("N° Bon : "+numBonEm,13,60)
+
            
        doc.text(date.toLocaleDateString("fr-FR"),172,60)
           doc.setFontSize(12)
           doc.text("Malade:",15,75)
-          doc.text(ipm1,40,75)
-          doc.text(ipm2,80,75) 
+          doc.text(ipm1+ " " +ipm2,40,75)
+          //doc.text(,80,75) 
           doc.text("Matricule:",120,75)
           doc.text(ipm4,140,75)
           doc.setFontSize(12)
@@ -478,7 +536,7 @@ upload(){
      }
     })
   
-  doc.save("lettreGantie.pdf");
+  doc.output("dataurlnewwindow");
   // let data = document.getElementById('noticeModal'); 
   // const printContents = document.getElementById('noticeModal').innerHTML;
   //    const originalContents = document.body.innerHTML;
@@ -501,6 +559,9 @@ uploadConjoint(){
    var ipm4=this.message?.matricule
    var ipm5=this.messageconjoint?.prenom_conjoint
    var ipm6=this.messageconjoint?.nom_conjoint
+   var numBonConj=Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeConjoint
    autoTable(doc,{
   //   startY:75,
   //   head:col,
@@ -533,20 +594,22 @@ uploadConjoint(){
        const date=new Date()
           doc.setFontSize(13)
            doc.text("Dakar, le :",150,60)
+           doc.text("N° BON : "+numBonConj,13,60)
+
            
        doc.text(date.toLocaleDateString("fr-FR"),172,60)
           doc.setFontSize(12)
-          doc.text("Participant:",15,75)
-          doc.text(ipm1,40,75)
-          doc.text(ipm2,80,75) 
+          doc.text("Participant :  "+ipm1 + " "+ipm2,15,75)
+          //doc.text(ipm1,40,75)
+          //doc.text(ipm2,80,75) 
           doc.text("Matricule:",120,75)
           doc.text(ipm4,140,75)
-          doc.text("Malade:",15,85)
-          doc.text(ipm5,40,85)
-          doc.text(ipm6,80,85) 
+          doc.text("Malade:  "+ipm5 + " "+ipm6,15,85)
+          //doc.text(ipm5,40,85)
+          //doc.text(ipm6,80,85) 
           doc.setFontSize(12)
-          doc.text("N Carnet :",120,85)
-          doc.text(""+Ncarnet,140,85)
+          doc.text("N Carnet : "+Ncarnet,120,85)
+          //doc.text(""+Ncarnet,140,85)
           // doc.text("Nombre D'article :",120,85)
           // doc.text(""+Narticle,160,85)
           // doc.text("Malade:",15,95)
@@ -580,7 +643,7 @@ uploadConjoint(){
      }
     })
   
-  doc.save("lettreGantie.pdf");
+    doc.output("dataurlnewwindow");
   // let data = document.getElementById('noticeModal'); 
   // const printContents = document.getElementById('noticeModal').innerHTML;
   //    const originalContents = document.body.innerHTML;
@@ -603,6 +666,9 @@ uploadEnfant(){
    var ipm4=this.message?.matricule
    var ipm5=this.messageenfant.prenom_enfant
    var ipm6=this.messageenfant?.nom_enfant
+   var numBonEnf=Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEnfant
    autoTable(doc,{
   //   startY:75,
   //   head:col,
@@ -635,20 +701,22 @@ uploadEnfant(){
        const date=new Date()
           doc.setFontSize(13)
            doc.text("Dakar, le :",150,60)
+           doc.text("N° BON : " +numBonEnf,13,60)
+
            
        doc.text(date.toLocaleDateString("fr-FR"),172,60)
           doc.setFontSize(12)
-          doc.text("Participant:",15,75)
-          doc.text(ipm1,40,75)
-          doc.text(ipm2,80,75) 
+          doc.text("Participant : " +ipm1 + " " +ipm2,15,75)
+          //doc.text(ipm1,40,75)
+          //doc.text(ipm2,80,75) 
           doc.text("Matricule:",120,75)
           doc.text(ipm4,140,75)
-          doc.text("Malade:",15,85)
-          doc.text(ipm5,40,85)
-          doc.text(ipm6,80,85) 
+          doc.text("Malade : "+ipm5 + " " +ipm6,15,85)
+          //doc.text(ipm5,40,85)
+          //doc.text(ipm6,80,85) 
           doc.setFontSize(12)
-          doc.text("N Carnet :",120,85)
-          doc.text(""+Ncarnet,140,85)
+          doc.text("N Carnet : " +Ncarnet,120,85)
+          //doc.text(""+Ncarnet,140,85)
           // doc.text("Nombre D'article :",120,85)
           // doc.text(""+Narticle,160,85)
           // doc.text("Malade:",15,95)
@@ -682,7 +750,7 @@ uploadEnfant(){
      }
     })
   
-  doc.save("lettreGantie.pdf");
+    doc.output("dataurlnewwindow");
   // let data = document.getElementById('noticeModal'); 
   // const printContents = document.getElementById('noticeModal').innerHTML;
   //    const originalContents = document.body.innerHTML;

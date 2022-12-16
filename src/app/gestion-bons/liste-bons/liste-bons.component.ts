@@ -92,6 +92,7 @@ export class ListeBonsComponent implements OnInit {
   mess1: string;
   addEmploye:Employe;
   idemploye: any;
+  agenft;
   constructor(@Inject(LOCALE_ID) private dateform: string,private emp_service:EmployeService,private router: Router,
     private route : ActivatedRoute,private pres_service:PrestataireService,
     private bonpharma:BonPharmacieService,private bont:BonService,  
@@ -328,6 +329,32 @@ this.Ageconjoin = ttoday.getFullYear() - b.getFullYear();
       this.enf_service.listeEnfant(this.message.idemp).subscribe(
         enfs => {      
           this.enfants = enfs;
+          this.enfants.forEach(ele => {
+            if (ele.date_nais_enfant) {
+              //convert date again to type Date
+              const bdate = new Date(ele.date_nais_enfant);
+              const timeDiff = Math.abs(Date.now() - bdate.getTime());
+              this.agenft = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+  
+            }
+            console.log(this.agenft)
+            if (this.agenft > 21) {
+              console.log("Age atteinte impossible de ce beneficier à l'ipm :", this.agenft)
+              ele.active = false
+              console.log(ele.active);
+              console.log("age depasse")
+            }
+            else if (this.agenft < 21) {
+              console.log("Voici l'age :", this.agenft)
+              ele.active = true
+              console.log(ele.active);
+              console.log("age non depasse")
+  
+            }
+          })
+          console.log(this.enfants)
+        this.enfants = this.enfants.filter(serv => serv.active ==true)
+
           console.log(this.enfants)
         });
       ///////Rechercher les conjoints en fontion de l'employé
