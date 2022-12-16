@@ -240,9 +240,15 @@
                   <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal" [disabled]="desactive"
                     (click)="BonConsultation()">Enregistrer
                   </button>
-                  <button mat-raised-button type="button" (click)="upload()" class=" btn btn-raised btn-round btn btn-danger btn-round"
+                  <!-- <button mat-raised-button type="button" (click)="upload()" class=" btn btn-raised btn-round btn btn-danger btn-round"
                     >
-                    Exporter</button>
+                    Exporter</button> -->
+                    <div class="col-md-6" style="font-weight:bold;color: black;float: right;">
+                      <i mat-raised-button type="button" class="nav-link"
+                      data-toggle="tab"  style="width: 100px;" (click)="retourserach()"  role="tablist" class="btn btn-info btn-round">
+                      <span class="material-icons">arrow_back</span></i>
+                    
+                    </div>
 
                 </div>
 

@@ -368,6 +368,12 @@ public BonConsultation(){
    }
 }
   
+
+retourserach()
+{
+  console.log('************************************');
+  window.location.reload();
+}
   /////////////////Save Bon Conjoint
 public BonConjoint(){
   // this.nom=this.bon.ipm_employe.prenom

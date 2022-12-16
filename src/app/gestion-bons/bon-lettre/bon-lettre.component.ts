@@ -439,6 +439,11 @@ this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe((data)=>{})
  }
  console.log(this.AgeConjoint);
      })}
+     retourserach()
+{
+  console.log('************************************');
+  window.location.reload();
+}
 /////////////////Imprimer Lettre de G
 upload(){
   let doc=new jsPDF();

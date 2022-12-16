@@ -383,6 +383,11 @@ this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate
       }
        
     } 
+    retourserach()
+{
+  console.log('************************************');
+  window.location.reload();
+}
     upload(){
       let doc=new jsPDF();
       var imgData = '/assets/img_poste/header1.png'

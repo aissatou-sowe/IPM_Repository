@@ -179,7 +179,8 @@ export class CarnetEmployeComponent implements OnInit {
         this.conjoints = conjs;
         console.log(this.conjoints)
         this.conjoints.forEach(element=>{
-          if(element.ipm_employe.sexe=="Féminin" && element.length==1){
+          if(element.ipm_employe.sexe=="Féminin" && this.conjoints.length==1){
+            console.log(this.conjoints)
             this.controlSexe=true
           }
         })
