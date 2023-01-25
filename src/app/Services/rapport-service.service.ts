@@ -9,6 +9,7 @@ import { Cotisation } from '../Models/CotisatonGlobal';
 import { Prestation } from '../Models/Prestations';
 import { IPM_Bon } from '../Models/IPM_Bon';
 import { IPM_DetaRembourse } from '../Models/IPM_DetaRembourse';
+import { Employe } from '../Models/Employe';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,10 @@ export class RapportServiceService {
   }
   public getBonByPeriodeBon(date1:String,date2:String,typeBon:String):Observable<IPM_Bon[]>{
     return this.http.get<IPM_Bon[]>(environment.URL+'getBonByPeriode/'+date1+'/'+date2+'/'+typeBon);
+  }
+
+  public CountEmploye():Observable<Employe[]>{
+    return this.http.get<Employe[]>(environment.URL+'employe/count');
   }
 }
 

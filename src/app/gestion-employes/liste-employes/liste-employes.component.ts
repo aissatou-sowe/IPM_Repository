@@ -90,6 +90,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   }
 
   ngOnInit(): void {
+ 
     ////////////////
     this.min = new Date().getFullYear()-18
   
@@ -290,19 +291,18 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     this.employe.date_recrutement = this.FormControlEmpployes.get("date_recrutement").value;
     console.log(this.employe.date_recrutement);
     console.log(this.employe);
-    this.employe.photo = this.selectedFile.name;
-    this.employe.justificatif=this.selectJustif.name;
-    if (this.employe.nom && this.employe.prenom && this.employe.date_nais
-      && this.employe.lieu_nais && this.employe.date_recrutement && this.employe.adresse_domicile 
-      && this.employe.situation_familial && this.employe.ipmEntity && this.employe.sexe
-      && this.employe.ipmService && this.employe.reference ) {
-      
+    if (this.selectedFile) {
+      this.employe.photo = this.selectedFile.name;    
+    }
+    if (this.selectJustif) {
+      this.employe.justificatif=this.selectJustif.name;      
+    }
+    
 
-    console.log(this.employe);
     if (this.employe.nom && this.employe.prenom && this.employe.date_nais
       && this.employe.lieu_nais && this.employe.date_recrutement && this.employe.adresse_domicile 
-      && this.employe.situation_familial && this.employe.ipmEntity && this.employe.sexe
-      && this.employe.ipmService && this.employe.reference ) {
+      && this.employe.situation_familial && this.employe.ipmEntity &&  this.employe.ipm_categorie && this.employe.sexe
+      && this.employe.ipmService && this.employe.reference  &&  this.employe.photo &&  this.employe.justificatif) {
       
 
     this.emp_service.AjoutEmploye(this.employe).subscribe(
@@ -325,13 +325,15 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
           this.message = data;
           console.log("the message ", data)
           //return this.message
+          this.showNotification('top', 'center', 1, '<b>employé ajouté avec succées!!!</b> :')
+
         });
-     this.showNotification('top', 'center', 1, '<b>employé ajouté avec succées!!!</b> :')
-    }),(errr)=>{
-        console.error(errr);
-      this.showNotification('top', 'center', 3, "<b>employé non ajouté</b> :")
+    }
+    ,error=>{
+        console.log(error);
+      this.showNotification('top', 'center',3, '<b>Matricule existe deja!!!</b> :');
       }
-   
+    )
     // if (!this.message) {
     //   this.showNotification('top', 'center', 1, '<b>employé ajouté avec succées!!!</b> :')
     //   // console.log(this.message);
@@ -343,10 +345,24 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     // }
   
 
-  }else
-  this.showNotification('top', 'center', 3, "<b>employé non ajouté</b> :")
+  }
+
+else{
+  console.log("************IPML*********************");
+  this.showNotification('top', 'right', 3, "<b>Veuiller remplir les Champs</b> :")
+}
+
+
+  
+ 
+
+  // this.showNotification('top', 'center', 3, "<b>Remplir les champs</b> :")
+
 
 }
+
+onReset(){
+  this.FormControlEmpployes.reset();
 }
 
   public getService() {

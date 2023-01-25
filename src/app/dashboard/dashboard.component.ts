@@ -3,6 +3,8 @@ import { TableData } from '../md/md-table/md-table.component';
 import { LegendItem, ChartType } from '../md/md-chart/md-chart.component';
 
 import * as Chartist from 'chartist';
+import { RapportServiceService } from '../Services/rapport-service.service';
+import { Employe } from '../Models/Employe';
 
 declare const $: any;
 
@@ -12,6 +14,8 @@ declare const $: any;
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
   // constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }
+nbre:Employe[];
+  constructor(private rapportrSer:RapportServiceService) { }
   public tableData: TableData;
   startAnimationForLineChart(chart: any) {
       let seq: any, delays: any, durations: any;
@@ -70,6 +74,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
   // constructor(private navbarTitleService: NavbarTitleService) { }
   public ngOnInit() {
+
+    //  Nbre d'"mpoloyé "
+     this.countEmploye();
       this.tableData = {
           headerRow: ['ID', 'Name', 'Salary', 'Country', 'City'],
           dataRows: [
@@ -212,4 +219,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
            });
        }
    }
+   countEmploye(){
+    this.rapportrSer.CountEmploye().subscribe(
+     (data) => {
+      this.nbre=data;
+       console.log(this.nbre);
+   
+     });
+
+ }
+
 }

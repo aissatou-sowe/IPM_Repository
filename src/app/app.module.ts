@@ -112,7 +112,7 @@ export class MaterialModule {}
         AuthLayoutComponent
     ],
     providers : [
-      MatNativeDateModule,
+     // MatNativeDateModule,
       {
         provide: APP_INITIALIZER,
         useFactory: initializeKeycloak,
@@ -121,8 +121,8 @@ export class MaterialModule {}
       },
         MatNativeDateModule,
         Location, {provide: LocationStrategy, useClass: HashLocationStrategy},  
-      MatNativeDateModule
+     // MatNativeDateModule
     ],
-    bootstrap:    [ AppComponent ]
+    bootstrap:    [AppComponent]
 })
 export class AppModule { }

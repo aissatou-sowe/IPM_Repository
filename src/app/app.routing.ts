@@ -7,7 +7,8 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 export const AppRoutes: Routes = [
     {
       path: '',
-      redirectTo: 'dashboard',
+     // redirectTo: '',
+     redirectTo: 'dashboard',
       pathMatch: 'full',
     }, {
       canActivate:[AuthGuard],
