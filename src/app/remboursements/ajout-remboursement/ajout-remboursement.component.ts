@@ -35,11 +35,14 @@ export class AjoutRemboursementComponent implements OnInit {
   panier = [];
   compte=0;
   indexMatricule;
+  messageErreur:any;
   desactive:boolean=false
+
   detailremb: IPM_DetaRembourse = { idDetail: null, matricule: null, montant: null, ipm_employe: null, ipmRemboursement: null};
   
   matri: any;
   objetEmploye: any;
+  mess: any;
   constructor(private emp_service:EmployeService,private datepipe: DatePipe,private dateAdapter: DateAdapter<Date>,
     private factservice:FactureService) {
     this.dateAdapter.setLocale('en-GB');
@@ -54,23 +57,29 @@ export class AjoutRemboursementComponent implements OnInit {
      this.emp_service.getEmployeByMatricule(this.matricule).subscribe(
       data=>{this.message = data;
         console.log(this.message)
+        this.message.solde;
       },err=>{console.log("error")}
        )
       
 
   }
   public ajoutRemboursement(){
-
     this.date1 = this.datepipe.transform(this.date, 'dd-MM-yyyy');
     console.log(this.message,this.message.matricule)
     const jsonRembourse=new IPM_DetaRembourse();
     jsonRembourse.ipm_employe=this.message
     jsonRembourse.matricule=this.message.matricule
-    jsonRembourse.montant=this.montantR
-    this.listRembourse.push({...jsonRembourse})
-     
+    jsonRembourse.montant=this.montantR   
     this.rembGlobal.dateRemboursement=this.date
    this.calculemontant()
+   if(this.message.cumul_charge<=jsonRembourse.montant ||this.message.solde<=jsonRembourse.montant)
+   {
+    this.desactive=true
+   }
+   else{
+     
+     this.listRembourse.push({...jsonRembourse})
+   }
     
   
  
@@ -95,17 +104,22 @@ export class AjoutRemboursementComponent implements OnInit {
   ajoutRem(){
     this.factservice.AjoutRembour(this.rembGlobal).subscribe((data:string)=>{
       this.rembGlobal.idRemboursement=parseInt(data)
+      //this.messageErreur=null;
+    
       console.log(this.rembGlobal)
       for(let list of this.listRembourse){
         list.ipmRemboursement=JSON.parse(JSON.stringify(this.rembGlobal))
         
       }
       console.log(this.listRembourse)
+     
       this.factservice.AjoutdetaRembour(this.listRembourse).subscribe((data)=>{
-
+        this.showALERTE2('top', 'center');
       })
+      
+     
     })
-
+//
   }
 //importation
 
@@ -320,6 +334,32 @@ deleteDetailrembs(index: number) {
     });
   }
   
-  
+  showALERTE3(from: any, align: any, idtype: any, note) {
+    const type = ['', 'success', 'warning', 'danger', 'info', 'rose', 'primary'];
+
+    // const color = Math.floor((Math.random() * 6) + 1);
+
+    $.notify({
+      icon: 'notifications',
+      message: note
+    }, {
+      type: type[1],
+      timer: 9000,
+      placement: {
+        from: from,
+        align: align
+      },
+      template: '<div data-notify="container" class="col-xs-14 col-sm-6 alert alert-{0} alert-with-icon" role="alert">' +
+        '<button mat-raised-button type="button" aria-hidden="true" class="close" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+        '<i class="material-icons" data-notify="icon">notifications</i> ' +
+        '<span data-notify="title">{1}</span> ' +
+        '<span data-notify="message">{2}</span>' +
+        '<div class="progress" data-notify="progressbar">' +
+        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+        '</div>' +
+        '<a href="{3}" target="{4}" data-notify="url"></a>' +
+        '</div>'
+    });
+  }
 
 }
