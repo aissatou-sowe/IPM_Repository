@@ -128,7 +128,7 @@ export class BonLettreComponent implements OnInit {
         this.showNotification('top','center',3,"<b>matricule n'existe pas</b> :")
     }    
   
-    if(data.statut==false) {
+    if(data.statut==true) {
        this.message = data;
         this.showNotification('top','center',1,'<b>agent existe</b> :')
 

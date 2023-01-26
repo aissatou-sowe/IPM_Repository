@@ -98,6 +98,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     this.getCategorie();
     this.getService();
     this.getEntity();
+    this.getStatutEmploye();
    
     ///////////////////
     this.dataTable = {
@@ -198,6 +199,15 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
       }
     );
     this.getFiles(this.employes);
+  }
+  getStatutEmploye(){
+    this.emp_statut.getStatutEmploye().subscribe(
+      data => {
+        // console.log(cat);
+        this.statutEmploye = data;
+        console.log(this.statutEmploye,data)
+      }
+    )
   }
 
   getEmployeById(employe) {
@@ -523,24 +533,21 @@ onReset(){
         res=>{
           this.employe=res;
           console.log(this.employe);
-          this.getStatutEmploye();
+          //this.getStatutEmploye();
         }
       )
   }
-  getStatutEmploye(){
-    this.emp_statut.getStatutEmploye().subscribe(
-      stu => {
-        // console.log(cat);
-        this.statutEmploye = stu;
-        console.log(this.statutEmploye[0])
-      }
-    )
-  }
+  
   /////Update Statut employe
   public updateStatut(){
     this.addStatut.idStatut=this.codeStat;
     
     this.employe.ipmStatutEmploye=JSON.parse(JSON.stringify(this.addStatut));
+    if (this.addStatut.idStatut==2 || this.addStatut.idStatut==3) {
+      this.employe.statut=false
+      
+    }else this.employe.statut=true
+
     console.log(this.employe)
       this.emp_service.ModifierEmployeSansphoto(this.employe).subscribe(
         (res)=>{

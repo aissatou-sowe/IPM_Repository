@@ -93,6 +93,7 @@ export class ListeBonsComponent implements OnInit {
   addEmploye:Employe;
   idemploye: any;
   agenft;
+  listB;
   constructor(@Inject(LOCALE_ID) private dateform: string,private emp_service:EmployeService,private router: Router,
     private route : ActivatedRoute,private pres_service:PrestataireService,
     private bonpharma:BonPharmacieService,private bont:BonService,  
@@ -112,6 +113,15 @@ export class ListeBonsComponent implements OnInit {
        // console.log(cat);
         this.lprestataires = pres;
         console.log(this.lprestataires);
+      }
+    )
+    this.pres_service.getBon().subscribe(
+      pres => {
+       // console.log(cat);
+        this.listB = pres;
+        console.log(this.listB);
+        
+        console.log(this.listB[this.listB.length-1].numeroBon);
       }
     )
    // this.b.ipm_employe=this.currentemploye;
@@ -290,7 +300,7 @@ console.log(this.matricule);
           console.log("charlessssssssssssss")
           this.showNotification('top','center',3,"<b>matricule n'existe pas</b> :")
       }    
-        if(data.statut==false)
+        if(data.statut==true)
          { this.message = data;
           this.idemploye=this.message.idemp
           console.log(this.message);}

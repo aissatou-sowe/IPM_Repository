@@ -15,6 +15,7 @@ export class StatutEmployeService {
   constructor(private http:HttpClient ,private toastr: ToastrService) { }
 
   public getStatutEmploye():Observable<IPM_StatutEmploye[]>{
+    
     return this.http.get<IPM_StatutEmploye[]>(environment.URL+'statutEmploye');
   }
   public modifierStatut(codes:Employe){

@@ -96,7 +96,7 @@ export class BonLunetterieComponent implements OnInit {
         console.log("charlessssssssssssss")
         this.showNotification('top','center',3,"<b>matricule n'existe pas</b> :")
     }    
-      if(data.statut==false)
+      if(data.statut==true)
        { this.message = data;
         console.log(this.message);}
         else{

@@ -26,6 +26,10 @@ return this.http.post(environment.URL+'prestataire',prestataire,{responseType: '
    // debugger
     return this.http.get<Prestataire[]>(environment.URL+'allprestataire');
   }
+  public getBon(){
+    // debugger
+     return this.http.get(environment.URL+'bon');
+   }
   public getTypePestataires(nom:string):Observable<Prestataire[]>{
      return this.http.get<Prestataire[]>(environment.URL+'listprestataire/'+nom);
    }

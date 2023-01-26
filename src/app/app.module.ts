@@ -120,7 +120,7 @@ export class MaterialModule {}
         deps: [KeycloakService],
       },
         MatNativeDateModule,
-        Location, {provide: LocationStrategy, useClass: HashLocationStrategy},  
+        Location, {provide: LocationStrategy, useClass:HashLocationStrategy},  
      // MatNativeDateModule
     ],
     bootstrap:    [AppComponent]

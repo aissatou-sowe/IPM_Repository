@@ -77,6 +77,7 @@ export class BonConsultationComponent implements OnInit {
   mess: any;
   mess1: string;
   agenft: number;
+  numBonConj: any;
   constructor(private emp_service:EmployeService,private router: Router,private pres_service:PrestataireService,
     private route : ActivatedRoute,private conj_service:ConjointService,private enf_service:EnfantService,
     private datePipe:DatePipe,private Serviceprestation: PrestationService,
@@ -132,7 +133,7 @@ export class BonConsultationComponent implements OnInit {
           this.showNotification('top','center',3,"<b>matricule n'existe pas</b> :")
       }    
     
-      if(data.statut==false) {
+      if(data.statut==true) {
          this.message = data;
         }
          else{
@@ -331,7 +332,10 @@ public BonConsultation(){
     let m =dayBEm.getMonth()+1
     console.log('sup',this.mois);
   this.mois=m}
-   this.numBEm=0+''+dayBEm.getDate()+''+this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.valInt
+  this.numBEm=(Math.floor(Math.random() * 100) + 1 +'' +this.mois+ '' 
+   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+   '' +this.AgeEmploye);
+   //=0+''+dayBEm.getDate()+''+this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.AgeEmploye
    console.log(this.numBEm);
    this.bonlettre.numeroBon=this.numBEm
   // this.nom=this.bon.ipm_employe.prenom
@@ -388,13 +392,27 @@ public BonConjoint(){
    this.bonlettre.dateEtablissement=new Date();
    console.log(this.bonlettre.ipm_conjoint);
    this.bonlettre.ipm_conjoint=this.conjChoisi
+   const dayBEm=new Date();
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  {this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
   // console.log( this.b.ipm_employe);
    //console.log(this.b.ipm_prestataire);
  // this.bonlettre.ordonnance=this.selectOrdonne.name
    //this.bon.prix_unitaire=this.prix_unitaire;
-   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+   this.numBonConj=(Math.floor(Math.random() * 100) + 1 +'' +this.mois+ '' 
    +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
    '' +this.AgeConjoint);
+   
+   this.bonlettre.numeroBon=this.numBonConj
    if(this.bonlettre.dateEtablissement &&  this.bonlettre.ipm_conjoint &&  this.bonlettre.ipm_prestataire &&  this.bonlettre.ipm_prestation){
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
         (data)=>{
@@ -503,9 +521,7 @@ upload(){
    var Ncarnet=this.message.numero_carnet
    var ipm4=this.message.ipmService?.type_service
    var ipm=this.message.matricule
-   var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEmploye);
+   var numBon=this.numBEm
   autoTable(doc,{
     startY:100,
     head:col,
@@ -602,9 +618,7 @@ uploadConjoint(){
    var ipm= this.message.matricule
    var prestatio=this.prestationC
    var Ncarnet=this.message.numero_carnet
-   var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEmploye);
+   var numBon=this.numBonConj
   autoTable(doc,{
     startY:100,
     head:col,
