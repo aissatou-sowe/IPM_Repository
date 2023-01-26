@@ -24,7 +24,7 @@ export class BaremeService {
   }
 
   public getBaremeById(idp: number):Observable<Bareme>{
-    return this.http.get<Bareme>(environment.URL+'getbareme/'+idp) 
+    return this.http.get<Bareme>(environment.URL+'bareme/'+idp) 
    
   }
 }

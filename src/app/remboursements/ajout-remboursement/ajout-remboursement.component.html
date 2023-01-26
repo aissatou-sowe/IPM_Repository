@@ -136,7 +136,13 @@
                           
                                     <hr>
                   </div>
-                 
+  
+                  <div class="card" *ngIf="desactive">
+                      <p style="text-align:center; color:red;font-size: 30px;">Remboursement impossible car solde insuffisant</p>
+                  </div>  
+                  <!-- <div class="card" *ngIf="!liste1">
+                    <p style="text-align:center; color:red;font-size: 30px;">Remboursement impossible car solde supérieur</p>
+                </div>  -->
                   <div class="col-md-12">
                       <div class="card">
                         <div class="card-header card-header-icon">
