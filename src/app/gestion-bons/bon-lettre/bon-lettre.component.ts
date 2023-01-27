@@ -80,6 +80,10 @@ export class BonLettreComponent implements OnInit {
   mess: any;
   mess1: string;
   agenft: number;
+  listB;
+  numero:number;
+  strBEm: string;
+  mois;
   ///////////////////////
  
   constructor(private emp_service:EmployeService,private router: Router,
@@ -109,6 +113,18 @@ export class BonLettreComponent implements OnInit {
         this.currentemploye = result;
       }
     );
+    this.pres_service.getBon().subscribe(
+      pres => {
+       // console.log(cat);
+        this.listB = pres;
+       
+        
+        console.log(this.listB[this.listB.length-1].numeroBon.slice(4));
+        this.numero=this.listB[this.listB.length-1].numeroBon.slice(4);
+        this.numero++
+        console.log(this.numero);
+      }
+    )
   }
  
   ////////////////////Rechercher par matricule 
@@ -282,6 +298,20 @@ showNotification(from: any, align: any, idtype:any,note ) {
 
 public BonNowLettre(){
   // this.nom=this.bon.ipm_employe.prenom
+  const dayBEm=new Date();
+
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  
+  { this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
    this.bonlettre.ipm_employe=this.message;
    this.bonlettre.dateEtablissement=new Date();
    this.addPrestataire.code_prestataire=this.idp;
@@ -297,9 +327,7 @@ public BonNowLettre(){
     
   }
   this.bonlettre.ordonnance=this.selectOrdonne.name
-  this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEmploye);
+  this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
     this.bonlettre.dateEtablissement && this.bonlettre.ordonnance){
    this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
@@ -324,6 +352,20 @@ public BonNowLettre(){
 }
   /////////////////Save Bon Conjoint
 public BonConjoint(){
+  const dayBEm=new Date();
+
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  
+  { this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
    this.bonlettre.dateEtablissement=new Date();
@@ -338,9 +380,7 @@ public BonConjoint(){
    console.log(this.b.ipm_prestataire);
   this.bonlettre.ordonnance=this.selectOrdonne.name
    //this.bon.prix_unitaire=this.prix_unitaire;
-   this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeConjoint);
+   this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
     this.bonlettre.dateEtablissement && this.bonlettre.ordonnance){
     this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
@@ -361,6 +401,20 @@ public BonConjoint(){
 
  /////////////////Save Bon Enfants
 public BonEnfant(){
+  const dayBEm=new Date();
+
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  
+  { this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
    this.bonlettre.dateEtablissement=new Date();
@@ -375,9 +429,7 @@ public BonEnfant(){
    console.log(this.b.ipm_prestataire);
 
 this.bonlettre.ordonnance=this.selectOrdonne.name
-this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEnfant);
+this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    if(this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
     this.bonlettre.dateEtablissement && this.bonlettre.ordonnance){
     this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(
@@ -446,6 +498,20 @@ this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe((data)=>{})
 }
 /////////////////Imprimer Lettre de G
 upload(){
+  const dayBEm=new Date();
+
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  
+  { this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
   let doc=new jsPDF();
   var imgData = '/assets/img_poste/header1.png'
   
@@ -459,9 +525,7 @@ upload(){
    var ipm3=this.message.ipmService?.type_service
    var ipm4=this.message?.matricule
    var ipm5=this.message?.reference
-   var numBonEm=Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEmploye;
+   var numBonEm=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    autoTable(doc,{
   //   startY:75,
   //   head:col,
@@ -550,6 +614,20 @@ upload(){
   //    document.body.innerHTML = originalContents;
 }
 uploadConjoint(){
+  const dayBEm=new Date();
+
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  
+  { this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
   let doc=new jsPDF();
   var imgData = '/assets/img_poste/header1.png'
   
@@ -564,9 +642,7 @@ uploadConjoint(){
    var ipm4=this.message?.matricule
    var ipm5=this.messageconjoint?.prenom_conjoint
    var ipm6=this.messageconjoint?.nom_conjoint
-   var numBonConj=Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeConjoint
+   var numBonConj=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    autoTable(doc,{
   //   startY:75,
   //   head:col,
@@ -657,6 +733,20 @@ uploadConjoint(){
   //    document.body.innerHTML = originalContents;
 }
 uploadEnfant(){
+  const dayBEm=new Date();
+
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  
+  { this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
   let doc=new jsPDF();
   var imgData = '/assets/img_poste/header1.png'
   
@@ -671,9 +761,7 @@ uploadEnfant(){
    var ipm4=this.message?.matricule
    var ipm5=this.messageenfant.prenom_enfant
    var ipm6=this.messageenfant?.nom_enfant
-   var numBonEnf=Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEnfant
+   var numBonEnf=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    autoTable(doc,{
   //   startY:75,
   //   head:col,
