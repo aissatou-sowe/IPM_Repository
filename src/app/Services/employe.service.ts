@@ -68,7 +68,6 @@ export class EmployeService {
     return this.http.get<Employe>(environment.URL+'rechercheM/'+matricule);
   }
   public AjoutCotisation(cotisation:Cotisation){
-    debugger
     return this.http.post(environment.URL+'cotisation',cotisation)
   }
   public AjoutDetaCotisation(detailCotsa:DetailCotisation[]){

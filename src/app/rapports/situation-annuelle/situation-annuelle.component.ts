@@ -24,6 +24,7 @@ export class SituationAnnuelleComponent implements OnInit {
   years: number[] = [];
   mois:any;
   mois1: any;
+  desactive:boolean=false;
   listOfMonths= [{id:1,value:'Javnvier'}, {id:2, value:'Février'}, {id:3, value:'Mars'}, {id:4, value:'Avril'}, {id:5, value:'Mai'}, {id:6, value:'Juin'}
    ,{id:7, value:'Juillet'},{id:8, value:'Aout'},{id:9, value:'Septembre'},{id:10, value:'Octobre'},{id:11, value:'Novembre'},{id:12, value:'Décembre'}];
   listCotisations: DetailCotisation[];
@@ -45,6 +46,7 @@ export class SituationAnnuelleComponent implements OnInit {
   }
 
   getCumulAnnee(){
+    this.desactive=true
        this.rapportServ.getCumulCotisationAnnee(this.selectedYear).subscribe(
         result=>{
         this.detailsCotisations=result
@@ -63,12 +65,14 @@ export class SituationAnnuelleComponent implements OnInit {
 
           }) 
        });
+     
         console.log(this.detailsCotisations.length);
         console.table(this.detailsCotisations);
         if (this.detailsCotisations.length==0) {
           this.showNotification('top','center',3,"<b> verifer la date ou l'entite</b> :")
   
-           }}
+           };
+          }
        )
 
 

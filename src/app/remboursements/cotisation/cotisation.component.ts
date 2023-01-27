@@ -79,24 +79,18 @@ export class CotisationComponent implements OnInit {
        
       });
       for (let index = 0; index < this.ws.length; index++) {
-        this.ws[index];
-              
-       
-      }
-     
-      this.calculemontant(this.ws)
+        this.ws[index];                     
+      }    
+      this.calculemontant(this.ws);
       
     };
     reader.readAsBinaryString(target.files[0]);
   }
   calculemontant(fac: any) {
-    this.total = 0;
-    
-    for (let element of fac) {
-      this.total += element.montant;
-      console.log(element)
-      
-
+    console.log(fac)
+    this.total = 0;    
+    for (let element of fac) {   
+      this.total += element.Montant;
     }
 
   }
@@ -111,8 +105,8 @@ export class CotisationComponent implements OnInit {
         console.log(data)
         this.cotisaGlobal.idCotisation = parseInt(data)
     for (let elemt of this.ws) {
-      this.total += elemt.montant;
-      this.emp_service.getEmployeByMatricule(elemt.matricule).subscribe(
+      this.total += elemt.Montant;
+      this.emp_service.getEmployeByMatricule(elemt.Matricule).subscribe(
 
         //() => console.log("Processing Complete."),
         (data) => {
@@ -122,7 +116,7 @@ export class CotisationComponent implements OnInit {
           if (this.message) {
             this.listEmploye.push(this.message)
             console.log(this.listEmploye)
-              this.detailCotisation.montant=elemt.montant
+              this.detailCotisation.montant=elemt.Montant
              // this.detailCotisation.matricule=elemt.matricule
               this.detailCotisation.ipm_employe=this.message
               this.detailCotisation.ipm_cotisation=this.cotisaGlobal
