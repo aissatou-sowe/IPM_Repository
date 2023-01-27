@@ -78,6 +78,9 @@ export class BonConsultationComponent implements OnInit {
   mess1: string;
   agenft: number;
   numBonConj: any;
+  listB;
+  numero:number;
+  
   constructor(private emp_service:EmployeService,private router: Router,private pres_service:PrestataireService,
     private route : ActivatedRoute,private conj_service:ConjointService,private enf_service:EnfantService,
     private datePipe:DatePipe,private Serviceprestation: PrestationService,
@@ -115,6 +118,18 @@ export class BonConsultationComponent implements OnInit {
         //console.log(this.listPrestation);
       }
     );
+    this.pres_service.getBon().subscribe(
+      pres => {
+       // console.log(cat);
+        this.listB = pres;
+       
+        
+        console.log(this.listB[this.listB.length-1].numeroBon.slice(4));
+        this.numero=this.listB[this.listB.length-1].numeroBon.slice(4);
+        this.numero++
+        console.log(this.numero);
+      }
+    )
       
   }
   ////////////////////Rechercher par matricule 
@@ -332,9 +347,7 @@ public BonConsultation(){
     let m =dayBEm.getMonth()+1
     console.log('sup',this.mois);
   this.mois=m}
-  this.numBEm=(Math.floor(Math.random() * 100) + 1 +'' +this.mois+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEmploye);
+  this.numBEm=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    //=0+''+dayBEm.getDate()+''+this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.AgeEmploye
    console.log(this.numBEm);
    this.bonlettre.numeroBon=this.numBEm
@@ -356,9 +369,7 @@ public BonConsultation(){
   }
   //this.bonlettre.ordonnance=this.selectOrdonne.name
   console.log(this.bonlettre);
-  this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEmploye);
+  
    if(this.bonlettre.ipm_prestataire && this.bonlettre.ipm_employe && this.bonlettre.ipm_prestation  &&this.bonlettre.dateEtablissement){
    this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
     (data)=>{ 
@@ -408,9 +419,7 @@ public BonConjoint(){
    //console.log(this.b.ipm_prestataire);
  // this.bonlettre.ordonnance=this.selectOrdonne.name
    //this.bon.prix_unitaire=this.prix_unitaire;
-   this.numBonConj=(Math.floor(Math.random() * 100) + 1 +'' +this.mois+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeConjoint);
+   this.numBonConj=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    
    this.bonlettre.numeroBon=this.numBonConj
    if(this.bonlettre.dateEtablissement &&  this.bonlettre.ipm_conjoint &&  this.bonlettre.ipm_prestataire &&  this.bonlettre.ipm_prestation){
@@ -433,6 +442,20 @@ public BonConjoint(){
 
  /////////////////Save Bon Enfants
 public BonEnfant(){
+  const dayBEm=new Date();
+
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  
+  { this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
   // this.nom=this.bon.ipm_employe.prenom
    this.bonlettre.ipm_employe=this.message;
    
@@ -449,9 +472,7 @@ public BonEnfant(){
    //console.log(this.b.ipm_prestataire);
    this.bonlettre.dateEtablissement=new Date();
 //this.bonlettre.ordonnance=this.selectOrdonne.name
-this.bonlettre.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEnfant);
+this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    if(this.bonlettre.ipm_prestataire && this.bonlettre.ipm_enfant &&
     this.bonlettre.dateEtablissement && this.bonlettre.ipm_prestation){
     this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(
@@ -496,6 +517,20 @@ showNotification(from: any, align: any, idtype:any,note ) {
 }
 ///////////////////////// Imprimer Bon Employé
 upload(){
+  const dayBEm=new Date();
+
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  
+  { this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
   console.log(this.message)
   let doc=new jsPDF();
   var imgData = '/assets/img_poste/header1.png'
@@ -521,7 +556,7 @@ upload(){
    var Ncarnet=this.message.numero_carnet
    var ipm4=this.message.ipmService?.type_service
    var ipm=this.message.matricule
-   var numBon=this.numBEm
+   var numBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
   autoTable(doc,{
     startY:100,
     head:col,
@@ -597,6 +632,20 @@ upload(){
   //    document.body.innerHTML = originalContents;
 }
 uploadConjoint(){
+  const dayBEm=new Date();
+
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  
+  { this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
   let doc=new jsPDF();
   var imgData = '/assets/img_poste/header1.png'
   
@@ -618,7 +667,7 @@ uploadConjoint(){
    var ipm= this.message.matricule
    var prestatio=this.prestationC
    var Ncarnet=this.message.numero_carnet
-   var numBon=this.numBonConj
+   var numBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
   autoTable(doc,{
     startY:100,
     head:col,
@@ -684,6 +733,20 @@ uploadConjoint(){
   //    document.body.innerHTML = originalContents;
 }
 uploadEnfant(){
+  const dayBEm=new Date();
+
+  if (dayBEm.getMonth()<10) {
+    this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    this.mois=0+''+m
+    console.log('infer',this.mois, this.strBEm);
+    
+  }else if(dayBEm.getMonth()>9)
+  
+  { this.strBEm=dayBEm.getFullYear().toString()
+    let m =dayBEm.getMonth()+1
+    console.log('sup',this.mois);
+  this.mois=m}
   let doc=new jsPDF();
   var imgData = '/assets/img_poste/header1.png'
   
@@ -705,9 +768,7 @@ uploadEnfant(){
    var ipm= this.message.matricule
    var prestatio=this.prestationC
    var Ncarnet=this.message.numero_carnet
-   var numBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-   +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-   '' +this.AgeEnfant);
+   var numBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
   autoTable(doc,{
     startY:100,
     head:col,
