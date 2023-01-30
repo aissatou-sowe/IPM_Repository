@@ -20,8 +20,9 @@
        
           <div class="col-md-3" style="margin-bottom: 2px;">
             <mat-form-field>
-            <mat-select ([ngModel])="selectedYear" placeholder="Choisir une année">
-              <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option> 
+            <mat-select ([ngModel])="selectedY" placeholder="Choisir une année">
+              <mat-option *ngFor="let year of years" [value]="year"  (click)="getChoixAnne(year)">{{ year }} </mat-option> 
+              
             </mat-select>
     
           </mat-form-field>
@@ -35,7 +36,7 @@
           
         </div>
         </form>
-        <div class="card" >
+        <div class="card" *ngIf="desactive">
           <p style="text-align:center; color:red;font-size: 30px;">Cotisations introuvale pour cette année</p>
       </div> 
         </div>
@@ -43,7 +44,7 @@
         </div>
         
         <!--liste creances-->
-  <div class="col-md-12" *ngIf="detailsCotisations">
+  <div class="col-md-12" *ngIf=" !desactive && detailsCotisations">
       <div class="card" >
         <div class="card-header card-header-icon">
           <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">

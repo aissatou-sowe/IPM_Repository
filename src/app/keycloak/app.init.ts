@@ -4,15 +4,15 @@ export  function initializeKeycloak(keycloak: KeycloakService): () => Promise<an
     return () =>
         keycloak.init({
             config: {
-              url: 'http://localhost:8180/auth',
+              url: 'http://localhost:8080/auth',
                 
               //url:'http://10.14.14.232:8180/auth/',
             
               
                //realm: 'Digital-Poste',
                //clientId:'ipm-fronte',
-            realm: 'IPM-Front',
-             clientId: 'front-end',
+            realm: 'Authentification-IPM',
+             clientId: 'ipm-client',
   
             } ,
             initOptions : {
