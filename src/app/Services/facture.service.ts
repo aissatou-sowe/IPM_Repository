@@ -71,7 +71,7 @@ export class FactureService {
   }
   public getAllremboursbyrembourseglobale(idremb:number):Observable<IPM_DetaRembourse[]> {
     
-    return this.http.get<IPM_Details_Facture[]>(environment.URL+'Detailremboursement/'+idremb);
+    return this.http.get<IPM_DetaRembourse[]>(environment.URL+'Detailremboursement/'+idremb);
   }
   public Updateremboursement(remb:Remboursement){
     

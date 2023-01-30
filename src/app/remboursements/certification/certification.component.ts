@@ -50,7 +50,7 @@ export class CertificationComponent implements OnInit {
             });
            });
            this.listRembourse=data;
-      console.log(this.listRembourse);
+      console.log(data);
            
        
      
@@ -94,8 +94,11 @@ export class CertificationComponent implements OnInit {
      console.log(this.update,this.update.solde);
      // console.log(this.objetEmploye,this.objetEmploye.solde,this.update);
      // debugger
-       this.factservice.updateOnEmploye(this.update).subscribe(data=>{this. showALERTE("top","center")},
-         err=>{this. showALERTE2("top","center")})
+       this.factservice.updateOnEmploye(this.update).subscribe(data=>  {if(index+1==this.listRembourse.length)
+        {this. showALERTE("top","center")}},
+        err=>{
+          if(index+1==this.listRembourse.length)
+          this. showALERTE2("top","center")})
   
     //this.fact_service.updateLemploye(this.chargeEmploie).subscribe(data=>{this. showALERTE("top","center")},
       //err=>{this. showALERTE2("top","center")})

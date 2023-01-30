@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CertificationComponent } from '../gestion-factures/certification/certification.component';
+
 import { AjoutRemboursementComponent } from './ajout-remboursement/ajout-remboursement.component';
+import { CertificationComponent } from './certification/certification.component';
 import { CotisationComponent } from './cotisation/cotisation.component';
 import { ListRemboursementsComponent } from './list-remboursements/list-remboursements.component';
 export const rembroutes: Routes = [
