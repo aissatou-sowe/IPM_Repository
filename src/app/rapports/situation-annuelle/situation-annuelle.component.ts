@@ -21,19 +21,20 @@ declare var $:any
 export class SituationAnnuelleComponent implements OnInit {
   detailsCotisations:DetailCotisation[];
   selectedYear: number;
+  selectedY: number;
   years: number[] = [];
   mois:any;
   mois1: any;
-  desactive:boolean=false;
+  desactive:boolean;
   listOfMonths= [{id:1,value:'Janvier'}, {id:2, value:'Février'}, {id:3, value:'Mars'}, {id:4, value:'Avril'}, {id:5, value:'Mai'}, {id:6, value:'Juin'}
    ,{id:7, value:'Juillet'},{id:8, value:'Aout'},{id:9, value:'Septembre'},{id:10, value:'Octobre'},{id:11, value:'Novembre'},{id:12, value:'Décembre'}];
   listCotisations: DetailCotisation[];
   nomCotisation: any;
   
     constructor(private dateAdapter: DateAdapter<Date>, private datepipe: DatePipe,private rapportServ:RapportServiceService) { 
-    this.selectedYear = new Date().getFullYear();
+   this.selectedYear = new Date().getFullYear();
     let y:number=this.selectedYear-9
-    console.log(y)
+    console.log(this.selectedYear)
     for (let year = this.selectedYear; year >= y; year--) {
       this.years.push(year);
     }
@@ -44,14 +45,23 @@ export class SituationAnnuelleComponent implements OnInit {
    
   
   }
+  getChoixAnne(year){
+    this.selectedY=year
+  }
 
   getCumulAnnee(){
-   
-    this.desactive=true
-       this.rapportServ.getCumulCotisationAnnee(this.selectedYear).subscribe(
+    this.desactive=false
+       this.rapportServ.getCumulCotisationAnnee(this.selectedY).subscribe(
         result=>{
         this.detailsCotisations=result
         console.log(this.detailsCotisations);
+        if (this.detailsCotisations.length==0) {
+          this.desactive=true
+    
+          this.showNotification('top','center',3,"<b> verifer la date ou l'entite</b> :")
+  
+           }
+        
          this.mois=new Date(this.detailsCotisations[0].ipm_cotisation?.date).getMonth()+1;
         console.log(this.mois,new Date(this.detailsCotisations[0].ipm_cotisation?.date));
         this.detailsCotisations.forEach(element => {      
@@ -70,10 +80,7 @@ export class SituationAnnuelleComponent implements OnInit {
      
         console.log(this.detailsCotisations.length);
         console.table(this.detailsCotisations);
-        if (this.detailsCotisations.length==0) {
-          this.showNotification('top','center',3,"<b> verifer la date ou l'entite</b> :")
-  
-           };
+        
           }
        )
 
@@ -103,7 +110,7 @@ export class SituationAnnuelleComponent implements OnInit {
         message: note
     }, {
         type: type[idtype],
-        timer: 10000,
+        timer: 600,
         placement: {
             from: from,
             align: align
