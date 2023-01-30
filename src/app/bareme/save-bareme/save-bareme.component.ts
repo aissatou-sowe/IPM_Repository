@@ -61,6 +61,7 @@ export class SaveBaremeComponent implements OnInit {
         
         })
         this.listBareme=result;
+      
         console.log(this.listBareme);
        });
        this.initForm();
@@ -81,6 +82,7 @@ saveBareme(){
   (()=>{
      console.log(this.baremes);
      this.toastr.success("Ajout Effectué avec succes");
+
        this.ngOnInit();
 
  });

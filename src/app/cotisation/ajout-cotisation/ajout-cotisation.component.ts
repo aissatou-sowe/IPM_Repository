@@ -10,6 +10,7 @@ import { Employe } from 'src/app/Models/Employe';
 import { DetailCotisation } from 'src/app/Models/IPM_Cotisation';
 import { EmployeService } from 'src/app/Services/employe.service';
 import * as xlsx from 'xlsx';
+declare const $: any;
 @Component({
   selector: 'app-ajout-cotisation',
   templateUrl: './ajout-cotisation.component.html',
@@ -90,7 +91,7 @@ export class AjoutCotisationComponent implements OnInit {
     this.total = 0;
     
     for (let element of fac) {
-      this.total += element.montant;
+      this.total += element.Montant;
       console.log(element)
       
 
@@ -108,8 +109,8 @@ export class AjoutCotisationComponent implements OnInit {
         console.log(data)
         this.cotisaGlobal.idCotisation = parseInt(data)
     for (let elemt of this.ws) {
-      this.total += elemt.montant;
-      this.emp_service.getEmployeByMatricule(elemt.matricule).subscribe(
+      this.total += elemt.Montant;
+      this.emp_service.getEmployeByMatricule(elemt.Matricule).subscribe(
 
         //() => console.log("Processing Complete."),
         (data) => {
@@ -119,7 +120,7 @@ export class AjoutCotisationComponent implements OnInit {
           if (this.message) {
             this.listEmploye.push(this.message)
             console.log(this.listEmploye)
-              this.detailCotisation.montant=elemt.montant
+              this.detailCotisation.montant=elemt.Montant
              // this.detailCotisation.matricule=elemt.matricule
               this.detailCotisation.ipm_employe=this.message
               this.detailCotisation.ipm_cotisation=this.cotisaGlobal
@@ -133,6 +134,7 @@ export class AjoutCotisationComponent implements OnInit {
                 (
                   (data) => {
                     console.log(data)
+                   
                   }
                 );
             }
@@ -143,9 +145,44 @@ export class AjoutCotisationComponent implements OnInit {
       
 
     }
-    })
+    this.showNotification('top', 'center', 1, '<b>cotisation ajouté avec succées!!!</b> :')
+    },error=>{
+      console.log(error);
+    this.showNotification('top', 'center',3, '<b>Erreur au niveau du fichier!!!</b> :');
+    }
+    )
   
 
+  }
+
+  ////////////fonction  Alerte
+  
+  showNotification(from: any, align: any, idtype: any, note) {
+    const type = ['', 'success', 'warning', 'danger', 'info', 'rose', 'primary'];
+
+    // const color = Math.floor((Math.random() * 6) + 1);
+
+    $.notify({
+      icon: 'notifications',
+      message: note
+    }, {
+      type: type[idtype],
+      timer: 2000,
+      placement: {
+        from: from,
+        align: align
+      },
+      template: '<div data-notify="container" class="col-xs-14 col-sm-6 alert alert-{0} alert-with-icon" role="alert">' +
+        '<button mat-raised-button type="button" aria-hidden="true" class="close" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+        '<i class="material-icons" data-notify="icon">notifications</i> ' +
+        '<span data-notify="title">{1}</span> ' +
+        '<span data-notify="message">{2}</span>' +
+        '<div class="progress" data-notify="progressbar">' +
+        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+        '</div>' +
+        '<a href="{3}" target="{4}" data-notify="url"></a>' +
+        '</div>'
+    });
   }
 
 

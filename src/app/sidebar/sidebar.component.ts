@@ -143,7 +143,7 @@ export const ROUTES: RouteInfo[] = [{
         children: [
             {path: 'AjoutRemboursement', title: 'Remboursement', ab:'AR'},
             {path: 'Listremboursements', title: 'Liste des Remboursements', ab:'LB'},
-             {path: 'Cotisation', title: 'Liste des Cotisations', ab:'LC'},
+            // {path: 'Cotisation', title: 'Liste des Cotisations', ab:'LC'},
     
         ] 
     },

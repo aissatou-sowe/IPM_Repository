@@ -35,8 +35,8 @@
                 <tbody>
                   <tr *ngFor=" let employe of employes" style="font-weight: 500;">
                     <td class="text-center">
-                      <span *ngIf="employe.statut!=''" class="badge badge-danger">{{employe.numero_carnet}}</span>
-                    <span *ngIf="employe.statut==''" class="badge badge-success">{{employe.numero_carnet}}</span>
+                      <span *ngIf="employe.statut!=''" class="badge badge-success">{{employe.numero_carnet}}</span>
+                    <span *ngIf="employe.statut==''" class="badge badge-danger">{{employe.numero_carnet}}</span>
                     </td>
                     <td>{{employe.nom}}</td>
                     <td>{{employe.prenom}}</td>

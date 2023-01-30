@@ -71,7 +71,7 @@ export class AjoutRemboursementComponent implements OnInit {
     jsonRembourse.matricule=this.message.matricule
     jsonRembourse.montant=this.montantR   
     this.rembGlobal.dateRemboursement=this.date
-   this.calculemontant()
+
    if(this.message.cumul_charge<=jsonRembourse.montant ||this.message.solde<=jsonRembourse.montant)
    {
     this.desactive=true
@@ -79,6 +79,7 @@ export class AjoutRemboursementComponent implements OnInit {
    else{
      
      this.listRembourse.push({...jsonRembourse})
+     this.calculemontant()
    }
     
   

@@ -154,7 +154,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
           if (this.ages > 60 || ele.ipmStatutEmploye?.emplStatut=="Démission" 
           || ele.ipmStatutEmploye?.emplStatut=="licenciment") {
             console.log("Age atteinte impossible de ce beneficier à l'ipm :", this.ages)
-            ele.statut = true
+            ele.statut = false
             console.log(ele);
             console.log(ele.ipmStatutEmploye?.emplStatut)
             this.emp_service.ModifierEmploye(ele).subscribe(data=>{})
@@ -162,7 +162,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
           }
           else if (this.ages < 60) {
             console.log("Voici l'age :", this.ages)
-            ele.statut = false
+            ele.statut = true
             //console.log(ele);
             console.log("age non depasse")
 
