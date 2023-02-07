@@ -81,6 +81,7 @@ export class AjouterFacturesComponent implements OnInit {
   indexMatricule;
   desactive:boolean=false
   comtper: number;
+  Prestation;
   //detailFacture : Array<IPM_Details_Facture> = [];
   // import("c:/Users/HP/workspace/projet_IPM/material-dashboard-pro-angular-v2.5.0/material-dashboard-pro-angular-v2.5.0/src/app/Models/Prestations").Prestation[];
 

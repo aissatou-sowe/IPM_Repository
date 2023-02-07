@@ -58,6 +58,7 @@
               <label>Telephone : <b> {{ currentemploye.telephone}}</b></label>
               <label>Situation Familial : <b> {{ currentemploye.situation_familial}}</b></label>
               <label>Service : <b> {{ currentemploye.ipmService?.type_service}}</b></label> <br>
+              
             </div>
           </div>
           <div class="col-md-4">
@@ -67,7 +68,7 @@
               <label>Reference : <b> {{currentemploye.reference}}</b></label><br>
               <label>Categorie : <b> {{ currentemploye.ipm_categorie?.libelle}}</b></label>
               <label>Date Recrutement :<b> {{currentemploye.date_recrutement}}</b></label>
-              <label>Lieu de Naissance :<b> {{currentemploye.lieu_nais}}</b></label>
+              <label>Date et Lieu de Naissance :<b> {{currentemploye.date_nais | date:'dd/MM/yyyy'}} à {{currentemploye.lieu_nais}}</b></label>
             </div>
           </div>
 

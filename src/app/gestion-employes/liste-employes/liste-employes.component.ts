@@ -75,6 +75,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   ]
   codeStat: number;
   desactive:boolean=false
+  desac:boolean=false;
   selectJustif: any;
   JustifURL: string | ArrayBuffer;
   min: number;
@@ -341,7 +342,8 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     }
     ,error=>{
         console.log(error);
-      this.showNotification('top', 'center',3, '<b>Matricule existe deja!!!</b> :');
+        this.desac=true
+     // this.showNotification('top', 'center',3, '<b>Matricule existe deja!!!</b> :');
       }
     )
     // if (!this.message) {
@@ -359,7 +361,8 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
 
 else{
   console.log("************IPML*********************");
-  this.showNotification('top', 'right', 3, "<b>Veuiller remplir les Champs</b> :")
+  this.desactive=true;
+ // this.showNotification('top', 'right', 3, "<b>Veuiller remplir les Champs</b> :")
 }
 
 
