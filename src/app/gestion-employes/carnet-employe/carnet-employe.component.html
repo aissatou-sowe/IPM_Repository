@@ -58,6 +58,7 @@
               <label>Telephone : <b> {{ currentemploye.telephone}}</b></label>
               <label>Situation Familial : <b> {{ currentemploye.situation_familial}}</b></label>
               <label>Service : <b> {{ currentemploye.ipmService?.type_service}}</b></label> <br>
+
             </div>
           </div>
           <div class="col-md-4">
@@ -67,7 +68,8 @@
               <label>Reference : <b> {{currentemploye.reference}}</b></label><br>
               <label>Categorie : <b> {{ currentemploye.ipm_categorie?.libelle}}</b></label>
               <label>Date Recrutement :<b> {{currentemploye.date_recrutement}}</b></label>
-              <label>Lieu de Naissance :<b> {{currentemploye.lieu_nais}}</b></label>
+              <label>Date et Lieu de Naissance :<b> {{currentemploye.date_nais | date:'dd/MM/yyyy'}} à
+                  {{currentemploye.lieu_nais}}</b></label>
             </div>
           </div>
 
@@ -149,11 +151,12 @@
               <div class="col-md-12">
                 <div class="">
 
-                  <div class="" *ngIf="condition!=true" >
+                  <div class="" *ngIf="condition!=true">
                     <div class="table-responsive">
-                      <button mat-raised-button type="button" data-toggle="modal" data-target="#conjoints" *ngIf="controlSexe==''"
-                        class="mat-raised-button mat-button-base btn btn-success"><span class="mat-button-wrapper"  ><i
-                            class="material-icons">add_circle</i> Ajouter un conjoint</span></button>
+                      <button mat-raised-button type="button" data-toggle="modal" data-target="#conjoints"
+                        *ngIf="controlSexe==''" class="mat-raised-button mat-button-base btn btn-success"><span
+                          class="mat-button-wrapper"><i class="material-icons">add_circle</i> Ajouter un
+                          conjoint</span></button>
                       <table class="table table-hover table-bordered rounded" style="background-color:whitesmoke;">
                         <thead>
                           <tr style="background-color:rgb(215, 215, 215);">
@@ -277,112 +280,110 @@
                                   </div>
                                 </form>
                                 <div class="modal-footer justify-content-center">
-                                  <button mat-raised-button type="button" class="btn btn-success btn-round" data-dismiss="modal"
-                                    (click)="ModifConjointNow()">
-                                   modifier</button>
+                                  <button mat-raised-button type="button" class="btn btn-success btn-round"
+                                    data-dismiss="modal" (click)="ModifConjointNow()">
+                                    modifier</button>
                                 </div>
                               </div>
                             </div>
                           </div>
-                 <!--Ajouter Nouveau Conjoints-->
-                 <div class="modal fade" id="conjoints" tabindex="-1" role="dialog"
-                 aria-labelledby="myModalLabel" aria-hidden="true">
-                 <div class="modal-dialog modal-notice ">
-                   <div class="modal-content" style="width: 700px;">
-                     <div class="modal-header">
-                       <h4 class="modal-title p-2 rounded"
-                         style="background-color:whitesmoke; font-weight: 400;" id="myModalLabel">Ajout de
-                         Conjoint(s)</h4>
-                       <button mat-button type="button" class=" btn btn-danger" data-dismiss="modal">
-                         <i class="material-icons">close</i>Fermer
-                       </button>
-                     </div>
-                     <form class="form-horizontal" #form="ngForm">
-                     
-                       <div class="form-group row card-header">
+                          <!--Ajouter Nouveau Conjoints-->
+                          <div class="modal fade" id="conjoints" tabindex="-1" role="dialog"
+                            aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-notice ">
+                              <div class="modal-content" style="width: 700px;">
+                                <div class="modal-header">
+                                  <h4 class="modal-title p-2 rounded"
+                                    style="background-color:whitesmoke; font-weight: 400;" id="myModalLabel">Ajout de
+                                    Conjoint(s)</h4>
+                                  <button mat-button type="button" class=" btn btn-danger" data-dismiss="modal">
+                                    <i class="material-icons">close</i>Fermer
+                                  </button>
+                                </div>
+                                <form class="form-horizontal" #form="ngForm">
 
-                         <div class="col-md-4 ">
-                           <mat-form-field class="example-full-width">
-                           <input matInput type="text" placeholder="Nom Conjoint(e)"  id="nom_conjoint"
-                             [(ngModel)]="nom_conjoint" name="nom_conjoint">
-                           </mat-form-field>
-                         </div>
-                         <div class="col-md-4">
-                           <mat-form-field class="example-full-width">
-                           <input matInput type="text" placeholder="Prenom Conjoint(e)"  id="prenom_conjoint"
-                             [(ngModel)]="prenom_conjoint" name="prenom_conjoint">
-                           </mat-form-field>
-                         </div>
+                                  <div class="form-group row card-header">
 
-                         <div [formGroup]="" class="col-md-4 form-group" style="margin-top: 0px;">
-                           <mat-form-field>
-                             <mat-select placeholder="Choissir le sexe" name="sexe" 
-                                [(ngModel)]="sexe">
-                               <mat-option *ngFor="let sex of sexe" [value]="sex.value"
-                                 (click)="sexeEnfant(sex)">
-                                 {{ sex.value }}
-                               </mat-option>
-                             </mat-select>
-                           </mat-form-field>
-                         </div>
+                                    <div class="col-md-4 ">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput type="text" placeholder="Nom Conjoint(e)" id="nom_conjoint"
+                                          [(ngModel)]="nom_conjoint" name="nom_conjoint">
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput type="text" placeholder="Prenom Conjoint(e)"
+                                          id="prenom_conjoint" [(ngModel)]="prenom_conjoint" name="prenom_conjoint">
+                                      </mat-form-field>
+                                    </div>
 
-                         <div class="col-md-4 form-group">
-                           
-                           <!-- <input type="date" class="form-control" id="date_naiss_conj"
+                                    <div [formGroup]="" class="col-md-4 form-group" style="margin-top: 0px;">
+                                      <mat-form-field>
+                                        <mat-select placeholder="Choissir le sexe" name="sexe" [(ngModel)]="sexe">
+                                          <mat-option *ngFor="let sex of sexe" [value]="sex.value"
+                                            (click)="sexeEnfant(sex)">
+                                            {{ sex.value }}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                    </div>
+
+                                    <div class="col-md-4 form-group">
+
+                                      <!-- <input type="date" class="form-control" id="date_naiss_conj"
                              [(ngModel)]="conjoint.date_naiss_conj" name="date_naiss_conj">  -->
-                             <mat-form-field>
+                                      <mat-form-field>
 
 
-                               <input matInput [matDatepicker]="picker" (click)="picker.open()" id="date_naiss_conj" 
-                                 placeholder="Date de naissance" id="date_naiss_conj"
-                                 [(ngModel)]="date_naiss_conj" name="date_naiss_conj">
-                               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                               <mat-datepicker #picker startView="year"></mat-datepicker>
-                             </mat-form-field>    
-                         </div>
-                         <div class="col-md-4 form-group">
-                           <mat-form-field class="example-full-width">
+                                        <input matInput [matDatepicker]="picker" (click)="picker.open()"
+                                          id="date_naiss_conj" placeholder="Date de naissance" id="date_naiss_conj"
+                                          [(ngModel)]="date_naiss_conj" name="date_naiss_conj">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker startView="year"></mat-datepicker>
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                      <mat-form-field class="example-full-width">
 
-                           <input matInput type="text" placeholder="lieu de naissance"  id="lieu_naiss_conj"
-                             [(ngModel)]="lieu_naiss_conj" name="lieu_naiss_conj">
-                           </mat-form-field>  
-                         </div>
-                         <div class="col-md-4 form-group">
-                           <mat-form-field class="example-full-width">
-                           <input matInput type="text" placeholder="Téléphone"  id="telephone"
-                             [(ngModel)]="telephone" name="telephone">
-                           </mat-form-field> 
-                           </div>
-                         <div class="col-md-4 btn btn-file"> Changer Photo
-                           <input type="file"  name="image" (change)="getFile($event)">
-                           <img [src]="imgURL" height=" 100" width="100" *ngIf="imgURL">
-                         </div>
-                         <div class="col-md-4 btn btn-file" style="margin-left:30% ;">Joindre Certificat de
-                           mariage
+                                        <input matInput type="text" placeholder="lieu de naissance" id="lieu_naiss_conj"
+                                          [(ngModel)]="lieu_naiss_conj" name="lieu_naiss_conj">
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput type="text" placeholder="Téléphone" id="telephone"
+                                          [(ngModel)]="telephone" name="telephone">
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4 btn btn-file"> Changer Photo
+                                      <input type="file" name="image" (change)="getFile($event)">
+                                      <img [src]="imgURL" height=" 100" width="100" *ngIf="imgURL">
+                                    </div>
+                                    <div class="col-md-4 btn btn-file" style="margin-left:30% ;">Joindre Certificat de
+                                      mariage
 
-                           <input type="file"  name="file"
-                             (change)="selectCertificat($event)">
-                           <img [src]="CertifURL" height=" 100" width="100" *ngIf="CertifURL">
-
-
-                         </div>
+                                      <input type="file" name="file" (change)="selectCertificat($event)">
+                                      <img [src]="CertifURL" height=" 100" width="100" *ngIf="CertifURL">
 
 
-               
-                       
-                       <div class="modal-footer justify-content-center">
-                         <button mat-raised-button type="button" class="btn btn-success btn-round"
-                           (click)="ConjointNow();form.resetForm()" data-dismiss="modal">
-                           Enregistrer</button>
-                       </div>
-                     </div>
-                       
-                     </form>
-                     
-                     
-                   </div>
-                 </div>
-               </div>
+                                    </div>
+
+
+
+
+                                    <div class="modal-footer justify-content-center">
+                                      <button mat-raised-button type="button" class="btn btn-success btn-round"
+                                        (click)="ConjointNow();form.resetForm()" data-dismiss="modal">
+                                        Enregistrer</button>
+                                    </div>
+                                  </div>
+
+                                </form>
+
+
+                              </div>
+                            </div>
+                          </div>
                         </tbody>
                       </table>
                     </div>
@@ -419,7 +420,7 @@
                             <!-- <td class="text-center">1</td>-->
                             <td class="text-center">
                               <span *ngIf="enfant.active==''" class="badge badge-danger">{{enfant.agenfant}}</span>
-                            <span *ngIf="enfant.active!=''" class="badge badge-success">{{enfant.agenfant}}</span>
+                              <span *ngIf="enfant.active!=''" class="badge badge-success">{{enfant.agenfant}}</span>
                             </td>
                             <td>{{enfant.nom_enfant}}</td>
                             <td>{{enfant.prenom_enfant}}</td>
@@ -652,9 +653,13 @@
         </div>
       </div>
     </div>
+    <button mat-raised-button class="btn btn-info" style="width: 100px;"data-toggle="modal" data-target="#noticeMod" (click)="listFacture()"><i
+        class="material-icons" ></i> Facture
+    </button>
     <button mat-raised-button class="btn btn-danger" style="width: 100px;" (click)="retourner()"><i
         class="material-icons">arrow_back</i> retour
     </button>
+
   </div>
 </div>
 <ng-template #test>
@@ -795,7 +800,7 @@
             <div class="form-group">
               <label>prenom : <b> {{prenom_enfant}}</b></label> <br>
               <label>Date de Naissance : <b> {{date_naiss_enfant}}</b> </label> <br>
-             
+
 
             </div>
           </div>
@@ -815,5 +820,90 @@
       </div>
 
     </div>
+  </div>
+
+</div>
+<!-- modal facture -->
+<div class="modal fade col-md-12" id="noticeMod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" >
+  <div class="modal-dialog  modal-notice">
+    <div class="modal-content " style="width: 1000px; margin-left: -3cm;">
+      <div class="modal-header">
+        <h4 class="modal-title">Facture</h4>
+        <button mat-button type="button" class="close btn-danger" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">clear</i>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-icon">
+              <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                <i class="material-icons">list</i>
+
+              </div>
+              <h3 style="background-color:whitesmoke; color: black; pading: 5px; width: 40%;">liste Facture
+              </h3>
+            </div>
+            <div class="card-body">
+
+              <table class="table table-hover table-bordered">
+                <thead>
+
+                  <th cope="col">Facture</th>
+                  <th cope="col">Prestation</th>
+                  <th cope="col">Date</th>
+                  <th cope="col">Taux</th>
+                  
+                  <th cope="col">Montant total</th>
+                  <th cope="col">Part Patient</th>
+                  <th cope="col">Part IPM</th>
+
+                  
+
+                </thead>
+                <tbody>
+                  <tr *ngFor="let element of listFactures">
+                    <td><b>{{element.ipmFacture.idfacture}}</b></td>
+                  
+                    <td><b>{{element.ipm_prestation.libelle}}</b></td>
+                    <td><b>{{element.datePrestation}}</b></td>
+                    <td><b>{{element.taux_ipm}}</b></td>
+                    <td><b>{{element.montant_facture}}</b></td>
+                    <td><b>{{element.part_patient}}</b></td>
+                    <td><b>{{element.part_ipm}}</b></td>
+                   
+                    
+
+                    
+                    
+                    
+
+
+                  </tr>
+                </tbody>
+                <tfoot style="font-weight:bold;">
+                  <tr>
+                    
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                  </tr>
+                </tfoot>
+
+              </table>
+              <div class="modal-footer justify-content-center">
+                
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

@@ -646,6 +646,7 @@ upload(){
    var ipm1=this.message.prenom
    var ipm2=this.message.nom
    var ipm3=this.p
+   var age=this.ageE;
    var Pmalade=this.message.prenom
    var Narticle=this.nombre_article
    var Ncarnet=this.message.numero_carnet
@@ -689,7 +690,9 @@ upload(){
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)
          doc.text("Malade :",15,75)
-         doc.text(ipm1,40,75)
+         doc.text(ipm1,50,75)
+         doc.text("Age :",30 ,75)
+         doc.text(""+age,30,75)
          doc.setFontSize(12)
          doc.text("",90,75)
          doc.text(ipm2,80,75)

@@ -10,6 +10,8 @@ import { Prestation } from '../Models/Prestations';
 import { IPM_Bon } from '../Models/IPM_Bon';
 import { IPM_DetaRembourse } from '../Models/IPM_DetaRembourse';
 import { Employe } from '../Models/Employe';
+import { Conjoint } from '../Models/Conjoint';
+import { Enfant } from '../Models/Enfant';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +56,12 @@ export class RapportServiceService {
 
   public CountEmploye():Observable<Employe[]>{
     return this.http.get<Employe[]>(environment.URL+'employe/count');
+  }
+  public CountConj():Observable<Conjoint[]>{
+    return this.http.get<Conjoint[]>(environment.URL+'conjoint/count');
+  }
+  public CountEnf():Observable<Enfant[]>{
+    return this.http.get<Enfant[]>(environment.URL+'enfant/count');
   }
 }
 

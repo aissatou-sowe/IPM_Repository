@@ -164,7 +164,7 @@
 Affichage de lien.txt en cours... -->
 
 <!-- Partie Modification modification-->
-<div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<!-- <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
@@ -201,7 +201,7 @@ aria-hidden="true">
         <div class="row">
         <div class="col-md-6 form-group">
           <mat-form-field>
-           <!--{{currentprestataire.typePres}}--> 
+           {{currentprestataire.typePres}}
             <mat-select placeholder="Prestataire" name="listTypePrestataire" [(ngModel)]="code_presta">
               <mat-option *ngFor="let prest of cur" [value]="prest.id_type_prestataire">
                 {{ prest.nom_type_prestaire }}
@@ -241,4 +241,4 @@ aria-hidden="true">
 
   </div>
 </div>
-</div>
+</div> -->

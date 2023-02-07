@@ -160,6 +160,12 @@
            <b class="btn btn-danger"> <i class="material-icons" style="color: red;">close</i> fermer</b>
           </button>
         </div>
+        <div class="card" *ngIf="desac">
+          <p style="text-align:center; color:red;font-size: 30px;">Matricule existe deja!!!</p>
+      </div>
+        <div class="card" *ngIf="desactive">
+          <p style="text-align:center; color:red;font-size: 30px;">Veuiller remplir les Champs!!!</p>
+      </div>
         <div class="container-fluid">
           <form class="form-horizontal">
             <input type="hidden" class="form-control">

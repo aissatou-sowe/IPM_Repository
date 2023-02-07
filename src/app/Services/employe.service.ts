@@ -10,6 +10,7 @@ import { Service } from '../Models/Service';
 import { catchError } from 'rxjs/operators';
 import { Cotisation } from '../Models/CotisatonGlobal';
 import { DetailCotisation } from '../Models/IPM_Cotisation';
+import { IPM_Details_Facture } from '../Models/IPM_Detils_Factures';
 
 
 @Injectable({
@@ -160,5 +161,9 @@ export class EmployeService {
     formData.append('image', file,file.name);
    // formData.append('enfant', enfant);
     return this.http.post(environment.URL+"uploadjustif", formData);
+  }
+  ListFactureByEmploye(id):Observable<any>{
+    return this.http.get<IPM_Details_Facture>(environment.URL+'detailsfactByEmploye/'+id);
+
   }
 }

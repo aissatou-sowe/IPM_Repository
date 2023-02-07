@@ -17,7 +17,7 @@ export  function initializeKeycloak(keycloak: KeycloakService): () => Promise<an
             } ,
             initOptions : {
                 onLoad:"check-sso",
-                checkLoginIframe:false
+                checkLoginIframe:false //Verifie l'etat qui a connecté
                // onLoad:"login-required",
             },
           //  enableBearerInterceptor: true,

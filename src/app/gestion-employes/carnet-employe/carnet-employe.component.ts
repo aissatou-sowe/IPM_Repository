@@ -108,6 +108,7 @@ export class CarnetEmployeComponent implements OnInit {
   imgURL5: string | ArrayBuffer;
   condition:boolean;
  controlSexe:boolean=false;
+  listFactures: any;
   constructor(@Inject(LOCALE_ID) private locale: string, private toastr: ToastrService,
     private emp_service: EmployeService,
     private conj_service: ConjointService,
@@ -874,6 +875,15 @@ export class CarnetEmployeComponent implements OnInit {
 
     );
 
+
+  }
+  listFacture(){
+    this.emp_service.ListFactureByEmploye(this.iden).subscribe(
+      (data) => {
+        this.listFactures = data;
+        console.log(this.listFactures)
+        //return this.message
+      })
 
   }
 

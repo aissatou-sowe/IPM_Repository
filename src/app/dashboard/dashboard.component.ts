@@ -5,6 +5,8 @@ import { LegendItem, ChartType } from '../md/md-chart/md-chart.component';
 import * as Chartist from 'chartist';
 import { RapportServiceService } from '../Services/rapport-service.service';
 import { Employe } from '../Models/Employe';
+import { Conjoint } from '../Models/Conjoint';
+import { Enfant } from '../Models/Enfant';
 
 declare const $: any;
 
@@ -15,6 +17,8 @@ declare const $: any;
 export class DashboardComponent implements OnInit, AfterViewInit {
   // constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }
 nbre:Employe[];
+nbreconjoint:Conjoint[];
+nbrenfant:Enfant[];
   constructor(private rapportrSer:RapportServiceService) { }
   public tableData: TableData;
   startAnimationForLineChart(chart: any) {
@@ -77,6 +81,8 @@ nbre:Employe[];
 
     //  Nbre d'"mpoloyé "
      this.countEmploye();
+     this.countConoint();
+     this.countEnfant();
       this.tableData = {
           headerRow: ['ID', 'Name', 'Salary', 'Country', 'City'],
           dataRows: [
@@ -228,5 +234,24 @@ nbre:Employe[];
      });
 
  }
+  countConoint(){
+    this.rapportrSer.CountConj().subscribe(
+     (data) => {
+      this.nbreconjoint=data;
+       console.log(this.nbreconjoint);
+   
+     });
+
+ }
+ countEnfant(){
+  this.rapportrSer.CountEnf().subscribe(
+   (data) => {
+    this.nbrenfant=data;
+     console.log(this.nbrenfant);
+ 
+   });
+
+}
+
 
 }
