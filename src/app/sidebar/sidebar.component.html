@@ -617,7 +617,7 @@
                                                     </ul>
                                   <!---Fin Cotisation------------->
                                         <!-- utilisateurs -->
-                                        <ul class="nav" *ngIf=" isSecretaire() || isOperateur() || isGerant()" >
+                                        <ul class="nav" *ngIf="  isGerant()" >
                                           <li routerLinkActive="active" class="nav-item">
                                               
                                               <a [routerLink]="[menuItems[10].path]" *ngIf="menuItems[10].type === 'link'" class="nav-link">
@@ -633,7 +633,7 @@
                                                   <p id="titre">{{menuItems[10].title}}<b class="caret"></b></p>
                                               </a>
                                               <div id="{{menuItems[10].collapse}}" class="collapse" *ngIf="menuItems[10].type === 'sub'">
-                                                <ul class="nav" *ngIf="isSecretaire() || isOperateur() || isGerant()">
+                                                <ul class="nav" *ngIf=" isGerant()">
                                                   <li routerLinkActive="active" class="nav-item">
                                                       <a [routerLink]="[menuItems[10].path,menuItems[10].children[0].path]" class="nav-link">
                               

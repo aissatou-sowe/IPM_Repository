@@ -629,7 +629,7 @@ upload(){
   this.mois=m}
   console.log(this.message)
   let doc=new jsPDF();
-  var imgData = '/assets/img_poste/header1.png'
+  var imgData = '/ipm-fronte/assets/img_poste/header1.png'
   let col=[["Quantité","Designation","P.unitaire","Montant"]]
   let rows=[]
     if(this.bon.ipm_employe=this.message.idemp){
@@ -743,7 +743,7 @@ uploadConjoint(){
     console.log('sup',this.mois);
   this.mois=m}
   let doc=new jsPDF();
-  var imgData = '/assets/img_poste/header1.png'
+  var imgData = '/ipm-fronte/assets/img_poste/header1.png'
   
    let col=[["Quantité","Designation","P.unitaire","Montant"]]
   let rows=[]
@@ -845,7 +845,7 @@ uploadEnfant(){
     console.log('sup',this.mois);
   this.mois=m}
   let doc=new jsPDF();
-  var imgData = '/assets/img_poste/header1.png'
+  var imgData = '/ipm-fronte/assets/img_poste/header1.png'
   
    let col=[["Quantité","Designation","P.unitaire","Montant"]]
   let rows=[]

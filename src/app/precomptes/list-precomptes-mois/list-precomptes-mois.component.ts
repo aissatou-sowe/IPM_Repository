@@ -1,9 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component,ElementRef,ViewChild, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
 import { Precompte } from 'src/app/Models/Precompte';
 import { PrecomptesService } from 'src/app/Services/precomptes.service';
+import * as xlsx from 'xlsx';
 declare var $;
 @Component({
   selector: 'app-list-precomptes-mois',
@@ -71,4 +72,12 @@ export class ListPrecomptesMoisComponent implements OnInit {
   
   
   }
+  @ViewChild('TABLE', { static: false }) TABLE: ElementRef; 
+  fileDownload(){
+    const ws: xlsx.WorkSheet = xlsx.utils.table_to_sheet(this.TABLE.nativeElement);  
+    const wb: xlsx.WorkBook = xlsx.utils.book_new();  
+    xlsx.utils.book_append_sheet(wb, ws, 'Fichier Precompte');  
+    xlsx.writeFile(wb, 'precompte.xlsx');  
+ 
+}
 }

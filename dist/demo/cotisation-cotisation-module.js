@@ -134,7 +134,7 @@ var AjoutCotisationComponent = /** @class */ (function () {
         this.total = 0;
         for (var _i = 0, fac_1 = fac; _i < fac_1.length; _i++) {
             var element = fac_1[_i];
-            this.total += element.montant;
+            this.total += element.Montant;
             console.log(element);
         }
     };
@@ -147,15 +147,15 @@ var AjoutCotisationComponent = /** @class */ (function () {
             console.log(data);
             _this.cotisaGlobal.idCotisation = parseInt(data);
             var _loop_1 = function (elemt) {
-                _this.total += elemt.montant;
-                _this.emp_service.getEmployeByMatricule(elemt.matricule).subscribe(
+                _this.total += elemt.Montant;
+                _this.emp_service.getEmployeByMatricule(elemt.Matricule).subscribe(
                 //() => console.log("Processing Complete."),
                 function (data) {
                     _this.message = data;
                     if (_this.message) {
                         _this.listEmploye.push(_this.message);
                         console.log(_this.listEmploye);
-                        _this.detailCotisation.montant = elemt.montant;
+                        _this.detailCotisation.montant = elemt.Montant;
                         // this.detailCotisation.matricule=elemt.matricule
                         _this.detailCotisation.ipm_employe = _this.message;
                         _this.detailCotisation.ipm_cotisation = _this.cotisaGlobal;
@@ -174,6 +174,36 @@ var AjoutCotisationComponent = /** @class */ (function () {
                 var elemt = _a[_i];
                 _loop_1(elemt);
             }
+            _this.showNotification('top', 'center', 1, '<b>cotisation ajouté avec succées!!!</b> :');
+        }, function (error) {
+            console.log(error);
+            _this.showNotification('top', 'center', 3, '<b>Erreur au niveau du fichier!!!</b> :');
+        });
+    };
+    ////////////fonction  Alerte
+    AjoutCotisationComponent.prototype.showNotification = function (from, align, idtype, note) {
+        var type = ['', 'success', 'warning', 'danger', 'info', 'rose', 'primary'];
+        // const color = Math.floor((Math.random() * 6) + 1);
+        $.notify({
+            icon: 'notifications',
+            message: note
+        }, {
+            type: type[idtype],
+            timer: 2000,
+            placement: {
+                from: from,
+                align: align
+            },
+            template: '<div data-notify="container" class="col-xs-14 col-sm-6 alert alert-{0} alert-with-icon" role="alert">' +
+                '<button mat-raised-button type="button" aria-hidden="true" class="close" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+                '<i class="material-icons" data-notify="icon">notifications</i> ' +
+                '<span data-notify="title">{1}</span> ' +
+                '<span data-notify="message">{2}</span>' +
+                '<div class="progress" data-notify="progressbar">' +
+                '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                '</div>' +
+                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                '</div>'
         });
     };
     AjoutCotisationComponent.ctorParameters = function () { return [

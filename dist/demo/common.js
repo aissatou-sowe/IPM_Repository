@@ -1,5 +1,120 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["common"],{
 
+/***/ "0WQY":
+/*!*********************************************!*\
+  !*** ./src/app/Services/facture.service.ts ***!
+  \*********************************************/
+/*! exports provided: FactureService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FactureService", function() { return FactureService; });
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "AytR");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var FactureService = /** @class */ (function () {
+    function FactureService(http) {
+        this.http = http;
+    }
+    FactureService.prototype.AjoutFacture = function (facture) {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'facture', facture, { responseType: 'text' });
+    };
+    FactureService.prototype.AjoutDetailsFacture = function (detailfacture) {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'adddetailsfacture', detailfacture, { responseType: 'text' })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])((this.erroHandler)));
+    };
+    FactureService.prototype.AjoutRembour = function (Remboursement) {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'remboursement', Remboursement, { responseType: 'text' })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])((this.erroHandler)));
+    };
+    FactureService.prototype.AjoutdetaRembour = function (listRembourse) {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'adddetailsremboursement', listRembourse, { responseType: 'text' })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])((this.erroHandler)));
+    };
+    FactureService.prototype.erroHandler = function (error) {
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error.message || 'erreur de telechargement de fichier');
+    };
+    FactureService.prototype.getAllFacture = function () {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'detailsfactures');
+    };
+    FactureService.prototype.getAllFactureglobale = function () {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'allfacture');
+    };
+    FactureService.prototype.getAllRemboursementGlobal = function () {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'remboursement');
+    };
+    FactureService.prototype.getAllFactbyfactglobale = function (idfac) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'detailsfacture/' + idfac);
+    };
+    FactureService.prototype.getAllremboursbyrembourseglobale = function (idremb) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'Detailremboursement/' + idremb);
+    };
+    FactureService.prototype.Updateremboursement = function (remb) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'remboursement', remb);
+    };
+    FactureService.prototype.UpdateFacture = function (facture) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'updatefacture', facture, { responseType: 'text' });
+    };
+    FactureService.prototype.getFactureById = function (idfac) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'getfacture/' + idfac);
+    };
+    FactureService.prototype.deleteById = function (idfac) {
+        return this.http.delete(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'facture/' + idfac);
+    };
+    FactureService.prototype.deleterembById = function (idfac) {
+        return this.http.delete(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'remboursement/' + idfac);
+    };
+    FactureService.prototype.updateLemploye = function (lEmploye) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'updateLEmploye', lEmploye, { responseType: 'text' });
+    };
+    FactureService.prototype.updateLdetailFacture = function (ldetail) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'updateList', ldetail, { responseType: 'text' });
+    };
+    FactureService.prototype.updateOnEmploye = function (Employe) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'employe', Employe);
+    };
+    FactureService.prototype.updateOnglobal = function (Empl) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'upremboursement', Empl);
+    };
+    FactureService.prototype.getEmployeById = function (idemp) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'employes/' + idemp);
+    };
+    FactureService.prototype.updateDetailfact = function (ipm_detail) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'updateDetail', ipm_detail);
+    };
+    FactureService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"] }
+    ]; };
+    FactureService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]])
+    ], FactureService);
+    return FactureService;
+}());
+
+
+
+/***/ }),
+
 /***/ "3m7+":
 /*!*************************************************!*\
   !*** ./src/app/Services/prestataire.service.ts ***!
@@ -38,6 +153,10 @@ var PrestataireService = /** @class */ (function () {
     PrestataireService.prototype.getAllPrestataires = function () {
         // debugger
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'allprestataire');
+    };
+    PrestataireService.prototype.getBon = function () {
+        // debugger
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'bon');
     };
     PrestataireService.prototype.getTypePestataires = function (nom) {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'listprestataire/' + nom);
@@ -197,7 +316,7 @@ var EnfantService = /** @class */ (function () {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'enfant/' + idenf);
     };
     EnfantService.prototype.modifEnfant = function (enfant) {
-        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'putenfant', enfant, { responseType: 'text' });
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'putenfantsansPhoto', enfant, { responseType: 'text' });
     };
     EnfantService.prototype.modifPhotoEnfant = function (enfant) {
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + "putenfant", enfant, { responseType: 'text' });
@@ -235,6 +354,87 @@ var EnfantService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]])
     ], EnfantService);
     return EnfantService;
+}());
+
+
+
+/***/ }),
+
+/***/ "CsMi":
+/*!*****************************************************!*\
+  !*** ./src/app/Services/rapport-service.service.ts ***!
+  \*****************************************************/
+/*! exports provided: RapportServiceService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RapportServiceService", function() { return RapportServiceService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/environments/environment */ "AytR");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var RapportServiceService = /** @class */ (function () {
+    function RapportServiceService(http) {
+        this.http = http;
+    }
+    RapportServiceService.prototype.getEntity = function () {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'entity');
+    };
+    RapportServiceService.prototype.getGlobaleParEntity = function (date1, date2, id) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'getCreanceGlobaless/' + date1 + '/' + date2 + '/' + id);
+    };
+    RapportServiceService.prototype.getCumulCotisationAnnee = function (annee) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'cumulCotisation/' + annee);
+    };
+    RapportServiceService.prototype.getDetailsCotisationByEmploye = function (details) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'listcotisation/' + details);
+    };
+    RapportServiceService.prototype.getSituationIndividuel = function (date1, date2) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'getCreanceGlo/' + date1 + '/' + date2);
+    };
+    RapportServiceService.prototype.getPrestation = function () {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'prestation');
+    };
+    RapportServiceService.prototype.getSituatonParPrestation = function (date1, date2, id) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'getGlobalsPrestations/' + date1 + '/' + date2 + '/' + id);
+    };
+    RapportServiceService.prototype.getSituatonParindividus = function (date1, date2, id) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'getIndividuelPrestations/' + date1 + '/' + date2 + '/' + id);
+    };
+    RapportServiceService.prototype.getSituatonRemboursement = function (date1, date2, id) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'getIndividuelRembour/' + date1 + '/' + date2 + '/' + id);
+    };
+    RapportServiceService.prototype.getBonByPeriodeAndtypeBon = function (date1, date2, idprestation) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'getBonByPeriodeAndtype/' + date1 + '/' + date2 + '/' + idprestation);
+    };
+    RapportServiceService.prototype.getBonByPeriodeBon = function (date1, date2, typeBon) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'getBonByPeriode/' + date1 + '/' + date2 + '/' + typeBon);
+    };
+    RapportServiceService.prototype.CountEmploye = function () {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'employe/count');
+    };
+    RapportServiceService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+    ]; };
+    RapportServiceService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    ], RapportServiceService);
+    return RapportServiceService;
 }());
 
 
@@ -542,7 +742,7 @@ var BaremeService = /** @class */ (function () {
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'updatebareme', pre);
     };
     BaremeService.prototype.getBaremeById = function (idp) {
-        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'getbareme/' + idp);
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'bareme/' + idp);
     };
     BaremeService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"] }

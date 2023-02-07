@@ -56,8 +56,6 @@
                       <button style="margin-bottom: 10px; font-size:17px;" class="w-100" data-toggle="modal"
                         data-target="#noticeModalroleUser">affecter role </button>
                     </td>
-                    <!-- <td><button>{{list.nom_entity}}</button></td>
-                  <td>  <button>{{list.nom_entity}}</button> -->
 
                   </tr>
                 </tbody>
@@ -70,9 +68,6 @@
     </div>
   </div>
 </div>
-
-
-
 <div class="row">
   <div class="col-md-8">
     <div class="card " style="margin-left:4cm;">
@@ -82,44 +77,43 @@
         </div>
       </div>
       <div class="card-body ">
+        
+        <div class="row">
+          <table class="table table-hover table-bordered col-md-12">
+              <thead>
+                  <tr style="background-color:rgb(213, 213, 213);">
+                      <!-- <th style="font-weight: 500;">Matricule</th> -->
+                      <th  style="font-weight: 500;">Nom</th>
+                      <th  style="font-weight: 500;">Prénom</th>
+                      <th  style="font-weight: 500;">nom utilisateur</th>
+                      <th  style="font-weight: 500;">email</th>
+                      <th  style="font-weight: 500;">Fonction</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let lis of listUser" style="font-weight: 400;">
+                   <!-- <td>{{listelement.ipm_employe?.matricule}}</td> -->
+                   <td>{{lis.nom}}</td>
+                   <td>{{lis.prenom}}</td>
+                      <td>{{lis.login}}</td>
+                      <td>{{lis.email}}</td>
+                      <td>{{lis.fonction}}</td>
+                      <!-- <td class="td_actions text-right">
+                          <button mat-raised-button type="button" class="btn btn-warning  btn-round btn-xs"
+                              id="edit">
+                              <i class="fa fa-home"></i></button>
+                      </td> -->
+                  </tr>
+              </tbody>
+          </table>
+      </div>
 
       </div>
-      <!-- <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header card-header-icon">
-                      <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
-                          <i class="material-icons">list</i>
-                      </div>
-                      <h3 style="background-color:whitesmoke; font-weight: 400; color: black; pading: 5px; width: 50%;" class="card-title"> Utilisateur et Role
-                      </h3>
-                  </div>
-                  <div class="card-body" style="padding-left: 3.5cm;">
-                      <div class="btn-group">
-                          <table>
-                              <thead>
-                                  <th></th>
-                              </thead>
-                              <tbody>
-                                  <tr>
-                                      <td> <button style="margin-bottom: 10px; font-size:17px;" class="w-100" data-toggle="modal"
-                                              data-target="#noticeModal">Nouveau Utilisateur</button>
-                                     <button style="margin-bottom: 10px; font-size:17px;" data-target="#noticeModal" class="w-100" data-toggle="modal">Nouveau Role</button>
-                                       <button style="margin-bottom: 10px; font-size:17px;" data-target="#noticeModal" class="w-100" data-toggle="modal">Attribution de Role</button> 
-
-                                  </tr>
-                              </tbody>
-                          </table>
-                      </div>
-
-                  </div>
-              </div>
-          </div>
-      </div>
-    -->
+      
      
 
 
-      <!--fin modal-->
+     
 
 
     </div>

@@ -456,7 +456,7 @@ this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charA
     console.log('sup',this.mois);
   this.mois=m}
       let doc=new jsPDF();
-      var imgData = '/assets/img_poste/header1.png'
+      var imgData = '/ipm-fronte/assets/img_poste/header1.png'
       
         let col=[["Designation","P.unitaire","Montant"]]
        let rows=[] 
@@ -575,7 +575,7 @@ this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charA
     console.log('sup',this.mois);
   this.mois=m}
       let doc=new jsPDF();
-      var imgData = '/assets/img_poste/header1.png'
+      var imgData = '/ipm-fronte/assets/img_poste/header1.png'
       
         let col=[["Designation","P.unitaire","Montant"]]
        let rows=[] 
@@ -697,7 +697,7 @@ this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charA
     console.log('sup',this.mois);
   this.mois=m}
       let doc=new jsPDF();
-      var imgData = '/assets/img_poste/header1.png'
+      var imgData = '/ipm-fronte/assets/img_poste/header1.png'
       
         let col=[["Designation","P.unitaire","Montant"]]
        let rows=[] 

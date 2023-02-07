@@ -101,9 +101,7 @@ var IPM_Bon_Lunetterie = /** @class */ (function (_super) {
     //public service:string,
     total, 
     // public date_etablissement:Date,
-    quantite, designation, prix_unitaire, ipm_employe, ipm_prestataire, ipm_enfant, ipm_prestation, 
-    // public ordonnance:string,
-    motif, ipm_conjoint, dateEtablissement) {
+    quantite, designation, prix_unitaire, ipm_employe, ipm_prestataire, ipm_enfant, ipm_prestation, numeroBon, motif, devit, ipm_conjoint, dateEtablissement) {
         var _this = _super.call(this, idbon, total, ipm_employe, ipm_prestataire, ipm_enfant, ipm_conjoint, ipm_prestation, dateEtablissement) || this;
         _this.idbon = idbon;
         _this.nombre_article = nombre_article;
@@ -115,7 +113,9 @@ var IPM_Bon_Lunetterie = /** @class */ (function (_super) {
         _this.ipm_prestataire = ipm_prestataire;
         _this.ipm_enfant = ipm_enfant;
         _this.ipm_prestation = ipm_prestation;
+        _this.numeroBon = numeroBon;
         _this.motif = motif;
+        _this.devit = devit;
         _this.ipm_conjoint = ipm_conjoint;
         _this.dateEtablissement = dateEtablissement;
         return _this;
@@ -197,7 +197,7 @@ var BonService = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!--Types Bons -->\r\n\r\n<div class=\"main-content\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row tab-content tab-space\" style=\"margin-top:-5.5cm;\">\r\n\r\n\r\n\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <ul class=\"nav nav-pills nav-pills-warning\" role=\"tablist\">\r\n\r\n      </ul>\r\n      <div class=\"tab-content tab-space\">\r\n        <div class=\"col-md-11 tab-pane active\" id=\"link0\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header  card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title\"\r\n                style=\"background-color:whitesmoke; font-weight: 400; color: black; padding: 4px; width: 35%;\">\r\n                Rechercher Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group no-border\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n\r\n\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\" style=\"padding-left: 80%;\">\r\n              <button mat-raised-button type=\"submit\" class=\"nav-link \" data-toggle=\"tab\" href=\"#link1\"\r\n                (click)=\"findByMatricule()\" class=\"btn btn-fill btn-success\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"tab-pane\" id=\"link1\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header  card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title\"\r\n                style=\"background-color:whitesmoke; font-weight: 400; color: black; padding: 4px; width: 40%;\">Bon\r\n                Pharmaceutique Employé</h3>\r\n            </div>\r\n\r\n            <div class=\"card p-4\" style=\"font-weight:500 ;\">\r\n              <form>\r\n                <div>\r\n                  <style>\r\n                    label {\r\n                      font-weight: bold;\r\n                      color: black;\r\n                    }\r\n                  </style>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom :</label>\r\n                        {{message.prenom}}\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom :</label>\r\n                        {{message.nom}}\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n                        {{message.numero_carnet}}\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age :</label>\r\n                        <b> {{ageE}}</b>\r\n                        \r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      {{message.date_nais}}\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      {{message.lieu_nais}}\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Services:</label>\r\n                      {{message.ipmService?.type_service}}\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\" style=\"margin-top: 5px;font-weight:bold;color: black\">\r\n                    <mat-form-field>\r\n                      <label for=\"lPrestataires\">lPrestataires</label>\r\n                      <mat-select name=\"prestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          {{ prest.nom_prestataire }}\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-2 form-group\">\r\n                    <label>Nombre d'article</label>\r\n                    <input type=\"number\" class=\"form-control\" id=\"nombre_article\" [(ngModel)]=\"nombre_article\"\r\n                      name=\"nombre_article\">\r\n                  </div>\r\n                  <div class=\"col-md-3 form-group\">\r\n                    <label>Designation</label>\r\n                    <input type=\"text\" class=\"form-control\" id=\"designation\" [(ngModel)]=\"designation\"\r\n                      name=\"designation\">\r\n                  </div>\r\n                  <div class=\"col-md-2 form-group\">\r\n                    \r\n                    <label class=\"bmd-label-floating\">Nombre de Bon :</label>\r\n                    \r\n                    <b> {{listBon.length}}</b>\r\n                    \r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                \r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n  \r\n                </div>\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                          data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-6\" style=\"font-weight:bold;color: black\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Conjoints\" name=\"conjoints\" ([ngModel])=\"id_conjoint\">\r\n                        <mat-option *ngFor=\"let conjoint of conjoints\" [value]=\"conjoint.idconj\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link2\" role=\"tablist\" (click)=\"getconjointbon(conjoint)\">\r\n                          {{ conjoint.prenom_conjoint}} {{ conjoint.nom_conjoint}}\r\n                        </mat-option>\r\n                      </mat-select>\r\n\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-6\" style=\"font-weight:bold;color: black\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Enfants\" name=\"enfants\" ([ngModel])=\"id_enfant\">\r\n                        <mat-option *ngFor=\"let enfant of enfants\" [value]=\"enfant.idenf\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link3\" role=\"tablist\" (click)=\"getenfantbon(enfant)\">\r\n                          {{ enfant.prenom_enfant}} {{ enfant.nom_enfant}}\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    data-target=\"#noticeModal\">Voir Bon Pharmaceutique</button>\r\n\r\n                </div>\r\n                <div>\r\n                  <!-- <h4>{{message}} </h4> -->\r\n                </div>\r\n\r\n              </form>\r\n\r\n\r\n              <!-- </div>\r\n                        </div>\r\n                      </div>\r\n          \r\n                    </div>\r\n                  </div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link2\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"text-center\"\r\n                style=\"background-color:whitesmoke; color: black; padding: 2px; width: 45%; font-weight: 500;\">Bon\r\n                Pharmaceutique conjoint</h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Conjoint :</label>\r\n                        <b> {{messageconjoint?.prenom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Conjoint :</label>\r\n                        <b> {{messageconjoint?.nom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance :</label>\r\n                        <b> {{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Matricule :</label>\r\n                      <b> {{message?.matricule}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance :</label>\r\n                      <b> {{messageconjoint?.lieu_naiss_conj}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Age :</label>\r\n                      <b> {{Ageconjoin}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\" style=\"margin-top:1px;\">\r\n                    <label class=\"bmd-label-floating\">Prestataires Conjoints :</label>\r\n                    <mat-form-field>\r\n                      <mat-select name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b> {{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <label>Nombre d'article</label>\r\n                    <input type=\"number\" class=\"form-control\" id=\"nombre_article\" [(ngModel)]=\"nombre_article\"\r\n                      name=\"nombre_article\">\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <label>Designation</label>\r\n                    <input type=\"text\" class=\"form-control\" id=\"designation\" [(ngModel)]=\"designation\"\r\n                      name=\"designation\">\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n  \r\n                </div>\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                          data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    data-target=\"#noticeConjoint\"> Details Conjoint</button>\r\n\r\n                </div>\r\n                <div>\r\n\r\n                </div>\r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link3\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"text-center\"\r\n                style=\"background-color:whitesmoke; color: black; padding: 2px; width: 45%; font-weight: 500;\">Bon\r\n                Pharmaceutique Enfant </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n\r\n                <style>\r\n                  b {\r\n                    color: black;\r\n                    font-weight: 500;\r\n                  }\r\n                </style>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-3 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label>Prénom Enfant : </label>\r\n                      <b> {{messageenfant?.prenom_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-3 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label> Nom Enfant : </label>\r\n                      <b> {{messageenfant?.nom_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-3 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance : </label>\r\n                      <b> {{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-3 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Age:</label>\r\n                      <b> {{AgeEnfant}}</b>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance : </label>\r\n                      <b> {{messageenfant?.lieu_nais_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <label>Nombre d'article</label>\r\n                    <input type=\"number\" class=\"form-control\" id=\"nombre_article\" [(ngModel)]=\"nombre_article\"\r\n                      name=\"nombre_article\">\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <label>Designation</label>\r\n                    <input type=\"text\" class=\"form-control\" id=\"designation\" [(ngModel)]=\"designation\"\r\n                      name=\"designation\">\r\n                  </div>\r\n\r\n                </div>\r\n\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires Enfants\">Prestataires Enfants</label>\r\n                      <mat-select name=\"prestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          {{ prest.nom_prestataire }}\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n  \r\n                </div>\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                          data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n\r\n\r\n                <!-- \r\n                                    <div class=\"col-md-6 form-group\">\r\n                                      <label>Prix Unitaire</label>\r\n                                      <input type=\"text\" class=\"form-control\" id=\"prix_unitaire\" [(ngModel)]=\"prix_unitaire\"\r\n                                        name=\"prix_unitaire\">\r\n                                    </div> -->\r\n\r\n\r\n\r\n\r\n\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    data-target=\"#noticeenfant\">Details Enfant</button>\r\n\r\n                </div>\r\n                <div>\r\n                  <!-- <h4>{{message}} </h4> -->\r\n                </div>\r\n\r\n              </form>\r\n\r\n\r\n              <!-- </div>\r\n                        </div>\r\n                      </div>\r\n          \r\n                    </div>\r\n                  </div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!-- Fin Types Bons -->\r\n<!-- <div class=\"col-md-12\"> -->\r\n\r\n<!-- Exemple ngTemplate-->\r\n\r\n<!-- Fin Exemple ngTemplate-->\r\n<!-- notice modal -->\r\n<div class=\"modal fade\" id=\"noticeModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"\r\n  *ngIf=\"message\">\r\n  <div class=\"modal-dialog modal-notice\">\r\n    <div class=\"modal-content\" style=\"width: 600px;\">\r\n      <div class=\"modal-header\">\r\n        <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n        <button mat-button type=\"button\" class=\"close \" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n          <i style=\"margin-top: -1.3cm; color: red; font-size: 30px;\" class=\"material-icons\">close</i>\r\n        </button>\r\n\r\n\r\n      </div>\r\n      <div class=\"modal-body\">\r\n\r\n\r\n        <div class=\"\" style=\"margin-top: -1cm;\">\r\n          <div>\r\n            <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n\r\n          <div class=\"col-md-12\">\r\n            <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n          </div>\r\n        </div>\r\n        <hr>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Prénom :</label>\r\n              <b> {{message.prenom}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Nom :</label>\r\n              <b> {{message.nom}}</b>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <hr>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Prestataire :</label>\r\n              <b>{{p}}</b>\r\n            </div>\r\n          </div>\r\n          <!-- <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n              {{message.idemp}}\r\n            </div>\r\n          </div> -->\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Services:</label>\r\n              <b> {{message.ipm_service?.type_service}}</b>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n        <div class=\"card-body table-full-width\">\r\n          <div class=\"table-responsive\">\r\n            <table class=\"table table-hover table-bordered\">\r\n              <thead class=\"\">\r\n                <tr style=\"background-color: whitesmoke;\">\r\n                  <th style=\"font-weight: 600px\">Matricule Participant</th>\r\n                  <th style=\"font-weight: 600px\">Designation</th>\r\n                  <th style=\"font-weight: 600px\">Nombre D'article</th>\r\n\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr>\r\n                  <td>{{message.matricule}}</td>\r\n                  <td>{{designation}}</td>\r\n                  <td>{{nombre_article}}</td>\r\n\r\n              </tbody>\r\n\r\n            </table>\r\n\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"BonNow()\" class=\"btn btn-success btn-round\"\r\n          data-dismiss=\"modal\">\r\n          Enregistrer</button>\r\n      </div>\r\n      <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\"btn btn-green btn-round\" data-dismiss=\"modal\">\r\n          Exporter</button>\r\n      </div>\r\n\r\n    </div>\r\n\r\n\r\n  </div>\r\n</div>\r\n<!-- end notice modal -->\r\n\r\n\r\n<!--modal Conjoints  -->\r\n<div class=\"modal fade\" id=\"noticeConjoint\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\" *ngIf=\"message\">\r\n  <div class=\"modal-dialog modal-notice\">\r\n    <div class=\"modal-content\" style=\"width: 600px;\">\r\n      <div class=\"modal-header\">\r\n        <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n        <button mat-button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n          <i class=\"material-icons\">close</i>\r\n        </button>\r\n\r\n\r\n      </div>\r\n      <div class=\"modal-body\">\r\n\r\n        <div class=\"\" style=\"margin-top: -1cm;\">\r\n          <div>\r\n            <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n\r\n          <div class=\"col-md-12\">\r\n            <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n          </div>\r\n        </div>\r\n        <hr>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Matricule Participant:</label>\r\n              <b> {{message.matricule}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Prénom Conjoint :</label>\r\n              <b> {{messageconjoint?.prenom_conjoint}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Nom Conjoint :</label>\r\n              <b> {{messageconjoint?.nom_conjoint}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Date Naissance :</label>\r\n              <b> {{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Lieu de Naissance :</label>\r\n              <b> {{messageconjoint?.lieu_naiss_conj}}</b>\r\n            </div>\r\n          </div>\r\n          <!-- <div class=\"col-md-6 form-group\">\r\n              <div class=\"form-group\">\r\n                <label class=\"bmd-label-floating\">Services:</label>\r\n                {{message.ipm_service?.type_service}}\r\n              </div>\r\n            </div> -->\r\n        </div>\r\n        <hr>\r\n        <div class=\"card-body table-full-width\">\r\n          <div class=\"table-responsive\">\r\n            <table class=\"table table-hover table-bordered\">\r\n              <thead class=\"text-black\">\r\n                <tr>\r\n\r\n                  <th style=\"font-weight:600;\">Prestataire</th>\r\n                  <th style=\"font-weight:600;\">Designation</th>\r\n                  <th style=\"font-weight:600;\">Nombre D'article</th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr>\r\n                  <td>{{p}}</td>\r\n                  <td>{{designation}}</td>\r\n                  <td>{{nombre_article}}</td>\r\n\r\n              </tbody>\r\n\r\n            </table>\r\n\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"BonConjoint()\" class=\"btn btn-success btn-round\"\r\n          data-dismiss=\"modal\">\r\n          Enregistrer Bon Conjoint</button>\r\n      </div>\r\n      <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"uploadConjoint()\" class=\"btn btn-green btn-round\"\r\n          data-dismiss=\"modal\">\r\n          Exporter</button>\r\n      </div>\r\n    </div>\r\n\r\n\r\n  </div>\r\n</div>\r\n<!-- end notice modal -->\r\n\r\n\r\n\r\n<!--modal Enfants -->\r\n<div class=\"modal fade\" id=\"noticeenfant\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"\r\n  *ngIf=\"message\">\r\n  <div class=\"modal-dialog modal-notice\">\r\n    <div class=\"modal-content\" style=\"width: 600px;\">\r\n      <div class=\"modal-header\">\r\n        <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n        <button mat-button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n          <i class=\"material-icons\">close</i>\r\n        </button>\r\n\r\n\r\n      </div>\r\n      <div class=\"modal-body\">\r\n\r\n        <div class=\"\" style=\"margin-top: -1cm;\">\r\n          <div>\r\n            <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n\r\n          <div class=\"col-md-12\">\r\n            <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n          </div>\r\n        </div>\r\n        <hr>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Matricule Participant :</label>\r\n              <b> {{message.matricule}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Prénom Enfant:</label>\r\n              <b> {{messageenfant?.prenom_enfant}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Nom Enfant :</label>\r\n              <b> {{messageenfant?.nom_enfant}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Date Naissance :</label>\r\n              <b> {{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Lieu de Naissance :</label>\r\n              <b> {{messageenfant?.lieu_nais_enfant}}</b>\r\n            </div>\r\n          </div>\r\n          <!-- <div class=\"col-md-6 form-group\">\r\n              <div class=\"form-group\">\r\n                <label class=\"bmd-label-floating\">Services:</label>\r\n                {{message.ipm_service?.type_service}}\r\n              </div>\r\n            </div> -->\r\n        </div>\r\n        <div class=\"card-body table-full-width\">\r\n          <div class=\"table-responsive\">\r\n            <table class=\"table table-hover table-bordered\">\r\n              <thead class=\"text-black\">\r\n                <tr style=\"background-color: whitesmoke\">\r\n\r\n                  <th style=\"font-weight: 600px ;\">Prestataire</th>\r\n                  <th style=\"font-weight: 600px ;\">Nombre d'article</th>\r\n                  <th style=\"font-weight: 600px ;\">Designation</th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr>\r\n                  <td>{{p}}</td>\r\n                  <td>{{nombre_article}}</td>\r\n                  <td>{{designation}}</td>\r\n\r\n              </tbody>\r\n\r\n            </table>\r\n\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"BonEnfant()\" class=\"btn btn-success btn-round\"\r\n          data-dismiss=\"modal\">\r\n          Enregistrer Bon Enfant</button>\r\n      </div>\r\n      <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"uploadEnfant()\" class=\"btn btn-green btn-round\"\r\n          data-dismiss=\"modal\">\r\n          Exporter</button>\r\n      </div>\r\n    </div>\r\n\r\n\r\n  </div>\r\n</div>\r\n<!-- end notice modal -->");
+/* harmony default export */ __webpack_exports__["default"] = ("<!--Types Bons -->\r\n\r\n<div class=\"main-content\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row tab-content tab-space\" style=\"margin-top:-5.5cm;\">\r\n\r\n\r\n\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <ul class=\"nav nav-pills nav-pills-warning\" role=\"tablist\">\r\n\r\n      </ul>\r\n      <div class=\"tab-content tab-space\">\r\n\r\n          <!----> \r\n            \r\n        <div class=\"col-md-11 tab-pane active\" id=\"link0\" *ngIf=\"mess1\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header  card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title\"\r\n                style=\"background-color:whitesmoke; font-weight: 400; color: black; padding: 4px; width: 35%;\">\r\n                Rechercher Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group no-border\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n\r\n\r\n              </form>\r\n            </div>\r\n\r\n            \r\n            <div class=\"card-footer\" style=\"padding-left: 80%;\">\r\n              <button mat-raised-button type=\"submit\" class=\"nav-link\" data-toggle=\"tab\" href=\"#link1\"\r\n                (click)=\"findByMatricule()\" class=\"btn btn-fill btn-success\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n\r\n\r\n            \r\n         <!-- --> \r\n\r\n\r\n        <div class=\"col-md-11 tab-pane active\" id=\"link0\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header  card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title\"\r\n                style=\"background-color:whitesmoke; font-weight: 400; color: black; padding: 4px; width: 35%;\">\r\n                Rechercher Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group no-border\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n\r\n\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\" style=\"padding-left: 80%;\">\r\n              <button mat-raised-button type=\"submit\" class=\"nav-link \" data-toggle=\"tab\" href=\"#link1\"\r\n                (click)=\"findByMatricule()\" class=\"btn btn-fill btn-success\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"tab-pane\" id=\"link1\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header  card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title\"\r\n                style=\"background-color:whitesmoke; font-weight: 400; color: black; padding: 4px; width: 40%;\">Bon\r\n                Pharmaceutique Employé</h3>\r\n            </div>\r\n\r\n            <div class=\"card p-4\" style=\"font-weight:500 ;\">\r\n              <form>\r\n                <div>\r\n                  <style>\r\n                    label {\r\n                      font-weight: bold;\r\n                      color: black;\r\n                    }\r\n                  </style>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom :</label>\r\n                        {{message.prenom}}\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom :</label>\r\n                        {{message.nom}}\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n                        {{message.numero_carnet}}\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age :</label>\r\n                        <b> {{ageE}}</b>\r\n                        \r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      {{message.date_nais}}\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      {{message.lieu_nais}}\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Services:</label>\r\n                      {{message.ipmService?.type_service}}\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\" style=\"margin-top: 5px;font-weight:bold;color: black\">\r\n                    <mat-form-field>\r\n                      <label for=\"lPrestataires\">lPrestataires</label>\r\n                      <mat-select name=\"prestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          {{ prest.nom_prestataire }}\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-2 form-group\">\r\n                    <label>Nombre d'article</label>\r\n                    <input type=\"number\" class=\"form-control\" id=\"nombre_article\" [(ngModel)]=\"nombre_article\"\r\n                      name=\"nombre_article\">\r\n                  </div>\r\n                  <div class=\"col-md-3 form-group\">\r\n                    <label>Designation</label>\r\n                    <input type=\"text\" class=\"form-control\" id=\"designation\" [(ngModel)]=\"designation\"\r\n                      name=\"designation\">\r\n                  </div>\r\n                  <div class=\"col-md-2 form-group\">\r\n                    \r\n                    <label class=\"bmd-label-floating\">Nombre de Bon :</label>\r\n                    \r\n                    <b> {{listBon.length}}</b>\r\n                    \r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                \r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <!-- <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\"> -->\r\n  \r\n                </div>\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                          data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-6\" style=\"font-weight:bold;color: black\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Conjoints\" name=\"conjoints\" ([ngModel])=\"id_conjoint\">\r\n                        <mat-option *ngFor=\"let conjoint of conjoints\" [value]=\"conjoint.idconj\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link2\" role=\"tablist\" (click)=\"getconjointbon(conjoint)\">\r\n                          {{ conjoint.prenom_conjoint}} {{ conjoint.nom_conjoint}}\r\n                        </mat-option>\r\n                      </mat-select>\r\n\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-6\" style=\"font-weight:bold;color: black\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Enfants\" name=\"enfants\" ([ngModel])=\"id_enfant\">\r\n                        <mat-option *ngFor=\"let enfant of enfants\" [value]=\"enfant.idenf\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link3\" role=\"tablist\" (click)=\"getenfantbon(enfant)\">\r\n                          {{ enfant.prenom_enfant}} {{ enfant.nom_enfant}}\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button type=\"button\" (click)=\"BonNow()\" class=\"btn btn-success btn-round\"\r\n                    data-dismiss=\"modal\">\r\n                    Enregistrer</button>\r\n                </div>\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <!-- <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\"btn btn-green btn-round\" data-dismiss=\"modal\">\r\n                    Exporter</button> -->\r\n                    <div class=\"col-md-6\" style=\"font-weight:bold;color: black;float: right;\">\r\n                      <i mat-raised-button type=\"button\" class=\"nav-link\"\r\n                      data-toggle=\"tab\"  style=\"width: 100px;\" (click)=\"retourserach()\"  role=\"tablist\" class=\"btn btn-info btn-round\">\r\n                      <span class=\"material-icons\">arrow_back</span></i>\r\n                    \r\n                    </div>\r\n                </div> \r\n\r\n                <!-- <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    data-target=\"#noticeModal\">Voir Bon Pharmaceutique</button>\r\n\r\n                </div> -->\r\n                <div>\r\n                  <!-- <h4>{{message}} </h4> -->\r\n                </div>\r\n\r\n              </form>\r\n\r\n\r\n              <!-- </div>\r\n                        </div>\r\n                      </div>\r\n          \r\n                    </div>\r\n                  </div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link2\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"text-center\"\r\n                style=\"background-color:whitesmoke; color: black; padding: 2px; width: 45%; font-weight: 500;\">Bon\r\n                Pharmaceutique conjoint</h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Conjoint :</label>\r\n                        <b> {{messageconjoint?.prenom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Conjoint :</label>\r\n                        <b> {{messageconjoint?.nom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance :</label>\r\n                        <b> {{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Matricule :</label>\r\n                      <b> {{message?.matricule}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance :</label>\r\n                      <b> {{messageconjoint?.lieu_naiss_conj}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Age :</label>\r\n                      <b> {{Ageconjoin}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\" style=\"margin-top:1px;\">\r\n                    <label class=\"bmd-label-floating\">Prestataires Conjoints :</label>\r\n                    <mat-form-field>\r\n                      <mat-select name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b> {{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <label>Nombre d'article</label>\r\n                    <input type=\"number\" class=\"form-control\" id=\"nombre_article\" [(ngModel)]=\"nombre_article\"\r\n                      name=\"nombre_article\">\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <label>Designation</label>\r\n                    <input type=\"text\" class=\"form-control\" id=\"designation\" [(ngModel)]=\"designation\"\r\n                      name=\"designation\">\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <!-- <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\"> -->\r\n  \r\n                </div>\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                          data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button type=\"button\" (click)=\"BonConjoint()\" class=\"btn btn-success btn-round\"\r\n                    data-dismiss=\"modal\">\r\n                    Enregistrer</button>\r\n                </div>\r\n                <!-- <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button type=\"button\" (click)=\"uploadConjoint()\" class=\"btn btn-green btn-round\" data-dismiss=\"modal\">\r\n                    Exporter</button>\r\n                </div> -->\r\n                <!-- <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    data-target=\"#noticeConjoint\"> Details Conjoint</button>\r\n\r\n                </div> -->\r\n                <div>\r\n\r\n                </div>\r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link3\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"text-center\"\r\n                style=\"background-color:whitesmoke; color: black; padding: 2px; width: 45%; font-weight: 500;\">Bon\r\n                Pharmaceutique Enfant </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n\r\n                <style>\r\n                  b {\r\n                    color: black;\r\n                    font-weight: 500;\r\n                  }\r\n                </style>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-3 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label>Prénom Enfant : </label>\r\n                      <b> {{messageenfant?.prenom_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-3 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label> Nom Enfant : </label>\r\n                      <b> {{messageenfant?.nom_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-3 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance : </label>\r\n                      <b> {{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-3 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Age:</label>\r\n                      <b> {{AgeEnfant}}</b>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance : </label>\r\n                      <b> {{messageenfant?.lieu_nais_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <label>Nombre d'article</label>\r\n                    <input type=\"number\" class=\"form-control\" id=\"nombre_article\" [(ngModel)]=\"nombre_article\"\r\n                      name=\"nombre_article\">\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <label>Designation</label>\r\n                    <input type=\"text\" class=\"form-control\" id=\"designation\" [(ngModel)]=\"designation\"\r\n                      name=\"designation\">\r\n                  </div>\r\n\r\n                </div>\r\n\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires Enfants\">Prestataires Enfants</label>\r\n                      <mat-select name=\"prestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          {{ prest.nom_prestataire }}\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <!-- <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\"> -->\r\n  \r\n                </div>\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                          data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n\r\n\r\n                <!-- \r\n                                    <div class=\"col-md-6 form-group\">\r\n                                      <label>Prix Unitaire</label>\r\n                                      <input type=\"text\" class=\"form-control\" id=\"prix_unitaire\" [(ngModel)]=\"prix_unitaire\"\r\n                                        name=\"prix_unitaire\">\r\n                                    </div> -->\r\n\r\n\r\n\r\n\r\n                                    <div class=\"modal-footer justify-content-center\">\r\n                                      <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\" [disabled]=\"desactive\"\r\n                                        (click)=\"BonEnfant()\">Enregistrer\r\n                                      </button>\r\n                                      <!-- <button mat-raised-button type=\"button\" (click)=\"uploadEnfant()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                                        >\r\n                                        Exporter</button> -->\r\n                    \r\n                                    </div>                     \r\n                <!-- <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    data-target=\"#noticeenfant\">Details Enfant</button>\r\n\r\n                </div> -->\r\n                <div>\r\n                  <!-- <h4>{{message}} </h4> -->\r\n                </div>\r\n\r\n              </form>\r\n\r\n\r\n              <!-- </div>\r\n                        </div>\r\n                      </div>\r\n          \r\n                    </div>\r\n                  </div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!-- Fin Types Bons -->\r\n<!-- <div class=\"col-md-12\"> -->\r\n\r\n<!-- Exemple ngTemplate-->\r\n\r\n<!-- Fin Exemple ngTemplate-->\r\n<!-- notice modal -->\r\n<div class=\"modal fade\" id=\"noticeModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"\r\n  *ngIf=\"message\">\r\n  <div class=\"modal-dialog modal-notice\">\r\n    <div class=\"modal-content\" style=\"width: 600px;\">\r\n      <div class=\"modal-header\">\r\n        <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n        <button mat-button type=\"button\" class=\"close \" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n          <i style=\"margin-top: -1.3cm; color: red; font-size: 30px;\" class=\"material-icons\">close</i>\r\n        </button>\r\n\r\n\r\n      </div>\r\n      <div class=\"modal-body\">\r\n\r\n\r\n        <div class=\"\" style=\"margin-top: -1cm;\">\r\n          <div>\r\n            <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n\r\n          <div class=\"col-md-12\">\r\n            <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n          </div>\r\n        </div>\r\n        <hr>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Prénom :</label>\r\n              <b> {{message.prenom}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Nom :</label>\r\n              <b> {{message.nom}}</b>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <hr>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Prestataire :</label>\r\n              <b>{{p}}</b>\r\n            </div>\r\n          </div>\r\n          <!-- <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n              {{message.idemp}}\r\n            </div>\r\n          </div> -->\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Services:</label>\r\n              <b> {{message.ipm_service?.type_service}}</b>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n        <div class=\"card-body table-full-width\">\r\n          <div class=\"table-responsive\">\r\n            <table class=\"table table-hover table-bordered\">\r\n              <thead class=\"\">\r\n                <tr style=\"background-color: whitesmoke;\">\r\n                  <th style=\"font-weight: 600px\">Matricule Participant</th>\r\n                  <th style=\"font-weight: 600px\">Designation</th>\r\n                  <th style=\"font-weight: 600px\">Nombre D'article</th>\r\n\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr>\r\n                  <td>{{message.matricule}}</td>\r\n                  <td>{{designation}}</td>\r\n                  <td>{{nombre_article}}</td>\r\n\r\n              </tbody>\r\n\r\n            </table>\r\n\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"BonNow()\" class=\"btn btn-success btn-round\"\r\n          data-dismiss=\"modal\">\r\n          Enregistrer</button>\r\n      </div>\r\n      <!-- <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\"btn btn-green btn-round\" data-dismiss=\"modal\">\r\n          Exporter</button>\r\n      </div> -->\r\n\r\n    </div>\r\n\r\n\r\n  </div>\r\n</div>\r\n<!-- end notice modal -->\r\n\r\n\r\n<!--modal Conjoints  -->\r\n<div class=\"modal fade\" id=\"noticeConjoint\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\" *ngIf=\"message\">\r\n  <div class=\"modal-dialog modal-notice\">\r\n    <div class=\"modal-content\" style=\"width: 600px;\">\r\n      <div class=\"modal-header\">\r\n        <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n        <button mat-button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n          <i class=\"material-icons\">close</i>\r\n        </button>\r\n\r\n\r\n      </div>\r\n      <div class=\"modal-body\">\r\n\r\n        <div class=\"\" style=\"margin-top: -1cm;\">\r\n          <div>\r\n            <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n\r\n          <div class=\"col-md-12\">\r\n            <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n          </div>\r\n        </div>\r\n        <hr>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Matricule Participant:</label>\r\n              <b> {{message.matricule}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Prénom Conjoint :</label>\r\n              <b> {{messageconjoint?.prenom_conjoint}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Nom Conjoint :</label>\r\n              <b> {{messageconjoint?.nom_conjoint}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Date Naissance :</label>\r\n              <b> {{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Lieu de Naissance :</label>\r\n              <b> {{messageconjoint?.lieu_naiss_conj}}</b>\r\n            </div>\r\n          </div>\r\n          <!-- <div class=\"col-md-6 form-group\">\r\n              <div class=\"form-group\">\r\n                <label class=\"bmd-label-floating\">Services:</label>\r\n                {{message.ipm_service?.type_service}}\r\n              </div>\r\n            </div> -->\r\n        </div>\r\n        <hr>\r\n        <div class=\"card-body table-full-width\">\r\n          <div class=\"table-responsive\">\r\n            <table class=\"table table-hover table-bordered\">\r\n              <thead class=\"text-black\">\r\n                <tr>\r\n\r\n                  <th style=\"font-weight:600;\">Prestataire</th>\r\n                  <th style=\"font-weight:600;\">Designation</th>\r\n                  <th style=\"font-weight:600;\">Nombre D'article</th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr>\r\n                  <td>{{p}}</td>\r\n                  <td>{{designation}}</td>\r\n                  <td>{{nombre_article}}</td>\r\n\r\n              </tbody>\r\n\r\n            </table>\r\n\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"BonConjoint()\" class=\"btn btn-success btn-round\"\r\n          data-dismiss=\"modal\">\r\n          Enregistrer Bon Conjoint</button>\r\n      </div>\r\n      <!-- <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"uploadConjoint()\" class=\"btn btn-green btn-round\"\r\n          data-dismiss=\"modal\">\r\n          Exporter</button>\r\n      </div> -->\r\n    </div>\r\n\r\n\r\n  </div>\r\n</div>\r\n<!-- end notice modal -->\r\n\r\n\r\n\r\n<!--modal Enfants -->\r\n<div class=\"modal fade\" id=\"noticeenfant\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"\r\n  *ngIf=\"message\">\r\n  <div class=\"modal-dialog modal-notice\">\r\n    <div class=\"modal-content\" style=\"width: 600px;\">\r\n      <div class=\"modal-header\">\r\n        <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n        <button mat-button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n          <i class=\"material-icons\">close</i>\r\n        </button>\r\n\r\n\r\n      </div>\r\n      <div class=\"modal-body\">\r\n\r\n        <div class=\"\" style=\"margin-top: -1cm;\">\r\n          <div>\r\n            <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n\r\n          <div class=\"col-md-12\">\r\n            <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n          </div>\r\n        </div>\r\n        <hr>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Matricule Participant :</label>\r\n              <b> {{message.matricule}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Prénom Enfant:</label>\r\n              <b> {{messageenfant?.prenom_enfant}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Nom Enfant :</label>\r\n              <b> {{messageenfant?.nom_enfant}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Date Naissance :</label>\r\n              <b> {{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-md-6 form-group\">\r\n            <div class=\"form-group\">\r\n              <label class=\"bmd-label-floating\">Lieu de Naissance :</label>\r\n              <b> {{messageenfant?.lieu_nais_enfant}}</b>\r\n            </div>\r\n          </div>\r\n          <!-- <div class=\"col-md-6 form-group\">\r\n              <div class=\"form-group\">\r\n                <label class=\"bmd-label-floating\">Services:</label>\r\n                {{message.ipm_service?.type_service}}\r\n              </div>\r\n            </div> -->\r\n        </div>\r\n        <div class=\"card-body table-full-width\">\r\n          <div class=\"table-responsive\">\r\n            <table class=\"table table-hover table-bordered\">\r\n              <thead class=\"text-black\">\r\n                <tr style=\"background-color: whitesmoke\">\r\n\r\n                  <th style=\"font-weight: 600px ;\">Prestataire</th>\r\n                  <th style=\"font-weight: 600px ;\">Nombre d'article</th>\r\n                  <th style=\"font-weight: 600px ;\">Designation</th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr>\r\n                  <td>{{p}}</td>\r\n                  <td>{{nombre_article}}</td>\r\n                  <td>{{designation}}</td>\r\n\r\n              </tbody>\r\n\r\n            </table>\r\n\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"BonEnfant()\" class=\"btn btn-success btn-round\"\r\n          data-dismiss=\"modal\">\r\n          Enregistrer Bon Enfant</button>\r\n      </div>\r\n      <!-- <div class=\"modal-footer justify-content-center\">\r\n        <button mat-raised-button type=\"button\" (click)=\"uploadEnfant()\" class=\"btn btn-green btn-round\"\r\n          data-dismiss=\"modal\">\r\n          Exporter</button>\r\n      </div> -->\r\n    </div>\r\n\r\n\r\n  </div>\r\n</div>\r\n<!-- end notice modal -->");
 
 /***/ }),
 
@@ -287,8 +287,9 @@ var BonLettreComponent = /** @class */ (function () {
         this.bons = [];
         this.dateform = new Date();
         this.b = new src_app_Models_IPM_Bon__WEBPACK_IMPORTED_MODULE_11__["IPM_Bon"](0, "", null, null, null, null, null, null);
-        this.bonlettre = new src_app_Models_IPM_Bon_Lettre_Garantie__WEBPACK_IMPORTED_MODULE_12__["IPM_Bon_Lettre_Garantie"](0, "", "", "", null, null, null, null, null, null, null);
+        this.bonlettre = new src_app_Models_IPM_Bon_Lettre_Garantie__WEBPACK_IMPORTED_MODULE_12__["IPM_Bon_Lettre_Garantie"](0, "", "", "", null, null, null, null, null, null, null, null);
         this.desactive = false;
+        this.maDate = new Date();
         this.jstoday = Object(_angular_common__WEBPACK_IMPORTED_MODULE_2__["formatDate"])(this.dateform, 'dd-MM-yyyy', 'en-US', '+0530');
         this.addPrestataire = new src_app_Models_Prestataire__WEBPACK_IMPORTED_MODULE_13__["Prestataire"]();
         this.addconjoint = new src_app_Models_Conjoint__WEBPACK_IMPORTED_MODULE_8__["Conjoint"]();
@@ -305,13 +306,40 @@ var BonLettreComponent = /** @class */ (function () {
         this.emp_service.getEmployeById(this.id).subscribe(function (result) {
             _this.currentemploye = result;
         });
+        this.pres_service.getBon().subscribe(function (pres) {
+            // console.log(cat);
+            _this.listB = pres;
+            console.log(_this.listB[_this.listB.length - 1].numeroBon.slice(4));
+            _this.numero = _this.listB[_this.listB.length - 1].numeroBon.slice(4);
+            _this.numero++;
+            console.log(_this.numero);
+        });
     };
     ////////////////////Rechercher par matricule 
     BonLettreComponent.prototype.findByMatricule = function () {
         var _this = this;
         ///////Rechercher l'employé
         this.emp_service.getEmployeByMatricule(this.matricule).subscribe(function (data) {
-            _this.message = data;
+            _this.mess = data;
+            if (_this.mess) {
+                console.log(_this.mess);
+            }
+            else {
+                _this.mess1 = "yess";
+                _this.mess1 = '';
+                console.log("charlessssssssssssss");
+                _this.showNotification('top', 'center', 3, "<b>matricule n'existe pas</b> :");
+            }
+            if (data.statut == true) {
+                _this.message = data;
+                _this.showNotification('top', 'center', 1, '<b>agent existe</b> :');
+            }
+            else {
+                console.log("age");
+                _this.mess1 = "yess";
+                _this.mess1 = '';
+                _this.showNotification('top', 'center', 3, "<b>agent de numero matricule " + _this.matricule + " ne beneficie plus de L'IPM</b> :");
+            }
             _this.matr = _this.message.idemp;
             console.log(_this.matr);
             _this.enfant = _this.message;
@@ -333,6 +361,29 @@ var BonLettreComponent = /** @class */ (function () {
             ///////Rechercher les enfants en fontion de l'employé
             _this.enf_service.listeEnfant(_this.message.idemp).subscribe(function (enfs) {
                 _this.enfants = enfs;
+                _this.enfants.forEach(function (ele) {
+                    if (ele.date_nais_enfant) {
+                        //convert date again to type Date
+                        var bdate = new Date(ele.date_nais_enfant);
+                        var timeDiff = Math.abs(Date.now() - bdate.getTime());
+                        _this.agenft = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+                    }
+                    console.log(_this.agenft);
+                    if (_this.agenft > 21) {
+                        console.log("Age atteinte impossible de ce beneficier à l'ipm :", _this.agenft);
+                        ele.active = false;
+                        console.log(ele.active);
+                        console.log("age depasse");
+                    }
+                    else if (_this.agenft < 21) {
+                        console.log("Voici l'age :", _this.agenft);
+                        ele.active = true;
+                        console.log(ele.active);
+                        console.log("age non depasse");
+                    }
+                });
+                console.log(_this.enfants);
+                _this.enfants = _this.enfants.filter(function (serv) { return serv.active == true; });
                 console.log(_this.enfants);
             });
             ///////Rechercher les conjoints en fontion de l'employé
@@ -340,14 +391,14 @@ var BonLettreComponent = /** @class */ (function () {
                 _this.conjoints = conjs;
                 console.log(_this.conjoints);
             });
-            if (_this.message) {
-                _this.showNotification('top', 'center', 1, '<b>agent existe</b> :');
-                console.log(_this.message);
-            }
-            else if (!_this.message) {
-                console.log("not existe");
-                _this.showNotification('top', 'center', 3, "<b>agent n'existe pas</b> :");
-            }
+            //   if(this.message){
+            //     this.showNotification('top','center',1,'<b>agent existe</b> :')
+            //     console.log(this.message);
+            //   }
+            // else if(!this.message){
+            //     console.log("not existe");
+            //     //this.showNotification('top','center',3,"<b>agent n'existe pas</b> :")
+            //   }
         });
     };
     BonLettreComponent.prototype.getnom = function (prest) {
@@ -410,6 +461,19 @@ var BonLettreComponent = /** @class */ (function () {
     BonLettreComponent.prototype.BonNowLettre = function () {
         var _this = this;
         // this.nom=this.bon.ipm_employe.prenom
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         this.bonlettre.ipm_employe = this.message;
         this.bonlettre.dateEtablissement = new Date();
         this.addPrestataire.code_prestataire = this.idp;
@@ -422,20 +486,41 @@ var BonLettreComponent = /** @class */ (function () {
             this.bonlettre.ipm_conjoint = this.conjChoisi;
         }
         this.bonlettre.ordonnance = this.selectOrdonne.name;
-        this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(function (data) {
-            _this.router.navigate(['/gestion-bons/BonLettre']);
-        });
-        this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe(function (data) { });
-        this.toastr.success('Ajouter Faite avec Success');
-        console.log(this.b);
-        console.log(this.b.ipm_employe);
-        console.log(this.b.ipm_prestataire);
+        this.bonlettre.numeroBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
+        if (this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+            this.bonlettre.dateEtablissement && this.bonlettre.ordonnance) {
+            this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(function (data) {
+                _this.upload();
+            });
+            this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe(function (data) { });
+            //this.toastr.success( 'Ajouter Faite avec Success');
+            console.log(this.b);
+            console.log(this.b.ipm_employe);
+            console.log(this.b.ipm_prestataire);
+            this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :");
+        }
         // this.router.navigate(['/gestion-bons/Listebons']);
         console.log(this.motif);
     };
     /////////////////Save Bon Conjoint
     BonLettreComponent.prototype.BonConjoint = function () {
         var _this = this;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         // this.nom=this.bon.ipm_employe.prenom
         this.bonlettre.ipm_employe = this.message;
         this.bonlettre.dateEtablissement = new Date();
@@ -449,16 +534,37 @@ var BonLettreComponent = /** @class */ (function () {
         console.log(this.b.ipm_prestataire);
         this.bonlettre.ordonnance = this.selectOrdonne.name;
         //this.bon.prix_unitaire=this.prix_unitaire;
-        this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(function (data) {
-            _this.router.navigate(['/gestion-bons/BonLettre']);
-        });
-        this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe(function (data) { });
-        console.log(this.bonlettre.ipm_prestataire);
-        console.log(this.bonlettre);
+        this.bonlettre.numeroBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
+        if (this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+            this.bonlettre.dateEtablissement && this.bonlettre.ordonnance) {
+            this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(function (data) {
+                _this.uploadConjoint();
+            });
+            this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe(function (data) { });
+            console.log(this.bonlettre.ipm_prestataire);
+            console.log(this.bonlettre);
+            this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :");
+        }
     };
     /////////////////Save Bon Enfants
     BonLettreComponent.prototype.BonEnfant = function () {
         var _this = this;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         // this.nom=this.bon.ipm_employe.prenom
         this.bonlettre.ipm_employe = this.message;
         this.bonlettre.dateEtablissement = new Date();
@@ -471,12 +577,20 @@ var BonLettreComponent = /** @class */ (function () {
         console.log(this.b.ipm_employe);
         console.log(this.b.ipm_prestataire);
         this.bonlettre.ordonnance = this.selectOrdonne.name;
-        this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(function (data) {
-            _this.router.navigate(['/gestion-bons/BonLettre']);
-        });
-        this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe(function (data) { });
-        console.log(this.bonlettre.ipm_prestataire);
-        console.log(this.bonlettre);
+        this.bonlettre.numeroBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
+        if (this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+            this.bonlettre.dateEtablissement && this.bonlettre.ordonnance) {
+            this.bon_lettreService.SaveBonLettre(this.bonlettre).subscribe(function (data) {
+                _this.uploadEnfant();
+            });
+            this.bon_lettreService.uploadFile(this.selectOrdonne).subscribe(function (data) { });
+            console.log(this.bonlettre.ipm_prestataire);
+            console.log(this.bonlettre);
+            this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :");
+        }
     };
     /////////////Recuperer un enfant pour lui choisir bon
     BonLettreComponent.prototype.getenfantbon = function (enfant) {
@@ -524,11 +638,28 @@ var BonLettreComponent = /** @class */ (function () {
             console.log(_this.AgeConjoint);
         });
     };
+    BonLettreComponent.prototype.retourserach = function () {
+        console.log('************************************');
+        window.location.reload();
+    };
     /////////////////Imprimer Lettre de G
     BonLettreComponent.prototype.upload = function () {
         var _a, _b, _c, _d, _e;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
         var col = [["Quantité", "Designation", "P.unitaire", "Montant"]];
         var rows = [];
         var ipm1 = (_a = this.message) === null || _a === void 0 ? void 0 : _a.prenom;
@@ -539,6 +670,7 @@ var BonLettreComponent = /** @class */ (function () {
         var ipm3 = (_c = this.message.ipmService) === null || _c === void 0 ? void 0 : _c.type_service;
         var ipm4 = (_d = this.message) === null || _d === void 0 ? void 0 : _d.matricule;
         var ipm5 = (_e = this.message) === null || _e === void 0 ? void 0 : _e.reference;
+        var numBonEm = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
             //   startY:75,
             //   head:col,
@@ -570,11 +702,13 @@ var BonLettreComponent = /** @class */ (function () {
                 var date = new Date();
                 doc.setFontSize(13);
                 doc.text("Dakar, le :", 150, 60);
+                doc.text("Dakar, le :", 150, 60);
+                doc.text("N° Bon : " + numBonEm, 13, 60);
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
                 doc.text("Malade:", 15, 75);
-                doc.text(ipm1, 40, 75);
-                doc.text(ipm2, 80, 75);
+                doc.text(ipm1 + " " + ipm2, 40, 75);
+                //doc.text(,80,75) 
                 doc.text("Matricule:", 120, 75);
                 doc.text(ipm4, 140, 75);
                 doc.setFontSize(12);
@@ -610,7 +744,7 @@ var BonLettreComponent = /** @class */ (function () {
                 doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)", 100, 265);
             }
         });
-        doc.save("lettreGantie.pdf");
+        doc.output("dataurlnewwindow");
         // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
@@ -620,8 +754,21 @@ var BonLettreComponent = /** @class */ (function () {
     };
     BonLettreComponent.prototype.uploadConjoint = function () {
         var _a, _b, _c, _d, _e, _f;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
         var col = [["Quantité", "Designation", "P.unitaire", "Montant"]];
         var rows = [];
         var ipm1 = (_a = this.message) === null || _a === void 0 ? void 0 : _a.prenom;
@@ -633,6 +780,7 @@ var BonLettreComponent = /** @class */ (function () {
         var ipm4 = (_d = this.message) === null || _d === void 0 ? void 0 : _d.matricule;
         var ipm5 = (_e = this.messageconjoint) === null || _e === void 0 ? void 0 : _e.prenom_conjoint;
         var ipm6 = (_f = this.messageconjoint) === null || _f === void 0 ? void 0 : _f.nom_conjoint;
+        var numBonConj = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
             //   startY:75,
             //   head:col,
@@ -664,19 +812,20 @@ var BonLettreComponent = /** @class */ (function () {
                 var date = new Date();
                 doc.setFontSize(13);
                 doc.text("Dakar, le :", 150, 60);
+                doc.text("N° BON : " + numBonConj, 13, 60);
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
-                doc.text("Participant:", 15, 75);
-                doc.text(ipm1, 40, 75);
-                doc.text(ipm2, 80, 75);
+                doc.text("Participant :  " + ipm1 + " " + ipm2, 15, 75);
+                //doc.text(ipm1,40,75)
+                //doc.text(ipm2,80,75) 
                 doc.text("Matricule:", 120, 75);
                 doc.text(ipm4, 140, 75);
-                doc.text("Malade:", 15, 85);
-                doc.text(ipm5, 40, 85);
-                doc.text(ipm6, 80, 85);
+                doc.text("Malade:  " + ipm5 + " " + ipm6, 15, 85);
+                //doc.text(ipm5,40,85)
+                //doc.text(ipm6,80,85) 
                 doc.setFontSize(12);
-                doc.text("N Carnet :", 120, 85);
-                doc.text("" + Ncarnet, 140, 85);
+                doc.text("N Carnet : " + Ncarnet, 120, 85);
+                //doc.text(""+Ncarnet,140,85)
                 // doc.text("Nombre D'article :",120,85)
                 // doc.text(""+Narticle,160,85)
                 // doc.text("Malade:",15,95)
@@ -707,7 +856,7 @@ var BonLettreComponent = /** @class */ (function () {
                 doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)", 100, 265);
             }
         });
-        doc.save("lettreGantie.pdf");
+        doc.output("dataurlnewwindow");
         // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
@@ -717,8 +866,21 @@ var BonLettreComponent = /** @class */ (function () {
     };
     BonLettreComponent.prototype.uploadEnfant = function () {
         var _a, _b, _c, _d, _e;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
         var col = [["Quantité", "Designation", "P.unitaire", "Montant"]];
         var rows = [];
         var ipm1 = (_a = this.message) === null || _a === void 0 ? void 0 : _a.prenom;
@@ -730,6 +892,7 @@ var BonLettreComponent = /** @class */ (function () {
         var ipm4 = (_d = this.message) === null || _d === void 0 ? void 0 : _d.matricule;
         var ipm5 = this.messageenfant.prenom_enfant;
         var ipm6 = (_e = this.messageenfant) === null || _e === void 0 ? void 0 : _e.nom_enfant;
+        var numBonEnf = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
             //   startY:75,
             //   head:col,
@@ -761,19 +924,20 @@ var BonLettreComponent = /** @class */ (function () {
                 var date = new Date();
                 doc.setFontSize(13);
                 doc.text("Dakar, le :", 150, 60);
+                doc.text("N° BON : " + numBonEnf, 13, 60);
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
-                doc.text("Participant:", 15, 75);
-                doc.text(ipm1, 40, 75);
-                doc.text(ipm2, 80, 75);
+                doc.text("Participant : " + ipm1 + " " + ipm2, 15, 75);
+                //doc.text(ipm1,40,75)
+                //doc.text(ipm2,80,75) 
                 doc.text("Matricule:", 120, 75);
                 doc.text(ipm4, 140, 75);
-                doc.text("Malade:", 15, 85);
-                doc.text(ipm5, 40, 85);
-                doc.text(ipm6, 80, 85);
+                doc.text("Malade : " + ipm5 + " " + ipm6, 15, 85);
+                //doc.text(ipm5,40,85)
+                //doc.text(ipm6,80,85) 
                 doc.setFontSize(12);
-                doc.text("N Carnet :", 120, 85);
-                doc.text("" + Ncarnet, 140, 85);
+                doc.text("N Carnet : " + Ncarnet, 120, 85);
+                //doc.text(""+Ncarnet,140,85)
                 // doc.text("Nombre D'article :",120,85)
                 // doc.text(""+Narticle,160,85)
                 // doc.text("Malade:",15,95)
@@ -804,7 +968,7 @@ var BonLettreComponent = /** @class */ (function () {
                 doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)", 100, 265);
             }
         });
-        doc.save("lettreGantie.pdf");
+        doc.output("dataurlnewwindow");
         // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
@@ -927,6 +1091,7 @@ var BonConsultationComponent = /** @class */ (function () {
         this.currentemploye = new src_app_Models_Employe__WEBPACK_IMPORTED_MODULE_7__["Employe"]();
         this.bonlettre = new _Models_IPM_Bon_Consultation__WEBPACK_IMPORTED_MODULE_15__["IPM_Bon_Consultation"](0, "", "", "", "", null, null, null, null, null, null, null, null, null, null);
         this.desactive = false;
+        this.maDate = new Date();
     }
     BonConsultationComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -954,37 +1119,55 @@ var BonConsultationComponent = /** @class */ (function () {
             //  })
             //console.log(this.listPrestation);
         });
+        this.pres_service.getBon().subscribe(function (pres) {
+            // console.log(cat);
+            _this.listB = pres;
+            console.log(_this.listB[_this.listB.length - 1].numeroBon.slice(4));
+            _this.numero = _this.listB[_this.listB.length - 1].numeroBon.slice(4);
+            _this.numero++;
+            console.log(_this.numero);
+        });
     };
     ////////////////////Rechercher par matricule 
     BonConsultationComponent.prototype.findByMatricule = function () {
         var _this = this;
         ///////Rechercher l'employé
         this.emp_service.getEmployeByMatricule(this.matricule).subscribe(function (data) {
-            if (data.statut == false) {
-                _this.message = data;
-                _this.matr = _this.message.idemp;
-                console.log(_this.matr);
-                _this.enfant = _this.message;
-                console.log(_this.enfant);
-                var date = _this.datePipe.transform(_this.message.date_nais, "dd-MM-yyyy");
-                //const date =this.message.date_nais
-                console.log(date);
-                var b = new Date(date);
-                var ttoday = new Date();
-                _this.AgeEmploye = ttoday.getFullYear() - b.getFullYear();
-                var m = ttoday.getMonth() - b.getMonth();
-                console.log(_this.message.date_nais);
-                console.log(m);
-                if (m < 0 || (m === 0 && ttoday.getDate() < b.getDate())) {
-                    _this.AgeEmploye--;
-                    // console.log(this.messageconjoint.date_naiss_conj);
-                }
-                console.log(_this.message);
+            _this.mess = data;
+            if (_this.mess) {
+                console.log(_this.mess);
             }
             else {
-                console.log(_this.message);
+                _this.mess1 = "yess";
+                console.log("charlessssssssssssss");
+                _this.showNotification('top', 'center', 3, "<b>matricule n'existe pas</b> :");
+            }
+            if (data.statut == true) {
+                _this.message = data;
+            }
+            else {
+                console.log("age");
+                _this.mess1 = "yess";
                 _this.showNotification('top', 'center', 3, "<b>agent de numero matricule " + _this.matricule + " ne beneficie plus de L'IPM</b> :");
             }
+            _this.matr = _this.message.idemp;
+            console.log(_this.matr);
+            _this.enfant = _this.message;
+            console.log(_this.enfant);
+            var date = _this.datePipe.transform(_this.message.date_nais, "dd-MM-yyyy");
+            //const date =this.message.date_nais
+            console.log(date);
+            var b = new Date(date);
+            var ttoday = new Date();
+            _this.AgeEmploye = ttoday.getFullYear() - b.getFullYear();
+            var m = ttoday.getMonth() - b.getMonth();
+            console.log(_this.message.date_nais);
+            console.log(m);
+            if (m < 0 || (m === 0 && ttoday.getDate() < b.getDate())) {
+                _this.AgeEmploye--;
+                // console.log(this.messageconjoint.date_naiss_conj);
+            }
+            console.log(_this.message);
             _this.emp_service.getlistBonConsult(_this.message.idemp).subscribe(function (res) {
                 _this.listBon = res;
                 console.log(res);
@@ -993,7 +1176,29 @@ var BonConsultationComponent = /** @class */ (function () {
             ///////Rechercher les enfants en fontion de l'employé
             _this.enf_service.listeEnfant(_this.message.idemp).subscribe(function (enfs) {
                 _this.enfants = enfs;
+                _this.enfants.forEach(function (ele) {
+                    if (ele.date_nais_enfant) {
+                        //convert date again to type Date
+                        var bdate = new Date(ele.date_nais_enfant);
+                        var timeDiff = Math.abs(Date.now() - bdate.getTime());
+                        _this.agenft = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+                    }
+                    console.log(_this.agenft);
+                    if (_this.agenft > 21) {
+                        console.log("Age atteinte impossible de ce beneficier à l'ipm :", _this.agenft);
+                        ele.active = false;
+                        console.log(ele.active);
+                        console.log("age depasse");
+                    }
+                    else if (_this.agenft < 21) {
+                        console.log("Voici l'age :", _this.agenft);
+                        ele.active = true;
+                        console.log(ele.active);
+                        console.log("age non depasse");
+                    }
+                });
                 console.log(_this.enfants);
+                _this.enfants = _this.enfants.filter(function (serv) { return serv.active == true; });
             });
             ///////Rechercher les conjoints en fontion de l'employé
             _this.conj_service.listeConjoint(_this.message.idemp).subscribe(function (conjs) {
@@ -1095,6 +1300,7 @@ var BonConsultationComponent = /** @class */ (function () {
     };
     /////////////////////////////////Save Lettre de Garantie
     BonConsultationComponent.prototype.BonConsultation = function () {
+        var _this = this;
         var dayBEm = new Date();
         if (dayBEm.getMonth() < 10) {
             this.strBEm = dayBEm.getFullYear().toString();
@@ -1108,7 +1314,8 @@ var BonConsultationComponent = /** @class */ (function () {
             console.log('sup', this.mois);
             this.mois = m;
         }
-        this.numBEm = 0 + '' + dayBEm.getDate() + '' + this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.valInt;
+        this.numBEm = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
+        //=0+''+dayBEm.getDate()+''+this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.AgeEmploye
         console.log(this.numBEm);
         this.bonlettre.numeroBon = this.numBEm;
         // this.nom=this.bon.ipm_employe.prenom
@@ -1126,50 +1333,108 @@ var BonConsultationComponent = /** @class */ (function () {
         }
         //this.bonlettre.ordonnance=this.selectOrdonne.name
         console.log(this.bonlettre);
-        this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(function (data) {
-        });
-        //this.toastr.success( 'Ajouter Faite avec Success');
-        // console.log( this.b.ipm_employe);
-        // console.log(this.b.ipm_prestataire);
-        // this.router.navigate(['/gestion-bons/Listebons']);
-        console.log(this.motif);
+        if (this.bonlettre.ipm_prestataire && this.bonlettre.ipm_employe && this.bonlettre.ipm_prestation && this.bonlettre.dateEtablissement) {
+            this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(function (data) {
+                _this.upload();
+            });
+            this.showNotification('top', 'center', 1, '<b>bon Consultation ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon Consultation non ajouté</b> :");
+        }
+    };
+    BonConsultationComponent.prototype.retourserach = function () {
+        console.log('************************************');
+        window.location.reload();
     };
     /////////////////Save Bon Conjoint
     BonConsultationComponent.prototype.BonConjoint = function () {
+        var _this = this;
         // this.nom=this.bon.ipm_employe.prenom
         this.bonlettre.ipm_employe = this.message;
-        this.addPrestataire.code_prestataire = this.idp;
-        this.bonlettre.ipm_prestataire = JSON.parse(JSON.stringify(this.addPrestataire));
-        this.addconjoint.idconj = this.idbconj;
-        this.bonlettre.ipm_conjoint = JSON.parse(JSON.stringify(this.addconjoint));
+        //  this.addPrestataire.code_prestataire=this.idp;
+        //  this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
+        //  this.addconjoint.idconj=this.idbconj
+        //  this.bonlettre.ipm_conjoint=JSON.parse(JSON.stringify(this.addconjoint))
+        this.bonlettre.ipm_prestataire = this.prestatair;
+        this.bonlettre.ipm_prestation = this.prestation;
         this.bonlettre.dateEtablissement = new Date();
         console.log(this.bonlettre.ipm_conjoint);
+        this.bonlettre.ipm_conjoint = this.conjChoisi;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         // console.log( this.b.ipm_employe);
         //console.log(this.b.ipm_prestataire);
         // this.bonlettre.ordonnance=this.selectOrdonne.name
         //this.bon.prix_unitaire=this.prix_unitaire;
-        this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(function (data) {
-        });
-        console.log(this.bonlettre.ipm_prestataire);
-        console.log(this.bonlettre);
+        this.numBonConj = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
+        this.bonlettre.numeroBon = this.numBonConj;
+        if (this.bonlettre.dateEtablissement && this.bonlettre.ipm_conjoint && this.bonlettre.ipm_prestataire && this.bonlettre.ipm_prestation) {
+            this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(function (data) {
+                _this.uploadConjoint();
+            });
+            console.log(this.bonlettre.ipm_prestataire);
+            console.log(this.bonlettre);
+            this.showNotification('top', 'center', 1, '<b>bon Consultation ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon Consultation non ajouté</b> :");
+        }
     };
     /////////////////Save Bon Enfants
     BonConsultationComponent.prototype.BonEnfant = function () {
+        var _this = this;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         // this.nom=this.bon.ipm_employe.prenom
         this.bonlettre.ipm_employe = this.message;
-        this.addPrestataire.code_prestataire = this.idp;
-        this.bonlettre.ipm_prestataire = JSON.parse(JSON.stringify(this.addPrestataire));
-        this.addenfant.idenf = this.idbenf;
-        //this.bonlettre.ipm_enfant=JSON.parse(JSON.stringify(this.addenfant))
-        console.log(this.bonlettre.ipm_enfant);
+        //  this.addPrestataire.code_prestataire=this.idp;
+        //  this.bonlettre.ipm_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));
+        // this.addenfant.idenf=this.enfChoisi
+        this.bonlettre.ipm_enfant = this.enfChoisi;
+        this.bonlettre.ipm_prestataire = this.prestatair;
+        this.bonlettre.ipm_prestation = this.prestation;
+        console.log(this.bonlettre.ipm_prestataire, this.bonlettre.ipm_enfant);
+        console.log(this.bonlettre.ipm_prestation);
         //console.log( this.b.ipm_employe);
         //console.log(this.b.ipm_prestataire);
         this.bonlettre.dateEtablissement = new Date();
         //this.bonlettre.ordonnance=this.selectOrdonne.name
-        this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(function (data) {
-        });
-        console.log(this.bonlettre.ipm_prestataire);
-        console.log(this.bonlettre);
+        this.bonlettre.numeroBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
+        if (this.bonlettre.ipm_prestataire && this.bonlettre.ipm_enfant &&
+            this.bonlettre.dateEtablissement && this.bonlettre.ipm_prestation) {
+            this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(function (data) {
+                _this.uploadEnfant();
+            });
+            console.log(this.bonlettre.ipm_prestataire);
+            console.log(this.bonlettre);
+            this.showNotification('top', 'center', 1, '<b>bon Consultation ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon Consultation non ajouté</b> :");
+        }
     };
     BonConsultationComponent.prototype.showNotification = function (from, align, idtype, note) {
         var type = ['', 'success', 'warning', 'danger', 'info', 'rose', 'primary'];
@@ -1199,9 +1464,22 @@ var BonConsultationComponent = /** @class */ (function () {
     ///////////////////////// Imprimer Bon Employé
     BonConsultationComponent.prototype.upload = function () {
         var _a;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         console.log(this.message);
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
         var col = [["Consultation", "Designation", "Tarif", "Montant"]];
         var rows = [];
         //let tmp=[this.designation,this.nombre_article]
@@ -1220,6 +1498,7 @@ var BonConsultationComponent = /** @class */ (function () {
         var Ncarnet = this.message.numero_carnet;
         var ipm4 = (_a = this.message.ipmService) === null || _a === void 0 ? void 0 : _a.type_service;
         var ipm = this.message.matricule;
+        var numBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
             startY: 100,
             head: col,
@@ -1259,8 +1538,10 @@ var BonConsultationComponent = /** @class */ (function () {
                 doc.text(ipm, 140, 75);
                 doc.text("Prestation :", 120, 85);
                 doc.text(prestatio, 143, 85);
-                doc.text("N Carnet :", 15, 85);
+                doc.text("N° Carnet :", 15, 85);
                 doc.text("" + Ncarnet, 40, 85);
+                doc.text("N° Bon : ", 15, 60);
+                doc.text("" + numBon, 35, 60);
                 //  doc.text("Nombre D'article :",120,85)
                 //  doc.text(""+Narticle,160,85)
                 //  doc.setFontSize(12)
@@ -1277,7 +1558,7 @@ var BonConsultationComponent = /** @class */ (function () {
                 doc.text("Total :", 140, 180);
             }
         });
-        doc.save("bonConsultation.pdf");
+        doc.output('dataurlnewwindow');
         // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
@@ -1287,8 +1568,21 @@ var BonConsultationComponent = /** @class */ (function () {
     };
     BonConsultationComponent.prototype.uploadConjoint = function () {
         var _a, _b, _c, _d, _e;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
         var col = [["Consultation", "Designation", "Tarif", "Montant"]];
         var rows = [];
         // if(this.bon.ipm_employe=this.message.idemp){
@@ -1307,6 +1601,7 @@ var BonConsultationComponent = /** @class */ (function () {
         var ipm = this.message.matricule;
         var prestatio = this.prestationC;
         var Ncarnet = this.message.numero_carnet;
+        var numBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
             startY: 100,
             head: col,
@@ -1344,6 +1639,8 @@ var BonConsultationComponent = /** @class */ (function () {
                 doc.text(ipm, 140, 75);
                 doc.setFontSize(12);
                 doc.text("N Carnet :", 15, 85);
+                doc.text("N Bon :", 55, 85);
+                doc.text("" + numBon, 75, 85);
                 doc.text("" + Ncarnet, 40, 85);
                 doc.text("Prestation :", 120, 85);
                 doc.text(prestatio, 160, 85);
@@ -1355,7 +1652,7 @@ var BonConsultationComponent = /** @class */ (function () {
                 doc.text("Total :", 140, 180);
             }
         });
-        doc.save("bonpharmacie.pdf");
+        doc.output('dataurlnewwindow');
         // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
@@ -1365,8 +1662,21 @@ var BonConsultationComponent = /** @class */ (function () {
     };
     BonConsultationComponent.prototype.uploadEnfant = function () {
         var _a, _b, _c, _d;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
         var col = [["Consultation", "Designation", "Tarif", "Montant"]];
         var rows = [];
         // if(this.bon.ipm_employe=this.message.idemp){
@@ -1385,6 +1695,7 @@ var BonConsultationComponent = /** @class */ (function () {
         var ipm = this.message.matricule;
         var prestatio = this.prestationC;
         var Ncarnet = this.message.numero_carnet;
+        var numBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
             startY: 100,
             head: col,
@@ -1417,14 +1728,16 @@ var BonConsultationComponent = /** @class */ (function () {
                 doc.setFontSize(12);
                 doc.text("Participant:", 15, 75);
                 doc.text(ipm1, 40, 75);
-                doc.text(ipm2, 80, 75);
+                doc.text(ipm2, 75, 75);
                 doc.text("Matricule:", 120, 75);
                 doc.text(ipm, 140, 75);
                 doc.setFontSize(12);
-                doc.text("N Carnet :", 15, 85);
+                doc.text("N° Carnet :", 15, 85);
                 doc.text("" + Ncarnet, 40, 85);
+                doc.text("N° Bon : ", 15, 60);
+                doc.text("" + numBon, 35, 60);
                 doc.text("Prestation :", 120, 85);
-                doc.text(prestatio, 160, 85);
+                doc.text(prestatio, 150, 85);
                 doc.text("Malade:", 15, 95);
                 doc.text(ipm5, 40, 95);
                 doc.text(ipm6, 80, 95);
@@ -1433,7 +1746,7 @@ var BonConsultationComponent = /** @class */ (function () {
                 doc.text("Total :", 140, 180);
             }
         });
-        doc.save("bonpharmacie.pdf");
+        doc.output('dataurlnewwindow');
         // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
@@ -1560,7 +1873,7 @@ var IPM_Bon_Pharmaceutique = /** @class */ (function (_super) {
     __extends(IPM_Bon_Pharmaceutique, _super);
     function IPM_Bon_Pharmaceutique(idbon, nombre_article, service, total, 
     //public date_etablissement:Date,
-    quantite, designation, prix_unitaire, ipm_employe, ipm_prestataire, ipm_enfant, ordonnance, ipm_conjoint, ipm_prestation, numero_bon_pharmacie, dateEtablissement) {
+    quantite, designation, prix_unitaire, ipm_employe, ipm_prestataire, ipm_enfant, ordonnance, ipm_conjoint, ipm_prestation, numeroBon, dateEtablissement) {
         var _this = _super.call(this, idbon, total, ipm_employe, ipm_prestataire, ipm_enfant, ipm_conjoint, ipm_prestation, dateEtablissement) || this;
         _this.idbon = idbon;
         _this.nombre_article = nombre_article;
@@ -1575,7 +1888,7 @@ var IPM_Bon_Pharmaceutique = /** @class */ (function (_super) {
         _this.ordonnance = ordonnance;
         _this.ipm_conjoint = ipm_conjoint;
         _this.ipm_prestation = ipm_prestation;
-        _this.numero_bon_pharmacie = numero_bon_pharmacie;
+        _this.numeroBon = numeroBon;
         _this.dateEtablissement = dateEtablissement;
         return _this;
     }
@@ -1794,12 +2107,13 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 var IPM_Bon_Lettre_Garantie = /** @class */ (function (_super) {
     __extends(IPM_Bon_Lettre_Garantie, _super);
-    function IPM_Bon_Lettre_Garantie(idbon, total, categorie_hospitalisation, motif, ipm_employe, ipm_prestataire, ipm_enfant, ordonnance, ipm_conjoint, ipm_prestation, dateEtablissement) {
+    function IPM_Bon_Lettre_Garantie(idbon, total, categorie_hospitalisation, motif, numeroBon, ipm_employe, ipm_prestataire, ipm_enfant, ordonnance, ipm_conjoint, ipm_prestation, dateEtablissement) {
         var _this = _super.call(this, idbon, total, ipm_employe, ipm_prestataire, ipm_enfant, ipm_conjoint, ipm_prestation, dateEtablissement) || this;
         _this.idbon = idbon;
         _this.total = total;
         _this.categorie_hospitalisation = categorie_hospitalisation;
         _this.motif = motif;
+        _this.numeroBon = numeroBon;
         _this.ipm_employe = ipm_employe;
         _this.ipm_prestataire = ipm_prestataire;
         _this.ipm_enfant = ipm_enfant;
@@ -1882,7 +2196,8 @@ var BonLunetterieComponent = /** @class */ (function () {
         this.enfants = [];
         this.conjoints = [];
         this.currentemploye = new src_app_Models_Employe__WEBPACK_IMPORTED_MODULE_7__["Employe"]();
-        this.bonlettre = new src_app_Models_IPM_Bon_Lunetterie__WEBPACK_IMPORTED_MODULE_9__["IPM_Bon_Lunetterie"](0, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.bonlettre = new src_app_Models_IPM_Bon_Lunetterie__WEBPACK_IMPORTED_MODULE_9__["IPM_Bon_Lunetterie"](0, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.maDate = new Date();
     }
     BonLunetterieComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1895,13 +2210,38 @@ var BonLunetterieComponent = /** @class */ (function () {
         this.emp_service.getEmployeById(this.id).subscribe(function (result) {
             _this.currentemploye = result;
         });
+        this.pres_service.getBon().subscribe(function (pres) {
+            // console.log(cat);
+            _this.listB = pres;
+            console.log(_this.listB[_this.listB.length - 1].numeroBon.slice(4));
+            _this.numero = _this.listB[_this.listB.length - 1].numeroBon.slice(4);
+            _this.numero++;
+            console.log(_this.numero);
+        });
     };
     ////////////////////Rechercher par matricule 
     BonLunetterieComponent.prototype.findByMatricule = function () {
         var _this = this;
         ///////Rechercher l'employé
         this.emp_service.getEmployeByMatricule(this.matricule).subscribe(function (data) {
-            _this.message = data;
+            _this.mess = data;
+            if (_this.mess) {
+                console.log(_this.mess);
+            }
+            else {
+                _this.mess1 = "yess";
+                console.log("charlessssssssssssss");
+                _this.showNotification('top', 'center', 3, "<b>matricule n'existe pas</b> :");
+            }
+            if (data.statut == true) {
+                _this.message = data;
+                console.log(_this.message);
+            }
+            else {
+                console.log(_this.message);
+                _this.mess1 = "yess";
+                _this.showNotification('top', 'center', 3, "<b>agent de numero matricule " + _this.matricule + " ne beneficie plus de L'IPM</b> :");
+            }
             _this.matr = _this.message.idemp;
             var date = _this.datePipe.transform(_this.message.date_nais, "dd-MM-yyyy");
             //const date =this.message.date_nais
@@ -1920,6 +2260,29 @@ var BonLunetterieComponent = /** @class */ (function () {
             ///////Rechercher les enfants en fontion de l'employé
             _this.enf_service.listeEnfant(_this.message.idemp).subscribe(function (enfs) {
                 _this.enfants = enfs;
+                _this.enfants.forEach(function (ele) {
+                    if (ele.date_nais_enfant) {
+                        //convert date again to type Date
+                        var bdate = new Date(ele.date_nais_enfant);
+                        var timeDiff = Math.abs(Date.now() - bdate.getTime());
+                        _this.agenft = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+                    }
+                    console.log(_this.agenft);
+                    if (_this.agenft > 21) {
+                        console.log("Age atteinte impossible de ce beneficier à l'ipm :", _this.agenft);
+                        ele.active = false;
+                        console.log(ele.active);
+                        console.log("age depasse");
+                    }
+                    else if (_this.agenft < 21) {
+                        console.log("Voici l'age :", _this.agenft);
+                        ele.active = true;
+                        console.log(ele.active);
+                        console.log("age non depasse");
+                    }
+                });
+                console.log(_this.enfants);
+                _this.enfants = _this.enfants.filter(function (serv) { return serv.active == true; });
                 console.log(_this.enfants);
             });
             ///////Rechercher les conjoints en fontion de l'employé
@@ -1988,11 +2351,12 @@ var BonLunetterieComponent = /** @class */ (function () {
     BonLunetterieComponent.prototype.getnom = function (prest) {
         var _this = this;
         this.prestatair = prest;
-        console.log(this.prestatair);
+        console.log(prest);
+        this.prestat = prest;
+        this.idp = prest.code_prestataire;
         this.pres_service.getAllPrestataires().subscribe(function (pres) {
             console.log(prest.nom_prestataire);
             _this.p = prest.nom_prestataire;
-            _this.idp = prest.code_prestataire;
             //   this.prestataires.forEach(element => {
             //     console.log(element.code_prestataire)
             //       if (element.code_prestataire=prest)
@@ -2006,10 +2370,10 @@ var BonLunetterieComponent = /** @class */ (function () {
             //   //console.log(this.prestataires);
         });
     };
-    BonLunetterieComponent.prototype.selectOrdonn = function (event) {
+    BonLunetterieComponent.prototype.selectDevit = function (event) {
         var _this = this;
         //selectCertif
-        this.selectOrdonne = event.target.files[0];
+        this.selectOrDevit = event.target.files[0];
         var readerr = new FileReader();
         readerr.readAsDataURL(event.target.files[0]);
         readerr.onload = function (event) {
@@ -2018,11 +2382,26 @@ var BonLunetterieComponent = /** @class */ (function () {
     };
     /////////////////////////////////Save Lettre de Garantie
     BonLunetterieComponent.prototype.BonConsultation = function () {
+        var _this = this;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         // this.nom=this.bon.ipm_employe.prenom
         this.bonlettre.ipm_employe = this.message;
         this.bonlettre.dateEtablissement = new Date();
         //this.addPrestataire.code_prestataire=this.idp;
         this.bonlettre.ipm_prestataire = this.prestatair;
+        this.bonlettre.devit = this.selectOrDevit.name;
         this.bonlettre.motif = this.motif;
         if (this.enfChoisi) {
             this.bonlettre.ipm_enfant = this.enfChoisi;
@@ -2032,58 +2411,137 @@ var BonLunetterieComponent = /** @class */ (function () {
         }
         //this.bonlettre.ordonnance=this.selectOrdonne.name
         console.log(this.bonlettre);
-        this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(function (data) {
-        });
-        this.desactive = true;
-        //this.toastr.success( 'Ajouter Faite avec Success');
-        // console.log( this.b.ipm_employe);
-        // console.log(this.b.ipm_prestataire);
-        // this.router.navigate(['/gestion-bons/Listebons']);
-        console.log(this.motif);
+        this.bonlettre.numeroBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
+        if (this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+            this.bonlettre.dateEtablissement && this.bonlettre.devit) {
+            this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(function (data) { _this.upload(); });
+            this.bon_lettreService.uploadFileDevit(this.selectOrDevit).subscribe(function (data) { });
+            this.desactive = true;
+            console.log(this.motif);
+            this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :");
+        }
     };
     /////////////////Save Bon Conjoint
     BonLunetterieComponent.prototype.BonConjoint = function () {
+        var _this = this;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         // this.nom=this.bon.ipm_employe.prenom
         this.bonlettre.ipm_employe = this.message;
         this.bonlettre.dateEtablissement = new Date();
         this.addPrestataire.code_prestataire = this.idp;
+        this.bonlettre.devit = this.selectOrDevit.name;
+        this.bonlettre.motif = this.motif;
         this.bonlettre.ipm_prestataire = JSON.parse(JSON.stringify(this.addPrestataire));
         this.addconjoint.idconj = this.idbconj;
         this.bonlettre.ipm_conjoint = JSON.parse(JSON.stringify(this.addconjoint));
+        this.bonlettre.numeroBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         console.log(this.bonlettre.ipm_conjoint);
         // console.log( this.b.ipm_employe);
         //console.log(this.b.ipm_prestataire);
         // this.bonlettre.ordonnance=this.selectOrdonne.name
         //this.bon.prix_unitaire=this.prix_unitaire;
-        this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(function (data) {
-        });
-        console.log(this.bonlettre.ipm_prestataire);
-        console.log(this.bonlettre);
+        if (this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+            this.bonlettre.dateEtablissement && this.bonlettre.devit) {
+            this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(function (data) {
+                _this.uploadConjoint();
+            });
+            this.bon_lettreService.uploadFileDevit(this.selectOrDevit).subscribe(function (data) { });
+            this.desactive = true;
+            console.log(this.bonlettre.ipm_prestataire);
+            console.log(this.bonlettre);
+            this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :");
+        }
     };
     /////////////////Save Bon Enfants
     BonLunetterieComponent.prototype.BonEnfant = function () {
+        var _this = this;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         // this.nom=this.bon.ipm_employe.prenom
+        console.log(this.idp);
         this.bonlettre.ipm_employe = this.message;
+        this.bonlettre.motif = this.motif;
         this.bonlettre.dateEtablissement = new Date();
-        this.addPrestataire.code_prestataire = this.idp;
-        this.bonlettre.ipm_prestataire = JSON.parse(JSON.stringify(this.addPrestataire));
-        this.addenfant.idenf = this.idbenf;
-        //this.bonlettre.ipm_enfant=JSON.parse(JSON.stringify(this.addenfant))
-        console.log(this.bonlettre.ipm_enfant);
+        this.bonlettre.devit = this.selectOrDevit.name;
+        // this.addPrestataire.code_prestataire=this.idp;
+        this.bonlettre.ipm_prestataire = this.prestat;
+        // this.addenfant.idenf=this.idbenf
+        this.bonlettre.ipm_enfant = this.enfChoisi;
+        console.log(this.bonlettre);
         //console.log( this.b.ipm_employe);
         //console.log(this.b.ipm_prestataire);
         //this.bonlettre.ordonnance=this.selectOrdonne.name
-        this.bon_lettreService.SaveBonConsultation(this.bonlettre).subscribe(function (data) {
-        });
-        console.log(this.bonlettre.ipm_prestataire);
-        console.log(this.bonlettre);
+        this.bonlettre.numeroBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
+        if (this.bonlettre.ipm_employe && this.bonlettre.ipm_prestataire && this.bonlettre.numeroBon &&
+            this.bonlettre.dateEtablissement && this.bonlettre.devit) {
+            this.bon_lettreService.SaveBonLunetterie(this.bonlettre).subscribe(function (data) {
+                _this.uploadEnfant();
+            });
+            this.bon_lettreService.uploadFileDevit(this.selectOrDevit).subscribe(function (data) { });
+            console.log(this.bonlettre.ipm_prestataire);
+            console.log(this.bonlettre);
+            this.showNotification('top', 'center', 1, '<b>bon lunetterie ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon lunetterie non ajouté</b> :");
+        }
+    };
+    BonLunetterieComponent.prototype.retourserach = function () {
+        console.log('************************************');
+        window.location.reload();
     };
     BonLunetterieComponent.prototype.upload = function () {
         var _a, _b, _c, _d, _e;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
-        var col = [["Quantité", "Designation", "P.unitaire", "Montant"]];
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
+        var col = [["Designation", "P.unitaire", "Montant"]];
         var rows = [];
+        for (var index = 1; index < 3; index++) {
+            var tmp = [];
+            rows.push(tmp);
+        }
         var ipm1 = (_a = this.message) === null || _a === void 0 ? void 0 : _a.prenom;
         var ipm2 = (_b = this.message) === null || _b === void 0 ? void 0 : _b.nom;
         console.log(ipm2);
@@ -2092,14 +2550,15 @@ var BonLunetterieComponent = /** @class */ (function () {
         var ipm3 = (_c = this.message.ipmService) === null || _c === void 0 ? void 0 : _c.type_service;
         var ipm4 = (_d = this.message) === null || _d === void 0 ? void 0 : _d.matricule;
         var ipm5 = (_e = this.message) === null || _e === void 0 ? void 0 : _e.reference;
+        var numBonEmp = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
-            //   startY:75,
-            //   head:col,
-            //    body:rows,
-            //   margin:{ horizontal:10},
-            //   styles:{overflow:"linebreak"},
-            //   bodyStyles:{valign:"top"},
-            //   theme:"grid",
+            startY: 100,
+            head: col,
+            body: rows,
+            margin: { horizontal: 10 },
+            styles: { overflow: "linebreak" },
+            bodyStyles: { valign: "top" },
+            theme: "grid",
             didDrawPage: function (data) {
                 //this.bon.ipm_employe=this.message;
                 doc.addImage(imgData, 'JPEG', 15, 5, 180, 20);
@@ -2112,9 +2571,9 @@ var BonLunetterieComponent = /** @class */ (function () {
                 doc.setFillColor(240, 240, 240);
                 doc.rect(13, 65, 185, 35, 'F');
                 //RECTANGLE PAGE
-                doc.setLineWidth(2);
-                doc.setDrawColor("#3A6EA5");
-                doc.rect(10, 100, 190, 170);
+                //doc.setLineWidth(2)
+                //doc.setDrawColor("#3A6EA5")
+                //doc.rect(10,100,190,170)
                 doc.setFontSize(15);
                 doc.setTextColor("#3A6EA5");
                 doc.text("BON DE COMMANDE", 85, 36);
@@ -2123,6 +2582,8 @@ var BonLunetterieComponent = /** @class */ (function () {
                 var date = new Date();
                 doc.setFontSize(13);
                 doc.text("Dakar, le :", 150, 60);
+                doc.text("N° Bon:", 13, 60);
+                doc.text("" + numBonEmp, 30, 60);
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
                 doc.text("Malade:", 15, 75);
@@ -2144,27 +2605,26 @@ var BonLunetterieComponent = /** @class */ (function () {
                 doc.text(prestataire, 40, 95);
                 //  doc.text("N° Ref:",15,95)
                 //  doc.text(ipm5,50,95)
-                doc.setFontSize(12);
-                doc.text("Monsieur,", 15, 110);
-                doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ", 15, 125);
-                //  doc.text("de:",15,125)
-                //  doc.text("----------------------",15,130)
-                doc.text("  institution :", 15, 130);
-                doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai", 15, 143);
-                doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre", 15, 150);
-                doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée", 15, 168);
-                doc.text("Le Gérant National", 150, 200);
-                doc.setTextColor("#8C1C13");
-                doc.text("NB:Nous retourner deux exemplaires avec la facture", 15, 240);
-                doc.text("--------------------------------------------------------------------------", 15, 250);
-                doc.setTextColor("");
-                doc.setFontSize(10);
-                doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée", 100, 260);
-                doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)", 100, 265);
+                // doc.setFontSize(12)
+                //  doc.text("Monsieur,",15,110)
+                //  doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
+                // //  doc.text("de:",15,125)
+                // //  doc.text("----------------------",15,130)
+                //  doc.text("  institution :",15,130)
+                //  doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
+                //  doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
+                //  doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
+                //  doc.text("Le Gérant National",150,200)
+                //  doc.setTextColor("#8C1C13")
+                //  doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
+                //  doc.text("--------------------------------------------------------------------------",15,250)
+                //  doc.setTextColor("")
+                //  doc.setFontSize(10)
+                //  doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
+                //  doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
             }
         });
-        doc.save("lettreGantie.pdf");
-        // let data = document.getElementById('noticeModal'); 
+        doc.output('dataurlnewwindow'); // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
         //    document.body.innerHTML = printContents;
@@ -2173,10 +2633,27 @@ var BonLunetterieComponent = /** @class */ (function () {
     };
     BonLunetterieComponent.prototype.uploadConjoint = function () {
         var _a, _b, _c, _d, _e, _f;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
-        var col = [["Quantité", "Designation", "P.unitaire", "Montant"]];
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
+        var col = [["Designation", "P.unitaire", "Montant"]];
         var rows = [];
+        for (var index = 1; index < 3; index++) {
+            var tmp = [];
+            rows.push(tmp);
+        }
         var ipm1 = (_a = this.message) === null || _a === void 0 ? void 0 : _a.prenom;
         var ipm2 = (_b = this.message) === null || _b === void 0 ? void 0 : _b.nom;
         console.log(ipm2);
@@ -2186,14 +2663,15 @@ var BonLunetterieComponent = /** @class */ (function () {
         var ipm4 = (_d = this.message) === null || _d === void 0 ? void 0 : _d.matricule;
         var ipm5 = (_e = this.messageconjoint) === null || _e === void 0 ? void 0 : _e.prenom_conjoint;
         var ipm6 = (_f = this.messageconjoint) === null || _f === void 0 ? void 0 : _f.nom_conjoint;
+        var numBonConj = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
-            //   startY:75,
-            //   head:col,
-            //    body:rows,
-            //   margin:{ horizontal:10},
-            //   styles:{overflow:"linebreak"},
-            //   bodyStyles:{valign:"top"},
-            //   theme:"grid",
+            startY: 100,
+            head: col,
+            body: rows,
+            margin: { horizontal: 10 },
+            styles: { overflow: "linebreak" },
+            bodyStyles: { valign: "top" },
+            theme: "grid",
             didDrawPage: function (data) {
                 //this.bon.ipm_employe=this.message;
                 doc.addImage(imgData, 'JPEG', 15, 5, 180, 20);
@@ -2206,17 +2684,19 @@ var BonLunetterieComponent = /** @class */ (function () {
                 doc.setFillColor(240, 240, 240);
                 doc.rect(13, 65, 185, 35, 'F');
                 //RECTANGLE PAGE
-                doc.setLineWidth(2);
-                doc.setDrawColor("#3A6EA5");
-                doc.rect(10, 100, 190, 170);
-                doc.setFontSize(15);
-                doc.setTextColor("#3A6EA5");
+                //   doc.setLineWidth(2)
+                //  doc.setDrawColor("#3A6EA5")
+                //  doc.rect(10,100,190,170)
+                //   doc.setFontSize(15)
+                //   doc.setTextColor("#3A6EA5")
                 doc.text("BON DE COMMANDE", 85, 36);
                 doc.text("POUR LUNETTERIE", 85, 45);
                 doc.setTextColor("");
                 var date = new Date();
                 doc.setFontSize(13);
                 doc.text("Dakar, le :", 150, 60);
+                doc.text("N° Bon:", 13, 60);
+                doc.text("" + numBonConj, 30, 60);
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
                 doc.text("Participant:", 15, 75);
@@ -2241,27 +2721,26 @@ var BonLunetterieComponent = /** @class */ (function () {
                 doc.text(prestataire, 40, 95);
                 //  doc.text("N° Ref:",15,95)
                 //  doc.text(ipm5,50,95)
-                doc.setFontSize(12);
-                doc.text("Monsieur,", 15, 110);
-                doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ", 15, 125);
-                //  doc.text("de:",15,125)
-                //  doc.text("----------------------",15,130)
-                doc.text("  institution :", 15, 130);
-                doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai", 15, 143);
-                doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre", 15, 150);
-                doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée", 15, 168);
-                doc.text("Le Gérant National", 150, 200);
-                doc.setTextColor("#8C1C13");
-                doc.text("NB:Nous retourner deux exemplaires avec la facture", 15, 240);
-                doc.text("--------------------------------------------------------------------------", 15, 250);
-                doc.setTextColor("");
-                doc.setFontSize(10);
-                doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée", 100, 260);
-                doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)", 100, 265);
+                // doc.setFontSize(12)
+                //  doc.text("Monsieur,",15,110)
+                //  doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
+                // //  doc.text("de:",15,125)
+                // //  doc.text("----------------------",15,130)
+                //  doc.text("  institution :",15,130)
+                //  doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
+                //  doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
+                //  doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
+                //  doc.text("Le Gérant National",150,200)
+                //  doc.setTextColor("#8C1C13")
+                //  doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
+                //  doc.text("--------------------------------------------------------------------------",15,250)
+                //  doc.setTextColor("")
+                //  doc.setFontSize(10)
+                //  doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
+                //  doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
             }
         });
-        doc.save("lettreGantie.pdf");
-        // let data = document.getElementById('noticeModal'); 
+        doc.output('dataurlnewwindow'); // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
         //    document.body.innerHTML = printContents;
@@ -2270,10 +2749,27 @@ var BonLunetterieComponent = /** @class */ (function () {
     };
     BonLunetterieComponent.prototype.uploadEnfant = function () {
         var _a, _b, _c, _d, _e;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
-        var col = [["Quantité", "Designation", "P.unitaire", "Montant"]];
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
+        var col = [["Designation", "P.unitaire", "Montant"]];
         var rows = [];
+        for (var index = 1; index < 3; index++) {
+            var tmp = [];
+            rows.push(tmp);
+        }
         var ipm1 = (_a = this.message) === null || _a === void 0 ? void 0 : _a.prenom;
         var ipm2 = (_b = this.message) === null || _b === void 0 ? void 0 : _b.nom;
         console.log(ipm2);
@@ -2283,14 +2779,15 @@ var BonLunetterieComponent = /** @class */ (function () {
         var ipm4 = (_d = this.message) === null || _d === void 0 ? void 0 : _d.matricule;
         var ipm5 = this.messageenfant.prenom_enfant;
         var ipm6 = (_e = this.messageenfant) === null || _e === void 0 ? void 0 : _e.nom_enfant;
+        var numBonEnf = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
-            //   startY:75,
-            //   head:col,
-            //    body:rows,
-            //   margin:{ horizontal:10},
-            //   styles:{overflow:"linebreak"},
-            //   bodyStyles:{valign:"top"},
-            //   theme:"grid",
+            startY: 100,
+            head: col,
+            body: rows,
+            margin: { horizontal: 10 },
+            styles: { overflow: "linebreak" },
+            bodyStyles: { valign: "top" },
+            theme: "grid",
             didDrawPage: function (data) {
                 //this.bon.ipm_employe=this.message;
                 doc.addImage(imgData, 'JPEG', 15, 5, 180, 20);
@@ -2303,17 +2800,19 @@ var BonLunetterieComponent = /** @class */ (function () {
                 doc.setFillColor(240, 240, 240);
                 doc.rect(13, 65, 185, 35, 'F');
                 //RECTANGLE PAGE
-                doc.setLineWidth(2);
-                doc.setDrawColor("#3A6EA5");
-                doc.rect(10, 100, 190, 170);
-                doc.setFontSize(15);
-                doc.setTextColor("#3A6EA5");
+                //   doc.setLineWidth(2)
+                //  doc.setDrawColor("#3A6EA5")
+                //  doc.rect(10,100,190,170)
+                //   doc.setFontSize(15)
+                //   doc.setTextColor("#3A6EA5")
                 doc.text("BON DE COMMANDE", 85, 36);
                 doc.text("POUR LUNETTERIE", 85, 45);
                 doc.setTextColor("");
                 var date = new Date();
                 doc.setFontSize(13);
                 doc.text("Dakar, le :", 150, 60);
+                doc.text("N° Bon:", 13, 60);
+                doc.text("" + numBonEnf, 30, 60);
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
                 doc.text("Participant:", 15, 75);
@@ -2338,26 +2837,26 @@ var BonLunetterieComponent = /** @class */ (function () {
                 doc.text(prestataire, 40, 95);
                 //  doc.text("N° Ref:",15,95)
                 //  doc.text(ipm5,50,95)
-                doc.setFontSize(12);
-                doc.text("Monsieur,", 15, 110);
-                doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ", 15, 125);
-                //  doc.text("de:",15,125)
-                //  doc.text("----------------------",15,130)
-                doc.text("  institution :", 15, 130);
-                doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai", 15, 143);
-                doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre", 15, 150);
-                doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée", 15, 168);
-                doc.text("Le Gérant National", 150, 200);
-                doc.setTextColor("#8C1C13");
-                doc.text("NB:Nous retourner deux exemplaires avec la facture", 15, 240);
-                doc.text("--------------------------------------------------------------------------", 15, 250);
-                doc.setTextColor("");
-                doc.setFontSize(10);
-                doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée", 100, 260);
-                doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)", 100, 265);
+                // doc.setFontSize(12)
+                //  doc.text("Monsieur,",15,110)
+                //  doc.text("Nous avons l'honneur de vous signaler que les frais de versement sont garantis par notre ",15,125)
+                // //  doc.text("de:",15,125)
+                // //  doc.text("----------------------",15,130)
+                //  doc.text("  institution :",15,130)
+                //  doc.text("Nous vous serions reconnaissant de bien vouloir nous faire parvenir votre facture dans un délai",15,143)
+                //  doc.text(" n'excédant pas deux (02) mois après la date d'établissement de la présente lettre",15,150)
+                //  doc.text("Veuillez agréer ,Monsieur,l'expression de notre considération distinguée",15,168)
+                //  doc.text("Le Gérant National",150,200)
+                //  doc.setTextColor("#8C1C13")
+                //  doc.text("NB:Nous retourner deux exemplaires avec la facture",15,240)
+                //  doc.text("--------------------------------------------------------------------------",15,250)
+                //  doc.setTextColor("")
+                //  doc.setFontSize(10)
+                //  doc.text("Siège Social:Immeuble Direction Générale Rez de Chaussée",100,260)
+                //  doc.text("8.Rue Abd.6.M.Paraine BP:11002 Dakar (Sénégal)",100,265)
             }
         });
-        doc.save("lettreGantie.pdf");
+        doc.output('dataurlnewwindow');
         // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
@@ -2426,7 +2925,7 @@ var BonLunetterieComponent = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!--Types Bons -->\r\n\r\n<div class=\"main-content\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row tab-content tab-space\" style=\"margin-top:-5.5cm;\">\r\n\r\n    </div>\r\n\r\n    <div class=\"card-body \">\r\n      <ul class=\"nav nav-pills nav-pills-warning\" role=\"tablist\">\r\n\r\n      </ul>\r\n\r\n      <div class=\" tab-content tab-space \">\r\n        <div class=\" col-md-11 tab-pane active \" id=\"link0\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; font-weight: 500; width:40%;\">Rechercher un\r\n                Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group p-2\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\">\r\n              <button mat-raised-button type=\"submit\" (click)=\"findByMatricule()\" class=\"nav-link \" data-toggle=\"tab\"\r\n                href=\"#link1\" class=\"btn btn-fill btn-success\" style=\"margin-left: 80%;\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- <div class=\"col-md-6\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-body\">\r\n              <br>\r\n  \r\n              <h4>l'agent {{message.matricule}} existe !!!</h4><br>\r\n              <table class=\"table table-hover\">\r\n  \r\n                <thead class=\"text-primary\">\r\n  \r\n                  <th>Nom</th>\r\n                  <th>Prenom</th>\r\n                  <th>Sexe</th>\r\n                  <th>Matricule</th>\r\n                  <th>Reference</th>\r\n  \r\n                </thead>\r\n                <tbody>\r\n                  <tr>\r\n                    <td>{{message.nom}}</td>\r\n                    <td>{{message.prenom}}</td>\r\n                    <td>{{message.sexe}}</td>\r\n                    <td>{{message.matricule}}</td>\r\n                    <td>{{message.reference}}</td>\r\n  \r\n                  </tr>\r\n                </tbody>\r\n              </table>\r\n            </div>\r\n  \r\n          </div>\r\n        </div> -->\r\n\r\n\r\n\r\n\r\n        <div class=\"tab-pane \" id=\"link1\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Lettre de\r\n                Garantie Agent</h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n                  <style>\r\n                    b,\r\n                    label {\r\n                      color: black;\r\n                      font-size: 18px;\r\n                    }\r\n                  </style>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom :</label>\r\n                        <b> {{message.prenom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom :</label>\r\n                        <b> {{message.nom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n                        <b> {{message.numero_carnet}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeEmploye}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b> {{message.date_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b> {{message.lieu_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Services:</label>\r\n                      <b> {{message.ipmService?.type_service}}</b>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"lPrestataires\" name=\"prestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b> {{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n\r\n                  <!-- <div class=\"col-md-8 form-group\">\r\n                  <label>Motif</label>\r\n                  <textarea cols=\"5\" rows=\"2\" style=\"background-color:whitesmoke; margin-top: -1cm;\" type=\"text\"\r\n                    class=\"form-control p-2\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                </div> -->\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                    data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Conjoints\" name=\"conjoints\" ([ngModel])=\"id_conjoint\">\r\n                        <mat-option *ngFor=\"let conjoint of conjoints\" [value]=\"conjoint.idconj\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link2\" role=\"tablist\" (click)=\"getconjointbon(conjoint)\">\r\n                          <b> {{ conjoint.prenom_conjoint}} {{ conjoint.nom_conjoint}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Enfants\" name=\"enfants\" ([ngModel])=\"id_enfant\">\r\n                        <mat-option *ngFor=\"let enfant of enfants\" [value]=\"enfant.idenf\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link3\" role=\"tablist\" (click)=\"getenfantbon(enfant)\">\r\n                          <b>{{ enfant.prenom_enfant}} {{ enfant.nom_enfant}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    (click)=\"BonNowLettre()\">Enregistrer\r\n                  </button>\r\n                  <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                  >\r\n                  Exporter</button>\r\n\r\n                </div>\r\n\r\n                <!-- <div class=\"modal-footer justify-content-center\">\r\n                <button mat-raised-button class=\"btn btn-raised btn-round btn-btn\" (click)=\"upload()\">Exporter Lettre\r\n                  de Grantie\r\n                </button>\r\n\r\n              </div> -->\r\n                <div>\r\n                  <!-- <h4>{{message}} </h4> -->\r\n                </div>\r\n\r\n              </form>\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link2\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:45%; font-weight: 500;\">Bon\r\n                Lettre de Garantie conjoint </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Conjoint :</label>\r\n                        <b>{{messageconjoint?.prenom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Conjoint:</label>\r\n                        <b>{{messageconjoint?.nom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <!-- <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageconjoint?.date_naiss_conj}}</b>\r\n                      </div>\r\n                    </div> -->\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeConjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b>{{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageconjoint?.lieu_naiss_conj}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"Prestataires Conjoints\" name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div>\r\n\r\n                <div class=\"modal-footer\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" (click)=\"BonNowLettre()\"> Enregistrer</button>\r\n\r\n                  <button mat-raised-button type=\"button\" (click)=\"uploadConjoint()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                    >\r\n                    Exporter</button>\r\n                </div>\r\n                \r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link3\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Bon\r\n                Lettre de Garantie Enfant </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Enfant :</label>\r\n                        <b>{{messageenfant?.prenom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Enfant:</label>\r\n                        <b>{{messageenfant?.nom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeEnfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <!-- <div class=\"col-md-4 form-group\">\r\n                  <div class=\"form-group\">\r\n                    <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                    <b>{{messageenfant.date_nais}}</b>\r\n                  </div>\r\n                </div> -->\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageenfant?.lieu_nais_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"Prestataires Enfant\" name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n                  <div class=\"modal-footer\">\r\n                    <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                      data-target=\"#noticeConjoint\" (click)=\"BonNowLettre()\"> Enregistrer</button>\r\n                    <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\"btn btn-green btn-round\"\r\n                      data-dismiss=\"modal\">\r\n                      Exporter</button>\r\n                  </div>\r\n                  <div>\r\n\r\n                  </div>\r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!-- notice modal -->\r\n    <div class=\"modal fade\" id=\"noticeModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n      aria-hidden=\"true\" *ngIf=\"message\">\r\n      <div class=\"modal-dialog modal-notice\">\r\n        <div class=\"modal-content\" style=\"width: 600px;\">\r\n          <div class=\"modal-header\">\r\n            <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n            <button mat-button type=\"button\" class=\"close \" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n              <i style=\"margin-top: -1.3cm; color: red; font-size: 30px;\" class=\"material-icons\">close</i>\r\n            </button>\r\n\r\n\r\n          </div>\r\n          <div class=\"modal-body\">\r\n\r\n\r\n            <div class=\"\" style=\"margin-top: -1cm;\">\r\n              <div>\r\n                <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n\r\n              <div class=\"col-md-12\">\r\n                <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n              </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prénom :</label>\r\n                  <b> {{message.prenom}}</b>\r\n                </div>\r\n              </div>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Nom :</label>\r\n                  <b> {{message.nom}}</b>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <hr>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prestataire :</label>\r\n                  <b>{{p}}</b>\r\n                </div>\r\n              </div>\r\n              <!-- <div class=\"col-md-6 form-group\">\r\n          <div class=\"form-group\">\r\n            <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n            {{message.idemp}}\r\n          </div>\r\n        </div> -->\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Services:</label>\r\n                  <b> {{message.ipm_service?.type_service}}</b>\r\n                </div>\r\n              </div>\r\n\r\n            </div>\r\n            <div class=\"card-body table-full-width\">\r\n              <div class=\"table-responsive\">\r\n                <table class=\"table table-hover table-bordered\">\r\n                  <thead class=\"\">\r\n                    <tr style=\"background-color: whitesmoke;\">\r\n                      <th style=\"font-weight: 600px\">Matricule Participant</th>\r\n                      <th style=\"font-weight: 600px\">Designation</th>\r\n                      <th style=\"font-weight: 600px\">Nombre D'article</th>\r\n\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr>\r\n                      <td>{{message.matricule}}</td>\r\n                      <td>{{designation}}</td>\r\n                      <td>{{nombre_article}}</td>\r\n\r\n                  </tbody>\r\n\r\n                </table>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"BonNowLettre()\" class=\"btn btn-success btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Enregistrer</button>\r\n          </div>\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\"btn btn-green btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Exporter</button>\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n    <!-- end notice modal -->\r\n  </div>\r\n</div>\r\n<!-- Exemple ngTemplate-->\r\n\r\n<!-- <div class=\"card\" *ngIf=\"message\">\r\n    <div class=\"card-header\">\r\n      <h4 class=\"card-title\">Lettre de Garantie</h4>\r\n    </div>\r\n<form class=\"form-horizontal\">\r\n    <input type=\"hidden\" class=\"form-control\" >\r\n    <div class=\"form-group row card-header\">\r\n      <h3 >Dakar,le  </h3>\r\n      \r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Nom du Patient</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"Nom du Patient\" [(ngModel)]=\"bon.nom_du_patient\" name=\"nom\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_Carnet_De_Sante</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_carnet_de_sante\" [(ngModel)]=\"bon.numero_carnet_de_sante\" name=\"numero_carnet_de_sante\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Service</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"service\" [(ngModel)]=\"bon.service\" name=\"service\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Mle de Solde</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"solde\" [(ngModel)]=\"bon.solde\" name=\"solde\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_De_Reference</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_de_reference\" [(ngModel)]=\"bon.numero_de_reference\" name=\"numero_de_reference\">\r\n\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <p>Monsieur,</p>\r\n        <p>Nous avons l'honnneur de vous signaler que les frais de versement de</p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n          sont garantis par notre institution. </p>\r\n        <p>Nous vous serons reconnaissants de bien vouloir parvenir votre facture dans un délai \r\n          n'excédant pas deux(02) mois aprés la date d'établissement de la présente lettre.\r\n          Veuillez agréer,Monsieur, l'expression de notre considération distinguée.\r\n\r\n        </p>\r\n      </div>\r\n \r\n     <div>\r\n      <h4>{{message}} </h4>\r\n    </div>\r\n    </div>\r\n  </form>\r\n\r\n  <div class=\"modal-footer justify-content-center\">\r\n    <button mat-raised-button type=\"button\" class=\"btn btn-info btn-round\" data-dismiss=\"modal\">Enregistrer</button>\r\n  </div>\r\n</div> -->");
+/* harmony default export */ __webpack_exports__["default"] = ("<!--Types Bons -->\r\n\r\n<div class=\"main-content\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row tab-content tab-space\" style=\"margin-top:-5.5cm;\">\r\n\r\n    </div>\r\n\r\n    <div class=\"card-body \">\r\n      <ul class=\"nav nav-pills nav-pills-warning\" role=\"tablist\">\r\n\r\n      </ul>\r\n\r\n      <div class=\" tab-content tab-space \">\r\n\r\n        <!------>\r\n        <div class=\" col-md-11 tab-pane active \" id=\"link0\" *ngIf=\"mess1\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; font-weight: 500; width:40%;\">Rechercher un\r\n                Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group p-2\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\">\r\n              <button mat-raised-button type=\"submit\" (click)=\"findByMatricule()\" class=\"nav-link \" data-toggle=\"tab\"\r\n                href=\"#link1\" class=\"btn btn-fill btn-success\" style=\"margin-left: 80%;\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!------->\r\n        <div class=\" col-md-11 tab-pane active \" id=\"link0\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; font-weight: 500; width:40%;\">Rechercher un\r\n                Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group p-2\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\">\r\n              <button mat-raised-button type=\"submit\" (click)=\"findByMatricule()\" class=\"nav-link \" data-toggle=\"tab\"\r\n                href=\"#link1\" class=\"btn btn-fill btn-success\" style=\"margin-left: 80%;\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- <div class=\"col-md-6\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-body\">\r\n              <br>\r\n  \r\n              <h4>l'agent {{message.matricule}} existe !!!</h4><br>\r\n              <table class=\"table table-hover\">\r\n  \r\n                <thead class=\"text-primary\">\r\n  \r\n                  <th>Nom</th>\r\n                  <th>Prenom</th>\r\n                  <th>Sexe</th>\r\n                  <th>Matricule</th>\r\n                  <th>Reference</th>\r\n  \r\n                </thead>\r\n                <tbody>\r\n                  <tr>\r\n                    <td>{{message.nom}}</td>\r\n                    <td>{{message.prenom}}</td>\r\n                    <td>{{message.sexe}}</td>\r\n                    <td>{{message.matricule}}</td>\r\n                    <td>{{message.reference}}</td>\r\n  \r\n                  </tr>\r\n                </tbody>\r\n              </table>\r\n            </div>\r\n  \r\n          </div>\r\n        </div> -->\r\n\r\n\r\n\r\n\r\n        <div class=\"tab-pane \" id=\"link1\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n              <i class=\"material-icons \" >assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Lettre de\r\n                Garantie Agent</h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n                  <style>\r\n                    b,\r\n                    label {\r\n                      color: black;\r\n                      font-size: 18px;\r\n                    }\r\n                  </style>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom :</label>\r\n                        <b> {{message.prenom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom :</label>\r\n                        <b> {{message.nom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n                        <b> {{message.numero_carnet}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeEmploye}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b> {{message.date_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b> {{message.lieu_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Services:</label>\r\n                      <b> {{message.ipmService?.type_service}}</b>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"lPrestataires\" name=\"prestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b> {{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n\r\n                  <!-- <div class=\"col-md-8 form-group\">\r\n                  <label>Motif</label>\r\n                  <textarea cols=\"5\" rows=\"2\" style=\"background-color:whitesmoke; margin-top: -1cm;\" type=\"text\"\r\n                    class=\"form-control p-2\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                </div> -->\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                    data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Conjoints\" name=\"conjoints\" ([ngModel])=\"id_conjoint\">\r\n                        <mat-option *ngFor=\"let conjoint of conjoints\" [value]=\"conjoint.idconj\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link2\" role=\"tablist\" (click)=\"getconjointbon(conjoint)\">\r\n                          <b> {{ conjoint.prenom_conjoint}} {{ conjoint.nom_conjoint}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Enfants\" name=\"enfants\" ([ngModel])=\"id_enfant\">\r\n                        <mat-option *ngFor=\"let enfant of enfants\" [value]=\"enfant.idenf\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link3\" role=\"tablist\" (click)=\"getenfantbon(enfant)\">\r\n                          <b>{{ enfant.prenom_enfant}} {{ enfant.nom_enfant}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    (click)=\"BonNowLettre()\">Enregistrer\r\n                  </button>\r\n\r\n                  <div class=\"col-md-6\" style=\"font-weight:bold;color: black;float: right;\">\r\n                    <i mat-raised-button type=\"button\" class=\"nav-link\"\r\n                    data-toggle=\"tab\"  style=\"width: 100px;\" (click)=\"retourserach()\"  role=\"tablist\" class=\"btn btn-info btn-round\">\r\n                    <span class=\"material-icons\">arrow_back</span></i>\r\n                  \r\n                  </div>\r\n                  <!-- <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                  >\r\n                  Exporter</button> -->\r\n\r\n                </div>\r\n\r\n                <!-- <div class=\"modal-footer justify-content-center\">\r\n                <button mat-raised-button class=\"btn btn-raised btn-round btn-btn\" (click)=\"upload()\">Exporter Lettre\r\n                  de Grantie\r\n                </button>\r\n\r\n              </div> -->\r\n                <div>\r\n                  <!-- <h4>{{message}} </h4> -->\r\n                </div>\r\n\r\n              </form>\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link2\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:45%; font-weight: 500;\">Bon\r\n                Lettre de Garantie conjoint </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Conjoint :</label>\r\n                        <b>{{messageconjoint?.prenom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Conjoint:</label>\r\n                        <b>{{messageconjoint?.nom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <!-- <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageconjoint?.date_naiss_conj}}</b>\r\n                      </div>\r\n                    </div> -->\r\n                    <div class=\"col-md-4 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeConjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b>{{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageconjoint?.lieu_naiss_conj}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"Prestataires Conjoints\" name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div>\r\n\r\n                <div class=\"modal-footer\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" (click)=\"BonConjoint()\"> Enregistrer</button>\r\n\r\n                  <!-- <button mat-raised-button type=\"button\" (click)=\"uploadConjoint()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                    >\r\n                    Exporter</button> -->\r\n                </div>\r\n                \r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link3\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Bon\r\n                Lettre de Garantie Enfant </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Enfant :</label>\r\n                        <b>{{messageenfant?.prenom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Enfant:</label>\r\n                        <b>{{messageenfant?.nom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeEnfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <!-- <div class=\"col-md-4 form-group\">\r\n                  <div class=\"form-group\">\r\n                    <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                    <b>{{messageenfant.date_nais}}</b>\r\n                  </div>\r\n                </div> -->\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageenfant?.lieu_nais_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"Prestataires Enfant\" name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n                  <div class=\"modal-footer\">\r\n                    <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                      data-target=\"#noticeConjoint\" (click)=\"BonEnfant()\"> Enregistrer</button>\r\n                    <!-- <button mat-raised-button type=\"button\" (click)=\"uploadEnfant()\" class=\"btn btn-green btn-round\"\r\n                      data-dismiss=\"modal\">\r\n                      Exporter</button> -->\r\n                  </div>\r\n                  <div>\r\n\r\n                  </div>\r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!-- notice modal -->\r\n    <div class=\"modal fade\" id=\"noticeModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n      aria-hidden=\"true\" *ngIf=\"message\">\r\n      <div class=\"modal-dialog modal-notice\">\r\n        <div class=\"modal-content\" style=\"width: 600px;\">\r\n          <div class=\"modal-header\">\r\n            <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n            <button mat-button type=\"button\" class=\"close \" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n              <i style=\"margin-top: -1.3cm; color: red; font-size: 30px;\" class=\"material-icons\">close</i>\r\n            </button>\r\n\r\n\r\n          </div>\r\n          <div class=\"modal-body\">\r\n\r\n\r\n            <div class=\"\" style=\"margin-top: -1cm;\">\r\n              <div>\r\n                <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n\r\n              <div class=\"col-md-12\">\r\n                <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n              </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prénom :</label>\r\n                  <b> {{message.prenom}}</b>\r\n                </div>\r\n              </div>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Nom :</label>\r\n                  <b> {{message.nom}}</b>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <hr>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prestataire :</label>\r\n                  <b>{{p}}</b>\r\n                </div>\r\n              </div>\r\n              <!-- <div class=\"col-md-6 form-group\">\r\n          <div class=\"form-group\">\r\n            <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n            {{message.idemp}}\r\n          </div>\r\n        </div> -->\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Services:</label>\r\n                  <b> {{message.ipm_service?.type_service}}</b>\r\n                </div>\r\n              </div>\r\n\r\n            </div>\r\n            <div class=\"card-body table-full-width\">\r\n              <div class=\"table-responsive\">\r\n                <table class=\"table table-hover table-bordered\">\r\n                  <thead class=\"\">\r\n                    <tr style=\"background-color: whitesmoke;\">\r\n                      <th style=\"font-weight: 600px\">Matricule Participant</th>\r\n                      <th style=\"font-weight: 600px\">Designation</th>\r\n                      <th style=\"font-weight: 600px\">Nombre D'article</th>\r\n\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr>\r\n                      <td>{{message.matricule}}</td>\r\n                      <td>{{designation}}</td>\r\n                      <td>{{nombre_article}}</td>\r\n\r\n                  </tbody>\r\n\r\n                </table>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"BonNowLettre()\" class=\"btn btn-success btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Enregistrer</button>\r\n          </div>\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\"btn btn-green btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Exporter</button>\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n    <!-- end notice modal -->\r\n  </div>\r\n</div>\r\n<!-- Exemple ngTemplate-->\r\n\r\n<!-- <div class=\"card\" *ngIf=\"message\">\r\n    <div class=\"card-header\">\r\n      <h4 class=\"card-title\">Lettre de Garantie</h4>\r\n    </div>\r\n<form class=\"form-horizontal\">\r\n    <input type=\"hidden\" class=\"form-control\" >\r\n    <div class=\"form-group row card-header\">\r\n      <h3 >Dakar,le  </h3>\r\n      \r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Nom du Patient</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"Nom du Patient\" [(ngModel)]=\"bon.nom_du_patient\" name=\"nom\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_Carnet_De_Sante</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_carnet_de_sante\" [(ngModel)]=\"bon.numero_carnet_de_sante\" name=\"numero_carnet_de_sante\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Service</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"service\" [(ngModel)]=\"bon.service\" name=\"service\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Mle de Solde</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"solde\" [(ngModel)]=\"bon.solde\" name=\"solde\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_De_Reference</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_de_reference\" [(ngModel)]=\"bon.numero_de_reference\" name=\"numero_de_reference\">\r\n\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <p>Monsieur,</p>\r\n        <p>Nous avons l'honnneur de vous signaler que les frais de versement de</p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n          sont garantis par notre institution. </p>\r\n        <p>Nous vous serons reconnaissants de bien vouloir parvenir votre facture dans un délai \r\n          n'excédant pas deux(02) mois aprés la date d'établissement de la présente lettre.\r\n          Veuillez agréer,Monsieur, l'expression de notre considération distinguée.\r\n\r\n        </p>\r\n      </div>\r\n \r\n     <div>\r\n      <h4>{{message}} </h4>\r\n    </div>\r\n    </div>\r\n  </form>\r\n\r\n  <div class=\"modal-footer justify-content-center\">\r\n    <button mat-raised-button type=\"button\" class=\"btn btn-info btn-round\" data-dismiss=\"modal\">Enregistrer</button>\r\n  </div>\r\n</div> -->");
 
 /***/ }),
 
@@ -2511,6 +3010,14 @@ var BonlettreService = /** @class */ (function () {
         // formData.append('enfant', enfant);
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + "uploadeOrdonnanceL", formData, { responseType: 'text' });
     };
+    BonlettreService.prototype.uploadFileDevit = function (file) {
+        var formData = new FormData();
+        // console.log("file.name :"+file.name) 
+        // console.log("file.size :"+file.size) 
+        formData.append('file', file, file.name);
+        // formData.append('enfant', enfant);
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + "uploadeDevitLu", formData, { responseType: 'text' });
+    };
     BonlettreService.prototype.SaveBonConsultation = function (bonConsultation) {
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].URL + 'bonconsult', bonConsultation, { responseType: 'text' });
     };
@@ -2564,7 +3071,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!--Types Bons -->\r\n\r\n<div class=\"main-content\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row tab-content tab-space\" style=\"margin-top:-5.5cm;\">\r\n\r\n    </div>\r\n\r\n    <div class=\"card-body \">\r\n      <ul class=\"nav nav-pills nav-pills-warning\" role=\"tablist\">\r\n\r\n      </ul>\r\n      <div class=\" tab-content tab-space \">\r\n        <div class=\" col-md-11 tab-pane active \" id=\"link0\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; font-weight: 500; width:40%;\">Rechercher un\r\n                Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group p-2\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\">\r\n              <button mat-raised-button type=\"submit\" (click)=\"findByMatricule()\" class=\"nav-link \" data-toggle=\"tab\"\r\n                href=\"#link1\" class=\"btn btn-fill btn-success\" style=\"margin-left: 80%;\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- <div class=\"col-md-6\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-body\">\r\n              <br>\r\n  \r\n              <h4>l'agent {{message.matricule}} existe !!!</h4><br>\r\n              <table class=\"table table-hover\">\r\n  \r\n                <thead class=\"text-primary\">\r\n  \r\n                  <th>Nom</th>\r\n                  <th>Prenom</th>\r\n                  <th>Sexe</th>\r\n                  <th>Matricule</th>\r\n                  <th>Reference</th>\r\n  \r\n                </thead>\r\n                <tbody>\r\n                  <tr>\r\n                    <td>{{message.nom}}</td>\r\n                    <td>{{message.prenom}}</td>\r\n                    <td>{{message.sexe}}</td>\r\n                    <td>{{message.matricule}}</td>\r\n                    <td>{{message.reference}}</td>\r\n  \r\n                  </tr>\r\n                </tbody>\r\n              </table>\r\n            </div>\r\n  \r\n          </div>\r\n        </div> -->\r\n\r\n\r\n\r\n\r\n        <div class=\"tab-pane \" id=\"link1\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:35%; font-weight: 500;\">Bon Consultation Agent</h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n                  <style>\r\n                    b,\r\n                    label {\r\n                      color: black;\r\n                      font-size: 18px;\r\n                    }\r\n                  </style>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom :</label>\r\n                        <b> {{message.prenom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom :</label>\r\n                        <b> {{message.nom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n                        <b> {{message.numero_carnet}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age :</label>\r\n                        <b> {{AgeEmploye}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b> {{message.date_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  \r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b> {{message.lieu_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Services:</label>\r\n                      <b> {{message.ipmService?.type_service}}</b>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires\"><b>Choisir une Prestataire</b> </label>\r\n                      <mat-select  name=\"prestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b> {{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n\r\n                 \r\n                  <div class=\"col-md-4 form-group\" >\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires\"><b>Choisir une Prestation</b> </label>\r\n                      <mat-select  name=\"Prestation\" [(ngModel)]=\"Prestation\">\r\n                        <mat-option *ngFor=\"let pret of listPrestation\" [value]=\"pret.code_prestation\" (click)=\"getPrestation(pret)\">\r\n                        <b> {{ pret.libelle }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-2 form-group\">\r\n                    \r\n                    <label class=\"bmd-label-floating\">Nombre de Bon :</label>\r\n                    \r\n                    <b> {{listBon.length}}</b>\r\n                    \r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                    data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n                <!-- <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div> -->\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Conjoints\" name=\"conjoints\" ([ngModel])=\"id_conjoint\">\r\n                        <mat-option *ngFor=\"let conjoint of conjoints\" [value]=\"conjoint.idconj\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link2\" role=\"tablist\" (click)=\"getconjointbon(conjoint)\">\r\n                          <b> {{ conjoint.prenom_conjoint}} {{ conjoint.nom_conjoint}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Enfants\" name=\"enfants\" ([ngModel])=\"id_enfant\">\r\n                        <mat-option *ngFor=\"let enfant of enfants\" [value]=\"enfant.idenf\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link3\" role=\"tablist\" (click)=\"getenfantbon(enfant)\">\r\n                          <b>{{ enfant.prenom_enfant}} {{ enfant.nom_enfant}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    (click)=\"BonConsultation()\">Enregistrer\r\n                  </button>\r\n                  <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                    >\r\n                    Exporter</button>\r\n\r\n                </div>\r\n\r\n                <!-- <div class=\"modal-footer justify-content-center\">\r\n                <button mat-raised-button class=\"btn btn-raised btn-round btn-btn\" (click)=\"upload()\">Exporter Lettre\r\n                  de Grantie\r\n                </button>\r\n\r\n              </div> -->\r\n                <div>\r\n                  <!-- <h4>{{message}} </h4> -->\r\n                </div>\r\n\r\n              </form>\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link2\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Bon Consultation Conjoint  </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Conjoint :</label>\r\n                        <b>{{messageconjoint?.prenom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Conjoint:</label>\r\n                        <b>{{messageconjoint?.nom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age :</label>\r\n                        <b> {{AgeConjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <!-- <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b>{{message.date_nais}}</b>\r\n                    </div>\r\n                  </div> -->\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageconjoint?.lieu_naiss_conj}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires\"><b>Choisir une Prestataire</b> </label>\r\n                      <mat-select name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\" >\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires\"><b>Choisir une Prestation</b> </label>\r\n                      <mat-select  name=\"Prestation\" [(ngModel)]=\"Prestation\">\r\n                        <mat-option *ngFor=\"let pret of listPrestation\" [value]=\"pret.code_prestation\" (click)=\"getPrestation(pret)\">\r\n                        <b> {{ pret.libelle }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n                <!-- <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div> -->\r\n\r\n                <div class=\"modal-footer\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    data-target=\"#noticeConjoint\" (click)=\"BonConsultation()\"> Enregistrer</button>\r\n                    <button mat-raised-button type=\"button\" (click)=\"uploadConjoint()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                    >\r\n                    Exporter</button>\r\n                </div>\r\n                \r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link3\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Bon Consultation Enfant </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Enfant :</label>\r\n                        <b>{{messageenfant?.prenom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Enfant:</label>\r\n                        <b>{{messageenfant?.nom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age :</label>\r\n                        <b> {{AgeEnfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <!-- <div class=\"col-md-4 form-group\">\r\n                  <div class=\"form-group\">\r\n                    <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                    <b>{{messageenfant.date_nais}}</b>\r\n                  </div>\r\n                </div> -->\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageenfant?.lieu_nais_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires\"><b>Choisir une Prestataire</b> </label>\r\n                      <mat-select  name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\" >\r\n                    <mat-form-field>\r\n                      \r\n                      <label for=\"Prestataires\"><b>Choisir une Prestation</b> </label>\r\n                      <mat-select  name=\"Prestation\" [(ngModel)]=\"Prestation\">\r\n                        <mat-option *ngFor=\"let pret of listPrestation\" [value]=\"pret.code_prestation\" (click)=\"getPrestation(pret)\">\r\n                        <b> {{ pret.libelle }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n                  <div class=\"modal-footer\">\r\n                    <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                      data-target=\"#noticeConjoint\" (click)=\"BonNowLettre()\"> Enregistrer</button>\r\n                      <button mat-raised-button type=\"button\" (click)=\"uploadEnfant()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                      >\r\n                      Exporter</button>\r\n                  </div>\r\n                  <div>\r\n\r\n                  </div>\r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!-- notice modal -->\r\n    <div class=\"modal fade\" id=\"noticeModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n      aria-hidden=\"true\" *ngIf=\"message\">\r\n      <div class=\"modal-dialog modal-notice\">\r\n        <div class=\"modal-content\" style=\"width: 600px;\">\r\n          <div class=\"modal-header\">\r\n            <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n            <button mat-button type=\"button\" class=\"close \" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n              <i style=\"margin-top: -1.3cm; color: red; font-size: 30px;\" class=\"material-icons\">close</i>\r\n            </button>\r\n\r\n\r\n          </div>\r\n          <div class=\"modal-body\">\r\n\r\n\r\n            <div class=\"\" style=\"margin-top: -1cm;\">\r\n              <div>\r\n                <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n\r\n              <div class=\"col-md-12\">\r\n                <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n              </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prénom :</label>\r\n                  <b> {{message.prenom}}</b>\r\n                </div>\r\n              </div>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Nom :</label>\r\n                  <b> {{message.nom}}</b>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <hr>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prestataire :</label>\r\n                  <b>{{p}}</b>\r\n                </div>\r\n              </div>\r\n              <!-- <div class=\"col-md-6 form-group\">\r\n          <div class=\"form-group\">\r\n            <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n            {{message.idemp}}\r\n          </div>\r\n        </div> -->\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Services:</label>\r\n                  <b> {{message.ipm_service?.type_service}}</b>\r\n                </div>\r\n              </div>\r\n\r\n            </div>\r\n            <div class=\"card-body table-full-width\">\r\n              <div class=\"table-responsive\">\r\n                <table class=\"table table-hover table-bordered\">\r\n                  <thead class=\"\">\r\n                    <tr style=\"background-color: whitesmoke;\">\r\n                      <th style=\"font-weight: 600px\">Matricule Participant</th>\r\n                      <th style=\"font-weight: 600px\">Designation</th>\r\n                      <th style=\"font-weight: 600px\">Nombre D'article</th>\r\n\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr>\r\n                      <td>{{message.matricule}}</td>\r\n                      <td>{{designation}}</td>\r\n                      <td>{{nombre_article}}</td>\r\n\r\n                  </tbody>\r\n\r\n                </table>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"BonNowLettre()\" class=\"btn btn-success btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Enregistrer</button>\r\n          </div>\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\"btn btn-green btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Exporter</button>\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n    <!-- end notice modal -->\r\n  </div>\r\n</div>\r\n<!-- Exemple ngTemplate-->\r\n\r\n<!-- <div class=\"card\" *ngIf=\"message\">\r\n    <div class=\"card-header\">\r\n      <h4 class=\"card-title\">Lettre de Garantie</h4>\r\n    </div>\r\n<form class=\"form-horizontal\">\r\n    <input type=\"hidden\" class=\"form-control\" >\r\n    <div class=\"form-group row card-header\">\r\n      <h3 >Dakar,le  </h3>\r\n      \r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Nom du Patient</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"Nom du Patient\" [(ngModel)]=\"bon.nom_du_patient\" name=\"nom\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_Carnet_De_Sante</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_carnet_de_sante\" [(ngModel)]=\"bon.numero_carnet_de_sante\" name=\"numero_carnet_de_sante\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Service</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"service\" [(ngModel)]=\"bon.service\" name=\"service\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Mle de Solde</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"solde\" [(ngModel)]=\"bon.solde\" name=\"solde\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_De_Reference</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_de_reference\" [(ngModel)]=\"bon.numero_de_reference\" name=\"numero_de_reference\">\r\n\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <p>Monsieur,</p>\r\n        <p>Nous avons l'honnneur de vous signaler que les frais de versement de</p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n          sont garantis par notre institution. </p>\r\n        <p>Nous vous serons reconnaissants de bien vouloir parvenir votre facture dans un délai \r\n          n'excédant pas deux(02) mois aprés la date d'établissement de la présente lettre.\r\n          Veuillez agréer,Monsieur, l'expression de notre considération distinguée.\r\n\r\n        </p>\r\n      </div>\r\n \r\n     <div>\r\n      <h4>{{message}} </h4>\r\n    </div>\r\n    </div>\r\n  </form>\r\n\r\n  <div class=\"modal-footer justify-content-center\">\r\n    <button mat-raised-button type=\"button\" class=\"btn btn-info btn-round\" data-dismiss=\"modal\">Enregistrer</button>\r\n  </div>\r\n</div> -->");
+/* harmony default export */ __webpack_exports__["default"] = ("<!--Types Bons -->\r\n\r\n<div class=\"main-content\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row tab-content tab-space\" style=\"margin-top:-5.5cm;\">\r\n\r\n    </div>\r\n\r\n    <div class=\"card-body \">\r\n      <ul class=\"nav nav-pills nav-pills-warning\" role=\"tablist\">\r\n\r\n      </ul>\r\n      <div class=\" tab-content tab-space \">\r\n\r\n        <!------>\r\n        <div class=\" col-md-11 tab-pane active \" id=\"link0\" *ngIf=\"mess1\"> \r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; font-weight: 500; width:40%;\">Rechercher un\r\n                Participant</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group p-2\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\">\r\n              <button mat-raised-button type=\"submit\" (click)=\"findByMatricule()\" class=\"nav-link \" data-toggle=\"tab\"\r\n                href=\"#link1\" class=\"btn btn-fill btn-success\" style=\"margin-left: 80%;\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <!------>\r\n        <div class=\" col-md-11 tab-pane active \" id=\"link0\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; font-weight: 500; width:40%;\">Rechercher un\r\n                Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group p-2\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\">\r\n              <button mat-raised-button type=\"submit\" (click)=\"findByMatricule()\" class=\"nav-link \" data-toggle=\"tab\"\r\n                href=\"#link1\" class=\"btn btn-fill btn-success\" style=\"margin-left: 80%;\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- <div class=\"col-md-6\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-body\">\r\n              <br>\r\n  \r\n              <h4>l'agent {{message.matricule}} existe !!!</h4><br>\r\n              <table class=\"table table-hover\">\r\n  \r\n                <thead class=\"text-primary\">\r\n  \r\n                  <th>Nom</th>\r\n                  <th>Prenom</th>\r\n                  <th>Sexe</th>\r\n                  <th>Matricule</th>\r\n                  <th>Reference</th>\r\n  \r\n                </thead>\r\n                <tbody>\r\n                  <tr>\r\n                    <td>{{message.nom}}</td>\r\n                    <td>{{message.prenom}}</td>\r\n                    <td>{{message.sexe}}</td>\r\n                    <td>{{message.matricule}}</td>\r\n                    <td>{{message.reference}}</td>\r\n  \r\n                  </tr>\r\n                </tbody>\r\n              </table>\r\n            </div>\r\n  \r\n          </div>\r\n        </div> -->\r\n\r\n\r\n\r\n\r\n        <div class=\"tab-pane \" id=\"link1\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:35%; font-weight: 500;\">Bon Consultation Agent</h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n                  <style>\r\n                    b,\r\n                    label {\r\n                      color: black;\r\n                      font-size: 18px;\r\n                    }\r\n                  </style>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom :</label>\r\n                        <b> {{message.prenom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom :</label>\r\n                        <b> {{message.nom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n                        <b> {{message.numero_carnet}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age :</label>\r\n                        <b> {{AgeEmploye}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b> {{message.date_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  \r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b> {{message.lieu_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Services:</label>\r\n                      <b> {{message.ipmService?.type_service}}</b>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires\"><b>Choisir une Prestataire</b> </label>\r\n                      <mat-select  name=\"prestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b> {{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n\r\n                 \r\n                  <div class=\"col-md-4 form-group\" >\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires\"><b>Choisir une Prestation</b> </label>\r\n                      <mat-select  name=\"Prestation\" [(ngModel)]=\"Prestation\">\r\n                        <mat-option *ngFor=\"let pret of listPrestation\" [value]=\"pret.code_prestation\" (click)=\"getPrestation(pret)\">\r\n                        <b> {{ pret.libelle }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-2 form-group\">\r\n                    \r\n                    <label class=\"bmd-label-floating\">Nombre de Bon :</label>\r\n                    \r\n                    <b> {{listBon.length}}</b>\r\n                    \r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                    data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n                <!-- <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div> -->\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Conjoints\" name=\"conjoints\" ([ngModel])=\"id_conjoint\">\r\n                        <mat-option *ngFor=\"let conjoint of conjoints\" [value]=\"conjoint.idconj\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link2\" role=\"tablist\" (click)=\"getconjointbon(conjoint)\">\r\n                          <b> {{ conjoint.prenom_conjoint}} {{ conjoint.nom_conjoint}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Enfants\" name=\"enfants\" ([ngModel])=\"id_enfant\">\r\n                        <mat-option *ngFor=\"let enfant of enfants\" [value]=\"enfant.idenf\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link3\" role=\"tablist\" (click)=\"getenfantbon(enfant)\">\r\n                          <b>{{ enfant.prenom_enfant}} {{ enfant.nom_enfant}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    (click)=\"BonConsultation()\">Enregistrer\r\n                  </button>\r\n\r\n                  <div class=\"col-md-6\" style=\"font-weight:bold;color: black;float: right;\">\r\n                    <i mat-raised-button type=\"button\" class=\"nav-link\"\r\n                    data-toggle=\"tab\"  style=\"width: 100px;\" (click)=\"retourserach()\"  role=\"tablist\" class=\"btn btn-info btn-round\">\r\n                    <span class=\"material-icons\">arrow_back</span></i>\r\n                  \r\n                  </div>\r\n                  <!-- <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                    >\r\n                    Exporter</button> -->\r\n\r\n                </div>\r\n\r\n                <!-- <div class=\"modal-footer justify-content-center\">\r\n                <button mat-raised-button class=\"btn btn-raised btn-round btn-btn\" (click)=\"upload()\">Exporter Lettre\r\n                  de Grantie\r\n                </button>\r\n\r\n              </div> -->\r\n                <div>\r\n                  <!-- <h4>{{message}} </h4> -->\r\n                </div>\r\n\r\n              </form>\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link2\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Bon Consultation Conjoint  </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Conjoint :</label>\r\n                        <b>{{messageconjoint?.prenom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Conjoint:</label>\r\n                        <b>{{messageconjoint?.nom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age :</label>\r\n                        <b> {{AgeConjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <!-- <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b>{{message.date_nais}}</b>\r\n                    </div>\r\n                  </div> -->\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageconjoint?.lieu_naiss_conj}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires\"><b>Choisir une Prestataire</b> </label>\r\n                      <mat-select name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\" >\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires\"><b>Choisir une Prestation</b> </label>\r\n                      <mat-select  name=\"Prestation\" [(ngModel)]=\"Prestation\">\r\n                        <mat-option *ngFor=\"let pret of listPrestation\" [value]=\"pret.code_prestation\" (click)=\"getPrestation(pret)\">\r\n                        <b> {{ pret.libelle }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n                <!-- <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div> -->\r\n\r\n                <div class=\"modal-footer\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    data-target=\"#noticeConjoint\" (click)=\"BonConsultation()\"> Enregistrer</button>\r\n                    <!-- <button mat-raised-button type=\"button\" (click)=\"uploadConjoint()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                    >\r\n                    Exporter</button> -->\r\n                </div>\r\n                \r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link3\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Bon Consultation Enfant </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Enfant :</label>\r\n                        <b>{{messageenfant?.prenom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Enfant:</label>\r\n                        <b>{{messageenfant?.nom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age :</label>\r\n                        <b> {{AgeEnfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <!-- <div class=\"col-md-4 form-group\">\r\n                  <div class=\"form-group\">\r\n                    <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                    <b>{{messageenfant.date_nais}}</b>\r\n                  </div>\r\n                </div> -->\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageenfant?.lieu_nais_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <label for=\"Prestataires\"><b>Choisir une Prestataire</b> </label>\r\n                      <mat-select  name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\" >\r\n                    <mat-form-field>\r\n                      \r\n                      <label for=\"Prestataires\"><b>Choisir une Prestation</b> </label>\r\n                      <mat-select  name=\"Prestation\" [(ngModel)]=\"Prestation\">\r\n                        <mat-option *ngFor=\"let pret of listPrestation\" [value]=\"pret.code_prestation\" (click)=\"getPrestation(pret)\">\r\n                        <b> {{ pret.libelle }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n                <!-- <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div> -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n                  <div class=\"modal-footer\">\r\n                    <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                      data-target=\"#noticeConjoint\" (click)=\"BonEnfant()\"> Enregistrer</button>\r\n                      <!-- <button mat-raised-button type=\"button\" (click)=\"uploadEnfant()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                      >\r\n                      Exporter</button> -->\r\n                  </div>\r\n                  <div>\r\n\r\n                  </div>\r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!-- notice modal -->\r\n    <div class=\"modal fade\" id=\"noticeModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n      aria-hidden=\"true\" *ngIf=\"message\">\r\n      <div class=\"modal-dialog modal-notice\">\r\n        <div class=\"modal-content\" style=\"width: 600px;\">\r\n          <div class=\"modal-header\">\r\n            <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n            <button mat-button type=\"button\" class=\"close \" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n              <i style=\"margin-top: -1.3cm; color: red; font-size: 30px;\" class=\"material-icons\">close</i>\r\n            </button>\r\n\r\n\r\n          </div>\r\n          <div class=\"modal-body\">\r\n\r\n\r\n            <div class=\"\" style=\"margin-top: -1cm;\">\r\n              <div>\r\n                <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n\r\n              <div class=\"col-md-12\">\r\n                <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n              </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prénom :</label>\r\n                  <b> {{message.prenom}}</b>\r\n                </div>\r\n              </div>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Nom :</label>\r\n                  <b> {{message.nom}}</b>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <hr>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prestataire :</label>\r\n                  <b>{{p}}</b>\r\n                </div>\r\n              </div>\r\n              <!-- <div class=\"col-md-6 form-group\">\r\n          <div class=\"form-group\">\r\n            <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n            {{message.idemp}}\r\n          </div>\r\n        </div> -->\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Services:</label>\r\n                  <b> {{message.ipm_service?.type_service}}</b>\r\n                </div>\r\n              </div>\r\n\r\n            </div>\r\n            <div class=\"card-body table-full-width\">\r\n              <div class=\"table-responsive\">\r\n                <table class=\"table table-hover table-bordered\">\r\n                  <thead class=\"\">\r\n                    <tr style=\"background-color: whitesmoke;\">\r\n                      <th style=\"font-weight: 600px\">Matricule Participant</th>\r\n                      <th style=\"font-weight: 600px\">Designation</th>\r\n                      <th style=\"font-weight: 600px\">Nombre D'article</th>\r\n\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr>\r\n                      <td>{{message.matricule}}</td>\r\n                      <td>{{designation}}</td>\r\n                      <td>{{nombre_article}}</td>\r\n\r\n                  </tbody>\r\n\r\n                </table>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"BonNowLettre()\" class=\"btn btn-success btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Enregistrer</button>\r\n          </div>\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\"btn btn-green btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Exporter</button>\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n    <!-- end notice modal -->\r\n  </div>\r\n</div>\r\n<!-- Exemple ngTemplate-->\r\n\r\n<!-- <div class=\"card\" *ngIf=\"message\">\r\n    <div class=\"card-header\">\r\n      <h4 class=\"card-title\">Lettre de Garantie</h4>\r\n    </div>\r\n<form class=\"form-horizontal\">\r\n    <input type=\"hidden\" class=\"form-control\" >\r\n    <div class=\"form-group row card-header\">\r\n      <h3 >Dakar,le  </h3>\r\n      \r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Nom du Patient</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"Nom du Patient\" [(ngModel)]=\"bon.nom_du_patient\" name=\"nom\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_Carnet_De_Sante</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_carnet_de_sante\" [(ngModel)]=\"bon.numero_carnet_de_sante\" name=\"numero_carnet_de_sante\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Service</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"service\" [(ngModel)]=\"bon.service\" name=\"service\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Mle de Solde</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"solde\" [(ngModel)]=\"bon.solde\" name=\"solde\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_De_Reference</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_de_reference\" [(ngModel)]=\"bon.numero_de_reference\" name=\"numero_de_reference\">\r\n\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <p>Monsieur,</p>\r\n        <p>Nous avons l'honnneur de vous signaler que les frais de versement de</p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n          sont garantis par notre institution. </p>\r\n        <p>Nous vous serons reconnaissants de bien vouloir parvenir votre facture dans un délai \r\n          n'excédant pas deux(02) mois aprés la date d'établissement de la présente lettre.\r\n          Veuillez agréer,Monsieur, l'expression de notre considération distinguée.\r\n\r\n        </p>\r\n      </div>\r\n \r\n     <div>\r\n      <h4>{{message}} </h4>\r\n    </div>\r\n    </div>\r\n  </form>\r\n\r\n  <div class=\"modal-footer justify-content-center\">\r\n    <button mat-raised-button type=\"button\" class=\"btn btn-info btn-round\" data-dismiss=\"modal\">Enregistrer</button>\r\n  </div>\r\n</div> -->");
 
 /***/ }),
 
@@ -2649,7 +3156,6 @@ var ListeBonsComponent = /** @class */ (function () {
         this.currentprestataire = new src_app_Models_Prestataire__WEBPACK_IMPORTED_MODULE_13__["Prestataire"]();
         this.enfant = new src_app_Models_Enfant__WEBPACK_IMPORTED_MODULE_10__["Enfant"]();
         this.currentemploye = new src_app_Models_Employe__WEBPACK_IMPORTED_MODULE_9__["Employe"]();
-        //id_conjoint:number;
         this.messageconjoint = new src_app_Models_Conjoint__WEBPACK_IMPORTED_MODULE_8__["Conjoint"]();
         this.enfants = [];
         this.today = new Date();
@@ -2673,6 +3179,14 @@ var ListeBonsComponent = /** @class */ (function () {
             // console.log(cat);
             _this.lprestataires = pres;
             console.log(_this.lprestataires);
+        });
+        this.pres_service.getBon().subscribe(function (pres) {
+            // console.log(cat);
+            _this.listB = pres;
+            console.log(_this.listB[_this.listB.length - 1].numeroBon.slice(4));
+            _this.numero = _this.listB[_this.listB.length - 1].numeroBon.slice(4);
+            _this.numero++;
+            console.log(_this.numero);
         });
         // this.b.ipm_employe=this.currentemploye;
         this.b.ipm_prestataire = this.currentprestataire;
@@ -2814,14 +3328,26 @@ var ListeBonsComponent = /** @class */ (function () {
     ListeBonsComponent.prototype.findByMatricule = function () {
         var _this = this;
         ///////Rechercher l'employé
-        debugger;
+        // debugger
+        console.log(this.matricule);
         this.emp_service.getEmployeByMatricule(this.matricule).subscribe(function (data) {
-            if (data.statut == false) {
+            _this.mess = data;
+            if (_this.mess) {
+                console.log(_this.mess);
+            }
+            else {
+                _this.mess1 = "yess";
+                console.log("charlessssssssssssss");
+                _this.showNotification('top', 'center', 3, "<b>matricule n'existe pas</b> :");
+            }
+            if (data.statut == true) {
                 _this.message = data;
+                _this.idemploye = _this.message.idemp;
                 console.log(_this.message);
             }
             else {
                 console.log(_this.message);
+                _this.mess1 = "yess";
                 _this.showNotification('top', 'center', 3, "<b>agent de numero matricule " + _this.matricule + " ne beneficie plus de L'IPM</b> :");
             }
             _this.emp_service.getlistBon(_this.message.idemp).subscribe(function (res) {
@@ -2850,6 +3376,29 @@ var ListeBonsComponent = /** @class */ (function () {
             ///////Rechercher les enfants en fontion de l'employé
             _this.enf_service.listeEnfant(_this.message.idemp).subscribe(function (enfs) {
                 _this.enfants = enfs;
+                _this.enfants.forEach(function (ele) {
+                    if (ele.date_nais_enfant) {
+                        //convert date again to type Date
+                        var bdate = new Date(ele.date_nais_enfant);
+                        var timeDiff = Math.abs(Date.now() - bdate.getTime());
+                        _this.agenft = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+                    }
+                    console.log(_this.agenft);
+                    if (_this.agenft > 21) {
+                        console.log("Age atteinte impossible de ce beneficier à l'ipm :", _this.agenft);
+                        ele.active = false;
+                        console.log(ele.active);
+                        console.log("age depasse");
+                    }
+                    else if (_this.agenft < 21) {
+                        console.log("Voici l'age :", _this.agenft);
+                        ele.active = true;
+                        console.log(ele.active);
+                        console.log("age non depasse");
+                    }
+                });
+                console.log(_this.enfants);
+                _this.enfants = _this.enfants.filter(function (serv) { return serv.active == true; });
                 console.log(_this.enfants);
             });
             ///////Rechercher les conjoints en fontion de l'employé
@@ -2857,14 +3406,18 @@ var ListeBonsComponent = /** @class */ (function () {
                 _this.conjoints = conjs;
                 console.log(_this.conjoints);
             });
-            if (_this.message) {
-                _this.showNotification('top', 'center', 1, '<b>agent existe</b> :');
-                console.log(_this.message);
-            }
-            else if (!_this.message) {
-                console.log("not existe");
-                _this.showNotification('top', 'center', 3, "<b>agent n'existe pas</b> :");
-            }
+            //   if(this.message){
+            //     this.showNotification('top','center',1,'<b>agent existe</b> :')
+            //     console.log(this.message);
+            //   }
+            // else if(!this.message){
+            //     console.log("not existe");
+            //     this.showNotification('top','center',3,"<b>agent n'existe pas</b> :")
+            //   }
+        }, function (err) {
+            console.log(err);
+            console.log('*************************************');
+            _this.showNotification('top', 'center', 3, "<b>matricule n'existe pas</b> :");
         });
     };
     ListeBonsComponent.prototype.showNotification = function (from, align, idtype, note) {
@@ -2894,6 +3447,67 @@ var ListeBonsComponent = /** @class */ (function () {
     };
     /////////////////Save Bon Employé
     ListeBonsComponent.prototype.BonNow = function () {
+        var _this = this;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
+        //let strBEm=dayBEm.getFullYear().toString()
+        // this.numBEm=0+''+dayBEm.getDate()+''+this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.valInt
+        // console.log(this.numBEm);
+        this.numBEm = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
+        this.bon.ipm_employe = this.message;
+        this.addPrestataire.code_prestataire = this.idp;
+        this.bon.ipm_prestataire = this.prestatair;
+        this.bon.numeroBon = this.numBEm;
+        console.log(this.bon.numeroBon);
+        // this.bont.AjoutBon(this.b).subscribe(
+        //   (data)=>{this.message=data});
+        console.log(this.b);
+        console.log(this.b.ipm_employe);
+        console.log(this.b.ipm_prestataire);
+        // this.router.navigate(['/gestion-bons/Listebons']);
+        console.log(this.designation, this.nombre_article);
+        this.bon.designation = this.designation;
+        this.bon.dateEtablissement = new Date();
+        this.bon.nombre_article = this.nombre_article;
+        //this.bon.prix_unitaire=this.prix_unitaire;
+        this.bon.ordonnance = this.selectOrdonne.name;
+        if (this.bon.ipm_prestataire
+            && this.bon.numeroBon && this.bon.designation &&
+            this.bon.nombre_article && this.bon.ordonnance && this.bon.dateEtablissement) {
+            this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(function (data) {
+                _this.upload();
+                //this.router.navigate(['/gestion-bons/Listebons'])
+            });
+            this.bonpharma.uploadFile(this.selectOrdonne).subscribe(function (data) {
+                //imprimer bon pharmacie
+                //Fin //////////////////
+            });
+            console.log(this.bon.ipm_prestataire);
+            console.log(this.bon);
+            this.showNotification('top', 'center', 1, '<b>bon pharmacie ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon pharmacie non ajouté</b> :");
+        }
+    };
+    ListeBonsComponent.prototype.retourserach = function () {
+        console.log('************************************');
+        window.location.reload();
+    };
+    /////////////////Save Bon Conjoint
+    ListeBonsComponent.prototype.BonConjoint = function () {
+        var _this = this;
         var dayBEm = new Date();
         //   this.prenomEm=this.message.prenom
         // this.nomEm=this.message.nom
@@ -2909,38 +3523,6 @@ var ListeBonsComponent = /** @class */ (function () {
             console.log('sup', this.mois);
             this.mois = m;
         }
-        //let strBEm=dayBEm.getFullYear().toString()
-        this.numBEm = 0 + '' + dayBEm.getDate() + '' + this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.valInt;
-        console.log(this.numBEm);
-        this.bon.ipm_employe = this.message;
-        this.addPrestataire.code_prestataire = this.idp;
-        this.bon.ipm_prestataire = this.prestatair;
-        // this.bon.numero_bon_pharmacie=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
-        // +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
-        // '' +this.ageE);
-        console.log(this.bon.numero_bon_pharmacie);
-        // this.bont.AjoutBon(this.b).subscribe(
-        //   (data)=>{this.message=data});
-        console.log(this.b);
-        console.log(this.b.ipm_employe);
-        console.log(this.b.ipm_prestataire);
-        // this.router.navigate(['/gestion-bons/Listebons']);
-        console.log(this.designation, this.nombre_article);
-        this.bon.designation = this.designation;
-        this.bon.dateEtablissement = new Date();
-        this.bon.nombre_article = this.nombre_article;
-        //this.bon.prix_unitaire=this.prix_unitaire;
-        this.bon.ordonnance = this.selectOrdonne.name;
-        this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(function (data) {
-            //this.router.navigate(['/gestion-bons/Listebons'])
-        });
-        this.bonpharma.uploadFile(this.selectOrdonne).subscribe(function (data) { });
-        console.log(this.bon.ipm_prestataire);
-        console.log(this.bon);
-    };
-    /////////////////Save Bon Conjoint
-    ListeBonsComponent.prototype.BonConjoint = function () {
-        var _this = this;
         // this.nom=this.bon.ipm_employe.prenom
         this.bon.ipm_employe = this.message;
         this.addPrestataire.code_prestataire = this.idp;
@@ -2958,16 +3540,42 @@ var ListeBonsComponent = /** @class */ (function () {
         this.bon.nombre_article = this.nombre_article;
         //this.bon.prix_unitaire=this.prix_unitaire;
         this.bon.ordonnance = this.selectOrdonne.name;
-        this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(function (data) {
-            _this.router.navigate(['/gestion-bons/Listebons']);
-        });
-        this.bonpharma.uploadFile(this.selectOrdonne).subscribe(function (data) { });
-        console.log(this.bon.ipm_prestataire);
-        console.log(this.bon);
+        this.bon.numeroBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
+        //  this.bon.numeroBon=(Math.floor(Math.random() * 100) + 1 +'' +((this.maDate.getMonth() + 1))+ '' 
+        //  +this.maDate.getFullYear().toString().charAt(2)+''+this.maDate.getFullYear().toString().charAt(3)+ 
+        //  '' +this.Ageconjoin);
+        if (this.bon.ipm_prestataire
+            && this.bon.designation &&
+            this.bon.nombre_article && this.bon.ordonnance && this.bon.dateEtablissement) {
+            this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(function (data) {
+                _this.uploadConjoint();
+            });
+            this.bonpharma.uploadFile(this.selectOrdonne).subscribe(function (data) {
+            });
+            console.log(this.bon.ipm_prestataire);
+            console.log(this.bon);
+            this.showNotification('top', 'center', 1, '<b>bon pharmacie ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon pharmacie non ajouté</b> :");
+        }
     };
     /////////////////Save Bon Enfants
     ListeBonsComponent.prototype.BonEnfant = function () {
         var _this = this;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         // this.nom=this.bon.ipm_employe.prenom
         this.bon.ipm_employe = this.message;
         this.addPrestataire.code_prestataire = this.idp;
@@ -2975,6 +3583,7 @@ var ListeBonsComponent = /** @class */ (function () {
         this.addenfant.idenf = this.idbenf;
         this.bon.ipm_enfant = JSON.parse(JSON.stringify(this.addenfant));
         this.bon.dateEtablissement = new Date();
+        this.bon.numeroBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         console.log(this.bon.ipm_enfant);
         console.log(this.b);
         console.log(this.b.ipm_employe);
@@ -2985,19 +3594,40 @@ var ListeBonsComponent = /** @class */ (function () {
         this.bon.nombre_article = this.nombre_article;
         //this.bon.prix_unitaire=this.prix_unitaire;
         this.bon.ordonnance = this.selectOrdonne.name;
-        this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(function (data) {
-            _this.router.navigate(['/gestion-bons/Listebons']);
-        });
-        this.bonpharma.uploadFile(this.selectOrdonne).subscribe(function (data) { });
-        console.log(this.bon.ipm_prestataire);
-        console.log(this.bon);
+        if (this.bon.ipm_prestataire
+            && this.bon.numeroBon && this.bon.designation &&
+            this.bon.nombre_article && this.bon.ordonnance && this.bon.dateEtablissement) {
+            this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(function (data) {
+                _this.uploadEnfant();
+            });
+            this.bonpharma.uploadFile(this.selectOrdonne).subscribe(function (data) { });
+            console.log(this.bon.ipm_prestataire);
+            console.log(this.bon);
+            this.showNotification('top', 'center', 1, '<b>bon pharmacie ajouté avec succées!!!</b> :');
+        }
+        else {
+            this.showNotification('top', 'center', 3, "<b>bon pharmacie non ajouté</b> :");
+        }
     };
     ///////////////////////// Imprimer Bon Employé
     ListeBonsComponent.prototype.upload = function () {
         var _a;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         console.log(this.message);
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
         var col = [["Quantité", "Designation", "P.unitaire", "Montant"]];
         var rows = [];
         if (this.bon.ipm_employe = this.message.idemp) {
@@ -3017,7 +3647,7 @@ var ListeBonsComponent = /** @class */ (function () {
         var Ncarnet = this.message.numero_carnet;
         var ipm4 = (_a = this.message.ipmService) === null || _a === void 0 ? void 0 : _a.type_service;
         var ipm = this.message.matricule;
-        var numBon = this.bon.numero_bon_pharmacie;
+        var numBon = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
             startY: 100,
             head: col,
@@ -3027,7 +3657,7 @@ var ListeBonsComponent = /** @class */ (function () {
             bodyStyles: { valign: "top" },
             theme: "grid",
             didDrawPage: function (data) {
-                //this.bon.ipm_employe=this.message;
+                //this.bon.ipm_employe=this.mes²sage;
                 doc.addImage(imgData, 'JPEG', 15, 5, 180, 20);
                 doc.setFontSize(15);
                 doc.text("", 72, 46);
@@ -3046,6 +3676,8 @@ var ListeBonsComponent = /** @class */ (function () {
                 var date = new Date();
                 doc.setFontSize(13);
                 doc.text("Dakar, le :", 150, 60);
+                doc.text("N° BON : ", 13, 60);
+                doc.text(" " + numBon, 30, 60);
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
                 doc.text("Malade :", 15, 75);
@@ -3057,8 +3689,8 @@ var ListeBonsComponent = /** @class */ (function () {
                 doc.text(ipm, 140, 75);
                 doc.text("N Carnet :", 15, 85);
                 doc.text("" + Ncarnet, 40, 85);
-                doc.text("N Bon :", 55, 85);
-                doc.text("" + numBon, 40, 85);
+                //  doc.text("N Bon :",55,85)
+                //  doc.text(""+numBon,75,85)
                 doc.text("Nombre D'article :", 120, 85);
                 doc.text("" + Narticle, 160, 85);
                 //  doc.setFontSize(12)
@@ -3075,7 +3707,7 @@ var ListeBonsComponent = /** @class */ (function () {
                 doc.text("Total :", 140, 180);
             }
         });
-        doc.save("bonpharmacie.pdf");
+        doc.output('dataurlnewwindow');
         // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
@@ -3086,8 +3718,21 @@ var ListeBonsComponent = /** @class */ (function () {
     ///////////////////////// Imprimer Bon Conjoint
     ListeBonsComponent.prototype.uploadConjoint = function () {
         var _a, _b, _c, _d, _e;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
         var col = [["Quantité", "Designation", "P.unitaire", "Montant"]];
         var rows = [];
         if (this.bon.ipm_employe = this.message.idemp) {
@@ -3106,6 +3751,7 @@ var ListeBonsComponent = /** @class */ (function () {
         var ipm = this.message.matricule;
         var Narticle = this.nombre_article;
         var Ncarnet = this.message.numero_carnet;
+        var numBonConj = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
             startY: 100,
             head: col,
@@ -3134,6 +3780,8 @@ var ListeBonsComponent = /** @class */ (function () {
                 var date = new Date();
                 doc.setFontSize(13);
                 doc.text("Dakar, le :", 150, 60);
+                doc.text("N° BON: ", 13, 60);
+                doc.text("" + numBonConj, 30, 60);
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
                 doc.text("Participant:", 15, 75);
@@ -3154,7 +3802,7 @@ var ListeBonsComponent = /** @class */ (function () {
                 doc.text("Total :", 140, 180);
             }
         });
-        doc.save("bonpharmacie.pdf");
+        doc.output('dataurlnewwindow');
         // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
@@ -3165,8 +3813,21 @@ var ListeBonsComponent = /** @class */ (function () {
     ///////////////////////// Imprimer Bon Enfant
     ListeBonsComponent.prototype.uploadEnfant = function () {
         var _a, _b, _c, _d;
+        var dayBEm = new Date();
+        if (dayBEm.getMonth() < 10) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            this.mois = 0 + '' + m;
+            console.log('infer', this.mois, this.strBEm);
+        }
+        else if (dayBEm.getMonth() > 9) {
+            this.strBEm = dayBEm.getFullYear().toString();
+            var m = dayBEm.getMonth() + 1;
+            console.log('sup', this.mois);
+            this.mois = m;
+        }
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        var imgData = '/assets/img_poste/header1.png';
+        var imgData = '/ipm-fronte/assets/img_poste/header1.png';
         var col = [["Quantité", "Designation", "P.unitaire", "Montant"]];
         var rows = [];
         if (this.bon.ipm_employe = this.message.idemp) {
@@ -3185,6 +3846,7 @@ var ListeBonsComponent = /** @class */ (function () {
         var ipm = this.message.matricule;
         var Narticle = this.nombre_article;
         var Ncarnet = this.message.numero_carnet;
+        var numBonEnf = this.mois + '' + this.strBEm.charAt(2) + '' + this.strBEm.charAt(3) + '' + this.numero;
         jspdf_autotable__WEBPACK_IMPORTED_MODULE_6___default()(doc, {
             startY: 100,
             head: col,
@@ -3213,6 +3875,8 @@ var ListeBonsComponent = /** @class */ (function () {
                 var date = new Date();
                 doc.setFontSize(13);
                 doc.text("Dakar, le :", 150, 60);
+                doc.text("N° BON: ", 13, 60);
+                doc.text(" " + numBonEnf, 30, 60);
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
                 doc.text("Participant:", 15, 75);
@@ -3233,7 +3897,7 @@ var ListeBonsComponent = /** @class */ (function () {
                 doc.text("Total :", 140, 180);
             }
         });
-        doc.save("bonpharmacie.pdf");
+        doc.output('dataurlnewwindow');
         // let data = document.getElementById('noticeModal'); 
         // const printContents = document.getElementById('noticeModal').innerHTML;
         //    const originalContents = document.body.innerHTML;
@@ -3431,7 +4095,7 @@ var BonPharmacieService = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!--Types Bons -->\r\n\r\n<div class=\"main-content\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row tab-content tab-space\" style=\"margin-top:-5.5cm;\">\r\n\r\n    </div>\r\n\r\n    <div class=\"card-body \">\r\n      <ul class=\"nav nav-pills nav-pills-warning\" role=\"tablist\">\r\n\r\n      </ul>\r\n\r\n      <div class=\" tab-content tab-space \">\r\n        <div class=\" col-md-11 tab-pane active \" id=\"link0\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; font-weight: 500; width:40%;\">Rechercher un\r\n                Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group p-2\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\">\r\n              <button mat-raised-button type=\"submit\" (click)=\"findByMatricule()\" class=\"nav-link \" data-toggle=\"tab\"\r\n                href=\"#link1\" class=\"btn btn-fill btn-success\" style=\"margin-left: 80%;\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- <div class=\"col-md-6\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-body\">\r\n              <br>\r\n  \r\n              <h4>l'agent {{message.matricule}} existe !!!</h4><br>\r\n              <table class=\"table table-hover\">\r\n  \r\n                <thead class=\"text-primary\">\r\n  \r\n                  <th>Nom</th>\r\n                  <th>Prenom</th>\r\n                  <th>Sexe</th>\r\n                  <th>Matricule</th>\r\n                  <th>Reference</th>\r\n  \r\n                </thead>\r\n                <tbody>\r\n                  <tr>\r\n                    <td>{{message.nom}}</td>\r\n                    <td>{{message.prenom}}</td>\r\n                    <td>{{message.sexe}}</td>\r\n                    <td>{{message.matricule}}</td>\r\n                    <td>{{message.reference}}</td>\r\n  \r\n                  </tr>\r\n                </tbody>\r\n              </table>\r\n            </div>\r\n  \r\n          </div>\r\n        </div> -->\r\n\r\n\r\n\r\n\r\n        <div class=\"tab-pane \" id=\"link1\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:30%; font-weight: 500;\">Bon Lunetterie Agent</h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n                  <style>\r\n                    b,\r\n                    label {\r\n                      color: black;\r\n                      font-size: 18px;\r\n                    }\r\n                  </style>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom :</label>\r\n                        <b> {{message.prenom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom :</label>\r\n                        <b> {{message.nom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n                        <b> {{message.numero_carnet}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeEmploye}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b> {{message.date_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b> {{message.lieu_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Services:</label>\r\n                      <b> {{message.ipmService?.type_service}}</b>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"lPrestataires\" name=\"prestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b> {{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n\r\n                  <!-- <div class=\"col-md-8 form-group\">\r\n                  <label>Motif</label>\r\n                  <textarea cols=\"5\" rows=\"2\" style=\"background-color:whitesmoke; margin-top: -1cm;\" type=\"text\"\r\n                    class=\"form-control p-2\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                </div> -->\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                    data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n                <!-- <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div> -->\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Conjoints\" name=\"conjoints\" ([ngModel])=\"id_conjoint\">\r\n                        <mat-option *ngFor=\"let conjoint of conjoints\" [value]=\"conjoint.idconj\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link2\" role=\"tablist\" (click)=\"getconjointbon(conjoint)\">\r\n                          <b> {{ conjoint.prenom_conjoint}} {{ conjoint.nom_conjoint}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Enfants\" name=\"enfants\" ([ngModel])=\"id_enfant\">\r\n                        <mat-option *ngFor=\"let enfant of enfants\" [value]=\"enfant.idenf\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link3\" role=\"tablist\" (click)=\"getenfantbon(enfant)\">\r\n                          <b>{{ enfant.prenom_enfant}} {{ enfant.nom_enfant}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\" [disabled]=\"desactive\"\r\n                    (click)=\"BonConsultation()\">Enregistrer\r\n                  </button>\r\n                  <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                    >\r\n                    Exporter</button>\r\n\r\n                </div>\r\n\r\n                <!-- <div class=\"modal-footer justify-content-center\">\r\n                <button mat-raised-button class=\"btn btn-raised btn-round btn-btn\" (click)=\"upload()\">Exporter Lettre\r\n                  de Grantie\r\n                </button>\r\n\r\n              </div> -->\r\n                <div>\r\n                  <!-- <h4>{{message}} </h4> -->\r\n                </div>\r\n\r\n              </form>\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link2\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Bon Lunetterie Conjoint  </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Conjoint :</label>\r\n                        <b>{{messageconjoint?.prenom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Conjoint:</label>\r\n                        <b>{{messageconjoint?.nom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeConjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <!-- <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b>{{message.date_nais}}</b>\r\n                    </div>\r\n                  </div> -->\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageconjoint?.lieu_naiss_conj}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"Prestataires Conjoints\" name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <!-- <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div> -->\r\n\r\n                <div class=\"modal-footer\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    data-target=\"#noticeConjoint\" (click)=\"BonConsultation()\"> Enregistrer</button>\r\n                  <button mat-raised-button type=\"button\" (click)=\"uploadConjoint()\" class=\"btn btn-green btn-round\"\r\n                    data-dismiss=\"modal\">\r\n                    Exporter</button>\r\n                </div>\r\n                \r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link3\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Bon Lunetterie Enfant </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Enfant :</label>\r\n                        <b>{{messageenfant?.prenom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Enfant:</label>\r\n                        <b>{{messageenfant?.nom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageenfant?.date_nais_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeEnfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <!-- <div class=\"col-md-4 form-group\">\r\n                  <div class=\"form-group\">\r\n                    <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                    <b>{{messageenfant.date_nais}}</b>\r\n                  </div>\r\n                </div> -->\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageenfant?.lieu_nais_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"Prestataires Enfant\" name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n                  <div class=\"modal-footer\">\r\n                    <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                      data-target=\"#noticeConjoint\" (click)=\"BonEnfant()\"> Enregistrer</button>\r\n                    <button mat-raised-button type=\"button\" (click)=\"uploadEnfant()\" class=\"btn btn-green btn-round\"\r\n                      data-dismiss=\"modal\">\r\n                      Exporter</button>\r\n                  </div>\r\n                  <div>\r\n\r\n                  </div>\r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!-- notice modal -->\r\n    <div class=\"modal fade\" id=\"noticeModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n      aria-hidden=\"true\" *ngIf=\"message\">\r\n      <div class=\"modal-dialog modal-notice\">\r\n        <div class=\"modal-content\" style=\"width: 600px;\">\r\n          <div class=\"modal-header\">\r\n            <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n            <button mat-button type=\"button\" class=\"close \" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n              <i style=\"margin-top: -1.3cm; color: red; font-size: 30px;\" class=\"material-icons\">close</i>\r\n            </button>\r\n\r\n\r\n          </div>\r\n          <div class=\"modal-body\">\r\n\r\n\r\n            <div class=\"\" style=\"margin-top: -1cm;\">\r\n              <div>\r\n                <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n\r\n              <div class=\"col-md-12\">\r\n                <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n              </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prénom :</label>\r\n                  <b> {{message.prenom}}</b>\r\n                </div>\r\n              </div>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Nom :</label>\r\n                  <b> {{message.nom}}</b>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <hr>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prestataire :</label>\r\n                  <b>{{p}}</b>\r\n                </div>\r\n              </div>\r\n              <!-- <div class=\"col-md-6 form-group\">\r\n          <div class=\"form-group\">\r\n            <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n            {{message.idemp}}\r\n          </div>\r\n        </div> -->\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Services:</label>\r\n                  <b> {{message.ipm_service?.type_service}}</b>\r\n                </div>\r\n              </div>\r\n\r\n            </div>\r\n            <div class=\"card-body table-full-width\">\r\n              <div class=\"table-responsive\">\r\n                <table class=\"table table-hover table-bordered\">\r\n                  <thead class=\"\">\r\n                    <tr style=\"background-color: whitesmoke;\">\r\n                      <th style=\"font-weight: 600px\">Matricule Participant</th>\r\n                      <th style=\"font-weight: 600px\">Designation</th>\r\n                      <th style=\"font-weight: 600px\">Nombre D'article</th>\r\n\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr>\r\n                      <td>{{message.matricule}}</td>\r\n                      <td>{{designation}}</td>\r\n                      <td>{{nombre_article}}</td>\r\n\r\n                  </tbody>\r\n\r\n                </table>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"BonNowLettre()\" class=\"btn btn-success btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Enregistrer</button>\r\n          </div>\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\"btn btn-green btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Exporter</button>\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n    <!-- end notice modal -->\r\n  </div>\r\n</div>\r\n<!-- Exemple ngTemplate-->\r\n\r\n<!-- <div class=\"card\" *ngIf=\"message\">\r\n    <div class=\"card-header\">\r\n      <h4 class=\"card-title\">Lettre de Garantie</h4>\r\n    </div>\r\n<form class=\"form-horizontal\">\r\n    <input type=\"hidden\" class=\"form-control\" >\r\n    <div class=\"form-group row card-header\">\r\n      <h3 >Dakar,le  </h3>\r\n      \r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Nom du Patient</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"Nom du Patient\" [(ngModel)]=\"bon.nom_du_patient\" name=\"nom\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_Carnet_De_Sante</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_carnet_de_sante\" [(ngModel)]=\"bon.numero_carnet_de_sante\" name=\"numero_carnet_de_sante\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Service</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"service\" [(ngModel)]=\"bon.service\" name=\"service\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Mle de Solde</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"solde\" [(ngModel)]=\"bon.solde\" name=\"solde\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_De_Reference</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_de_reference\" [(ngModel)]=\"bon.numero_de_reference\" name=\"numero_de_reference\">\r\n\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <p>Monsieur,</p>\r\n        <p>Nous avons l'honnneur de vous signaler que les frais de versement de</p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n          sont garantis par notre institution. </p>\r\n        <p>Nous vous serons reconnaissants de bien vouloir parvenir votre facture dans un délai \r\n          n'excédant pas deux(02) mois aprés la date d'établissement de la présente lettre.\r\n          Veuillez agréer,Monsieur, l'expression de notre considération distinguée.\r\n\r\n        </p>\r\n      </div>\r\n \r\n     <div>\r\n      <h4>{{message}} </h4>\r\n    </div>\r\n    </div>\r\n  </form>\r\n\r\n  <div class=\"modal-footer justify-content-center\">\r\n    <button mat-raised-button type=\"button\" class=\"btn btn-info btn-round\" data-dismiss=\"modal\">Enregistrer</button>\r\n  </div>\r\n</div> -->\r\n<!-- <form class=\"form-horizontal\">\r\n    <input type=\"hidden\" class=\"form-control\" >\r\n    <div class=\"form-group row card-header\">\r\n      \r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_Carnet</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"numero_carnet\" [(ngModel)]=\"bon.numero_carnet\" name=\"numero_carnet\">\r\n    </div>\r\n      <div class=\"col-md-8 form-group\">\r\n          <label>Code de Fournisseur</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"code_fournisseur\" [(ngModel)]=\"bon.code_fournisseur\" name=\"code_fournisseur\">\r\n      </div>\r\n      <div class=\"col-md-4 form-group\">\r\n          <label>Numero Saisie Facture</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"n_saisie_facture\" [(ngModel)]=\"bon.n_saisie_facture\" name=\"n_saisie_facture\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n          <label>Prénom de/des Malade(s)</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"prenom_malade\" [(ngModel)]=\"bon.prenom_malade\" name=\"prenom_malade\">\r\n      </div>\r\n      <div class=\"col-md-4 form-group\">\r\n          <label>Date de Demande</label>\r\n        <input type=\"date\" class=\"form-control\" id=\"date_demande\" [(ngModel)]=\"bon.date_demande\" name=\"date_demande\">\r\n      </div>\r\n      <div class=\"col-md-4 form-group\">\r\n          <label>Date de Reception de Facture</label>\r\n        <input type=\"date\" class=\"form-control\" id=\"date_reception_facture\" [(ngModel)]=\"bon.date_reception_facture\" name=\"date_reception_facture\">\r\n      </div>\r\n      \r\n      <div class=\"card-body table-full-width\">\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table table-hover\">\r\n                <thead class=\"text-primary\">\r\n                    <tr>\r\n                      <th>Date Prestation</th>\r\n                      <th >Code Prestation</th>\r\n                      <th >Nature Prestation</th>\r\n                      <th >Montant</th>\r\n                      <th >T.P.S</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody >\r\n                      <tr *ngFor=\" let bon of bons\">\r\n                          <td>{{bon.code_remb_64800}}</td>\r\n                          <td >{{bon.code_p_non_Remb_64801}}</td>\r\n                          <td >{{bon.quantite}}</td>\r\n                          <td >{{bon.designation}}</td>\r\n                          <td >{{bon.prix_unitaire}}</td>\r\n                          <td>{{bon.total}}</td>\r\n                          <td >{{employe.lieu_nais}}</td>\r\n                          <td >{{employe.telephone}}</td>\r\n                          <td >{{employe.date_recrutement}}</td>\r\n                          <td >{{employe.matricule}}</td>\r\n                          <td>{{employe.reference}}</td>\r\n                          <td >{{employe.numero_carnet}}</td>\r\n                          <td >{{employe.situation_familial}}</td>\r\n                          <td >{{employe.solde}}</td>\r\n                          <td >{{employe.cumul_charge}}</td>\r\n                          <td >{{employe.niveau_salarial}}</td>\r\n                          <td>\r\n                            <a  class=\"btn btn-success\" [routerLink]=\"['/gestion-employes/ModifierEmployes/'+employe.idemp]\">\r\n                                Modifier\r\n                            </a>\r\n                          </td>\r\n                          <td>\r\n                            <a  class=\"btn btn-danger\" (click)=\"supprimerEmploye(employe)\">\r\n                                supprimer\r\n                            </a>\r\n                          </td>\r\n                          \r\n                    </tr>\r\n                   \r\n                </tbody>\r\n            </table>\r\n            </div>\r\n            </div>\r\n      \r\n     <div>\r\n      <h4>{{message}} </h4>\r\n    </div>\r\n    </div>\r\n  </form>\r\n  <div class=\"modal-footer justify-content-center\">\r\n    <button mat-raised-button type=\"button\" class=\"btn btn-info btn-round\" data-dismiss=\"modal\">Valider</button>\r\n  </div> -->\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<!--Types Bons -->\r\n\r\n<div class=\"main-content\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row tab-content tab-space\" style=\"margin-top:-5.5cm;\">\r\n\r\n    </div>\r\n\r\n    <div class=\"card-body \">\r\n      <ul class=\"nav nav-pills nav-pills-warning\" role=\"tablist\">\r\n\r\n      </ul>\r\n        <!------>\r\n      <div class=\" tab-content tab-space \">\r\n        <div class=\" col-md-11 tab-pane active \" id=\"link0\" *ngIf=\"mess1\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; font-weight: 500; width:40%;\">Rechercher un\r\n                Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group p-2\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\">\r\n              <button mat-raised-button type=\"submit\" (click)=\"findByMatricule()\" class=\"nav-link \" data-toggle=\"tab\"\r\n                href=\"#link1\" class=\"btn btn-fill btn-success\" style=\"margin-left: 80%;\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!------>\r\n        <div class=\" col-md-11 tab-pane active \" id=\"link0\">\r\n          <div class=\"card \" style=\"margin-left:1cm;\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">search</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; font-weight: 500; width:40%;\">Rechercher un\r\n                Employe</h3>\r\n            </div>\r\n            <div class=\"card-body \">\r\n              <form class=\"navbar-form\">\r\n                <span class=\"bmd-form-group\">\r\n                  <div class=\"input-group p-2\">\r\n                    <input type=\"text\" name=\"matricule\" class=\"form-control\" placeholder=\"Matricule\" id=\"matricule\"\r\n                      [(ngModel)]=\"matricule\">\r\n\r\n                  </div>\r\n                </span>\r\n              </form>\r\n            </div>\r\n\r\n            <!--[disabled]=\"!searchForm.form.invalid\"-->\r\n            <div class=\"card-footer\">\r\n              <button mat-raised-button type=\"submit\" (click)=\"findByMatricule()\" class=\"nav-link \" data-toggle=\"tab\"\r\n                href=\"#link1\" class=\"btn btn-fill btn-success\" style=\"margin-left: 80%;\"><i\r\n                  class=\"material-icons\">search</i>Rechercher</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- <div class=\"col-md-6\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-body\">\r\n              <br>\r\n  \r\n              <h4>l'agent {{message.matricule}} existe !!!</h4><br>\r\n              <table class=\"table table-hover\">\r\n  \r\n                <thead class=\"text-primary\">\r\n  \r\n                  <th>Nom</th>\r\n                  <th>Prenom</th>\r\n                  <th>Sexe</th>\r\n                  <th>Matricule</th>\r\n                  <th>Reference</th>\r\n  \r\n                </thead>\r\n                <tbody>\r\n                  <tr>\r\n                    <td>{{message.nom}}</td>\r\n                    <td>{{message.prenom}}</td>\r\n                    <td>{{message.sexe}}</td>\r\n                    <td>{{message.matricule}}</td>\r\n                    <td>{{message.reference}}</td>\r\n  \r\n                  </tr>\r\n                </tbody>\r\n              </table>\r\n            </div>\r\n  \r\n          </div>\r\n        </div> -->\r\n\r\n\r\n\r\n\r\n        <div class=\"tab-pane \" id=\"link1\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:30%; font-weight: 500;\">Bon Lunetterie Agent</h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n                  <style>\r\n                    b,\r\n                    label {\r\n                      color: black;\r\n                      font-size: 18px;\r\n                    }\r\n                  </style>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom :</label>\r\n                        <b> {{message.prenom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom :</label>\r\n                        <b> {{message.nom}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n                        <b> {{message.numero_carnet}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeEmploye}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b> {{message.date_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b> {{message.lieu_nais}}</b>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Services:</label>\r\n                      <b> {{message.ipmService?.type_service}}</b>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"lPrestataires\" name=\"prestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b> {{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n\r\n                  <!-- <div class=\"col-md-8 form-group\">\r\n                  <label>Motif</label>\r\n                  <textarea cols=\"5\" rows=\"2\" style=\"background-color:whitesmoke; margin-top: -1cm;\" type=\"text\"\r\n                    class=\"form-control p-2\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                </div> -->\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <!-----Row Vide   data-toggle=\"modal\"\r\n                    data-target=\"#modalconjoints\"----------------------------->\r\n                </div>\r\n                 <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Devit\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectDevit($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div> \r\n                <div class=\"row\">\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Conjoints\" name=\"conjoints\" ([ngModel])=\"id_conjoint\">\r\n                        <mat-option *ngFor=\"let conjoint of conjoints\" [value]=\"conjoint.idconj\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link2\" role=\"tablist\" (click)=\"getconjointbon(conjoint)\">\r\n                          <b> {{ conjoint.prenom_conjoint}} {{ conjoint.nom_conjoint}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-6\">\r\n                    <mat-form-field appearance=\"fill\">\r\n                      <mat-select placeholder=\"Choisir Enfants\" name=\"enfants\" ([ngModel])=\"id_enfant\">\r\n                        <mat-option *ngFor=\"let enfant of enfants\" [value]=\"enfant.idenf\" class=\"nav-link \"\r\n                          data-toggle=\"tab\" href=\"#link3\" role=\"tablist\" (click)=\"getenfantbon(enfant)\">\r\n                          <b>{{ enfant.prenom_enfant}} {{ enfant.nom_enfant}}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n                <div class=\"modal-footer justify-content-center\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\" [disabled]=\"desactive\"\r\n                    (click)=\"BonConsultation()\">Enregistrer\r\n                  </button>\r\n                  <!-- <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\" btn btn-raised btn-round btn btn-danger btn-round\"\r\n                    >\r\n                    Exporter</button> -->\r\n                    <div class=\"col-md-6\" style=\"font-weight:bold;color: black;float: right;\">\r\n                      <i mat-raised-button type=\"button\" class=\"nav-link\"\r\n                      data-toggle=\"tab\"  style=\"width: 100px;\" (click)=\"retourserach()\"  role=\"tablist\" class=\"btn btn-info btn-round\">\r\n                      <span class=\"material-icons\">arrow_back</span></i>\r\n                    \r\n                    </div>\r\n\r\n                </div>\r\n\r\n                <!-- <div class=\"modal-footer justify-content-center\">\r\n                <button mat-raised-button class=\"btn btn-raised btn-round btn-btn\" (click)=\"upload()\">Exporter Lettre\r\n                  de Grantie\r\n                </button>\r\n\r\n              </div> -->\r\n                <div>\r\n                  <!-- <h4>{{message}} </h4> -->\r\n                </div>\r\n\r\n              </form>\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link2\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Bon Lunetterie Conjoint  </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Conjoint :</label>\r\n                        <b>{{messageconjoint?.prenom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Conjoint:</label>\r\n                        <b>{{messageconjoint?.nom_conjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeConjoint}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <!-- <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                      <b>{{message.date_nais}}</b>\r\n                    </div>\r\n                  </div> -->\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageconjoint?.lieu_naiss_conj}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"Prestataires Conjoints\" name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Devit\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectDevit($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div>\r\n                <!-- <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Ordonnance\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectOrdonn($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div> -->\r\n\r\n                <div class=\"modal-footer\">\r\n                  <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" data-toggle=\"modal\"\r\n                    data-target=\"#noticeConjoint\" (click)=\"BonConsultation()\"> Enregistrer</button>\r\n                  <!-- <button mat-raised-button type=\"button\" (click)=\"uploadConjoint()\" class=\"btn btn-green btn-round\"\r\n                    data-dismiss=\"modal\">\r\n                    Exporter</button> -->\r\n                </div>\r\n                \r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"tab-pane\" id=\"link3\">\r\n          <div class=\"card\" *ngIf=\"message\">\r\n            <div class=\"card-header card-header-icon\">\r\n              <div class=\"card-icon\" style=\"background-color:rgba(17, 17, 227, 0.88)\">\r\n                <i class=\"material-icons\">assignment</i>\r\n              </div>\r\n              <h3 class=\"card-title p-2\" style=\"background-color:whitesmoke; width:40%; font-weight: 500;\">Bon Lunetterie Enfant </h3>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <form>\r\n                <div class=\"card-header card-header-icon card-header-info\" class=\"btn-btn primary\">\r\n\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label>Prénom Enfant :</label>\r\n                        <b>{{messageenfant?.prenom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label> Nom Enfant:</label>\r\n                        <b>{{messageenfant?.nom_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                        <b>{{messageenfant?.date_nais_enfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col-md-3 form-group\">\r\n                      <div class=\"form-group\">\r\n                        <label class=\"bmd-label-floating\">Age:</label>\r\n                        <b> {{AgeEnfant}}</b>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"message\">\r\n                  <!-- <div class=\"col-md-4 form-group\">\r\n                  <div class=\"form-group\">\r\n                    <label class=\"bmd-label-floating\">Date Naissance:</label>\r\n                    <b>{{messageenfant.date_nais}}</b>\r\n                  </div>\r\n                </div> -->\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <div class=\"form-group\">\r\n                      <label class=\"bmd-label-floating\">Lieu de Naissance:</label>\r\n                      <b>{{messageenfant?.lieu_nais_enfant}}</b>\r\n                    </div>\r\n                  </div>\r\n\r\n                </div>\r\n\r\n\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 form-group\">\r\n                    <mat-form-field>\r\n                      <mat-select placeholder=\"Prestataires Enfant\" name=\"lprestataires\" [(ngModel)]=\"code_presta\">\r\n                        <mat-option *ngFor=\"let prest of lprestataires\" [value]=\"prest.code_prestataire\"\r\n                          (click)=\"getnom(prest)\">\r\n                          <b>{{ prest.nom_prestataire }}</b>\r\n                        </mat-option>\r\n                      </mat-select>\r\n                    </mat-form-field>\r\n                  </div>\r\n                  <div class=\"col-md-8 form-group\">\r\n                    <label>Motif</label>\r\n                    <textarea cols=\"5\" rows=\"5\" style=\"background-color:rgb(243, 237, 237);\" type=\"text\"\r\n                      class=\"form-control\" id=\"motif\" [(ngModel)]=\"motif\" name=\"motif\"></textarea>\r\n                  </div>\r\n                </div>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-4 btn btn-file\" style=\"margin-left:30% ;\">Joindre Devit\r\n                    <input type=\"file\" class=\"form-control\" name=\"image\" (change)=\"selectDevit($event)\">\r\n                    <img [src]=\"OrdonnanceURL\" height=\" 100\" width=\"100\" *ngIf=\"OrdonnancefURL\">\r\n\r\n                  </div>\r\n                </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n                  <div class=\"modal-footer\">\r\n                    <button mat-raised-button class=\"btn btn-raised btn-round btn-success\" \r\n                       (click)=\"BonEnfant()\"> Enregistrer</button>\r\n                    <!-- <button mat-raised-button type=\"button\" (click)=\"uploadEnfant()\" class=\"btn btn-green btn-round\"\r\n                      data-dismiss=\"modal\">\r\n                      Exporter</button> -->\r\n                  </div>\r\n                  <div>\r\n\r\n                  </div>\r\n\r\n              </form>\r\n\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!-- notice modal -->\r\n    <div class=\"modal fade\" id=\"noticeModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n      aria-hidden=\"true\" *ngIf=\"message\">\r\n      <div class=\"modal-dialog modal-notice\">\r\n        <div class=\"modal-content\" style=\"width: 600px;\">\r\n          <div class=\"modal-header\">\r\n            <!-- <h5 class=\"modal-title\" id=\"myModalLabel\">How Do You Become an Affiliate?</h5> -->\r\n            <button mat-button type=\"button\" class=\"close \" data-dismiss=\"modal\" aria-hidden=\"true\">\r\n              <i style=\"margin-top: -1.3cm; color: red; font-size: 30px;\" class=\"material-icons\">close</i>\r\n            </button>\r\n\r\n\r\n          </div>\r\n          <div class=\"modal-body\">\r\n\r\n\r\n            <div class=\"\" style=\"margin-top: -1cm;\">\r\n              <div>\r\n                <img src=\"/assets/img_poste/header1.png\" style=\"width: 100%;\" alt=\"Thumbnail Image\" alt=\"\" />\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n\r\n              <div class=\"col-md-12\">\r\n                <h4 style=\"text-align:right; font-weight: bold; margin-top: 25px;\">Dakar le:{{jstoday}}</h4>\r\n              </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prénom :</label>\r\n                  <b> {{message.prenom}}</b>\r\n                </div>\r\n              </div>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Nom :</label>\r\n                  <b> {{message.nom}}</b>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <hr>\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Prestataire :</label>\r\n                  <b>{{p}}</b>\r\n                </div>\r\n              </div>\r\n              <!-- <div class=\"col-md-6 form-group\">\r\n          <div class=\"form-group\">\r\n            <label class=\"bmd-label-floating\">Numero Carnet:</label>\r\n            {{message.idemp}}\r\n          </div>\r\n        </div> -->\r\n              <div class=\"col-md-6 form-group\">\r\n                <div class=\"form-group\">\r\n                  <label class=\"bmd-label-floating\">Services:</label>\r\n                  <b> {{message.ipm_service?.type_service}}</b>\r\n                </div>\r\n              </div>\r\n\r\n            </div>\r\n            <div class=\"card-body table-full-width\">\r\n              <div class=\"table-responsive\">\r\n                <table class=\"table table-hover table-bordered\">\r\n                  <thead class=\"\">\r\n                    <tr style=\"background-color: whitesmoke;\">\r\n                      <th style=\"font-weight: 600px\">Matricule Participant</th>\r\n                      <th style=\"font-weight: 600px\">Designation</th>\r\n                      <th style=\"font-weight: 600px\">Nombre D'article</th>\r\n\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr>\r\n                      <td>{{message.matricule}}</td>\r\n                      <td>{{designation}}</td>\r\n                      <td>{{nombre_article}}</td>\r\n\r\n                  </tbody>\r\n\r\n                </table>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"BonNowLettre()\" class=\"btn btn-success btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Enregistrer</button>\r\n          </div>\r\n          <div class=\"modal-footer justify-content-center\">\r\n            <button mat-raised-button type=\"button\" (click)=\"upload()\" class=\"btn btn-green btn-round\"\r\n              data-dismiss=\"modal\">\r\n              Exporter</button>\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n    <!-- end notice modal -->\r\n  </div>\r\n</div>\r\n<!-- Exemple ngTemplate-->\r\n\r\n<!-- <div class=\"card\" *ngIf=\"message\">\r\n    <div class=\"card-header\">\r\n      <h4 class=\"card-title\">Lettre de Garantie</h4>\r\n    </div>\r\n<form class=\"form-horizontal\">\r\n    <input type=\"hidden\" class=\"form-control\" >\r\n    <div class=\"form-group row card-header\">\r\n      <h3 >Dakar,le  </h3>\r\n      \r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Nom du Patient</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"Nom du Patient\" [(ngModel)]=\"bon.nom_du_patient\" name=\"nom\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_Carnet_De_Sante</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_carnet_de_sante\" [(ngModel)]=\"bon.numero_carnet_de_sante\" name=\"numero_carnet_de_sante\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Service</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"service\" [(ngModel)]=\"bon.service\" name=\"service\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Mle de Solde</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"solde\" [(ngModel)]=\"bon.solde\" name=\"solde\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_De_Reference</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"numero_de_reference\" [(ngModel)]=\"bon.numero_de_reference\" name=\"numero_de_reference\">\r\n\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <p>Monsieur,</p>\r\n        <p>Nous avons l'honnneur de vous signaler que les frais de versement de</p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n        </p>\r\n        <p>............................................................................................................................................................................................\r\n          sont garantis par notre institution. </p>\r\n        <p>Nous vous serons reconnaissants de bien vouloir parvenir votre facture dans un délai \r\n          n'excédant pas deux(02) mois aprés la date d'établissement de la présente lettre.\r\n          Veuillez agréer,Monsieur, l'expression de notre considération distinguée.\r\n\r\n        </p>\r\n      </div>\r\n \r\n     <div>\r\n      <h4>{{message}} </h4>\r\n    </div>\r\n    </div>\r\n  </form>\r\n\r\n  <div class=\"modal-footer justify-content-center\">\r\n    <button mat-raised-button type=\"button\" class=\"btn btn-info btn-round\" data-dismiss=\"modal\">Enregistrer</button>\r\n  </div>\r\n</div> -->\r\n<!-- <form class=\"form-horizontal\">\r\n    <input type=\"hidden\" class=\"form-control\" >\r\n    <div class=\"form-group row card-header\">\r\n      \r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Numero_Carnet</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"numero_carnet\" [(ngModel)]=\"bon.numero_carnet\" name=\"numero_carnet\">\r\n    </div>\r\n      <div class=\"col-md-8 form-group\">\r\n          <label>Code de Fournisseur</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"code_fournisseur\" [(ngModel)]=\"bon.code_fournisseur\" name=\"code_fournisseur\">\r\n      </div>\r\n      <div class=\"col-md-4 form-group\">\r\n          <label>Numero Saisie Facture</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"n_saisie_facture\" [(ngModel)]=\"bon.n_saisie_facture\" name=\"n_saisie_facture\">\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n          <label>Prénom de/des Malade(s)</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"prenom_malade\" [(ngModel)]=\"bon.prenom_malade\" name=\"prenom_malade\">\r\n      </div>\r\n      <div class=\"col-md-4 form-group\">\r\n          <label>Date de Demande</label>\r\n        <input type=\"date\" class=\"form-control\" id=\"date_demande\" [(ngModel)]=\"bon.date_demande\" name=\"date_demande\">\r\n      </div>\r\n      <div class=\"col-md-4 form-group\">\r\n          <label>Date de Reception de Facture</label>\r\n        <input type=\"date\" class=\"form-control\" id=\"date_reception_facture\" [(ngModel)]=\"bon.date_reception_facture\" name=\"date_reception_facture\">\r\n      </div>\r\n      \r\n      <div class=\"card-body table-full-width\">\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table table-hover\">\r\n                <thead class=\"text-primary\">\r\n                    <tr>\r\n                      <th>Date Prestation</th>\r\n                      <th >Code Prestation</th>\r\n                      <th >Nature Prestation</th>\r\n                      <th >Montant</th>\r\n                      <th >T.P.S</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody >\r\n                      <tr *ngFor=\" let bon of bons\">\r\n                          <td>{{bon.code_remb_64800}}</td>\r\n                          <td >{{bon.code_p_non_Remb_64801}}</td>\r\n                          <td >{{bon.quantite}}</td>\r\n                          <td >{{bon.designation}}</td>\r\n                          <td >{{bon.prix_unitaire}}</td>\r\n                          <td>{{bon.total}}</td>\r\n                          <td >{{employe.lieu_nais}}</td>\r\n                          <td >{{employe.telephone}}</td>\r\n                          <td >{{employe.date_recrutement}}</td>\r\n                          <td >{{employe.matricule}}</td>\r\n                          <td>{{employe.reference}}</td>\r\n                          <td >{{employe.numero_carnet}}</td>\r\n                          <td >{{employe.situation_familial}}</td>\r\n                          <td >{{employe.solde}}</td>\r\n                          <td >{{employe.cumul_charge}}</td>\r\n                          <td >{{employe.niveau_salarial}}</td>\r\n                          <td>\r\n                            <a  class=\"btn btn-success\" [routerLink]=\"['/gestion-employes/ModifierEmployes/'+employe.idemp]\">\r\n                                Modifier\r\n                            </a>\r\n                          </td>\r\n                          <td>\r\n                            <a  class=\"btn btn-danger\" (click)=\"supprimerEmploye(employe)\">\r\n                                supprimer\r\n                            </a>\r\n                          </td>\r\n                          \r\n                    </tr>\r\n                   \r\n                </tbody>\r\n            </table>\r\n            </div>\r\n            </div>\r\n      \r\n     <div>\r\n      <h4>{{message}} </h4>\r\n    </div>\r\n    </div>\r\n  </form>\r\n  <div class=\"modal-footer justify-content-center\">\r\n    <button mat-raised-button type=\"button\" class=\"btn btn-info btn-round\" data-dismiss=\"modal\">Valider</button>\r\n  </div> -->\r\n");
 
 /***/ })
 
