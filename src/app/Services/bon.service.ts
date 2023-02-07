@@ -31,4 +31,9 @@ export class BonService {
   listeBon(idbon: number) : Observable<IPM_Bon>{
     return this.http.get<IPM_Bon>(environment.URL+'getbonByid/'+idbon);
   }
+//Consulter les informations du bon de l'employé
+  public getEmpBonById(idemp: number):Observable<IPM_Bon[]>{
+    return this.http.get<IPM_Bon[]>(environment.URL+'getbonByid/'+idemp) 
+   
+  }
 }

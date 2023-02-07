@@ -19,6 +19,8 @@ import { ModifierEmployesComponent } from '../modifier-employes/modifier-employe
 import { ToastrService } from 'ngx-toastr';
 import { DateAdapter } from '@angular/material/core';
 import { element } from 'protractor';
+import { BonService } from 'src/app/Services/bon.service';
+import { IPM_Bon } from 'src/app/Models/IPM_Bon';
 declare var $: any
 @Component({
   selector: 'app-carnet-employe',
@@ -52,6 +54,7 @@ export class CarnetEmployeComponent implements OnInit {
 
   /////////
   currentemploye: Employe = new Employe();
+  currentBon:IPM_Bon[]
   id: number;
   service: Service[];
   categorie: Categorie[];
@@ -108,8 +111,12 @@ export class CarnetEmployeComponent implements OnInit {
   imgURL5: string | ArrayBuffer;
   condition:boolean;
  controlSexe:boolean=false;
+ desactive:boolean=false;
+  idempBon: any;
+  nombre: number;
   constructor(@Inject(LOCALE_ID) private locale: string, private toastr: ToastrService,
     private emp_service: EmployeService,
+    private bonService:BonService,
     private conj_service: ConjointService,
     private enf_service: EnfantService, private datePipe: DatePipe,
     private dateAdapter: DateAdapter<Date>,
@@ -134,6 +141,7 @@ export class CarnetEmployeComponent implements OnInit {
     this.getCategorie();
     this.getService();
     this.getEmploye();
+    this.idempBon= this.route.snapshot.params['id'];
     this.id = this.route.snapshot.params['id'];
     this.emp_service.getEmployeById(this.id).subscribe(
       result => {
@@ -875,6 +883,20 @@ export class CarnetEmployeComponent implements OnInit {
     );
 
 
+  }
+
+  //Consulter Bon de l'employé
+  consulter(){
+          this.bonService.getEmpBonById(this.idempBon).subscribe(
+            result =>{
+              this.currentBon=result;              
+               this.nombre=this.currentBon.length
+              console.log(this.currentBon);
+              if(this.currentBon.length==0 && this.nombre==0){
+                this.desactive=true
+              }
+            }
+          )
   }
 
 }

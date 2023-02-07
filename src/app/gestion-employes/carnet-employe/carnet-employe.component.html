@@ -653,9 +653,15 @@
         </div>
       </div>
     </div>
+    <!-- <div class="modal-footer justify-content-center">
+      <button mat-raised-button class="btn btn-info" data-toggle="modal" data-target="#bonempl" style="width: 100px;;" (click)="consulter()"><i
+        class="material-icons">person_pin</i> Bons
+    </button>
+    </div> -->
     <button mat-raised-button class="btn btn-danger" style="width: 100px;" (click)="retourner()"><i
         class="material-icons">arrow_back</i> retour
     </button>
+
   </div>
 </div>
 <ng-template #test>
@@ -818,3 +824,114 @@
     </div>
   </div>
 </div>
+
+<!-------Consulter Bon-------------->
+<div class="modal fade" id="bonempl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" >
+              <div class="modal-content"style="width: 900px; margin-left:-3cm;margin-top: 3cm;">
+                  <div class="modal-header" style="background-color: whitesmoke;"
+                  >
+                      <h2 class="modal-title p-2" id="noticeModal" style="font-weight:400;">Bons de {{currentemploye.prenom}} {{currentemploye.nom}}
+                      
+                      </h2>
+                      <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                          <i class="material-icons">close</i>
+                      </button>
+                  </div>
+                  <div class="modal-body" style="width: 900px;">
+                              
+                          
+                                    <hr>
+                  </div>
+
+                  <div class="col-md-12">
+                      <div class="card">
+                        <div class="card-header card-header-icon">
+                          <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                            <i class="material-icons">list</i>
+                    
+                          </div>
+                          <h3  style="background-color:whitesmoke; color: black; pading: 5px; width: 40%;">liste Bon 
+                          </h3>
+                        </div>
+                        <div class="card" *ngIf="desactive">
+                          <p style="text-align:center; color:red;font-size: 30px;">Aucun bon pour l'instant</p>
+                      </div> 
+                        <div class="card-body" *ngIf="!desactive">
+                          <div class="row bordered" >
+                            <div class="col-md-4 form-group bordered">
+                                <span><b style="color: green; font-size: 25px;">Nombre de Bons: {{nombre}}</b></span>
+                              </div>
+                            </div>
+                          <table class="table table-hover table-bordered">
+                     
+                            <thead style="background-color:whitesmoke;">
+                  
+                              <!-- <th cope="col"> Matricule</th> -->
+                              <!-- <th cope="col">Nom</th>
+                              <th cope="col">Prenom</th> -->
+                               <th style="font-weight:bold;text-align: center;" cope="col">Numero de Bon</th> 
+                               <th style="font-weight:bold;text-align: center;" cope="col">Type de Bon</th> 
+                               <th style="font-weight:bold;text-align: center;" cope="col">Prestataire</th> 
+                              
+                              <!-- <th cope="col">Solde</th> -->
+                              
+                              <th style="font-weight:bold;text-align: center;"cope="col">Date</th>
+                              <!-- <th cope="col">Action</th> -->
+                    
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let element of currentBon ; let i=index">
+                                <!-- <td><b>{{element.ipm_employe.matricule}}</b></td> -->
+                                <!-- <td><b>{{element.ipm_employe.nom}}</b></td>
+                                <td><b>{{element.ipm_employe.prenom}}</b></td> -->
+                                  <td>{{element.numeroBon}}</td>  
+                                 <td><b>{{element.decriminatorValue}}</b></td>
+                                 <td><b>{{element.ipm_prestataire?.nom_prestataire}}</b></td> 
+<!--                                
+                                <td><b>{{element.ipm_employe.solde}}</b></td> -->
+                               
+                                <td><b>{{element.dateEtablissement | date:'dd/MM/yyyy'}}</b></td>
+                                <!-- <td class="td_actions">
+                                  <i class="material-icons" class="btn btn-danger" (click)=deleteDetails(i)><span
+                                      class="fa fa-trash-o"></span></i>
+                                </td> -->
+                                <!-- <td>
+                                  <button class="btn btn-info btn-block" 
+                                 data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>
+                                  </button></td> -->
+                    
+                    
+                              </tr>
+                            </tbody>
+                            <tfoot style="font-weight:bold;">
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                  <!-- <h4>TOTAL</h4> -->
+                                </td>
+                               <!-- <td>{{cumul}}</td> -->
+                                 <!--  <td>{{totalMont}}</td> -->
+                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                    
+                              </tr>
+                            </tfoot>
+                    
+                          </table>
+                     
+                        </div>
+                    
+                      </div>
+                    </div>
+                  
+              </div>
+          </div>
+      </div>
+
+<!--fin modal-->
