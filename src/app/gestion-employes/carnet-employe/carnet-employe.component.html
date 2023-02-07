@@ -143,6 +143,9 @@
               </a>
             </li>
             <li class="nav-item"><a data-toggle="tab" href="#link5" role="tablist" class="nav-link"> Enfant(s) </a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#link6" role="tablist" class="nav-link" (click)="listFacture()"> Factures </a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#link6" role="tablist" class="nav-link" (click)="listFacture()"> Bons </a></li>
+
           </ul>
         </div>
         <div class="col-md-8">
@@ -649,13 +652,82 @@
               </div>
             </div>
 
+            <!-- table facture -->
+            <div id="link6" class="tab-pane">
+              <div class="col-md-12">
+                <div class="">
+
+                  <div class="">
+                    <div class="table-responsive">
+                      <table class="table table-hover table-bordered">
+                        <thead>
+        
+                          <th cope="col">Facture</th>
+                          <th cope="col">Prestation</th>
+                          <th cope="col">Date</th>
+                          <th cope="col">Taux</th>
+                          
+                          <th cope="col">Montant total</th>
+                          <th cope="col">Part Patient</th>
+                          <th cope="col">Part IPM</th>
+        
+                          
+        
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of listFactures">
+                            <td><b>{{element.ipmFacture.numerofacture}}</b></td>
+                          
+                            <td><b>{{element.ipm_prestation.libelle}}</b></td>
+                            <td><b>{{element.datePrestation}}</b></td>
+                            <td><b>{{element.taux_ipm}}</b></td>
+                            <td><b>{{element.montant_facture}}</b></td>
+                            <td><b>{{element.part_patient}}</b></td>
+                            <td><b>{{element.part_ipm}}</b></td>
+                           
+                            
+        
+                            
+                            
+                            
+        
+        
+                          </tr>
+                        </tbody>
+                        <tfoot style="font-weight:bold;">
+                          <tr>
+                            
+        
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total</td>
+                            <td>{{montant}} </td>
+                            <td>{{partIpm}} </td>
+                            <td>{{partPatient}}</td>
+                            <td></td>
+        
+                          </tr>
+                        </tfoot>
+        
+                      </table>
+                      
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
           </div>
         </div>
       </div>
     </div>
-    <button mat-raised-button class="btn btn-info" style="width: 100px;"data-toggle="modal" data-target="#noticeMod" (click)="listFacture()"><i
+    <!-- <button mat-raised-button class="btn btn-info" style="width: 100px;"data-toggle="modal" data-target="#noticeMod" (click)="listFacture()"><i
         class="material-icons" ></i> Facture
-    </button>
+    </button> -->
     <button mat-raised-button class="btn btn-danger" style="width: 100px;" (click)="retourner()"><i
         class="material-icons">arrow_back</i> retour
     </button>
@@ -824,7 +896,7 @@
 
 </div>
 <!-- modal facture -->
-<div class="modal fade col-md-12" id="noticeMod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<!-- <div class="modal fade col-md-12" id="noticeMod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true" >
   <div class="modal-dialog  modal-notice">
     <div class="modal-content " style="width: 1000px; margin-left: -3cm;">
@@ -848,53 +920,7 @@
             </div>
             <div class="card-body">
 
-              <table class="table table-hover table-bordered">
-                <thead>
-
-                  <th cope="col">Facture</th>
-                  <th cope="col">Prestation</th>
-                  <th cope="col">Date</th>
-                  <th cope="col">Taux</th>
-                  
-                  <th cope="col">Montant total</th>
-                  <th cope="col">Part Patient</th>
-                  <th cope="col">Part IPM</th>
-
-                  
-
-                </thead>
-                <tbody>
-                  <tr *ngFor="let element of listFactures">
-                    <td><b>{{element.ipmFacture.idfacture}}</b></td>
-                  
-                    <td><b>{{element.ipm_prestation.libelle}}</b></td>
-                    <td><b>{{element.datePrestation}}</b></td>
-                    <td><b>{{element.taux_ipm}}</b></td>
-                    <td><b>{{element.montant_facture}}</b></td>
-                    <td><b>{{element.part_patient}}</b></td>
-                    <td><b>{{element.part_ipm}}</b></td>
-                   
-                    
-
-                    
-                    
-                    
-
-
-                  </tr>
-                </tbody>
-                <tfoot style="font-weight:bold;">
-                  <tr>
-                    
-
-                    <td></td>
-                    <td></td>
-                    <td></td>
-
-                  </tr>
-                </tfoot>
-
-              </table>
+             
               <div class="modal-footer justify-content-center">
                 
               </div>
@@ -906,4 +932,4 @@
     </div>
 
   </div>
-</div>
+</div> -->

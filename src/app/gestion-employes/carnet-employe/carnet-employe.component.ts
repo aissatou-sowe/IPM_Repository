@@ -109,6 +109,9 @@ export class CarnetEmployeComponent implements OnInit {
   condition:boolean;
  controlSexe:boolean=false;
   listFactures: any;
+  montant: any;
+  partIpm: any;
+  partPatient: any;
   constructor(@Inject(LOCALE_ID) private locale: string, private toastr: ToastrService,
     private emp_service: EmployeService,
     private conj_service: ConjointService,
@@ -882,6 +885,9 @@ export class CarnetEmployeComponent implements OnInit {
       (data) => {
         this.listFactures = data;
         console.log(this.listFactures)
+        this.montant=this.listFactures.reduce((sum,current)=>sum+current.montant_facture,0)
+        this.partIpm=this.listFactures.reduce((sum,current)=>sum+current.part_patient,0)
+        this.partPatient=this.listFactures.reduce((sum,current)=>sum+current.part_ipm,0)
         //return this.message
       })
 
