@@ -41,8 +41,8 @@
               <td class="text-center">{{employ.adresse_domicile}}</td>
               <!-- <td>{{fac.ipm_prestation?.code_prestation}}</td>
 -->
-              <td class="text-center">{{employ.cumul_charge}}</td>
-              <td class="text-center">{{employ.solde}}</td>
+              <td class="text-center">{{employ.cumul_charge | number:'1.0-0'}}</td>
+              <td class="text-center">{{employ.solde | number:'1.0-0'}}</td>
               <td class="text-center">{{employ.telephone}}</td>
               <td class="text-center">{{employ.numero_carnet}}</td>
           </tr>

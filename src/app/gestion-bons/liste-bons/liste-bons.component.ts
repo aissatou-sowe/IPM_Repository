@@ -190,8 +190,19 @@ export class ListeBonsComponent implements OnInit {
       this.OrdonnanceURL = readerr.result;
     };
   }
+  viderConjoint(){
+    this.findByMatricule()
+    
+
+  }
+  viderEnfant(){
+    this.findByMatricule()
+    
+
+  }
    /////////////Recuperer un enfant pour lui choisir bon
 getenfantbon(enfant){
+  
  this.idbenf=enfant.idenf;
  this.enf_service.getEnfantById(enfant.idenf).subscribe(
   data=>{this. messageenfant=data
@@ -691,8 +702,7 @@ upload(){
          doc.setFontSize(12)
          doc.text("Malade :",15,75)
          doc.text(ipm1,50,75)
-         doc.text("Age :",30 ,75)
-         doc.text(""+age,30,75)
+         
          doc.setFontSize(12)
          doc.text("",90,75)
          doc.text(ipm2,80,75)
@@ -700,6 +710,8 @@ upload(){
          doc.text(ipm,140,75)
          doc.text("N Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
+         doc.text("Age : "+age,80 ,85)
+        //doc.text(""+age,30,85)
         //  doc.text("N Bon :",55,85)
         //  doc.text(""+numBon,75,85)
          doc.text("Nombre D'article :",120,85)
@@ -760,6 +772,7 @@ uploadConjoint(){
    var ipm1=this.message?.prenom
    var ipm2=this.message?.nom
    var ipm3=this.p
+   var ageC=this.Ageconjoin
    var ipm4=this.message.ipmService?.type_service
    var ipm5=this.messageconjoint?.prenom_conjoint
    var ipm6=this.messageconjoint?.nom_conjoint
@@ -811,6 +824,7 @@ uploadConjoint(){
          doc.setFontSize(12)
          doc.text("N Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
+         doc.text("Age : "+ageC,80,85)
          doc.text("Nombre D'article :",120,85)
          doc.text(""+Narticle,160,85)
          doc.text("Malade:",15,95)
@@ -863,6 +877,7 @@ uploadEnfant(){
    var ipm1=this.message?.prenom
    var ipm2=this.message?.nom
    var ipm3=this.p
+   var ageE = this.AgeEnfant
    var ipm4=this.message.ipm_service?.type_service
    var ipm5=this.messageenfant.prenom_enfant
    var ipm6=this.messageenfant?.nom_enfant
@@ -915,6 +930,7 @@ uploadEnfant(){
          doc.setFontSize(12)
          doc.text("N Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
+         doc.text("Age : "+ageE,80,85)
          doc.text("Nombre D'article :",120,85)
          doc.text(""+Narticle,160,85)
          doc.text("Malade:",15,95)

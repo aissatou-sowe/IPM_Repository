@@ -661,21 +661,22 @@
                     <div class="table-responsive">
                       <table class="table table-hover table-bordered">
                         <thead>
+                          <tr style="background-color:#d5d5d5 ;">
         
-                          <th cope="col">Facture</th>
-                          <th cope="col">Prestation</th>
-                          <th cope="col">Date</th>
-                          <th cope="col">Taux</th>
+                          <th style="font-weight: 500;" cope="col">Facture</th>
+                          <th style="font-weight: 500;" cope="col">Prestation</th>
+                          <th style="font-weight: 500;" cope="col">Date</th>
+                          <th style="font-weight: 500;" cope="col">Taux</th>
                           
-                          <th cope="col">Montant total</th>
-                          <th cope="col">Part Patient</th>
-                          <th cope="col">Part IPM</th>
-        
+                          <th style="font-weight: 500;" cope="col">Montant total</th>
+                          <th style="font-weight: 500;" cope="col">Part Patient</th>
+                          <th style="font-weight: 500;" cope="col">Part IPM</th>
+                        </tr>
                           
         
                         </thead>
                         <tbody>
-                          <tr *ngFor="let element of listFactures">
+                          <tr  style="font-weight: 500; text-align: center;" *ngFor="let element of listFactures">
                             <td><b>{{element.ipmFacture.numerofacture}}</b></td>
                           
                             <td><b>{{element.ipm_prestation.libelle}}</b></td>
@@ -695,7 +696,7 @@
                           </tr>
                         </tbody>
                         <tfoot style="font-weight:bold;">
-                          <tr>
+                          <tr style="font-weight: 500; text-align: center;">
                             
         
                             <td></td>

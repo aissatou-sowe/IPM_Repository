@@ -389,6 +389,16 @@ retourserach()
   console.log('************************************');
   window.location.reload();
 }
+viderConjoint(){
+  this.findByMatricule()
+  
+
+}
+viderEnfant(){
+  this.findByMatricule()
+  
+
+}
   /////////////////Save Bon Conjoint
 public BonConjoint(){
   // this.nom=this.bon.ipm_employe.prenom
@@ -550,6 +560,7 @@ upload(){
    var ipm1=this.message.prenom
    var ipm2=this.message.nom
    var ipm3=this.p
+   var ageE=this.AgeEmploye
    var prestatio=this.prestationC
    var Pmalade=this.message.prenom
    var Narticle=this.nombre_article
@@ -600,6 +611,7 @@ upload(){
          doc.text("Prestation :",120,85)
          doc.text(prestatio,143,85)
          doc.text("N° Carnet :",15,85)
+         doc.text("Age : "+ageE,80,85)
          doc.text(""+Ncarnet,40,85)
          doc.text("N° Bon : ",15,60)
          doc.text(""+numBon,35,60)
@@ -661,6 +673,7 @@ uploadConjoint(){
    var ipm1=this.message?.prenom
    var ipm2=this.message?.nom
    var ipm3=this.p
+   var ageC=this.AgeConjoint
    var ipm4=this.message.ipmService?.type_service
    var ipm5=this.messageconjoint?.prenom_conjoint
    var ipm6=this.messageconjoint?.nom_conjoint
@@ -708,6 +721,7 @@ uploadConjoint(){
          doc.text(ipm,140,75)
          doc.setFontSize(12)
          doc.text("N Carnet :",15,85)
+         doc.text("Age : "+ageC,80,85)
          doc.text("N Bon :",55,85)
          doc.text(""+numBon,75,85)
          doc.text(""+Ncarnet,40,85)
@@ -762,6 +776,7 @@ uploadEnfant(){
    var ipm1=this.message?.prenom
    var ipm2=this.message?.nom
    var ipm3=this.p
+   var ageEn=this.AgeEnfant
    var ipm4=this.message.ipmService?.type_service
    var ipm5=this.messageenfant.prenom_enfant
    var ipm6=this.messageenfant?.nom_enfant
@@ -809,6 +824,7 @@ uploadEnfant(){
          doc.text(ipm,140,75)
          doc.setFontSize(12)
          doc.text("N° Carnet :",15,85)
+         doc.text("Age : "+ageEn,80,85)
          doc.text(""+Ncarnet,40,85)
          doc.text("N° Bon : ",15,60)
          doc.text(""+numBon,35,60)

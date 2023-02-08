@@ -440,6 +440,16 @@ this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charA
   console.log('************************************');
   window.location.reload();
 }
+viderConjoint(){
+  this.findByMatricule()
+  
+
+}
+viderEnfant(){
+  this.findByMatricule()
+  
+
+}
     upload(){
       const dayBEm=new Date();
 
@@ -472,6 +482,7 @@ this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charA
        var ipm3=this.message.ipmService?.type_service
        var ipm4=this.message?.matricule
        var ipm5=this.message?.reference
+       var ageE=this.AgeEmploye
        var numBonEmp=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
        autoTable(doc,{
         startY:100,
@@ -518,6 +529,7 @@ this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charA
               doc.setFontSize(12)
               doc.text("N Carnet :",15,85)
               doc.text(""+Ncarnet,40,85)
+              doc.text("Age : "+ageE,80,85)
         
               // doc.text("Nombre D'article :",120,85)
               // doc.text(""+Narticle,160,85)
@@ -587,6 +599,7 @@ this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charA
        var ipm2=this.message?.nom
        console.log(ipm2);
        var prestataire=this.p
+       var ageC=this.AgeConjoint
        var Ncarnet=this.message.numero_carnet
        var ipm3=this.message.ipmService?.type_service
        var ipm4=this.message?.matricule
@@ -640,6 +653,7 @@ this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charA
               doc.text(ipm6,80,85) 
               doc.setFontSize(12)
               doc.text("N Carnet :",120,85)
+              doc.text("Age : "+ageC,160,85)
               doc.text(""+Ncarnet,140,85)
               // doc.text("Nombre D'article :",120,85)
               // doc.text(""+Narticle,160,85)
@@ -709,6 +723,7 @@ this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charA
        var ipm2=this.message?.nom
        console.log(ipm2);
        var prestataire=this.p
+       var ageEn=this.AgeEnfant
        var Ncarnet=this.message.numero_carnet
        var ipm3=this.message.ipmService?.type_service
        var ipm4=this.message?.matricule
@@ -762,6 +777,7 @@ this.bonlettre.numeroBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charA
               doc.text(ipm6,80,85) 
               doc.setFontSize(12)
               doc.text("N Carnet :",120,85)
+              doc.text("Age : "+ageEn,160,85)
               doc.text(""+Ncarnet,140,85)
               // doc.text("Nombre D'article :",120,85)
               // doc.text(""+Narticle,160,85)
