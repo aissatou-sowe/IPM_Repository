@@ -64,6 +64,8 @@ export class RechercheEmployeComponent implements OnInit {
   //       //  if(this.listFacture[0].ipm_facture.certifier!=true){
   //       //    this.liste.push(this.listFacture[index].ipm_facture)
      console.log(this.employe)
+   
+ 
      //console.log((<any>$('#datatable')).dataTable())
   //       //  }
         
@@ -81,6 +83,7 @@ export class RechercheEmployeComponent implements OnInit {
     this.emp_service.getEmployeById(employe.idemp).subscribe(
       result => {
         this.employe = result;
+   
       }
     );
   }
