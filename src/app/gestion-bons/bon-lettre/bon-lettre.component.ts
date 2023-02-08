@@ -521,6 +521,7 @@ upload(){
    var ipm2=this.message?.nom
    console.log(ipm2);
    var prestataire=this.p
+   var ageE=this.AgeEmploye
    var Ncarnet=this.message.numero_carnet
    var ipm3=this.message.ipmService?.type_service
    var ipm4=this.message?.matricule
@@ -572,6 +573,7 @@ upload(){
           doc.setFontSize(12)
           doc.text("N Carnet :",15,85)
           doc.text(""+Ncarnet,40,85)
+          doc.text("Age : " +ageE,80,85)
           // doc.text("Nombre D'article :",120,85)
           // doc.text(""+Narticle,160,85)
           // doc.text("Malade:",15,95)
@@ -637,6 +639,7 @@ uploadConjoint(){
    var ipm2=this.message?.nom
    console.log(ipm2);
    var prestataire=this.p
+   var ageC=this.AgeConjoint
    var Ncarnet=this.message.numero_carnet
    var ipm3=this.message.ipmService?.type_service
    var ipm4=this.message?.matricule
@@ -690,6 +693,7 @@ uploadConjoint(){
           //doc.text(ipm6,80,85) 
           doc.setFontSize(12)
           doc.text("N Carnet : "+Ncarnet,120,85)
+          doc.text("Age : " +ageC,80,85)
           //doc.text(""+Ncarnet,140,85)
           // doc.text("Nombre D'article :",120,85)
           // doc.text(""+Narticle,160,85)
@@ -732,6 +736,16 @@ uploadConjoint(){
   //    window.print();
   //    document.body.innerHTML = originalContents;
 }
+viderConjoint(){
+  this.findByMatricule()
+  
+
+}
+viderEnfant(){
+  this.findByMatricule()
+  
+
+}
 uploadEnfant(){
   const dayBEm=new Date();
 
@@ -756,6 +770,7 @@ uploadEnfant(){
    var ipm2=this.message?.nom
    console.log(ipm2);
    var prestataire=this.p
+   var ageEn=this.AgeEnfant
    var Ncarnet=this.message.numero_carnet
    var ipm3=this.message.ipmService?.type_service
    var ipm4=this.message?.matricule
@@ -809,12 +824,8 @@ uploadEnfant(){
           //doc.text(ipm6,80,85) 
           doc.setFontSize(12)
           doc.text("N Carnet : " +Ncarnet,120,85)
-          //doc.text(""+Ncarnet,140,85)
-          // doc.text("Nombre D'article :",120,85)
-          // doc.text(""+Narticle,160,85)
-          // doc.text("Malade:",15,95)
-          // doc.text(ipm5,40,95)
-          // doc.text(ipm6,80,95)
+          doc.text("Age : " +ageEn,80,85)
+          
           doc.text("Service :",100,95)
           doc.text(ipm3,120,95)
           doc.text("Prestataire :",15,95)

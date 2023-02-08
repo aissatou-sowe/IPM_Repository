@@ -276,6 +276,9 @@
               <h3 class="card-title p-2" style="background-color:whitesmoke; width:40%; font-weight: 500;">Bon Lunetterie Conjoint  </h3>
             </div>
             <div class="card-body">
+              <button mat-raised-button type="submit"  class="nav-link " data-toggle="tab"
+                href="#link1" class="btn btn-fill btn-success" style=""(click)="viderConjoint()"><i
+                  class="material-icons">search</i>Participant</button>
               <form>
                 <div class="card-header card-header-icon card-header-info" class="btn-btn primary">
 
@@ -359,7 +362,7 @@
 
                 <div class="modal-footer">
                   <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal"
-                    data-target="#noticeConjoint" (click)="BonConsultation()"> Enregistrer</button>
+                    data-target="#noticeConjoint" (click)="uploadConjoint()"> Enregistrer</button>
                   <!-- <button mat-raised-button type="button" (click)="uploadConjoint()" class="btn btn-green btn-round"
                     data-dismiss="modal">
                     Exporter</button> -->
@@ -382,6 +385,9 @@
               <h3 class="card-title p-2" style="background-color:whitesmoke; width:40%; font-weight: 500;">Bon Lunetterie Enfant </h3>
             </div>
             <div class="card-body">
+              <button mat-raised-button type="submit"  class="nav-link " data-toggle="tab"
+                href="#link1" class="btn btn-fill btn-success" style=""(click)="viderEnfant()"><i
+                  class="material-icons">search</i>Participant</button>
               <form>
                 <div class="card-header card-header-icon card-header-info" class="btn-btn primary">
 
