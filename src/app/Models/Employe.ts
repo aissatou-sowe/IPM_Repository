@@ -27,7 +27,8 @@ export class Employe{
        public photo?:string,
       public statut?:boolean,
       public ipmStatutEmploye?:IPM_StatutEmploye,
-      public justificatif?:string
+      public justificatif?:string,
+      public echelonnage?:string
       //public certifier?:boolean,
 
     ){}
