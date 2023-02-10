@@ -38,9 +38,9 @@
                         <td ><b>{{fac.ipm_prestataire.nom_prestataire}}</b></td>
                         <td class="text-center"><b>{{fac.dateFacture | date}}</b></td>
 
-                      <td class="text-center"><b>{{fac.montantTotal | number}}</b></td>
-                    <td class="text-center"><b>{{fac.part_ipm | number}}</b></td>
-             <td class="text-center"><b>{{fac.part_patient | number}}</b></td>
+                      <td class="text-center"><b>{{fac.montantTotal | number:'1.0-0'}}</b></td>
+                    <td class="text-center"><b>{{fac.part_ipm | number:'1.0-0'}}</b></td>
+             <td class="text-center"><b>{{fac.part_patient | number:'1.0-0'}}</b></td>
 
                             <td class="td_actions text-right">
                                 <!-- <button mat-raised-button type="button" class="btn btn-outline-info"> -->
