@@ -106,6 +106,11 @@ export class EmployeService {
    public getlistService(id:number):Observable<Service[]>{
     return this.http.get<Service[]>(environment.URL+'listservice/'+id);
   }
+  
+  public getlistCategorie():Observable<Categorie[]>{
+    return this.http.get<Categorie[]>(environment.URL+'categorie');
+  }
+
   public getlistBonConsult(id:number){
     return this.http.get<any>(environment.URL+'getbonConsultByid/'+id)
   }
@@ -165,5 +170,23 @@ export class EmployeService {
   ListFactureByEmploye(id):Observable<any>{
     return this.http.get<IPM_Details_Facture>(environment.URL+'detailsfactByEmploye/'+id);
 
+  }
+  public AjoutPanierService(service:Service[]){
+    
+    return this.http.post(environment.URL+'addPanierService',service,{responseType: 'text' as 'json'})
+    
+  ;
+  }
+  public AjoutPanierCategorie(service:Categorie[]){
+    
+    return this.http.post(environment.URL+'addPanierCategorie',service,{responseType: 'text' as 'json'})
+    
+  ;
+  }
+  public AjoutPanierEmploye(service:Employe[]){
+    
+    return this.http.post(environment.URL+'addPanierEmploye',service,{responseType: 'text' as 'json'})
+    
+  ;
   }
 }

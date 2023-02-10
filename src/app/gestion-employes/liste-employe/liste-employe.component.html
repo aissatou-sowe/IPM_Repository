@@ -2,6 +2,89 @@
 
 <div class="main-content">
     <div class="container-fluid">
+        <form [formGroup]="uploadForm">
+      
+          
+            
+      <input type="file" (change)="onFileChange($event)" formControlName="myFile"/>
+      <table class="table table-hover">
+
+        <!-- Table service
+            <thead  style="font-weight:bold;">
+             <tr>
+          <th cope="col"> code</th>          
+          <th cope="col">service</th>
+          <th cope="col">Entité</th>          
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor=" let fac of ws">
+            <td  style="font-weight:bold;">{{fac.Categorie}}</td>            
+            <td style="font-weight:bold;">{{fac.Service}}</td>
+            <td style="font-weight:bold;"></td>
+          </tr>
+        </tbody> -->
+        <!--table categorie
+             <thead  style="font-weight:bold;">
+        <tr>
+
+            <th cope="col"> categorie</th>
+            
+            
+           
+            
+          </tr>
+  
+          </thead>
+          <tbody>
+            <tr *ngFor=" let fac of ws">
+              <td  style="font-weight:bold;">{{fac.Categorie}}</td>
+              
+              
+              
+             
+  
+            </tr>
+          </tbody> -->
+          <thead  style="font-weight:bold;">
+            <tr>
+    
+                <th cope="col"> matricule</th>
+                <th cope="col"> NOM</th>
+                <th cope="col"> PRENOM</th>
+                <th cope="col"> SEXE</th>
+                <th cope="col"> DATE</th>
+                <th cope="col"> SOLDE</th> 
+              </tr>
+      
+              </thead>
+              <tbody>
+                <tr *ngFor=" let fac of ws">
+                  <td  style="font-weight:bold;">{{fac.MATRICULE}}</td>
+                  <td  style="font-weight:bold;">{{fac.NOM}}</td>
+                  <td  style="font-weight:bold;">{{fac.PRENOMS}}</td>
+                  <td  style="font-weight:bold;">{{fac.Sexe}}</td>
+                  <td  style="font-weight:bold;">{{fac.DateNaiss}}</td>
+                  <td  style="font-weight:bold;">{{fac.Solde}}</td>
+
+
+
+
+
+                  
+                  
+                  
+                 
+      
+                </tr>
+              </tbody>
+        
+      </table>
+      <div class="modal-footer justify-content-center">
+      <button (click)="ajoutEmploye(ws)"  mat-raised-button class="btn btn-success" [disabled]="desactive">
+        <i class="material-icons">checked</i>Ajouter </button>
+      </div>
+    </form>
         <div class="row">
             <div class="col-md-6">
                 <div class="card " style="margin-left:8cm;">
