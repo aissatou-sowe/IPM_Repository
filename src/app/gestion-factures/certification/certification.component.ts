@@ -128,8 +128,7 @@ listFactures:IPM_Details_Facture[];
     // this.fact_service.updateOnEmploye(this.chargeEmploie).subscribe(
     //  (data)=>{
         console.log(this.listFactureCertif)
-        // for (let index = 0; index < array.length; index++) {
-        //   const element = array[index];
+        // for (let j = 0; j < this.listFactureCertif.length; j++) { 
           
         // }                                                                            
   for (let index = 0; index < this.listFactureCertif.length; index++) {

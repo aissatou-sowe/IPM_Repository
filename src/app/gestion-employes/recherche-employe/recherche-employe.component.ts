@@ -63,7 +63,7 @@ export class RechercheEmployeComponent implements OnInit {
   //      for (let index = 0; index < this.listFacture.length; index++) {
   //       //  if(this.listFacture[0].ipm_facture.certifier!=true){
   //       //    this.liste.push(this.listFacture[index].ipm_facture)
-     console.log(this.employe)
+     //console.log(this.employe)
    
  
      //console.log((<any>$('#datatable')).dataTable())
