@@ -26,20 +26,24 @@ listEntity;
   panier=[]
   entity:Entity;
   statu:IPM_StatutEmploye;
+  jsoncategori:Categorie;
+  jsonService:Service;
   
   servicePanier:Service={idService:null,type_service:null,code_service:null,ipmEntity:null}
   listS: Service[];
   categoriePanier:Categorie={code_categorie:null,libelle:null,montant:null,echalonnage:null}
   employePanier:Employe={nom:null,prenom:null,sexe:null,adresse_domicile:null,
-    date_nais:null, lieu_nais:null, telephone:null,date_recrutement: null, matricule:null, reference:null, numero_carnet:null,
+    date_nais:null, lieu_nais:null, telephone:null,date_recrutement: null,matricule:null,reference:null, numero_carnet:null,
  situation_familial:null, cumul_charge:null,niveau_salarial:null, ipm_categorie:null,ipmService:null,ipmEntity:null,
-  photo:null,statut:null,ipmStatutEmploye:null,justificatif:null,echelonnage:null,solde:null
+  photo:null,statut:null,ipmStatutEmploye:null,justificatif:null,Echelonnage:null,solde:null
     }
   listC: Categorie[];
 
   constructor(private router:Router,private emp_service:EmployeService) { 
     this.entity = new Entity();
     this.statu=new IPM_StatutEmploye();
+    this.jsoncategori=new Categorie();
+    this.jsonService=new Service();
   }
 
   ngOnInit(): void {
@@ -48,7 +52,7 @@ listEntity;
       console.log(this.listEntity)
     })
     //service la poste
-    this.emp_service.getlistService(1).subscribe((data)=>{
+    this.emp_service.getlistService(3).subscribe((data)=>{
       this.listS=data
       console.log(this.listS)
     })
@@ -122,17 +126,17 @@ listEntity;
   //import Employe
   ajoutEmploye(fac) {
     console.log(fac);
-    this.entity.idEntity=1
+    this.entity.idEntity=3
     this.statu.idStatut=1
     for (let index of fac) {
       this.employePanier.reference=index.NumRef
       this.employePanier.nom=index.NOM
       this.employePanier.prenom=index.PRENOMS
-      this.employePanier.matricule=index.MATRICULE
+      this.employePanier.matricule=index.Matricule
       this.employePanier.sexe=index.Sexe
       this.employePanier.date_nais=index.DateNaiss
-      this.employePanier.date_recrutement=index.PreEumbauche
-      this.employePanier.echelonnage=index.Echelon
+      this.employePanier.date_recrutement=index.PreEmbauche
+      this.employePanier.Echelonnage=index.Echelon
       this.employePanier.solde=index.Solde
       this.employePanier.statut=true
 
@@ -143,27 +147,38 @@ listEntity;
 
       for (let indServ of this.listS) {
         if (index.Service==indServ.type_service) {
-          this.employePanier.ipmService=JSON.parse(JSON.stringify(indServ.idService));
-          
+          this.jsonService.idService=indServ.idService
+          this.jsonService.ipmEntity=this.entity
+          this.employePanier.ipmService=JSON.parse(JSON.stringify(this.jsonService));
+          console.log(this.employePanier)
+          break
         }
+        
+        }
+       
         for (let indCateg of this.listC) {
           if (index.Catégorie==indCateg.libelle) {
-            this.employePanier.ipm_categorie=JSON.parse(JSON.stringify(indCateg.code_categorie));
+            this.jsoncategori.code_categorie=indCateg.code_categorie
+            this.employePanier.ipm_categorie=JSON.parse(JSON.stringify(this.jsoncategori));
+            console.log(this.employePanier)
             
+            break 
           }
-      }
+          
+       }
       this.panier.push({ ...this.employePanier })
 
       
-    }
+   
     
-    // this.emp_service.AjoutPanierEmploye(this.panier).subscribe(data=>{
-    //   data
-    // })
+     
    
 
    }
    console.log(this.panier)
+   this.emp_service.AjoutPanierEmploye(this.panier).subscribe(data=>{
+    data
+  })
   }
 
 

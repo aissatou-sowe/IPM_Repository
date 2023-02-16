@@ -118,6 +118,7 @@ export class CarnetEmployeComponent implements OnInit {
   partPatient: any;
   idempBon:any;
   nombre: number;
+  date: Date;
   constructor(@Inject(LOCALE_ID) private locale: string, private toastr: ToastrService,
     private emp_service: EmployeService,
     private bonService:BonService,
@@ -162,10 +163,10 @@ export class CarnetEmployeComponent implements OnInit {
         //const birthDate = new Date(this.currentemploye.date_nais);
         if (this.currentemploye.date_nais) {
           console.log(this.currentemploye.date_nais)
-          let date = this.currentemploye.date_nais
+          this.date = this.currentemploye.date_nais
           //convert date again to type Date
-          const bdate = new Date(date);
-          console.log(date)
+          const bdate = new Date(this.date);
+          console.log(this.date)
           const ttoday = new Date();
           // const timeDiff = Math.abs(Date.now() - bdate.getTime());
           //this.agemploye= Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
@@ -173,6 +174,7 @@ export class CarnetEmployeComponent implements OnInit {
           console.log(this.agemploye);
           this.agemploye = ttoday.getFullYear() - bdate.getFullYear();
           const m = ttoday.getMonth() - bdate.getMonth();
+          console.log(bdate.getFullYear(),bdate.getMonth());
 
           if (m < 0 || (m === 0 && ttoday.getDate() < bdate.getDate())) {
             this.agemploye--;

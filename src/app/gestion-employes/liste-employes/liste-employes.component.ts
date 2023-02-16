@@ -141,7 +141,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
         })
         
 
-        console.log(emps);
+        //console.log(emps);
         this.employes = emps;
         this.employes.forEach(ele => {
           if (ele.date_nais) {
@@ -196,7 +196,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
 
 
 
-        console.log(this.employes)
+        //console.log(this.employes)
       }
     );
     this.getFiles(this.employes);
@@ -206,7 +206,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
       data => {
         // console.log(cat);
         this.statutEmploye = data;
-        console.log(this.statutEmploye,data)
+        //console.log(this.statutEmploye,data)
       }
     )
   }
@@ -320,8 +320,8 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
       (data) => {
         this.message = data;
         this.ngOnInit();
-        console.log("the message ", data)
-        console.log(this.employe.date_nais);
+       // console.log("the message ", data)
+       // console.log(this.employe.date_nais);
 
 
             // return this.message
@@ -341,7 +341,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
         });
     }
     ,error=>{
-        console.log(error);
+        //console.log(error);
         this.desac=true
      // this.showNotification('top', 'center',3, '<b>Matricule existe deja!!!</b> :');
       }
@@ -414,7 +414,7 @@ onReset(){
     this.service = this.tempservice
     this.service = this.service.filter(serv => serv.ipmEntity.idEntity == this.enti)
 
-    console.log(this.enti)
+    //console.log(this.enti)
     console.log(this.service)
   }
   /////choisir et recuperer l'image sur l'ordinateur

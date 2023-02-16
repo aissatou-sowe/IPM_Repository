@@ -28,7 +28,7 @@ export class Employe{
       public statut?:boolean,
       public ipmStatutEmploye?:IPM_StatutEmploye,
       public justificatif?:string,
-      public echelonnage?:string
+      public Echelonnage?:string
       //public certifier?:boolean,
 
     ){}
