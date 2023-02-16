@@ -12,12 +12,20 @@
               <i class="material-icons" >add_circle</i> Ajouter un participant
             </button>
           </div>
-        
+         
           <div class="card-body table-full-width">
+           
             <div class="material-datatable">
+              <div class="text-center">
+                <mat-spinner *ngIf="!employes" style="margin-left: 15cm;"></mat-spinner>
+               
+              </div>
+              
               <table id="datatable" class="table table-bordered table-striped" width="100%" style="width:100%"
                 class="table table-hover">
+                
                 <thead class="text-black">
+                 
                   <tr>
 
                     <th cope="col"><b> Numero Carnet</b></th>
@@ -35,6 +43,7 @@
                 <tbody>
                   <tr *ngFor=" let employe of employes" style="font-weight: 500;">
                     <td class="text-center">
+                     
                       <span *ngIf="employe.statut!=''" class="badge badge-success">{{employe.numero_carnet}}</span>
                     <span *ngIf="employe.statut==''" class="badge badge-danger">{{employe.numero_carnet}}</span>
                     </td>

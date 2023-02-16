@@ -32,6 +32,7 @@ declare const $: any;
   styleUrls: ['./liste-employes.component.css']
 })
 export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
+  public showOverlay = true;
   listService:Service[];
   public tableData: TableData;
   public dataTable: DataTable;
@@ -88,6 +89,8 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     this.addEntity = new Entity();
     this.addStatut=new IPM_StatutEmploye();
     this.dateAdapter.setLocale('en-GB');
+
+   
   }
 
   ngOnInit(): void {

@@ -11,10 +11,13 @@
         </div>
         
             <div class="card-body">
-                             
+               
 
  <div class="material-datatable">
-
+    <div class="text-center">
+        <mat-spinner *ngIf="!listEmployer" style="margin-left: 15cm;"></mat-spinner>
+       
+      </div>
     <table id="datatable" class="table  table-hover table-bordered"
         cellspacing="0" width="100%" style="width:100%; font-weight: bold;">
 
@@ -36,6 +39,7 @@
             </tr>
         </thead>
         <tbody>
+
             <tr *ngFor="let employ of listEmployer">
                 <td class="text-center">{{employ.matricule}}</td>
                 <td class="text-center">{{employ.prenom}}</td>
