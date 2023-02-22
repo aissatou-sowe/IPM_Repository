@@ -16,6 +16,7 @@ import { PrestationService } from 'src/app/Services/prestation.service';
 import { element } from 'protractor';
 import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { IPM_Statut_Facture } from 'src/app/Models/IPM_Statut_Facture';
 
 declare var $;
 @Component({
@@ -37,6 +38,7 @@ export class FactureEmployesComponent implements OnInit {
   employe_choisi:any;
   id_emp_choisi:any;
   agree: any;
+  addStatutFacture:IPM_Statut_Facture;
   non_agree: any;
   id_prest_choisi: any;
   part_imp: number;
@@ -64,7 +66,9 @@ export class FactureEmployesComponent implements OnInit {
     private pres_service: PrestataireService,private prestation:PrestationService,
     private fact_service:FactureService,private toastr: ToastrService,
     private conj_service:ConjointService,private enf_service:EnfantService,private dateAdapter: DateAdapter<Date>, private datepipe: DatePipe,
-    ) { }
+    ) { 
+      this.addStatutFacture=new IPM_Statut_Facture();
+    }
     listemploye: Employe[];
     Employe:Employe[];
     matricule: string;
@@ -345,8 +349,11 @@ editDetails(index: number) {
     this.Factures.numerofacture=this.numerofacture
     this.Factures.dateFacture=this.date_facture
     this.Factures.dateSaisie=new Date();
+    this.addStatutFacture.idStatutFacture=1
+    this.Factures.ipmStatutFacture=JSON.parse(JSON.stringify(this.addStatutFacture))
     console.log(this.jsonPrest)
-    console.log(this.ipm_prestataires)
+    console.log(this.ipm_prestataires);
+
     
    //this.Factures.ipm_prestataire=JSON.parse(JSON.stringify(this.ipm_prestataires));
     console.log(this.Factures);

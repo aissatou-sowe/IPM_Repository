@@ -117,5 +117,16 @@ export class FactureService {
     
          
       }
+      public annulerfacture(idfacture: number){
+        return this.http.delete(environment.URL+'facture/'+idfacture)
+    
+         
+      }
+      public annulerfactureGlobles(idfacture: number){
+        return this.http.delete(environment.URL+'facture/'+idfacture)
+    
+         
+      }
+
   
 }

@@ -1,4 +1,5 @@
 import { Employe } from "./Employe";
+import { IPM_Statut_Facture } from "./IPM_Statut_Facture";
 import { Prestataire } from "./Prestataire";
 import { Prestation } from "./Prestations";
 
@@ -20,7 +21,8 @@ export class Facture{
         // public ipm_employe?:Employe ,
         public certifier?:boolean ,
         //public ipm_details_factures?:any,
-        public montantTotal?:number
+        public montantTotal?:number,
+        public  ipmStatutFacture?:IPM_Statut_Facture
 
     ){}
 }

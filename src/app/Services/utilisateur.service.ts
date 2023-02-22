@@ -40,4 +40,8 @@ export class UtilisateurService {
   public getAllUser():Observable<IPM_Utilisateur[]>{
     return this.http.get<IPM_Utilisateur[]>(environment.URL+'allUser');
   }
+
+  getUserByUsername(email):Observable<any> {
+    return this.http.get(environment.URL + 'email/' + email);
+}
 }

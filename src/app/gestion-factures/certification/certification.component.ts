@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { sum } from 'chartist';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { ObjectUnsubscribedError } from 'rxjs';
 import { IPM_Details_Facture } from 'src/app/Models/IPM_Detils_Factures';
+import { IPM_StatutEmploye } from 'src/app/Models/IPM_StatutEmploye';
+import { IPM_Statut_Facture } from 'src/app/Models/IPM_Statut_Facture';
+import { Prestataire } from 'src/app/Models/Prestataire';
+import { Prestation } from 'src/app/Models/Prestations';
 import { FactureService } from 'src/app/Services/facture.service';
+import { PrestataireService } from 'src/app/Services/prestataire.service';
+import { PrestationService } from 'src/app/Services/prestation.service';
 import { Employe } from '../../Models/Employe';
 import { Facture } from '../../Models/IPM_Facture';
 type AOA = any;
@@ -33,6 +40,7 @@ listFactures:IPM_Details_Facture[];
   solde: any;
   cumulCharge: any;
   chargeEmploie=[];
+  listPrestation:Prestation[];
   numFacture: any;
   detailfacture: any;
   certifier:boolean;
@@ -45,21 +53,58 @@ listFactures:IPM_Details_Facture[];
   booleanCerti: any;
   listCertifier=[];
   liste;
+  factureForm:FormGroup;
   facture=new Facture();
   elements: IPM_Details_Facture[];
   table;
   fac;
   id1: any;
+  idfac:any
   listFactureCertif: IPM_Details_Facture[];
   numero: any;
   objetEmploye: Employe;
   update: Employe;
-  constructor(private fact_service:FactureService,private route : ActivatedRoute,private router:Router) { }
+  ide: IPM_Statut_Facture;
+  statfact: number;
+  listPrestataire: Prestataire[];
+  ipm_prestataires:Prestataire;
+    prestataire_choisi: any;
+    id_prest_choisi: any;
+    taux_ipm;
+    jsonPrest: any;
+    val:any;
+    prestation_choisi: any;
+    id_prestation_choisi: any;
+    agree: any;
+    non_agree: any;
+    Jsonprestations: any;
+    numerofacture:number;
+    ipm_prestations:Prestation;
+  pre: any;
+  prestationmodif: any;
+  Prestation:any;
+  constructor(private fact_service:FactureService
+    ,private route : ActivatedRoute,private router:Router,private prestation_service:PrestationService,  private pres_service: PrestataireService) { 
+    this.ide=new IPM_Statut_Facture()
+  }
 
   ngOnInit(): void {
+    this.prestation_service.getAllPrestation().subscribe(
+      pres => {
+        // console.log(cat);
+        this.listPrestation = pres;
+      })
     this.id=this.route.snapshot.params['id'];
    // this.id1=this.route.snapshot.params['id2'];
     //(<any>$('#datatable')).dataTable().fnDestroy(); 
+    this.pres_service.getAllPrestataires().subscribe(
+      pres => {
+        // console.log(cat);
+        this.listPrestataire = pres;
+        console.log(this.listPrestataire);
+      }
+    );
+ ;
     console.log(this.id)
     this.fact_service.getAllFactbyfactglobale(this.id).subscribe(data=>{
       this.listFactures=data;
@@ -97,6 +142,12 @@ listFactures:IPM_Details_Facture[];
           this.certifier=lf.ipmFacture.certifier
           this.facture=lf.ipmFacture
           this.numero =lf.ipmFacture.numerofacture
+          this.idfac=lf.ipmFacture.idfacture
+          this.statfact=lf.ipmFacture.ipmStatutFacture.idStatutFacture;
+          this.pre=lf.ipmFacture.ipm_prestataire.nom_prestataire
+         this.prestationmodif=lf.ipm_prestation.libelle
+          console.log(this.idfac,this.pre,this.prestationmodif)
+          
          
         }
       }
@@ -117,6 +168,8 @@ listFactures:IPM_Details_Facture[];
     console.log(this.facture,this.certifier)
     this.listFactureCertif=this.listFactures
     this.facture.certifier=true;
+    this.ide.idStatutFacture=3
+    this.facture.ipmStatutFacture=JSON.parse(JSON.stringify(this.ide))
     console.log(this.facture)
     //a revoir apres la présentattion
      this.fact_service.UpdateFacture(this.facture).subscribe(
@@ -208,7 +261,7 @@ this.detailfacture=fact
 
     //console.log(this.listEmploie)
 
-
+   
 
   }
   certifiGlobal(){
@@ -221,6 +274,17 @@ this.detailfacture=fact
       (data)=>{}
     )
 
+  }
+  getnomprestataire(prest){
+    console.log(prest,prest.nom_prestataire)
+    this.prestataire_choisi=prest.nom_prestataire;
+    this.id_prest_choisi=prest.code_prestataire;
+    this.val=prest.code_categorie_pretataire
+    //this.part_imp=(5000*this.taux_ipm)/100
+     this.jsonPrest=prest
+
+    console.log(this.prestataire_choisi,this.taux_ipm,"non agrreer")
+    this.ipm_prestataires.code_prestataire=this.id_prest_choisi;
   }
   retourner(){
     this.router.navigate(['/gestion-factures/ListeFacture']);
@@ -346,5 +410,113 @@ this.detailfacture=fact
 
 }
 /////////////////Fin Duplicata Facture 
+showALERTE3(from: any, align: any) {
+  const type = ['', 'success', 'warning', 'danger', 'info', 'rose', 'primary'];
 
+  // const color = Math.floor((Math.random() * 6) + 1);
+
+  $.notify({
+    icon: 'notifications',
+    message: '<b>Erreur lors de la suppression </b> :'
+  }, {
+    type: type[3],
+    timer: 13000,
+    placement: {
+      from: from,
+      align: align
+    },
+    template: '<div data-notify="container" class="col-xs-14 col-sm-6 alert alert-{0} alert-with-icon" role="alert">' +
+      '<button mat-raised-button type="button" aria-hidden="true" class="close" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+      '<i class="material-icons" data-notify="icon">notifications</i> ' +
+      '<span data-notify="title">{1}</span> ' +
+      '<span data-notify="message">{2}</span>' +
+      '<div class="progress" data-notify="progressbar">' +
+      '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+      '</div>' +
+      '<a href="{3}" target="{4}" data-notify="url"></a>' +
+      '</div>'
+  });
+}
+showALERTE1(from: any, align: any) {
+  const type = ['', 'success', 'warning', 'danger', 'info', 'rose', 'primary'];
+
+  // const color = Math.floor((Math.random() * 6) + 1);
+
+  $.notify({
+    icon: 'notifications',
+    message: '<b> facture  annuller avec succès </b> :'
+  }, {
+    type: type[1],
+    timer: 13000,
+    placement: {
+      from: from,
+      align: align
+    },
+    template: '<div data-notify="container" class="col-xs-14 col-sm-6 alert alert-{0} alert-with-icon" role="alert">' +
+      '<button mat-raised-button type="button" aria-hidden="true" class="close" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+      '<i class="material-icons" data-notify="icon">notifications</i> ' +
+      '<span data-notify="title">{1}</span> ' +
+      '<span data-notify="message">{2}</span>' +
+      '<div class="progress" data-notify="progressbar">' +
+      '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+      '</div>' +
+      '<a href="{3}" target="{4}" data-notify="url"></a>' +
+      '</div>'
+  });
+}
+deleteFactById(){
+  console.log(this.idfac);
+  this.fact_service.annulerfactureGlobles(this.idfac).subscribe(data=>{
+    this.listFactures=this.idfac
+    console.log(this.listFactures);
+    this.showALERTE('top', 'center')
+  },err=>{
+    this.showALERTE3('top', 'center')
+
+   })
+}
+
+
+RejeterFacture(){
+  console.log(this.facture,this.certifier)
+  this.listFactureCertif=this.listFactures
+ // this.facture.certifier=true;
+  this.ide.idStatutFacture=2
+  this.facture.ipmStatutFacture=JSON.parse(JSON.stringify(this.ide))
+  console.log(this.facture)
+  //a revoir apres la présentattion
+   this.fact_service.UpdateFacture(this.facture).subscribe(
+    (data)=>{
+      this.ngOnInit();
+     // this.router.navigate(['/gestion-factures/ListeFacture']);
+    }
+
+  )
+}
+getnom(pret){
+  console.log(pret)
+  this.prestation_choisi=pret.libelle;
+  this.id_prestation_choisi=pret.code_prestation;
+  this.agree=pret.taux_agrees
+  this.non_agree=pret.taux_non_agrees
+ this.Jsonprestations=pret;
+ if(this.val==1){
+  this.taux_ipm=this.agree
+  console.log(this.taux_ipm,"agreer")
+  //this.part_imp=(5000*this.taux_ipm)/100
+ // this.part_patient=5000-(5000*this.taux_ipm)/100
+  
+
+}else console.log(this.non_agree)
+this.taux_ipm=this.non_agree
+  console.log(this.ipm_prestations);
+  console.log(this.id_prestation_choisi);
+  let detailsFac =[];
+  for(let i =0; i<this.id_prestation_choisi; i++){
+   let DetailsePannier=this.id_prestation_choisi[i];
+   //mettre les montants  dans la variable tableau avec tous les montants
+   detailsFac.push(DetailsePannier);
+   console.log(detailsFac);
+ }
+}
 }
