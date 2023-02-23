@@ -102,6 +102,7 @@ listFactures:IPM_Details_Facture[];
         // console.log(cat);
         this.listPrestataire = pres;
         console.log(this.listPrestataire);
+        console.log('****************************')
       }
     );
  ;
