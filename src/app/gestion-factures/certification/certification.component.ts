@@ -83,6 +83,10 @@ listFactures:IPM_Details_Facture[];
   pre: any;
   prestationmodif: any;
   Prestation:any;
+  tauxIpmPrestation: any;
+  factureAmodifier: any;
+  detailFactures: any;
+  detailFacturess: any;
   constructor(private fact_service:FactureService
     ,private route : ActivatedRoute,private router:Router,private prestation_service:PrestationService,  private pres_service: PrestataireService) { 
     this.ide=new IPM_Statut_Facture()
@@ -199,11 +203,13 @@ listFactures:IPM_Details_Facture[];
      console.log(this.update,this.update.solde);
 
        this.fact_service.updateOnEmploye(this.update).subscribe(data=>
-        {if(index+1==this.listFactureCertif.length)
-          {this. showALERTE("top","center")}},
+        {
+          if(index+1==this.listFactureCertif.length)
+           {this. showALERTE("top","center")}},
           err=>{
             if(index+1==this.listFactureCertif.length)
             this. showALERTE2("top","center")})
+            
     })
     // this.fact_service.updateLemploye(this.chargeEmploie).subscribe(data=>
     //   {if(index+1==this.listFactureCertif.length)
@@ -221,26 +227,54 @@ listFactures:IPM_Details_Facture[];
   
   getFactureById(fact){
     console.log(fact)
-    fact.ipm_employe.solde+=fact.part_patient
-    fact.ipm_employe.cumul_charge+=fact.part_patient
+    fact.ipmFacture.part_patient-=fact.part_patient
+    fact.ipmFacture.part_ipm-=fact.part_ipm
+    fact.ipmFacture.montantTotal-=fact.montant_facture
+    this.detailFactures=fact
+    this.detailFacturess=this.detailFactures
 
-    console.log(fact.ipm_employe.solde,fact);
-    this.nom=fact.ipm_employe.nom
+    console.log(fact)
+    console.log(this.detailFacturess)
+
+    this.val=fact.ipmFacture.ipm_prestataire?.code_categorie_pretataire
+    console.log(fact.ipmFacture.ipm_prestataire?.code_categorie_pretataire,this.val)
+    if(this.val==1){
+      this.taux_ipm=fact.ipm_prestation.taux_agrees
+      console.log(fact.ipm_prestation.taux_agrees,"agreer")
+      //this.part_imp=(5000*this.taux_ipm)/100
+     // this.part_patient=5000-(5000*this.taux_ipm)/100
+      
+    
+    }else console.log(fact.ipm_prestation.taux_non_agrees)
+    this.taux_ipm=fact.ipm_prestation.taux_non_agrees
+      
+      
+
+    console.log(fact)
+    this.factureAmodifier=fact
+//     fact.ipm_employe.solde+=fact.part_patient
+//     fact.ipm_employe.cumul_charge+=fact.part_patient
+
+//     console.log(fact.ipm_employe.solde,fact);
+     this.nom=fact.ipm_employe.nom
     this.prenom=fact.ipm_employe.prenom
-    this.matricule=fact.ipm_employe.matricule
-    this.prestation=fact.ipm_prestation.libelle
-    this.montant=fact.montant_facture
-    this.part_ipm=fact.part_ipm
-    this.part_patient=fact.part_patient
-    this.dateFacture=fact.ipmFacture.date_facture
-    this.dateEnregistrement=fact.ipmFacture.date_saisie
-    this.prestataire=fact.ipmFacture.ipm_prestataire.nom_prestataire
-    this.numFacture=fact.ipmFacture.numerofacture
-this.solde=fact.ipm_employe.solde
-this.cumulCharge=fact.ipm_employe.cumul_charge
-this.detailfacture=fact
-   // this.chargeEmploie=fac.ipm_employe
-    //this.certifier=this.detailfacture.certifier
+     this.matricule=fact.ipm_employe.matricule
+     this.prestation=fact.ipm_prestation.libelle
+    this.tauxIpmPrestation=fact.ipm_prestation
+   
+     this.montant=fact.montant_facture
+//     this.part_ipm=fact.part_ipm
+//     this.part_patient=fact.part_patient
+     this.dateFacture=fact.datePrestation
+//     this.dateEnregistrement=fact.ipmFacture.date_saisie
+//     console.log(this.dateFacture)
+     this.prestataire=fact.ipmFacture.ipm_prestataire.nom_prestataire
+//     this.numFacture=fact.ipmFacture.numerofacture
+// this.solde=fact.ipm_employe.solde
+// this.cumulCharge=fact.ipm_employe.cumul_charge
+ this.detailfacture=fact
+   //// this.chargeEmploie=fac.ipm_employe
+    ////this.certifier=this.detailfacture.certifier
 
   }
  
@@ -277,15 +311,18 @@ this.detailfacture=fact
 
   }
   getnomprestataire(prest){
+    this.pre=null
+    this.prestataire=null
     console.log(prest,prest.nom_prestataire)
     this.prestataire_choisi=prest.nom_prestataire;
     this.id_prest_choisi=prest.code_prestataire;
     this.val=prest.code_categorie_pretataire
     //this.part_imp=(5000*this.taux_ipm)/100
      this.jsonPrest=prest
+     this.ipm_prestataires=prest
 
     console.log(this.prestataire_choisi,this.taux_ipm,"non agrreer")
-    this.ipm_prestataires.code_prestataire=this.id_prest_choisi;
+    this.ipm_prestataires.code_prestataire=prest.code_prestataire;
   }
   retourner(){
     this.router.navigate(['/gestion-factures/ListeFacture']);
@@ -495,7 +532,10 @@ RejeterFacture(){
   )
 }
 getnom(pret){
+  this.prestationmodif=null
+  this.prestation=null
   console.log(pret)
+  this.ipm_prestations=pret
   this.prestation_choisi=pret.libelle;
   this.id_prestation_choisi=pret.code_prestation;
   this.agree=pret.taux_agrees
@@ -519,5 +559,43 @@ this.taux_ipm=this.non_agree
    detailsFac.push(DetailsePannier);
    console.log(detailsFac);
  }
+}
+modifierFacture(){
+  this.factureAmodifier.montant_facture=this.montant
+  console.log(this.factureAmodifier)
+  console.log(this.taux_ipm)
+  if (this.ipm_prestataires) {
+
+    this.factureAmodifier.ipmFacture.ipm_prestataire=this.ipm_prestataires
+    this.getnomprestataire(this.ipm_prestataires)
+    console.log(this.taux_ipm+"--------if prestataire-----------")
+
+   
+  }
+  if (this.ipm_prestations) {
+
+    this.factureAmodifier.ipm_prestation=this.ipm_prestations
+    this.getnom(this.ipm_prestations)
+
+    this.factureAmodifier.part_ipm=(this.montant*this.taux_ipm)/100
+    this.factureAmodifier.part_patient=this.montant-(this.montant*this.taux_ipm)/100
+    console.log(this.taux_ipm+"--------if-----------")
+  }else{
+  this.factureAmodifier.part_ipm=(this.montant*this.taux_ipm)/100
+    this.factureAmodifier.part_patient=this.montant-(this.montant*this.taux_ipm)/100
+    console.log(this.taux_ipm+"---------else----------")
+  }
+  console.log(this.detailFacturess)
+  
+  console.log(this.factureAmodifier)
+  this.factureAmodifier.ipmFacture.part_patient+=this.factureAmodifier.part_patient
+  this.factureAmodifier.ipmFacture.part_ipm+=this.factureAmodifier.part_ipm
+  this.factureAmodifier.ipmFacture.montantTotal+=this.factureAmodifier.montant_facture
+  console.log(this.factureAmodifier)  
+  this.fact_service.UpdateFacture(this.factureAmodifier.ipmFacture).subscribe(data=>{
+
+  })
+  this.fact_service.updateDetailfact(this.factureAmodifier).subscribe(data=>{})                                                                                                                                                                                                                               
+
 }
 }
