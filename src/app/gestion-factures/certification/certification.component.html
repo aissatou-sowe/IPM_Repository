@@ -238,14 +238,14 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-sm-offset-2">
-                        <form [formGroup]="factureForm">
+                        <form>
                             <div class="row">
                                 <div class="form-group col-md-5">
                             
                                     <mat-form-field>
                                         {{this.pre}}
-                                        <mat-select name="Prestataires"  class="form-control" id="Prestataires"  formControlName="Prestataires">
-                                            <mat-option>None</mat-option>
+                                        <mat-select name="Prestataires"   id="Prestataires"  formControlName="Prestataires">
+                                            <mat-option></mat-option>
                                           <mat-option *ngFor="let prest of listPrestataire" [value]="prest.code_prestataire" 
                                             (click)="getnomprestataire(prest)">
                                             {{ prest.nom_prestataire }}
@@ -261,8 +261,8 @@
                                     {{this.prestationmodif}}
                   
                                     <mat-select  name="Prestation"
-                                      class="form-control" id="Prestation"  [(ngModel)]="Prestation">
-                                      <mat-option>None</mat-option>
+                                       id="Prestation"  [(ngModel)]="Prestation">
+                                      <mat-option></mat-option>
                                       <mat-option *ngFor="let pret of listPrestation" [value]="pret.code_prestation" (click)="getnom(pret)">
                                         {{ pret.libelle }}
                                       </mat-option>
@@ -304,18 +304,19 @@
                                 <div class="col-md-3 form-group">
                                   <label for="Montant"><b>Montant Facture</b></label>
                     
-                                  <input type="number" class="form-control" id="Montant"  formControlName="Montant">
+                                  <input type="number" class="form-control" id="Montant" [(ngModel)]="montant"  formControlName="Montant">
                                 </div>
                                 <div class="col-md-3 form-group">
                                   <label for="Code_acte"><b>Code acte</b></label><br />
                     
-                                  <input type="number" class="form-control" id="Code_acte" [(ngModel)]="montant" formControlName="Code_acte">
+                                  <input type="number" class="form-control" id="Code_acte" formControlName="Code_acte">
                                 </div>
                     
                                 <div class="col-md-3 form-group">
                                   <label for="Taux_ipm"><b>Taux ipm</b></label><br />
                                   {{taux_ipm}}
-                                  <!-- <input type="number" class="form-control" id="Taux_ipm" formControlName="Taux_ipm"> -->
+                                  <input type="number" class="form-control" [(ngModel)]="taux_ipm
+                                  "  id="Taux_ipm" formControlName="Taux_ipm"> 
                                 </div>
                     
                               </div>
