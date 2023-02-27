@@ -46,14 +46,15 @@
                     <td class="text-center"><b>{{fac.part_ipm | number:'1.0-0'}}</b></td>
              <td class="text-center"><b>{{fac.part_patient | number:'1.0-0'}}</b></td>
              <td class="text-center">
-                <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Certifié'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>
+                <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Certifiée'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>
                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='En Instance'" class="badge badge-info">{{fac.ipmStatutFacture?.statutFacture}}</span>
-                <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Rejeter'" class="badge badge-danger">{{fac.ipmStatutFacture?.statutFacture}}</span>
+                <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Rejetée'" class="badge badge-danger">{{fac.ipmStatutFacture?.statutFacture}}</span>
+                <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Annulée'" class="badge badge-danger">{{fac.ipmStatutFacture?.statutFacture}}</span>
                 </td>
                 <!-- <b class="text-white text-center bg-info p-2">{{fac.ipmStatutFacture?.statutFacture}}</b></td> -->
                             <td class="td_actions text-right">
                                 <!-- <button mat-raised-button type="button" class="btn btn-outline-info"> -->
-                                <button mat-raised-button (click)="getDetFactById(fac)" type="button" class="btn btn-round btn-xs" id="edit">
+                                <button *ngIf="fac.ipmStatutFacture?.statutFacture!='Annulée'" mat-raised-button (click)="getDetFactById(fac)" type="button" class="btn btn-round btn-xs" id="edit">
                                     <i class="material-icons" >help</i></button> 
                                     
                             </td>

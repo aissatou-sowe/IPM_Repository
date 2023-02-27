@@ -127,6 +127,11 @@ export class FactureService {
     
          
       }
+      public annullerFacture(st:Facture){
+        return this.http.put(environment.URL+'updatefacture',st);
+    
+         
+      }
 
   
 }

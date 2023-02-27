@@ -9,17 +9,17 @@
             </div>
             <h2 style="background-color:whitesmoke; color: black; padding: 2px; width: 100%;"> Facture numero :{{numero}} 
                 <button mat-raised-button  style="float: right;" class="btn btn-fill btn-success" data-dismiss="modal" (click)="CertifierEmploye()"
-                *ngIf="certifier!=true else test">Certifier
+                *ngIf="certifier!=true">Certifier
                 </button>
                 <button mat-raised-button  style="float: right;" class="btn btn-fill btn-danger" data-dismiss="modal" (click)="RejeterFacture()"
-                *ngIf="certifier!=true else test">Rejeter
+                 *ngIf="certifier!=true else test">Rejeter
                 </button>
                 <ng-template #test>
                     <h4 class="text-white text-center bg-success p-2" style="float: left; font-size: 20px;">
                         <i class="material-icons">checked</i>
                         la facture est déja certfiée
                     </h4>
-                    <button mat-raised-button  style="float: right;" class="btn btn-fill btn-danger" data-dismiss="modal" (click)="deleteFactById()"
+                    <button mat-raised-button  style="float: right;" class="btn btn-fill btn-danger" data-dismiss="modal" (click)="annullationfac()"
                     >Annuler la  Facture
                     </button>
                 </ng-template> 
@@ -238,14 +238,14 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-sm-offset-2">
-                        <form>
+                        <form >
                             <div class="row">
                                 <div class="form-group col-md-5">
                             
                                     <mat-form-field>
                                         {{this.pre}}
                                         <mat-select name="Prestataires"   id="Prestataires"  formControlName="Prestataires">
-                                            <mat-option></mat-option>
+                                            <!-- <mat-option>None</mat-option> -->
                                           <mat-option *ngFor="let prest of listPrestataire" [value]="prest.code_prestataire" 
                                             (click)="getnomprestataire(prest)">
                                             {{ prest.nom_prestataire }}
@@ -259,10 +259,8 @@
                                 <div class="form-group col-md-5">
                                   <mat-form-field>
                                     {{this.prestationmodif}}
-                  
                                     <mat-select  name="Prestation"
-                                       id="Prestation"  [(ngModel)]="Prestation">
-                                      <mat-option></mat-option>
+                                      id="Prestation"  [(ngModel)]="Prestation">
                                       <mat-option *ngFor="let pret of listPrestation" [value]="pret.code_prestation" (click)="getnom(pret)">
                                         {{ pret.libelle }}
                                       </mat-option>
@@ -287,11 +285,13 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                   <label for="prestation"><b>prestation</b></label><br />
+                                  <b>{{prestation}}</b>
                                   <b>{{prestation_choisi}}</b>
                                   <!-- <input type="text" class="form-control" id="prestation" formControlName="prestation"> -->
                                 </div>
                                 <div class="col-md-3 form-group">
                                   <label for="Prestataires "><b>Prestataires</b></label><br />
+                                  <b>{{prestataire}}</b>
                                   <b>{{prestataire_choisi}}</b>
                                   <!-- <input type="number" class="form-control" id="matricule" formControlName="Matricule"> -->
                                 </div>
@@ -300,16 +300,15 @@
                               </div>
                               <hr>
                               <div class="row">
-                    
                                 <div class="col-md-3 form-group">
                                   <label for="Montant"><b>Montant Facture</b></label>
-                    
-                                  <input type="number" class="form-control" id="Montant" [(ngModel)]="montant"  formControlName="Montant">
+                            
+                                  <input type="number" class="form-control" id="Montant"  [(ngModel)]="montant" name="montant">
                                 </div>
                                 <div class="col-md-3 form-group">
                                   <label for="Code_acte"><b>Code acte</b></label><br />
-                    
-                                  <input type="number" class="form-control" id="Code_acte" formControlName="Code_acte">
+                                  
+                                  <input matInput type="number" class="form-control" id="Code_acte" [(ngModel)]="montant" formControlName="Code_acte">
                                 </div>
                     
                                 <div class="col-md-3 form-group">
@@ -333,7 +332,7 @@
                     
                                 <div class="form-group  col-md-3">
                                   <label for="date_prestation"><b>date de prestation</b></label>
-                                  <input type="date" class="form-control" id="date_prestation" formControlName="date_prestation">
+                                  <input type="date" class="form-control" id="date_prestation" [(ngModel)]="dateFacture" name="date_prestation">
                                 </div>
                     
                     
@@ -342,8 +341,8 @@
                     
                     
                               <div class="modal-footer justify-content-center">
-                                <button mat-raised-button class="btn btn-raised btn-round btn-success">Ajouter
-                                  facture </button>
+                                <button mat-raised-button class="btn btn-raised btn-round btn-success"(click)="modifierFacture()">Valider
+                                  </button>
                     
                               </div>
                     
