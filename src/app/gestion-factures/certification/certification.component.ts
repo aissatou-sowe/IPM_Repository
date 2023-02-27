@@ -510,10 +510,24 @@ showALERTE1(from: any, align: any) {
       '</div>'
   });
 }
-deleteFactById(){
+// deleteFactById(){
+//   console.log(this.idfac);
+//   this.fact_service.annulerfactureGlobles(this.idfac).subscribe(data=>{
+//     this.listFactures=this.idfac
+//     console.log(this.listFactures);
+//     this.showALERTE('top', 'center')
+//   },err=>{
+//     this.showALERTE3('top', 'center')
+
+//    })
+// }
+annullationfac(){
   console.log(this.idfac);
-  this.fact_service.annulerfactureGlobles(this.idfac).subscribe(data=>{
+  this.ide.idStatutFacture=4
+  this.facture.ipmStatutFacture=JSON.parse(JSON.stringify(this.ide))
+  this.fact_service.annullerFacture(this.facture).subscribe(data=>{
     this.listFactures=this.idfac
+    this.router.navigate(['/gestion-factures/ListeFacture']);
     console.log(this.listFactures);
     this.showALERTE('top', 'center')
   },err=>{

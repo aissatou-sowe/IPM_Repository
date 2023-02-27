@@ -9,17 +9,17 @@
             </div>
             <h2 style="background-color:whitesmoke; color: black; padding: 2px; width: 100%;"> Facture numero :{{numero}} 
                 <button mat-raised-button  style="float: right;" class="btn btn-fill btn-success" data-dismiss="modal" (click)="CertifierEmploye()"
-                *ngIf="certifier!=true else test">Certifier
+                *ngIf="certifier!=true">Certifier
                 </button>
                 <button mat-raised-button  style="float: right;" class="btn btn-fill btn-danger" data-dismiss="modal" (click)="RejeterFacture()"
-                *ngIf="certifier!=true else test">Rejeter
+                 *ngIf="certifier!=true else test">Rejeter
                 </button>
                 <ng-template #test>
                     <h4 class="text-white text-center bg-success p-2" style="float: left; font-size: 20px;">
                         <i class="material-icons">checked</i>
                         la facture est déja certfiée
                     </h4>
-                    <button mat-raised-button  style="float: right;" class="btn btn-fill btn-danger" data-dismiss="modal" (click)="deleteFactById()"
+                    <button mat-raised-button  style="float: right;" class="btn btn-fill btn-danger" data-dismiss="modal" (click)="annullationfac()"
                     >Annuler la  Facture
                     </button>
                 </ng-template> 
@@ -314,7 +314,8 @@
                                 <div class="col-md-3 form-group">
                                   <label for="Taux_ipm"><b>Taux ipm</b></label><br />
                                   {{taux_ipm}}
-                                  <!-- <input type="number" class="form-control" id="Taux_ipm" formControlName="Taux_ipm"> -->
+                                  <input type="number" class="form-control" [(ngModel)]="taux_ipm
+                                  "  id="Taux_ipm" formControlName="Taux_ipm"> 
                                 </div>
                     
                               </div>
@@ -340,8 +341,8 @@
                     
                     
                               <div class="modal-footer justify-content-center">
-                                <button mat-raised-button class="btn btn-raised btn-round btn-success"(click)="modifierFacture()">Modifier
-                                  facture </button>
+                                <button mat-raised-button class="btn btn-raised btn-round btn-success"(click)="modifierFacture()">Valider
+                                  </button>
                     
                               </div>
                     
