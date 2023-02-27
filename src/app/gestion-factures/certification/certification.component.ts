@@ -25,6 +25,7 @@ declare var $;
 export class CertificationComponent implements OnInit {
 id;
 listFactures:IPM_Details_Facture[];
+listFacturess;
   date1: string;
   nom: any;
   prenom: any;
@@ -98,7 +99,10 @@ listFactures:IPM_Details_Facture[];
         // console.log(cat);
         this.listPrestation = pres;
       })
+      
     this.id=this.route.snapshot.params['id'];
+    console.log(this.id+'****************************')
+    
    // this.id1=this.route.snapshot.params['id2'];
     //(<any>$('#datatable')).dataTable().fnDestroy(); 
     this.pres_service.getAllPrestataires().subscribe(
@@ -111,6 +115,10 @@ listFactures:IPM_Details_Facture[];
     );
  ;
     console.log(this.id)
+    this.fact_service.getAllFactbyfactglobale2(this.id).subscribe(res=>{
+      this.listFacturess=res;
+      console.log(res)
+    })
     this.fact_service.getAllFactbyfactglobale(this.id).subscribe(data=>{
       this.listFactures=data;
       console.log(data)
@@ -143,7 +151,7 @@ listFactures:IPM_Details_Facture[];
       }); 
          
         console.log(this.listFactures)
-        for(let lf of this.listFactures){
+        for(let lf of this.listFacturess){
           this.certifier=lf.ipmFacture.certifier
           this.facture=lf.ipmFacture
           this.numero =lf.ipmFacture.numerofacture
@@ -171,7 +179,7 @@ listFactures:IPM_Details_Facture[];
   }
   CertifierEmploye(){
     console.log(this.facture,this.certifier)
-    this.listFactureCertif=this.listFactures
+    this.listFactureCertif=this.listFacturess
     this.facture.certifier=true;
     this.ide.idStatutFacture=3
     this.facture.ipmStatutFacture=JSON.parse(JSON.stringify(this.ide))

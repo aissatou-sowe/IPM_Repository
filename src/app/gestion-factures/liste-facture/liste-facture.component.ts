@@ -120,8 +120,8 @@ export class ListeFactureComponent implements OnInit {
     //location.reload();
     //(<any>$('#datatable1')).dataTable().fnDestroy();
     console.log(fac.idfacture);
-    console.log();
-    console.log(fac.ipmStatutFacture.statutFacture);
+    console.log(fac);
+    //console.log(fac.ipmStatutFacture.statutFacture);
     this.router.navigate(['/gestion-factures/certification/'+fac.idfacture]);
     
   }

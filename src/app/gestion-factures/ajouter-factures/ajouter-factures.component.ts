@@ -21,6 +21,7 @@ import * as xlsx from 'xlsx';
 import { Facture } from '../../Models/IPM_Facture';
 import { DateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { IPM_Statut_Facture } from 'src/app/Models/IPM_Statut_Facture';
 
 type AOA = any;
 declare var $;
@@ -64,6 +65,8 @@ export class AjouterFacturesComponent implements OnInit {
   Jsonprestations: any;
   val: number;
   jsonPrest: any;
+  jsonStat: IPM_Statut_Facture;
+  //IPM_Statut_Facture
   Factures = new Facture();
   factureglobal = new Facture()
   total: number;
@@ -96,6 +99,7 @@ export class AjouterFacturesComponent implements OnInit {
     this.ipm_prestations = new Prestation();
     this.ipm_employes = new Employe();
     this.ipm_facturess = new Facture();
+    this.jsonStat=new IPM_Statut_Facture()
   }
 
   listemploye: Employe[];
@@ -585,6 +589,8 @@ export class AjouterFacturesComponent implements OnInit {
     
     this.factureglobal.dateFacture=this.dateFacture
     this.factureglobal.numerofacture =this.NumeroFacture
+    this.jsonStat.idStatutFacture=1
+    this.factureglobal.ipmStatutFacture =JSON.parse(JSON.stringify(this.jsonStat))
     this.factureglobal.dateSaisie= new Date()
 
     this.fact_service.AjoutFacture(this.factureglobal).subscribe(

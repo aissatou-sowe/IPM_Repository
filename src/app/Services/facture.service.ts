@@ -12,7 +12,7 @@ import { IPM_DetaRembourse } from '../Models/IPM_DetaRembourse';
 @Injectable({
   providedIn: 'root'
 })
-export class FactureService {
+export class                                                      FactureService {
 
   constructor(private http:HttpClient) { }
 
@@ -68,6 +68,10 @@ export class FactureService {
   public getAllFactbyfactglobale(idfac:number):Observable<IPM_Details_Facture[]> {
     
     return this.http.get<IPM_Details_Facture[]>(environment.URL+'detailsfacture/'+idfac);
+  }
+  public getAllFactbyfactglobale2(idfac:number):Observable<IPM_Details_Facture[]> {
+    
+    return this.http.get<IPM_Details_Facture[]>(environment.URL+'detailsfacturebyFacture/'+idfac);
   }
   public getAllremboursbyrembourseglobale(idremb:number):Observable<IPM_DetaRembourse[]> {
     
