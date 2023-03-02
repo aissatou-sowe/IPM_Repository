@@ -7,6 +7,7 @@ import { RapportServiceService } from '../Services/rapport-service.service';
 import { Employe } from '../Models/Employe';
 import { Conjoint } from '../Models/Conjoint';
 import { Enfant } from '../Models/Enfant';
+import { IPM_Bon } from '../Models/IPM_Bon';
 
 declare const $: any;
 
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 nbre:Employe[];
 nbreconjoint:Conjoint[];
 nbrenfant:Enfant[];
+nombreBons:IPM_Bon[]
   constructor(private rapportrSer:RapportServiceService) { }
   public tableData: TableData;
   startAnimationForLineChart(chart: any) {
@@ -248,6 +250,15 @@ nbrenfant:Enfant[];
    (data) => {
     this.nbrenfant=data;
      console.log(this.nbrenfant);
+ 
+   });
+
+}
+countBon(){
+  this.rapportrSer.CountBons().subscribe(
+   (data) => {
+    this.nombreBons=data;
+     console.log(this.nombreBons);
  
    });
 

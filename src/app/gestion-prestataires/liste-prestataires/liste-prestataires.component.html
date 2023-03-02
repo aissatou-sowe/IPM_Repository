@@ -37,9 +37,9 @@
           <div class="row">
             <div class="col-md-6 form-group">
               <mat-form-field>
-                <!--{{currentprestataire.typePres}}-->
-                <mat-select placeholder="Prestataire" name="listTypePrestataire" [(ngModel)]="code_presta">
-                  <mat-option *ngFor="let prest of cur" [value]="prest.id_type_prestataire">
+                {{this.currentprestataire.ipm_type_prestataire?.nom_type_prestaire}} 
+                <mat-select name="listTypePrestataire" [(ngModel)]="code_presta">   
+                  <mat-option *ngFor="let prest of cur" [value]="prest.id_type_prestataire" (click)="getTypePrest()">
                     {{ prest.nom_type_prestaire }}
                   </mat-option>
                 </mat-select>

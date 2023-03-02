@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { element } from 'protractor';
 import { Subject } from 'rxjs';
 
 import { TableData } from 'src/app/md/md-table/md-table.component';
@@ -49,6 +50,7 @@ code_presta:number
   selctLettreAg: any;
   AgrementURL: string | ArrayBuffer;
   selectLettreAg: any;
+  el: boolean=false;
   constructor(public pres_service:PrestataireService, private formBuilder:FormBuilder
     ,private router:Router,private toastr: ToastrService, private route : ActivatedRoute,
     private ref: ChangeDetectorRef
@@ -113,7 +115,9 @@ code_presta:number
       this.pres_service.getAllTypePrestataires().subscribe(
         result => {
           this.listTypePrestataire=result;
-          console.log(this.listTypePrestataire)
+          console.log(this.listTypePrestataire);
+          
+          
         });
   }
   initForm(){
@@ -134,15 +138,17 @@ code_presta:number
     }
  //Recuperer le prestataire correspondant
 getPrestaById(prestataire){
- 
+
   this.pres_service.getPrestataireById(prestataire.code_prestataire).subscribe(
     result => {
       this.currentprestataire = result;
+      console.log(this.currentprestataire.ipm_type_prestataire?.nom_type_prestaire);
       this.pres_service.getAllTypePrestataires().subscribe(
           data =>{
            // prestataire.ipm_type_prestataire?.nom_type_prestaire
             this.cur= data;
             console.log(this.cur);
+            
           }
       )
     
@@ -150,6 +156,10 @@ getPrestaById(prestataire){
     });
 }
 
+getTypePrest(){
+  this.currentprestataire.ipm_type_prestataire.nom_type_prestaire=null
+
+}
 update(){
   this.addPrestataire.id_type_prestataire=this.code_presta;
   this.currentprestataire.ipm_type_prestataire=JSON.parse(JSON.stringify(this.addPrestataire));

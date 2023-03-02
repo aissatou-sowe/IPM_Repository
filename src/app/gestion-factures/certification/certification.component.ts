@@ -617,7 +617,9 @@ modifierFacture(){
   this.fact_service.UpdateFacture(this.factureAmodifier.ipmFacture).subscribe(data=>{
 
   })
-  this.fact_service.updateDetailfact(this.factureAmodifier).subscribe(data=>{})                                                                                                                                                                                                                               
+  this.fact_service.updateDetailfact(this.factureAmodifier).subscribe(data=>{
+    
+  })                                                                                                                                                                                                                               
 
 }
 }
