@@ -161,7 +161,8 @@ export class BonConsultationComponent implements OnInit {
         console.log(this.matr);
         this.enfant=this.message;
         console.log(this.enfant);
-        const date = this.datePipe.transform(this.message.date_nais, "dd-MM-yyyy");
+        const date =this.message.date_nais
+        //this.datePipe.transform(this.message.date_nais, "dd-MM-yyyy");
         //const date =this.message.date_nais
           console.log(date)
           const b=new Date(date)

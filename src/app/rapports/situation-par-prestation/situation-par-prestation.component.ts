@@ -33,7 +33,7 @@ export class SituationParPrestationComponent implements OnInit {
   ngOnInit(): void {
     this.rapportServ.getPrestation().subscribe(data=>{
       this.listPrestation=data
-      //console.log(this.prestatonChoisi,presta.code_prestation)
+      console.log(this.listPrestation)
     })
   }
   getprestation(presta){

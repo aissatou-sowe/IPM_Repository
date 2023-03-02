@@ -39,6 +39,10 @@ export class EmployeService {
      return this.http.put<Employe>(environment.URL+'employe',emp)
     
    }
+   public ModifierCategorie(emp: Categorie){
+    return this.http.put<Categorie>(environment.URL+'categorie',emp)
+   
+  }
    public ModifierEmployeSansphoto(emp: Employe){
     return this.http.put<Employe>(environment.URL+'employesansPhoto',emp)
    

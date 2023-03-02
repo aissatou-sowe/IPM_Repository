@@ -127,7 +127,12 @@ export class ListeBonsComponent implements OnInit {
         this.numero++
         console.log(this.numero);
       }
+
     )
+
+     
+
+    
    // this.b.ipm_employe=this.currentemploye;
     this.b.ipm_prestataire=this.currentprestataire;
     this.ide=this.route.snapshot.params['id'];
@@ -439,6 +444,7 @@ console.log(this.matricule);
 nom;
 /////////////////Save Bon Employé
 public BonNow(){
+
   const dayBEm=new Date();
 
 if (dayBEm.getMonth()<10) {
@@ -479,11 +485,13 @@ console.log(this.designation,this.nombre_article);
   if(this.bon.ipm_prestataire 
     && this.bon.numeroBon && this.bon.designation && 
      this.bon.nombre_article &&this.bon.ordonnance && this.bon.dateEtablissement){
+      console.log(this.bon);
     this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(
   
       (data)=>{this.upload();
    //this.router.navigate(['/gestion-bons/Listebons'])
        });
+       console.log(this.selectOrdonne);
          this.bonpharma.uploadFile(this.selectOrdonne).subscribe( (data)=>{
           //imprimer bon pharmacie
      
@@ -701,11 +709,11 @@ upload(){
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)
          doc.text("Malade :",15,75)
-         doc.text(ipm1,50,75)
+         doc.text(ipm1+" "+ipm2,50,75)
          
          doc.setFontSize(12)
-         doc.text("",90,75)
-         doc.text(ipm2,80,75)
+        //  doc.text("",90,75)
+        //  doc.text(ipm2,80,75)
          doc.text("Matricule :",120,75)
          doc.text(ipm,140,75)
          doc.text("N Carnet :",15,85)
@@ -817,8 +825,8 @@ uploadConjoint(){
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)
          doc.text("Participant:",15,75)
-         doc.text(ipm1,40,75)
-         doc.text(ipm2,80,75) 
+         doc.text(ipm1+" "+ipm2,40,75)
+        //  doc.text(ipm2,80,75) 
          doc.text("Matricule:",120,75)
          doc.text(ipm,140,75)
          doc.setFontSize(12)
@@ -828,8 +836,8 @@ uploadConjoint(){
          doc.text("Nombre D'article :",120,85)
          doc.text(""+Narticle,160,85)
          doc.text("Malade:",15,95)
-         doc.text(ipm5,40,95)
-         doc.text(ipm6,80,95)
+         doc.text(ipm5+" "+ipm6,40,95)
+        //  doc.text(ipm6,80,95)
          doc.text("Prestataire :",120,95)
          doc.text(ipm3,145,95)
          doc.text("Total :",140,180)
@@ -923,8 +931,8 @@ uploadEnfant(){
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)
          doc.text("Participant:",15,75)
-         doc.text(ipm1,40,75)
-         doc.text(ipm2,80,75) 
+         doc.text(ipm1+" "+ipm2,40,75)
+        //  doc.text(ipm2,80,75) 
          doc.text("Matricule:",120,75)
          doc.text(ipm,140,75)
          doc.setFontSize(12)
@@ -934,8 +942,8 @@ uploadEnfant(){
          doc.text("Nombre D'article :",120,85)
          doc.text(""+Narticle,160,85)
          doc.text("Malade:",15,95)
-         doc.text(ipm5,40,95)
-         doc.text(ipm6,80,95)
+         doc.text(ipm5+" "+ipm6,40,95)
+        //  doc.text(ipm6,80,95)
          doc.text("Prestataire :",120,95)
          doc.text(ipm3,145,95)
          doc.text("Total :",140,180)

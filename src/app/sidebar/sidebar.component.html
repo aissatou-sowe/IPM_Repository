@@ -518,7 +518,7 @@
   
                                  <!--remboursements-->      
                                 
-                          <ul class="nav" *ngIf=" isSecretaire() || isOperateur() || isGerant()" >
+                          <ul class="nav" *ngIf=" isSecretaire() || isOperateur() || isGerant() || isComptable()" >
                             <li routerLinkActive="active" class="nav-item">
                                 
                                 <a [routerLink]="[menuItems[8].path]" *ngIf="menuItems[8].type === 'link'" class="nav-link">
@@ -534,7 +534,7 @@
                                     <p id="titre">{{menuItems[8].title}}<b class="caret"></b></p>
                                 </a>
                                 <div id="{{menuItems[8].collapse}}" class="collapse" *ngIf="menuItems[8].type === 'sub'">
-                                  <ul class="nav" *ngIf="isSecretaire() || isOperateur() || isGerant()">
+                                  <ul class="nav" *ngIf="isSecretaire() || isOperateur() || isGerant() || isComptable()">
                                     <li routerLinkActive="active" class="nav-item">
                                         <a [routerLink]="[menuItems[8].path,menuItems[8].children[0].path]" class="nav-link">
                 
@@ -572,7 +572,7 @@
                                   </ul>
                                   <!----Cotisation--------------->
                                           
-                                                <ul class="nav" *ngIf=" isSecretaire() || isOperateur() || isGerant()" >
+                                                <ul class="nav" *ngIf=" isSecretaire() || isOperateur() || isGerant() || isComptable()" >
                                                   <li routerLinkActive="active" class="nav-item">
                                                       
                                                       <a [routerLink]="[menuItems[9].path]" *ngIf="menuItems[9].type === 'link'" class="nav-link">
@@ -600,7 +600,7 @@
                                                           </li>
                                                           </ul>
                                                           <!----->
-                                                          <ul class="nav" *ngIf="isGerant()">
+                                                          <ul class="nav" *ngIf="isGerant() || isComptable()">
                                                             <li routerLinkActive="active" class="nav-item">
                                                                 <a [routerLink]="[menuItems[9].path,menuItems[9].children[1].path]" class="nav-link">
                                         

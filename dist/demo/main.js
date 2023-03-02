@@ -141,7 +141,7 @@ var MdChartComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\HP\workspace\Front-IPM\PROJET-IPM\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Users\HP\workspace2\Front-IPM\PROJET-IPM\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -1266,6 +1266,9 @@ var EmployeService = /** @class */ (function () {
     EmployeService.prototype.getlistService = function (id) {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + 'listservice/' + id);
     };
+    EmployeService.prototype.getlistCategorie = function () {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + 'categorie');
+    };
     EmployeService.prototype.getlistBonConsult = function (id) {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + 'getbonConsultByid/' + id);
     };
@@ -1315,6 +1318,18 @@ var EmployeService = /** @class */ (function () {
         formData.append('image', file, file.name);
         // formData.append('enfant', enfant);
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + "uploadjustif", formData);
+    };
+    EmployeService.prototype.ListFactureByEmploye = function (id) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + 'detailsfactByEmploye/' + id);
+    };
+    EmployeService.prototype.AjoutPanierService = function (service) {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + 'addPanierService', service, { responseType: 'text' });
+    };
+    EmployeService.prototype.AjoutPanierCategorie = function (service) {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + 'addPanierCategorie', service, { responseType: 'text' });
+    };
+    EmployeService.prototype.AjoutPanierEmploye = function (service) {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].URL + 'addPanierEmploye', service, { responseType: 'text' });
     };
     EmployeService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"] }
@@ -1804,7 +1819,6 @@ var AuthGuard = /** @class */ (function (_super) {
                             })];
                     case 1:
                         _a.sent();
-                        this.router.navigateByUrl('**');
                         _a.label = 2;
                     case 2:
                         requiredRoles = route.data.roles;
@@ -1993,7 +2007,7 @@ var map = {
 	],
 	"./cotisation/cotisation.module": [
 		"bnfn",
-		"default~cotisation-cotisation-module~gestion-factures-gestion-factures-module~precomptes-precomptes-~6adcab5a",
+		"default~cotisation-cotisation-module~gestion-employes-gestion-employes-module~gestion-factures-gesti~53251f32",
 		"common",
 		"cotisation-cotisation-module"
 	],
@@ -2005,18 +2019,20 @@ var map = {
 	"./gestion-bons/gestion-bons.module": [
 		"qLYx",
 		"default~gestion-bons-gestion-bons-module~gestion-employes-gestion-employes-module~gestion-factures-g~38cf250c",
+		"default~gestion-bons-gestion-bons-module~gestion-employes-gestion-employes-module",
 		"common",
 		"gestion-bons-gestion-bons-module"
 	],
 	"./gestion-employes/gestion-employes.module": [
 		"SO5K",
+		"default~cotisation-cotisation-module~gestion-employes-gestion-employes-module~gestion-factures-gesti~53251f32",
 		"default~gestion-bons-gestion-bons-module~gestion-employes-gestion-employes-module~gestion-factures-g~38cf250c",
-		"common",
+		"default~gestion-bons-gestion-bons-module~gestion-employes-gestion-employes-module",
 		"gestion-employes-gestion-employes-module"
 	],
 	"./gestion-factures/gestion-factures.module": [
 		"z6mg",
-		"default~cotisation-cotisation-module~gestion-factures-gestion-factures-module~precomptes-precomptes-~6adcab5a",
+		"default~cotisation-cotisation-module~gestion-employes-gestion-employes-module~gestion-factures-gesti~53251f32",
 		"default~gestion-bons-gestion-bons-module~gestion-employes-gestion-employes-module~gestion-factures-g~38cf250c",
 		"common",
 		"gestion-factures-gestion-factures-module"
@@ -2033,7 +2049,7 @@ var map = {
 	],
 	"./precomptes/precomptes.module": [
 		"f8UU",
-		"default~cotisation-cotisation-module~gestion-factures-gestion-factures-module~precomptes-precomptes-~6adcab5a",
+		"default~cotisation-cotisation-module~gestion-employes-gestion-employes-module~gestion-factures-gesti~53251f32",
 		"common",
 		"precomptes-precomptes-module"
 	],
@@ -2045,7 +2061,7 @@ var map = {
 	],
 	"./remboursements/remboursements.module": [
 		"MTHE",
-		"default~cotisation-cotisation-module~gestion-factures-gestion-factures-module~precomptes-precomptes-~6adcab5a",
+		"default~cotisation-cotisation-module~gestion-employes-gestion-employes-module~gestion-factures-gesti~53251f32",
 		"common",
 		"remboursements-remboursements-module"
 	],
@@ -2059,6 +2075,7 @@ var map = {
 	],
 	"./utilisateur/utilisateur.module": [
 		"DQha",
+		"common",
 		"utilisateur-utilisateur-module"
 	]
 };
@@ -2274,13 +2291,15 @@ function initializeKeycloak(keycloak) {
     return function () {
         return keycloak.init({
             config: {
-                //url: 'http://localhost:8080/auth',
+                // url: 'http://localhost:8180/auth',
                 url: 'http://10.14.14.232:8180/auth/',
                 realm: 'Digital-Poste',
                 clientId: 'ipm-fronte',
             },
             initOptions: {
                 onLoad: "check-sso",
+                checkLoginIframe: false //Verifie l'etat qui a connecté
+                // onLoad:"login-required",
             },
         });
     };

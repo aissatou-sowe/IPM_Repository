@@ -159,7 +159,7 @@ listFacturess;
           this.statfact=lf.ipmFacture.ipmStatutFacture.idStatutFacture;
           this.pre=lf.ipmFacture.ipm_prestataire.nom_prestataire
          this.prestationmodif=lf.ipm_prestation.libelle
-          console.log(this.idfac,this.pre,this.prestationmodif)
+          console.log(this.statfact,this.idfac,this.pre,this.prestationmodif)
           
          
         }
@@ -182,6 +182,7 @@ listFacturess;
     this.listFactureCertif=this.listFacturess
     this.facture.certifier=true;
     this.ide.idStatutFacture=3
+    console.log(this.listFactureCertif,this.listFacturess)
     this.facture.ipmStatutFacture=JSON.parse(JSON.stringify(this.ide))
     console.log(this.facture)
     //a revoir apres la présentattion
@@ -534,6 +535,38 @@ annullationfac(){
     this.showALERTE3('top', 'center')
 
    })
+   this.listFactureCertif =this.listFacturess
+   for (let index = 0; index < this.listFactureCertif.length; index++) {
+    this.fact_service.getEmployeById(this.listFactureCertif[index].ipm_employe.idemp).subscribe((data)=>{
+      this.objetEmploye=data
+     // console.log(this.listFactureCertif[index].ipm_employe.idemp,this.objetEmploye)
+    // this.listFactureCertif[index]
+    console.log(this.objetEmploye.solde);
+      this.objetEmploye.solde-=this.listFactureCertif[index].part_patient
+      this.objetEmploye.cumul_charge-=this.listFactureCertif[index].part_patient
+     this.chargeEmploie.push({...this.objetEmploye})
+     // //console.log(this.chargeEmploie);
+     this.update=this.objetEmploye
+     console.log(this.update,this.update.solde);
+
+       this.fact_service.updateOnEmploye(this.update).subscribe(data=>
+        {
+          if(index+1==this.listFactureCertif.length)
+           {this. showALERTE("top","center")}},
+          err=>{
+            if(index+1==this.listFactureCertif.length)
+            this. showALERTE2("top","center")})
+            
+    })
+    // this.fact_service.updateLemploye(this.chargeEmploie).subscribe(data=>
+    //   {if(index+1==this.listFactureCertif.length)
+    //   {this. showALERTE("top","center")}},
+    //   err=>{
+    //     if(index+1==this.listFactureCertif.length)
+    //     this. showALERTE2("top","center")})
+      //  (data)=>{
+    //this.elements.push(element);
+  }
 }
 
 
