@@ -121,7 +121,8 @@ export class BonLunetterieComponent implements OnInit {
         this.showNotification('top','center',3,"<b>agent de numero matricule "+this.matricule+" ne beneficie plus de L'IPM</b> :")
       }
       this.matr=this.message.idemp
-      const date = this.datePipe.transform(this.message.date_nais, "dd-MM-yyyy");
+      const date =this.message.date_nais
+       //this.datePipe.transform(this.message.date_nais, "dd-MM-yyyy");
     //const date =this.message.date_nais
       console.log(date)
       const b=new Date(date)

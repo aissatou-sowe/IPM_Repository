@@ -621,14 +621,17 @@ export class CarnetEmployeComponent implements OnInit {
     //console.log(this.enfant);
     //this.enfantt.ipm_employe=JSON.parse(JSON.stringify(this.currentemploye));
     console.log(this.enfant);
-    this.enfant.chemin = this.selectedFile.name;
-
-
+    if (this.selectedFile) {
+      this.enfant.chemin = this.selectedFile.name;
+      
+    }
+   
     console.log(this.enfant);
     //  var date = this.datePipe.transform(this.enfant.date_nais_enfant, "dd-MM-yyyy");
     //  this.enfant.date_nais_enfant= date;
     console.log(this.enfant)
     this.enfant.sexe_enfant = this.sexChoisi
+    
     this.enfant.extrait_naiss = this.selectExtrait.name;
     this.enf_service.AjoutEnfant(this.enfant).subscribe(
       (data) => {

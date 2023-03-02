@@ -18,20 +18,6 @@
 
     <form>
       <div class="row">
-        <!-- <div class="col-md-4 form-group" style="margin-top: -20px;">
-          <mat-form-field>
-            <mat-select multiple placeholder="Choisir Plusieurs Participant" name="Employe" class="form-control" id="Employe"
-            [(ngModel)]="Employe">
-              <mat-option *ngFor="let emp of listemploye" [value]="emp.idemp"
-              (click)="getnomemploye(emp)">
-                {{ emp.matricule}}-{{ emp.prenom}}-{{emp.nom}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div> -->
-
-
-
         <div class="form-group  col-md-3" style="margin-top: -20px;">
           <label for="Matricule"><b>Matricule</b> </label>
           <input type="text" name="matricule" class="form-control" id="matricule" [(ngModel)]="matricule">

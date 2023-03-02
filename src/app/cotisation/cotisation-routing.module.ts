@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AjoutCotisationComponent } from './ajout-cotisation/ajout-cotisation.component';
 import { ListeCotisationComponent } from './liste-cotisation/liste-cotisation.component';
 
-export const routes: Routes = [
+export const routesCotisation: Routes = [
   {
     path: '',
     children: [ {

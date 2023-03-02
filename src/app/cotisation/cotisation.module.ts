@@ -4,7 +4,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { AjoutCotisationComponent } from './ajout-cotisation/ajout-cotisation.component';
 import { ListeCotisationComponent } from './liste-cotisation/liste-cotisation.component';
 import { RouterModule } from '@angular/router';
-import { routes } from './cotisation-routing.module';
+import { routesCotisation } from './cotisation-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../app.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [AjoutCotisationComponent, ListeCotisationComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routesCotisation),
     FormsModule,
     MaterialModule,
     HttpClientModule,

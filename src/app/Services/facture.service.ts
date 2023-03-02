@@ -103,7 +103,7 @@ export class                                                      FactureService
         return this.http.put(environment.URL+'updateList',ldetail,{responseType: 'text' as 'json'})
       }
       public updateOnEmploye(Employe: Employe){
-        return this.http.put(environment.URL+'employe',Employe)
+        return this.http.put(environment.URL+'employesansPhoto',Employe)
     
          
       }
@@ -113,7 +113,7 @@ export class                                                      FactureService
          
       }
       public getEmployeById(idemp: number):Observable<Employe>{
-        return this.http.get<Employe>(environment.URL+'employes/'+idemp) 
+        return this.http.get<Employe>(environment.URL+'employesanstof/'+idemp) 
        
       }
       public updateDetailfact(ipm_detail: IPM_Details_Facture){

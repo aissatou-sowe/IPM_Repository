@@ -63,8 +63,8 @@ export class RapportServiceService {
   public CountEnf():Observable<Enfant[]>{
     return this.http.get<Enfant[]>(environment.URL+'enfant/count');
   }
-  public CountBons():Observable<IPM_Bon[]>{
-    return this.http.get<IPM_Bon[]>(environment.URL+'getBonbymonth');
+  public CountBons():Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+'getBonbymonth');
   }
 }
 

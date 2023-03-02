@@ -17,10 +17,10 @@ declare const $: any;
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
   // constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }
-nbre:Employe[];
-nbreconjoint:Conjoint[];
-nbrenfant:Enfant[];
-nombreBons:IPM_Bon[]
+nbre:any;
+nbreconjoint:any;
+nbrenfant:any;
+nombreBons:any;
   constructor(private rapportrSer:RapportServiceService) { }
   public tableData: TableData;
   startAnimationForLineChart(chart: any) {
@@ -85,6 +85,7 @@ nombreBons:IPM_Bon[]
      this.countEmploye();
      this.countConoint();
      this.countEnfant();
+     this.countBon();
       this.tableData = {
           headerRow: ['ID', 'Name', 'Salary', 'Country', 'City'],
           dataRows: [
