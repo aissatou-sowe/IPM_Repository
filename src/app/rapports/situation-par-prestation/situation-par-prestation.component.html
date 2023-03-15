@@ -110,7 +110,7 @@
               <td><b>{{element.ipmFacture?.ipm_prestataire.nom_prestataire}}</b></td>
               
               <!-- <td>{{element.ipm_prestation?.code_prestation}}</td> -->
-              <td><b>{{element.dateSaisie}}</b></td>
+              <td><b>{{element.datePrestation}}</b></td>
               <td><b>{{element.part_ipm}}</b></td>
               <td><b>{{element.part_patient}}</b></td>
               <td><b>{{element.montant_facture}}</b></td>
@@ -131,23 +131,23 @@
   
             </tr>
           </tbody>
-          <!-- <tfoot style="font-weight:bold;">
+         <tfoot style="font-weight:bold;">
             <tr>
+              <td></td>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>
               <td>
                 <h4>TOTAL</h4>
               </td>
-              <td>{{}}</td>
-              <td>{{}}</td>
-              <td>{{}}</td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{somme1}}</td>
+              <td>{{somme2}}</td>
+              <td>{{somme3}}</td>
+              
   
             </tr>
-          </tfoot> -->
+          </tfoot> 
   
         </table>
       </div>

@@ -664,6 +664,7 @@ upload(){
 
    var ipm1=this.message.prenom
    var ipm2=this.message.nom
+   var sexe=this.message.sexe
    var ipm3=this.p
    var age=this.ageE;
    var Pmalade=this.message.prenom
@@ -708,14 +709,14 @@ upload(){
           
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)
-         doc.text("Malade :",15,75)
-         doc.text(ipm1+" "+ipm2,50,75)
+         doc.text("Malade :"+ipm1+" "+ipm2,15,75)
+         //doc.text(ipm1+" "+ipm2,50,75)
          
          doc.setFontSize(12)
         //  doc.text("",90,75)
         //  doc.text(ipm2,80,75)
-         doc.text("Matricule :",120,75)
-         doc.text(ipm,140,75)
+         doc.text("Matricule :"+ipm,120,75)
+         doc.text("Sexe :"+sexe,163,75)
          doc.text("N Carnet :",15,85)
          doc.text(""+Ncarnet,40,85)
          doc.text("Age : "+age,80 ,85)
@@ -787,6 +788,7 @@ uploadConjoint(){
    var ipm= this.message.matricule
    var Narticle=this.nombre_article
    var Ncarnet=this.message.numero_carnet
+   var sexe=this.messageconjoint?.sexe_conjoint
    var numBonConj=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero
   autoTable(doc,{
     startY:100,
@@ -835,10 +837,10 @@ uploadConjoint(){
          doc.text("Age : "+ageC,80,85)
          doc.text("Nombre D'article :",120,85)
          doc.text(""+Narticle,160,85)
-         doc.text("Malade:",15,95)
-         doc.text(ipm5+" "+ipm6,40,95)
-        //  doc.text(ipm6,80,95)
-         doc.text("Prestataire :",120,95)
+         doc.text("Malade :"+ipm5+" "+ipm6,15,95)
+         //doc.text(ipm5+" "+ipm6,40,95)
+          doc.text("Sexe :"+sexe,90,95)
+         doc.text("Prestataire :",125,95)
          doc.text(ipm3,145,95)
          doc.text("Total :",140,180)
          
@@ -889,6 +891,7 @@ uploadEnfant(){
    var ipm4=this.message.ipm_service?.type_service
    var ipm5=this.messageenfant.prenom_enfant
    var ipm6=this.messageenfant?.nom_enfant
+   var sexe=this.messageenfant?.sexe_enfant
    var ipm= this.message.matricule
    var Narticle=this.nombre_article
    var Ncarnet=this.message.numero_carnet
@@ -941,10 +944,11 @@ uploadEnfant(){
          doc.text("Age : "+ageE,80,85)
          doc.text("Nombre D'article :",120,85)
          doc.text(""+Narticle,160,85)
-         doc.text("Malade:",15,95)
-         doc.text(ipm5+" "+ipm6,40,95)
+         doc.text("Malade :"+ipm5+" "+ipm6,15,95)
+         //doc.text(ipm5+" "+ipm6,40,95)
+         doc.text("Sexe :"+sexe,90,95)
         //  doc.text(ipm6,80,95)
-         doc.text("Prestataire :",120,95)
+         doc.text("Prestataire :",125,95)
          doc.text(ipm3,145,95)
          doc.text("Total :",140,180)
          

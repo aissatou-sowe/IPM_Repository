@@ -52,6 +52,10 @@ export class EmployeService {
      return this.http.get<Employe>(environment.URL+'employes/'+idemp) 
     
    }
+   public statutInactif(id: number):Observable<any>{
+    return this.http.get<any>(environment.URL+'statutInactif/'+id) 
+   
+  }
    public getEmployeByIdSanstof(idemp: number):Observable<Employe>{
     return this.http.get<Employe>(environment.URL+'employesanstof/'+idemp) 
    

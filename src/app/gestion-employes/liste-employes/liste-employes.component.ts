@@ -66,6 +66,8 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   ages: number;
   date: Date;
   date1: Date;
+  motifStatu;
+  condStatut:boolean;
   situation_familial=[{id:1,value:"Celibataire"},
   {id:2,value:"Marier"},
   {id:3,value:"Divorce"},
@@ -80,9 +82,13 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   selectJustif: any;
   JustifURL: string | ArrayBuffer;
   min: number;
+  datefi;
+  datede;
+  motifStatut:string;
+  statuttt:boolean;
   constructor(private emp_service: EmployeService,private emp_statut:StatutEmployeService,
     private router: Router, private fb: FormBuilder,private toastr: ToastrService,
-    private route: ActivatedRoute, private datePipe: DatePipe, 
+    private route: ActivatedRoute, 
     private dateAdapter: DateAdapter<Date>, private datepipe: DatePipe,) {
     this.addCategorie = new Categorie();
     this.addService = new Service();
@@ -94,7 +100,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
   }
 
   ngOnInit(): void {
- 
+ this.statuttt=false
     ////////////////
     this.min = new Date().getFullYear()-18
   
@@ -147,6 +153,8 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
         //console.log(emps);
         this.employes = emps;
         this.employes.forEach(ele => {
+          this.condStatut=ele.statut
+          
           if (ele.date_nais) {
             //convert date again to type Date 
             const bdate = new Date(ele.date_nais);
@@ -155,22 +163,22 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
             console.log(timeDiff);
             this.ages = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
           }
-          if (this.ages > 60 || ele.ipmStatutEmploye?.emplStatut=="Démission" 
-          || ele.ipmStatutEmploye?.emplStatut=="licenciment") {
-            console.log("Age atteinte impossible de ce beneficier à l'ipm :", this.ages)
+          if (this.ages > 60 || ele.ipmStatutEmploye?.emplStatut=="inactif" 
+          ) {
+            //console.log("Age atteinte impossible de ce beneficier à l'ipm :", this.ages)
             ele.statut = false
-            console.log(ele);
-            console.log(ele.ipmStatutEmploye?.emplStatut)
-            this.emp_service.ModifierEmploye(ele).subscribe(data=>{})
-            console.log("age depasse")
-          }
-          else if (this.ages < 60) {
-            console.log("Voici l'age :", this.ages)
-            ele.statut = true
             //console.log(ele);
-            console.log("age non depasse")
-
+            //console.log(ele.ipmStatutEmploye?.emplStatut)
+            this.emp_service.ModifierEmploye(ele).subscribe(data=>{})
+           // console.log("age depasse")
           }
+          // else if (this.ages < 60) {
+          //   //console.log("Voici l'age :", this.ages)
+          //   ele.statut = true
+          //   //console.log(ele);
+          //  // console.log("age non depasse")
+
+          // }
 
           // const ttoday=new Date();
           // const birthDate = new Date(ele.date_nais);
@@ -204,6 +212,7 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
     );
     this.getFiles(this.employes);
   }
+  
   getStatutEmploye(){
     this.emp_statut.getStatutEmploye().subscribe(
       data => {
@@ -212,6 +221,18 @@ export class ListeEmployesComponent implements OnInit /*,AfterViewInit*/ {
         //console.log(this.statutEmploye,data)
       }
     )
+  }
+  getStatut(stu){
+    console.log(this.datede)
+    //this.motifStatut=stu.libelleStatut
+    if (stu.idStatut==2) {
+      this.emp_service.statutInactif(stu.idStatut).subscribe(
+
+        data => {this.motifStatu=data
+          console.log(this.motifStatu);})
+
+      
+    }
   }
 
   getEmployeById(employe) {
@@ -546,13 +567,27 @@ onReset(){
   
   /////Update Statut employe
   public updateStatut(){
+    console.log(this.datede,this.datefi,this.motifStatut)
     this.addStatut.idStatut=this.codeStat;
     
     this.employe.ipmStatutEmploye=JSON.parse(JSON.stringify(this.addStatut));
-    if (this.addStatut.idStatut==2 || this.addStatut.idStatut==3) {
+    if (this.addStatut.idStatut==2 ) {
       this.employe.statut=false
       
     }else this.employe.statut=true
+    if (this.datede) {
+      this.employe.date_debut_suspension=this.datede
+      //this.datepipe.transform(this.datede, 'dd-MM-yyyy');
+      
+    }
+    if (this.datefi) {
+      
+      //this.datepipe.transform(this.dateFacture, 'dd-MM-yyyy');
+      this.employe.date_fin_suspension=this.datefi
+      //this.datepipe.transform(this.datefi, 'dd-MM-yyyy');
+      
+    }
+    this.employe.motifStatut=this.motifStatut
 
     console.log(this.employe)
       this.emp_service.ModifierEmployeSansphoto(this.employe).subscribe(

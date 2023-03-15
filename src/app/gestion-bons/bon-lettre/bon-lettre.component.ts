@@ -520,6 +520,7 @@ upload(){
    let rows=[] 
    var ipm1=this.message?.prenom
    var ipm2=this.message?.nom
+   var sexe=this.message?.sexe
    console.log(ipm2);
    var prestataire=this.p
    var ageE=this.AgeEmploye
@@ -566,11 +567,11 @@ upload(){
            
        doc.text(date.toLocaleDateString("fr-FR"),172,60)
           doc.setFontSize(12)
-          doc.text("Malade:",15,75)
-          doc.text(ipm1+ " " +ipm2,40,75)
+          doc.text("Malade : "+ipm1+ " " +ipm2,15,75)
+          //doc.text(ipm1+ " " +ipm2,40,75)
           //doc.text(,80,75) 
-          doc.text("Matricule:",120,75)
-          doc.text(ipm4,140,75)
+          doc.text("Matricule : "+ipm4,120,75)
+          doc.text("Sexe : "+sexe,163,75)
           doc.setFontSize(12)
           doc.text("N Carnet :",15,85)
           doc.text(""+Ncarnet,40,85)
@@ -638,6 +639,7 @@ uploadConjoint(){
    let rows=[] 
    var ipm1=this.message?.prenom
    var ipm2=this.message?.nom
+   
    console.log(ipm2);
    var prestataire=this.p
    var ageC=this.AgeConjoint
@@ -646,6 +648,7 @@ uploadConjoint(){
    var ipm4=this.message?.matricule
    var ipm5=this.messageconjoint?.prenom_conjoint
    var ipm6=this.messageconjoint?.nom_conjoint
+   var sexe=this.messageconjoint?.sexe_conjoint
    var numBonConj=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    autoTable(doc,{
   //   startY:75,
@@ -689,7 +692,8 @@ uploadConjoint(){
           //doc.text(ipm2,80,75) 
           doc.text("Matricule:",120,75)
           doc.text(ipm4,140,75)
-          doc.text("Malade:  "+ipm5 + " "+ipm6,15,85)
+          doc.text("Malade :  "+ipm5 + " "+ipm6,15,85)
+          doc.text("Sexe :  "+sexe ,145,85)
           //doc.text(ipm5,40,85)
           //doc.text(ipm6,80,85) 
           doc.setFontSize(12)
@@ -777,6 +781,7 @@ uploadEnfant(){
    var ipm4=this.message?.matricule
    var ipm5=this.messageenfant.prenom_enfant
    var ipm6=this.messageenfant?.nom_enfant
+   var sexe=this.messageenfant?.sexe_enfant
    var numBonEnf=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
    autoTable(doc,{
   //   startY:75,
@@ -821,10 +826,11 @@ uploadEnfant(){
           doc.text("Matricule:",120,75)
           doc.text(ipm4,140,75)
           doc.text("Malade : "+ipm5 + " " +ipm6,15,85)
+          doc.text("Sexe : "+sexe ,100,85)
           //doc.text(ipm5,40,85)
           //doc.text(ipm6,80,85) 
           doc.setFontSize(12)
-          doc.text("N Carnet : " +Ncarnet,120,85)
+          doc.text("N Carnet : " +Ncarnet,140,85)
           doc.text("Age : " +ageEn,80,85)
           
           doc.text("Service :",100,95)

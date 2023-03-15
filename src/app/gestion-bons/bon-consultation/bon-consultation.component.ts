@@ -568,6 +568,7 @@ upload(){
    var Ncarnet=this.message.numero_carnet
    var ipm4=this.message.ipmService?.type_service
    var ipm=this.message.matricule
+   var sexe=this.message.sexe
    var numBon=this.mois+''+this.strBEm.charAt(2)+''+this.strBEm.charAt(3)+''+this.numero;
   autoTable(doc,{
     startY:100,
@@ -602,13 +603,13 @@ upload(){
           
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)
-         doc.text("Malade :",15,75)
-         doc.text(ipm1,40,75)
+         doc.text("Malade : "+ipm1+" "+ipm2,15,75)
+        // doc.text(ipm1+" "+ipm,240,75)
          doc.setFontSize(12)
-         doc.text("",90,75)
-         doc.text(ipm2,80,75)
-         doc.text("Matricule :",120,75)
-         doc.text(ipm,140,75)
+         //doc.text("",90,75)
+         //doc.text(ipm2,80,75)
+         doc.text("Matricule : "+ipm,120,75)
+         doc.text("Sexe : "+sexe,160,75)
          doc.text("Prestation :",120,85)
          doc.text(prestatio,143,85)
          doc.text("N° Carnet :",15,85)
@@ -674,6 +675,7 @@ uploadConjoint(){
    var ipm1=this.message?.prenom
    var ipm2=this.message?.nom
    var ipm3=this.p
+   var sexe=this.messageconjoint?.sexe_conjoint
    var ageC=this.AgeConjoint
    var ipm4=this.message.ipmService?.type_service
    var ipm5=this.messageconjoint?.prenom_conjoint
@@ -715,11 +717,11 @@ uploadConjoint(){
           
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)
-         doc.text("Participant:",15,75)
-         doc.text(ipm1,40,75)
-         doc.text(ipm2,80,75) 
-         doc.text("Matricule:",120,75)
-         doc.text(ipm,140,75)
+         doc.text("Participant : "+ipm1+" "+ipm2,15,75)
+        // doc.text(ipm1,40,75)
+         //doc.text(ipm2,80,75) 
+         doc.text("Matricule : "+ipm,120,75)
+         
          doc.setFontSize(12)
          doc.text("N Carnet :",15,85)
          doc.text("Age : "+ageC,80,85)
@@ -728,10 +730,11 @@ uploadConjoint(){
          doc.text(""+Ncarnet,40,85)
          doc.text("Prestation :",120,85)
          doc.text(prestatio,160,85)
-         doc.text("Malade:",15,95)
-         doc.text(ipm5,40,95)
-         doc.text(ipm6,80,95)
-         doc.text("Prestataire :",120,95)
+         doc.text("Malade :"+ipm5+" "+ipm6,15,95)
+         ////doc.text(ipm5,40,95)
+         //doc.text(ipm6,80,95)
+         doc.text("Sexe : "+sexe,90,95)
+         doc.text("Prestataire :",125,95)
          doc.text(ipm3,145,95)
          doc.text("Total :",140,180)
          
@@ -778,6 +781,7 @@ uploadEnfant(){
    var ipm2=this.message?.nom
    var ipm3=this.p
    var ageEn=this.AgeEnfant
+   var sexe=this.messageenfant?.sexe_enfant
    var ipm4=this.message.ipmService?.type_service
    var ipm5=this.messageenfant.prenom_enfant
    var ipm6=this.messageenfant?.nom_enfant
@@ -818,11 +822,11 @@ uploadEnfant(){
           
       doc.text(date.toLocaleDateString("fr-FR"),172,60)
          doc.setFontSize(12)
-         doc.text("Participant:",15,75)
-         doc.text(ipm1,40,75)
-         doc.text(ipm2,75,75) 
-         doc.text("Matricule:",120,75)
-         doc.text(ipm,140,75)
+         doc.text("Participant : "+ipm1+" "+ipm2,15,75)
+        // doc.text(ipm1,40,75)
+         //doc.text(ipm2,75,75) 
+         doc.text("Matricule : "+ipm,120,75)
+        
          doc.setFontSize(12)
          doc.text("N° Carnet :",15,85)
          doc.text("Age : "+ageEn,80,85)
@@ -831,11 +835,12 @@ uploadEnfant(){
          doc.text(""+numBon,35,60)
          doc.text("Prestation :",120,85)
          doc.text(prestatio,150,85)
-         doc.text("Malade:",15,95)
-         doc.text(ipm5,40,95)
-         doc.text(ipm6,80,95)
-         doc.text("Prestataire :",120,95)
-         doc.text(ipm3,145,95)
+         doc.text("Malade :"+ipm5+" "+ipm6,15,95)
+        // doc.text(ipm5,40,95)
+         //doc.text(ipm6,80,95)
+         doc.text("Sexe : "+sexe,90,95)
+         doc.text("Prestataire :"+ipm3,125,95)
+         //doc.text(ipm3,145,95)
          doc.text("Total :",140,180)
          
 

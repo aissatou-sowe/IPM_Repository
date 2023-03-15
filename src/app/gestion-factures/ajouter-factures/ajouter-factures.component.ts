@@ -68,6 +68,7 @@ export class AjouterFacturesComponent implements OnInit {
   jsonStat: IPM_Statut_Facture;
   //IPM_Statut_Facture
   Factures = new Facture();
+  reception;
   factureglobal = new Facture()
   total: number;
   totalChargeIpm: number;

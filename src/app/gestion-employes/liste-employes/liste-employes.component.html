@@ -44,8 +44,8 @@
                   <tr *ngFor=" let employe of employes" style="font-weight: 500;">
                     <td class="text-center">
                      
-                      <span *ngIf="employe.statut!=''" class="badge badge-success">{{employe.numero_carnet}}</span>
-                    <span *ngIf="employe.statut==''" class="badge badge-danger">{{employe.numero_carnet}}</span>
+                      <span *ngIf="employe.statut" class="badge badge-success"> {{employe.numero_carnet}}</span>
+                    <span *ngIf="!employe.statut" class="badge badge-danger">{{employe.numero_carnet}}</span>
                     </td>
                     <td>{{employe.nom}}</td>
                     <td>{{employe.prenom}}</td>
@@ -393,26 +393,52 @@
               </button>
           </div>
           <div class="container-fluid">
-            <form class="form-horizontal">
-          <div class="modal-body" style="width: 700px;">
+          <form >
+          <div class="modal-body" style="width: 900px;">
             <div class="row">
-            <div class="col-md-6 form-group">
+            <div class="col-md-3 ">
               <mat-form-field>
                 <mat-select placeholder="Statut" name="statutEmploye" [(ngModel)]="codeStat">
-                  <mat-option *ngFor="let stu of statutEmploye"  [value]="stu.idStatut">
+                  <mat-option *ngFor="let stu of statutEmploye"  [value]="stu.idStatut" (click)="getStatut(stu)">
                     {{ stu.emplStatut}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-md-6 form-group">
+            <div class="col-md-3 " *ngIf="motifStatu">
+              
               <mat-form-field>
-                <input matInput [matDatepicker]="picker3" (click)="picker3.open()" id="dateDemission" style="margin-top: 4px;"
-                  placeholder="Date Demission" formControlName="dateDemission">
-                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                <mat-datepicker #picker3 startView="year"></mat-datepicker>
+                <mat-select placeholder="Motif" name="motif" [(ngModel)]="motif">
+                  <mat-option *ngFor="let stu of motifStatu"  [value]="stu.idAllStatut">
+                    {{ stu.libelleStatut}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
-            </div>                
+            </div>
+            <div class="col-md-3">
+              <input type="text" class="form-control" placeholder="MotifStatut" name="motifStatut" id="motifStatut"  [(ngModel)]="motifStatut">
+
+            </div>
+             </div>
+             <div class="row">
+            <div class="col-md-3 ">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker11" placeholder="date debut" id="datede" name="datede" [(ngModel)]="datede" (click)="picker11.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
+                <mat-datepicker #picker11 startView="year"></mat-datepicker>
+                </mat-form-field>
+              
+              
+            </div> 
+            <div class="col-md-3 " *ngIf="motifStatu">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker22" placeholder="date fin suspension" id="datefi" name="datefi" [(ngModel)]="datefi" (click)="picker22.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker22"></mat-datepicker-toggle>
+                <mat-datepicker #picker22 startView="year"></mat-datepicker>
+                </mat-form-field>
+              
+              
+            </div>               
               </div>
               
           </div>

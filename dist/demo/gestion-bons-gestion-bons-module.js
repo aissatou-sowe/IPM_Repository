@@ -283,7 +283,8 @@ var BonLettreComponent = /** @class */ (function () {
             console.log(_this.matr);
             _this.enfant = _this.message;
             console.log(_this.enfant);
-            var date = _this.datePipe.transform(_this.message.date_nais, "dd-MM-yyyy");
+            var date = _this.message.date_nais;
+            //this.datePipe.transform(this.message.date_nais, "dd-MM-yyyy");
             //const date =this.message.date_nais
             console.log(date);
             var b = new Date(date);
@@ -1099,7 +1100,8 @@ var BonConsultationComponent = /** @class */ (function () {
             console.log(_this.matr);
             _this.enfant = _this.message;
             console.log(_this.enfant);
-            var date = _this.datePipe.transform(_this.message.date_nais, "dd-MM-yyyy");
+            var date = _this.message.date_nais;
+            //this.datePipe.transform(this.message.date_nais, "dd-MM-yyyy");
             //const date =this.message.date_nais
             console.log(date);
             var b = new Date(date);
@@ -2200,7 +2202,8 @@ var BonLunetterieComponent = /** @class */ (function () {
                 _this.showNotification('top', 'center', 3, "<b>agent de numero matricule " + _this.matricule + " ne beneficie plus de L'IPM</b> :");
             }
             _this.matr = _this.message.idemp;
-            var date = _this.datePipe.transform(_this.message.date_nais, "dd-MM-yyyy");
+            var date = _this.message.date_nais;
+            //this.datePipe.transform(this.message.date_nais, "dd-MM-yyyy");
             //const date =this.message.date_nais
             console.log(date);
             var b = new Date(date);
@@ -3460,10 +3463,12 @@ var ListeBonsComponent = /** @class */ (function () {
         if (this.bon.ipm_prestataire
             && this.bon.numeroBon && this.bon.designation &&
             this.bon.nombre_article && this.bon.ordonnance && this.bon.dateEtablissement) {
+            console.log(this.bon);
             this.bonpharma.AjouterBonPharmacie(this.bon).subscribe(function (data) {
                 _this.upload();
                 //this.router.navigate(['/gestion-bons/Listebons'])
             });
+            console.log(this.selectOrdonne);
             this.bonpharma.uploadFile(this.selectOrdonne).subscribe(function (data) {
                 //imprimer bon pharmacie
                 //Fin //////////////////
@@ -3657,10 +3662,10 @@ var ListeBonsComponent = /** @class */ (function () {
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
                 doc.text("Malade :", 15, 75);
-                doc.text(ipm1, 50, 75);
+                doc.text(ipm1 + " " + ipm2, 50, 75);
                 doc.setFontSize(12);
-                doc.text("", 90, 75);
-                doc.text(ipm2, 80, 75);
+                //  doc.text("",90,75)
+                //  doc.text(ipm2,80,75)
                 doc.text("Matricule :", 120, 75);
                 doc.text(ipm, 140, 75);
                 doc.text("N Carnet :", 15, 85);
@@ -3764,8 +3769,8 @@ var ListeBonsComponent = /** @class */ (function () {
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
                 doc.text("Participant:", 15, 75);
-                doc.text(ipm1, 40, 75);
-                doc.text(ipm2, 80, 75);
+                doc.text(ipm1 + " " + ipm2, 40, 75);
+                //  doc.text(ipm2,80,75) 
                 doc.text("Matricule:", 120, 75);
                 doc.text(ipm, 140, 75);
                 doc.setFontSize(12);
@@ -3775,8 +3780,8 @@ var ListeBonsComponent = /** @class */ (function () {
                 doc.text("Nombre D'article :", 120, 85);
                 doc.text("" + Narticle, 160, 85);
                 doc.text("Malade:", 15, 95);
-                doc.text(ipm5, 40, 95);
-                doc.text(ipm6, 80, 95);
+                doc.text(ipm5 + " " + ipm6, 40, 95);
+                //  doc.text(ipm6,80,95)
                 doc.text("Prestataire :", 120, 95);
                 doc.text(ipm3, 145, 95);
                 doc.text("Total :", 140, 180);
@@ -3861,8 +3866,8 @@ var ListeBonsComponent = /** @class */ (function () {
                 doc.text(date.toLocaleDateString("fr-FR"), 172, 60);
                 doc.setFontSize(12);
                 doc.text("Participant:", 15, 75);
-                doc.text(ipm1, 40, 75);
-                doc.text(ipm2, 80, 75);
+                doc.text(ipm1 + " " + ipm2, 40, 75);
+                //  doc.text(ipm2,80,75) 
                 doc.text("Matricule:", 120, 75);
                 doc.text(ipm, 140, 75);
                 doc.setFontSize(12);
@@ -3872,8 +3877,8 @@ var ListeBonsComponent = /** @class */ (function () {
                 doc.text("Nombre D'article :", 120, 85);
                 doc.text("" + Narticle, 160, 85);
                 doc.text("Malade:", 15, 95);
-                doc.text(ipm5, 40, 95);
-                doc.text(ipm6, 80, 95);
+                doc.text(ipm5 + " " + ipm6, 40, 95);
+                //  doc.text(ipm6,80,95)
                 doc.text("Prestataire :", 120, 95);
                 doc.text(ipm3, 145, 95);
                 doc.text("Total :", 140, 180);

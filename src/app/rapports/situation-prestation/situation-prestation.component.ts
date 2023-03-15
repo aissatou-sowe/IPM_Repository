@@ -29,6 +29,7 @@ export class SituationPrestationComponent implements OnInit {
   prenom: string;
   matr: any;
   listRemboursement: IPM_DetaRembourse[];
+  totalMontant: number;
 
   constructor(private dateAdapter: DateAdapter<Date>, private datepipe: DatePipe,
     private rapportServ:RapportServiceService,private router:Router) { 
@@ -66,6 +67,7 @@ export class SituationPrestationComponent implements OnInit {
           console.log(this.d1,this.d2,this.matr)
           console.log(result)
           this.listRemboursement=result
+          this.totalMontant=this.listRemboursement.reduce((sum,current)=>sum+current.montant,0);
         })
 
    }
@@ -99,6 +101,7 @@ export class SituationPrestationComponent implements OnInit {
           this.prenom=liste.ipm_employe?.prenom
           var ipm2=liste.ipm_employe?.prenom
           var ipm3=liste.ipm_employe?.matricule
+          var solde=liste.ipm_employe?.solde
         }
         var somme1=this.listPrestatio.reduce((sum,current)=>sum+current.part_ipm,0);
         var somme2=this.listPrestatio.reduce((sum,current)=>sum+current.part_patient,0);
@@ -152,6 +155,7 @@ export class SituationPrestationComponent implements OnInit {
           //  doc.text(ipm2,80,75) 
             doc.text("Prenom & Nom:",15,85)
             doc.text(""+ipm2 +" "+" "+" "+ipm1,60,85)
+            doc.text("Solde: "+solde,145,85)
             doc.setFontSize(12)
           
        }
@@ -161,10 +165,11 @@ export class SituationPrestationComponent implements OnInit {
     
   }
   getremboursement(){
+    console.log(this.listRemboursement)
     
     let doc=new jsPDF();
     //var imgData = '/assets/img_poste/laposte.png'
-    var imgData ='/ipm-fronte/assets/img_poste/laposte.png'
+    //var imgData ='/ipm-fronte/assets/img_poste/laposte.png'
 
     
      let col=[["Date Remboursement","Montant Remboursement"]]
@@ -179,6 +184,7 @@ export class SituationPrestationComponent implements OnInit {
           this.prenom=liste.ipm_employe?.prenom
           var ipm2=liste.ipm_employe?.prenom
           var ipm3=liste.ipm_employe?.matricule
+          var solde=liste.ipm_employe?.solde
         }
         var somme1=this.listRemboursement.reduce((sum,current)=>sum+current.montant,0);
         
@@ -199,7 +205,7 @@ export class SituationPrestationComponent implements OnInit {
        theme:"striped",
        didDrawPage: function(data){
         //this.bon.ipm_employe=this.message;
-        doc.addImage(imgData ,'JPEG',15,5,30,30)
+       // doc.addImage(imgData ,'JPEG',15,5,30,30)
        doc.setFontSize(15)
        doc.text("",72,46)
       // doc.text("Bon Pharmacie:Institut prévoyance de maladie de la poste",50,30)
@@ -230,6 +236,7 @@ export class SituationPrestationComponent implements OnInit {
             doc.text(ipm3,60,75)
           //  doc.text(ipm2,80,75) 
             doc.text("Prenom & Nom:",15,85)
+            doc.text("Solde : "+solde,145,85)
             doc.text(""+ipm2 +" "+" "+" "+ipm1,60,85)
             doc.setFontSize(12)
           

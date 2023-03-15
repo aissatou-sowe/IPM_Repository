@@ -25,6 +25,9 @@ export class SituationParPrestationComponent implements OnInit {
   d2: string;
   list: IPM_Details_Facture[];
   prestationChoisi: any;
+  somme1: number;
+  somme2: number;
+  somme3: number;
 
   constructor(private dateAdapter: DateAdapter<Date>, private datepipe: DatePipe,
     private rapportServ:RapportServiceService,private router:Router) { 
@@ -78,6 +81,9 @@ export class SituationParPrestationComponent implements OnInit {
       })
       this.list=data
       console.log(this.list)
+      this.somme1=this.list.reduce((sum,current)=>sum+current.part_ipm,0);
+        this.somme2=this.list.reduce((sum,current)=>sum+current.part_patient,0);
+        this.somme3=this.list.reduce((sum,current)=>sum+current.montant_facture,0);
 
 
     })

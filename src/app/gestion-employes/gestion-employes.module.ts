@@ -28,8 +28,7 @@ import { EmployerParServiceComponent } from './employer-par-service/employer-par
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
   ],
-  providers: [EmployeService,
-    DatePipe,]
+  providers: [DatePipe]
 
 })
 export class GestionEmployesModule { }
