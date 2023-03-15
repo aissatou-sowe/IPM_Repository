@@ -3,13 +3,8 @@
 </style>
 <div class="main-content">
     <div class="container-fluid">
-<<<<<<< HEAD
-      
-      <!-- <div class="row">
-=======
 <!--       
       <div class="row">
->>>>>>> 457502187f64ca37ad45f6bd8365ecb50b191ea8
         <div class="col-md-4">
           <div class="card card-chart">
             <div class="card-header card-header-rose" data-header-animation="true">
@@ -103,13 +98,23 @@
               </div>
               <!-- <p class="card-category">Bookings</p> 
              <h3 class="card-title">184</h3> -->
-              <p class="card-category" style="font-size: 26px">Total Employés</p>
+           
+              <p class="card-category" style="font-size: 26px">Total Participant</p>
               <h3 class="card-title" style="font-size: 26px;">{{nbre}}</h3>
+          
+            
+              
             </div>
+            
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons text-danger">warning</i>
-                <a href="#pablo">Get More Space...</a>
+                <!-- <i class="material-icons text-danger">warning</i> -->
+                <button mat-raised-button data-toggle="modal"
+                data-target="#statu" style="margin:10px;" type="button"  style="background-color: rgb(47, 47, 201);">
+                 <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>
+                   
+                </button>
+                <!-- <a href="#pablo">Get More Space...</a> -->
               </div>
             </div>
           </div>
@@ -147,7 +152,12 @@
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">date_range</i> Last 24 Hours
+                <button mat-raised-button data-toggle="modal"
+                data-target="#enfa" style="margin:10px;" type="button"  style="background-color: rgb(47, 47, 201);">
+                 <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>
+                   
+                </button>
+                <!-- <i class="material-icons">date_range</i> Last 24 Hours -->
               </div>
             </div>
           </div>
@@ -158,12 +168,20 @@
               <div class="card-icon">
                 <i class="fa fa-twitter"></i>
               </div>
-              <p class="card-category" style="font-size: 23px">Nombre de Bons</p>
+              <p class="card-category" style="font-size: 23px">Nombre de Bons Par Mois</p>
               <h3 class="card-title">{{nombreBons}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">update</i> Just Updated
+                <div class="stats">
+                  <button mat-raised-button data-toggle="modal"
+                  data-target="#bons" style="margin:10px;" type="button"  style="background-color: rgb(47, 47, 201);">
+                   <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>
+                     
+                  </button>
+                  <!-- <i class="material-icons">date_range</i> Last 24 Hours -->
+                </div>
+                <!-- <i class="material-icons">update</i> Just Updated -->
               </div>
             </div>
           </div>
@@ -172,3 +190,95 @@
       
     </div>
 </div>
+
+
+<!--modal dahsbord -->
+<div class="modal fade" id="statu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" >
+    <div class="modal-content" style="background-color: whitesmoke;color: black;">
+        <div class="modal-header" style="background-color: whitesmoke;"
+        >
+            <h3 class="modal-title" id="noticeModal" style="font-weight:bold; padding-bottom: 10px;">
+                Totals Hommes: <span style="color:blue">{{nombreHommes}}</span><br>
+                Totals Femmes: <span style="color:blue">{{nombreFemmes}}</span>
+            </h3>
+            <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!--fin modal-->
+
+<!--modal categories ages enfants -->
+<div class="modal fade" id="enfa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" >
+    <div class="modal-content" style="background-color: whitesmoke;color: black;">
+        <div class="modal-header" style="background-color: whitesmoke;"
+        >
+            <h3 class="modal-title" id="noticeModal" style="font-weight:bold; padding-bottom: 10px;">
+                Totals Enfants moins de 5 ans:  <span style="color:blue">{{this.agenfan}}</span>
+                Totals Enfants plus de 5 ans:  <span style="color:blue">{{this.agenfa}}</span>
+            </h3>
+            <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <div class="container-fluid">
+          <form class="form-horizontal">
+        <div class="modal-body" style="width: 700px;">
+      
+            
+        </div>
+        <div class="text-center" style="margin-top: 40px; padding-bottom: 1cm;">
+      
+        </div>
+      </form>
+      </div>
+    </div>
+
+</div>
+</div>
+
+<!--fin modal-->
+
+<!--modal bon par prestattions -->
+<div class="modal fade" id="bons" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" >
+    <div class="modal-content" style="background-color: whitesmoke;color: black;">
+        <div class="modal-header" style="background-color: whitesmoke;"
+        >
+            <h3 class="modal-title" id="noticeModal" style="font-weight:bold; padding-bottom: 10px;">
+                <p style="color:blue">Nombre de Bons </p>
+                 Pharmacie:  <span style="color:blue">{{this.nombreph}}</span><br>
+                 Consultation:  <span style="color:blue">{{this.nombrecons}}</span><br>
+                 Lettre De Garantie:  <span style="color:blue">{{this.nombrelettre}}</span><br>
+               Lunetterie:  <span style="color:blue">{{this.nombrebonlunette}}</span>
+            </h3>
+            <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <div class="container-fluid">
+          <form class="form-horizontal">
+        <div class="modal-body" style="width: 700px;">
+      
+            
+        </div>
+        <div class="text-center" style="margin-top: 40px; padding-bottom: 1cm;">
+      
+        </div>
+      </form>
+      </div>
+    </div>
+
+</div>
+</div>
+
+<!--fin modal-->

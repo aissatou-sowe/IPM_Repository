@@ -396,7 +396,7 @@
             <form class="form-horizontal">
           <div class="modal-body" style="width: 700px;">
             <div class="row">
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
               <mat-form-field>
                 <mat-select placeholder="Statut" name="statutEmploye" [(ngModel)]="codeStat">
                   <mat-option *ngFor="let stu of statutEmploye"  [value]="stu.idStatut">
@@ -405,6 +405,23 @@
                 </mat-select>
               </mat-form-field>
             </div>
+            <div class="col-md-4 form-group">
+              <mat-form-field>
+                <mat-select placeholder="Statut" name="statutEmploye" [(ngModel)]="codeStat">
+                  <mat-option *ngFor="let stu of statutEmploye"  [value]="stu.idStatut">
+                    {{ stu.emplStatut}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 form-group">
+              <mat-form-field>
+                <input matInput type="text" class="form-control" id="motif"
+                placeholder="Motif" formControlName="motif">
+              </mat-form-field>
+            </div>
+          </div>
+            <div class="row">
             <div class="col-md-6 form-group">
               <mat-form-field>
                 <input matInput [matDatepicker]="picker3" (click)="picker3.open()" id="dateDemission" style="margin-top: 4px;"
@@ -412,8 +429,17 @@
                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                 <mat-datepicker #picker3 startView="year"></mat-datepicker>
               </mat-form-field>
-            </div>                
-              </div>
+            </div> 
+            <div class="col-md-6 form-group">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker3" (click)="picker3.open()" id="dateDemission" style="margin-top: 4px;"
+                  placeholder="Date Demission" formControlName="dateDemission">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3 startView="year"></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>               
+           
               
           </div>
           <div class="text-center" style="margin-top: 40px; padding-bottom: 1cm;">
