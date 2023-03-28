@@ -66,5 +66,31 @@ export class RapportServiceService {
   public CountBons():Observable<any[]>{
     return this.http.get<any[]>(environment.URL+'getBonbymonth');
   }
+
+  public CountSexeMasculin():Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+'employe/countSexeM');
+  }
+  public CountSexeFeminin():Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+'employe/countSexeF');
+  }
+
+  public CountAgesEnfant():Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+'allenfant');
+  }
+
+
+  //////Bon par prestation
+  public CountBonPharmacie():Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+'getBonbypharma');
+  }
+  public CountBonConsultation():Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+'getBonbycons');
+  }
+  public CountBonLettreGarantie():Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+'getBonbylettreGarantie');
+  }
+  public CountBonLunetterie():Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+'getBonbylunetterie');
+  }
 }
 

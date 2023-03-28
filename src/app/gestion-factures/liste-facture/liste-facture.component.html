@@ -22,12 +22,13 @@
 
                         <tr>
                             <!-- <th class="text-center"><b>Id</b> </th>-->
-                            <th  style="font-weight:bold;" cope="col"> Numero facture</th>
+                            <th  style="font-weight:bold;" cope="col"> Numero</th>
                             <th style="font-weight:bold;" cope="col">Prestataire</th>
                             <th style="font-weight:bold;text-align: center;" cope="col" >Date</th>
                             <th style="font-weight:bold;text-align: center;" cope="col">Montant Facture</th>
                             <th style="font-weight:bold;text-align: center;" cope="col">Charge ipm</th>
                             <th style="font-weight:bold;text-align: center;" cope="col">Charge agent</th>
+                            <th style="font-weight:bold;text-align: center;" cope="col">réglement</th>
                             <th style="font-weight:bold;text-align: center;" cope="col">Statu Facture</th>
                             <!-- <th cope="col">Date</th> -->
                             <th style="font-weight:bold;text-align: center;" cope="col">Action</th>
@@ -45,7 +46,13 @@
                       <td class="text-center"><b>{{fac.montantTotal | number:'1.0-0'}}</b></td>
                     <td class="text-center"><b>{{fac.part_ipm | number:'1.0-0'}}</b></td>
              <td class="text-center"><b>{{fac.part_patient | number:'1.0-0'}}</b></td>
-             <td class="text-center">
+             <td class="text-center" >
+                <div *ngIf="fac.nombJour>75">
+             <span *ngIf=" fac.reglement" class="badge badge-success">regler</span>
+              <span *ngIf="!fac.reglement  " class="badge badge-danger">non regler</span>
+            </div></td>
+
+             <td class="text-center" >
                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Certifiée'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>
                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='En Instance'" class="badge badge-info">{{fac.ipmStatutFacture?.statutFacture}}</span>
                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Rejetée'" class="badge badge-warning">{{fac.ipmStatutFacture?.statutFacture}}</span>

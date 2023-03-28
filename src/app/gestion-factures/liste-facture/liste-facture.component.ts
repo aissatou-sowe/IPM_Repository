@@ -6,6 +6,7 @@ import { IPM_Details_Facture } from 'src/app/Models/IPM_Detils_Factures';
 import { Facture } from 'src/app/Models/IPM_Facture';
 import { FactureService } from 'src/app/Services/facture.service';
 import { UtilisateurService } from 'src/app/Services/utilisateur.service';
+import * as moment from 'moment';
 declare var $;
 @Component({
   selector: 'app-liste-facture',
@@ -48,6 +49,8 @@ export class ListeFactureComponent implements OnInit {
   idfact: any;
   user: any;
  factur:Facture=new Facture();
+  delai: any;
+  nombJour: number;
   
   constructor(private fact_service:FactureService,private datepipe: DatePipe,private user_Service:UtilisateurService,
     private router:Router,private route: ActivatedRoute,public keycloak: KeycloakService) { 
@@ -98,20 +101,32 @@ export class ListeFactureComponent implements OnInit {
            });
       
       })
-      this.liste = data;
-  //      for (let index = 0; index < this.listFacture.length; index++) {
-  //       //  if(this.listFacture[0].ipm_facture.certifier!=true){
-  //       //    this.liste.push(this.listFacture[index].ipm_facture)
+      
+      data.forEach(element => {
+        const date =element.DateReception
+     console.log(date)
+     const b=new Date(date)
+     // Définissez la date de référence
+     //const referenceDate = moment('2023-02-01');
+     const referenceDate = moment(date);
+
+     
+     // Définissez la date actuelle
+     const currentDate = moment();
+     
+     // Calculez la différence en jours entre les deux dates
+     const daysDiff = currentDate.diff(referenceDate, 'days');
+     console.log('Nombre de jours écoulés depuis la date de référence : ' + daysDiff);
+     element.nombJour=daysDiff
+     this.liste = data;
+        
+      });
+      
+
+  
      console.log(this.liste);
     
-     //console.log((<any>$('#datatable')).dataTable())
-  //       //  }
-        
-  //      }
-
-      
-  // console.log(this.date1)
-  //     console.log(this.listFacture);
+    
       
     });
     

@@ -15,6 +15,7 @@ import { PrestataireService } from 'src/app/Services/prestataire.service';
 import { PrestationService } from 'src/app/Services/prestation.service';
 import { Employe } from '../../Models/Employe';
 import { Facture } from '../../Models/IPM_Facture';
+
 type AOA = any;
 declare var $;
 @Component({
@@ -176,6 +177,16 @@ listFacturess;
     
    
     //(<any>$('#datatable1')).dataTable().fnDestroy();
+  }
+  reglementer(){
+    this.facture.reglement=true
+    this.fact_service.UpdateFacture(this.facture).subscribe(
+      (data)=>{
+        this.ngOnInit();
+      }
+
+    )
+
   }
   CertifierEmploye(){
     console.log(this.facture,this.certifier)

@@ -90,7 +90,26 @@ export class FactureEmployesComponent implements OnInit {
      date_facture;
      idfacture;
      validerFact:boolean=false
+     reception;
   ngOnInit(): void {
+////////////////
+    let date = new Date(2016, 1, 28);
+   if (date.setDate(date.getMonth() + 2 +date.getDate() +15))
+    if(date.getTimezoneOffset())
+    {
+        
+      console.log( date );
+      alert(date);
+    }
+    else
+    {
+      console.log("******************************************")
+      // alert("**********Temps****************")
+    }
+ 
+   
+
+////
      this.createForm(); 
 
      this.pres_service.getAllPrestataires().subscribe(
@@ -276,6 +295,7 @@ showNotification(from: any, align: any, idtype: any, note) {
   addDetails() {
     const detailsfact= new IPM_Details_Facture(); 
       detailsfact.matricule= this.message.matricule,
+
      // detailsfact.numerofacture=this.factureForm.get('numerofacture').value,
       //detailsfact.date_facture=this.date_facture,
       detailsfact.datePrestation=this.factureForm.get('date_prestation').value;
@@ -348,6 +368,7 @@ editDetails(index: number) {
     this.Factures.part_patient=this.totalChargeAgent
     this.Factures.numerofacture=this.numerofacture
     this.Factures.dateFacture=this.date_facture
+    this.Factures.DateReception=this.reception
     this.Factures.dateSaisie=new Date();
     this.addStatutFacture.idStatutFacture=1
     this.Factures.ipmStatutFacture=JSON.parse(JSON.stringify(this.addStatutFacture))

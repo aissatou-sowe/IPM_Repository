@@ -8,6 +8,7 @@ import { Employe } from '../Models/Employe';
 import { Conjoint } from '../Models/Conjoint';
 import { Enfant } from '../Models/Enfant';
 import { IPM_Bon } from '../Models/IPM_Bon';
+import { element } from 'protractor';
 
 declare const $: any;
 
@@ -21,6 +22,16 @@ nbre:any;
 nbreconjoint:any;
 nbrenfant:any;
 nombreBons:any;
+nombreHommes:any;
+nombreFemmes:any
+nombreEnfantsAges:Enfant[]
+  agenfant: number;
+  agenfa: number=0;
+  agenfan: number=0;
+  nombreph: any;
+  nombrecons: any
+  nombrelettre: any
+  nombrebonlunette: any
   constructor(private rapportrSer:RapportServiceService) { }
   public tableData: TableData;
   startAnimationForLineChart(chart: any) {
@@ -86,6 +97,13 @@ nombreBons:any;
      this.countConoint();
      this.countEnfant();
      this.countBon();
+     this.countM();
+     this.countF();
+     this.countEnfantAge();
+     this.countBonPhar();
+     this.countBonCons();
+     this.countBonlettre();
+     this.countBonLunette();
       this.tableData = {
           headerRow: ['ID', 'Name', 'Salary', 'Country', 'City'],
           dataRows: [
@@ -255,6 +273,7 @@ nombreBons:any;
    });
 
 }
+//Nombre de Bon par Mois
 countBon(){
   this.rapportrSer.CountBons().subscribe(
    (data) => {
@@ -265,5 +284,95 @@ countBon(){
 
 }
 
+
+//Count nombre d'hommes
+countM(){
+  this.rapportrSer.CountSexeMasculin().subscribe(
+   (data) => {
+    this.nombreHommes=data;
+     console.log(this.nombreHommes);
+ 
+   });
+
+}
+
+//Count nombre de femmes
+countF(){
+  this.rapportrSer.CountSexeFeminin().subscribe(
+   (data) => {
+    this.nombreFemmes=data;
+     console.log(this.nombreFemmes);
+ 
+   });
+
+}
+
+//Count enfant mois et plus de 5 ans
+countEnfantAge(){
+  this.rapportrSer.CountAgesEnfant().subscribe(
+   (data) => {
+    this.nombreEnfantsAges=data;
+    this.nombreEnfantsAges.forEach(ele => {
+      ele.date_nais_enfant
+        //convert date again to type Date
+        const bdate = new Date(ele.date_nais_enfant);
+        const timeDiff = Math.abs(Date.now() - bdate.getTime());
+        this.agenfant = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+        console.log(this.agenfant)
+   
+      if (this.agenfant > 5) {
+        console.log("Age plus de 5 ans :" ,this.agenfant)
+        this.agenfa++
+        console.log(this.agenfa);
+      }
+      else if (this.agenfant <=5) {
+        console.log("Age moins de 5 ans :", this.agenfant)
+        this.agenfan++;
+        console.log(this.agenfan);
+
+      }
+    })
+ 
+   });
+
+}
+
+//Count nombre de bon par prestation
+countBonPhar(){
+  this.rapportrSer.CountBonPharmacie().subscribe(
+   (data) => {
+    this.nombreph=data;
+     console.log(this.nombreph);
+ 
+   });
+
+}
+countBonCons(){
+  this.rapportrSer.CountBonConsultation().subscribe(
+   (data) => {
+    this.nombrecons=data;
+     console.log(this.nombrecons);
+ 
+   });
+
+}
+countBonlettre(){
+  this.rapportrSer.CountBonLettreGarantie().subscribe(
+   (data) => {
+    this.nombrelettre=data;
+     console.log(this.nombrelettre);
+ 
+   });
+
+}
+countBonLunette(){
+  this.rapportrSer.CountBonLunetterie().subscribe(
+   (data) => {
+    this.nombrebonlunette=data;
+     console.log(this.nombrebonlunette);
+ 
+   });
+
+}
 
 }
