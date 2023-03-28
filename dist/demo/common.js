@@ -91,13 +91,13 @@ var FactureService = /** @class */ (function () {
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'updateList', ldetail, { responseType: 'text' });
     };
     FactureService.prototype.updateOnEmploye = function (Employe) {
-        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'employe', Employe);
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'employesansPhoto', Employe);
     };
     FactureService.prototype.updateOnglobal = function (Empl) {
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'upremboursement', Empl);
     };
     FactureService.prototype.getEmployeById = function (idemp) {
-        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'employes/' + idemp);
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'employesanstof/' + idemp);
     };
     FactureService.prototype.updateDetailfact = function (ipm_detail) {
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].URL + 'updateDetail', ipm_detail);
@@ -281,6 +281,9 @@ var RapportServiceService = /** @class */ (function () {
     };
     RapportServiceService.prototype.CountEnf = function () {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'enfant/count');
+    };
+    RapportServiceService.prototype.CountBons = function () {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].URL + 'getBonbymonth');
     };
     RapportServiceService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

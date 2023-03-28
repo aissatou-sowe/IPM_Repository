@@ -61,6 +61,7 @@ export class FactureEmployesComponent implements OnInit {
   factuGlobale: Facture;
   date_prestation:Date
   code_presta:any;
+  d1: number;
   constructor(private builder: FormBuilder,private emp_service: EmployeService, 
     private router: Router, private route: ActivatedRoute,
     private pres_service: PrestataireService,private prestation:PrestationService,
@@ -91,24 +92,7 @@ export class FactureEmployesComponent implements OnInit {
      idfacture;
      validerFact:boolean=false
   ngOnInit(): void {
-////////////////
-    let date = new Date(2016, 1, 28);
-   if (date.setDate(date.getMonth() + 2 +date.getDate() +15))
-    if(date.getTimezoneOffset())
-    {
-        
-      console.log( date );
-      alert(date);
-    }
-    else
-    {
-      console.log("******************************************")
-      alert("**********Temps****************")
-    }
- 
-   
 
-////
      this.createForm(); 
 
      this.pres_service.getAllPrestataires().subscribe(

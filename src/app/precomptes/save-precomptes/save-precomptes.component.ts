@@ -10,7 +10,10 @@ import { EmployeService } from 'src/app/Services/employe.service';
 import { PrecomptesService } from 'src/app/Services/precomptes.service';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import * as xlsx from 'xlsx';
+import * as FileSaver from 'file-saver';
 import { DatePipe } from '@angular/common';
+import { PrecompteExcel } from '../../Models/PrecompteExcel';
+import { SidebarModule } from '../../sidebar/sidebar.module';
 declare const $: any;
 @Component({
   selector: 'app-save-precomptes',
@@ -33,6 +36,9 @@ export class SavePrecomptesComponent implements OnInit {
   annny: any;
   myDate = new Date();
   dateprecompte: string;
+  PrecompteExcel:PrecompteExcel=new PrecompteExcel()
+  PrecompteExcels=[]
+
   constructor(private emp_service: EmployeService, private datePipe: DatePipe, private formbuildprecompte: FormBuilder,
     private router: Router, private bareme_service: BaremeService, private precompte_service: PrecomptesService,
     private route: ActivatedRoute) {
@@ -115,8 +121,27 @@ export class SavePrecomptesComponent implements OnInit {
           });
     
         })
+        this.PrecompteExcels=[]
         console.log(this.listPanier);
+        for (let i = 0; i < this.listPanier.length; i++) {
+          this.PrecompteExcel.Matricule=this.listPanier[i].matricule
+          this.PrecompteExcel.Prenom=this.listPanier[i].prenom
+          this.PrecompteExcel.Nom=this.listPanier[i].nom
+          
+          this.PrecompteExcel.Solde=this.listPanier[i].solde
+          this.PrecompteExcel.MontantRemboursement=this.listPanier[i].montantRembou
+
+          this.PrecompteExcel.Date=this.listPanier[i].datePrecompte
+          this.PrecompteExcels.push({...this.PrecompteExcel} )
+          
+          
+        }
+      
+       
       });
+      console.log(this.listPanier);
+     
+     
   }
   ////////////Enregistrer les précomptes 
   savePrecom(){
@@ -160,12 +185,32 @@ export class SavePrecomptesComponent implements OnInit {
 
 
   /////////////////Export
-  @ViewChild('TABLE', { static: false }) TABLE: ElementRef; 
-  fileDownload(){
-    const ws: xlsx.WorkSheet = xlsx.utils.table_to_sheet(this.TABLE.nativeElement);  
-    const wb: xlsx.WorkBook = xlsx.utils.book_new();  
-    xlsx.utils.book_append_sheet(wb, ws, 'Fichier Precompte');  
-    xlsx.writeFile(wb, 'precompte.xlsx');  
+ // @ViewChild('TABLE', { static: false }) TABLE: ElementRef; 
+  
+//   fileDownload(){
+//     const ws: xlsx.WorkSheet = xlsx.utils.table_to_sheet(this.TABLE.nativeElement);  
+//     const wb: xlsx.WorkBook = xlsx.utils.book_new();  
+//     xlsx.utils.book_append_sheet(wb, ws, 'Fichier Precompte');  
+//     xlsx.writeFile(wb, 'precompte.xlsx');  
  
+// }
+fileDownload() {
+  console.log(this.PrecompteExcels)
+  
+  // @ts-ignore
+  import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this.PrecompteExcels);
+      const workbook = { Sheets: { 'fichier_excel': worksheet }, SheetNames: ['fichier_excel'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, "PrecompteExcel");
+  });
+}
+saveAsExcelFile(buffer: any, fileName: string): void {
+  let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  let EXCEL_EXTENSION = '.xlsx';
+  const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+  });
+  FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 }
 }

@@ -160,6 +160,12 @@
                 <div class="row">
                   <div class="col-md-4 form-group">
                     <div class="form-group">
+                      <label class="bmd-label-floating">Sexe:</label>
+                      <b> {{message.sexe}}</b>
+                    </div>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <div class="form-group">
                       <label class="bmd-label-floating">Date Naissance:</label>
                       <b> {{message.date_nais}}</b>
                     </div>
@@ -288,16 +294,22 @@
                 <div class="card-header card-header-icon card-header-info" class="btn-btn primary">
 
                   <div class="row">
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-3 form-group">
                       <div class="form-group">
                         <label>Prénom Conjoint :</label>
                         <b>{{messageconjoint?.prenom_conjoint}}</b>
                       </div>
                     </div>
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-3 form-group">
                       <div class="form-group">
                         <label> Nom Conjoint:</label>
                         <b>{{messageconjoint?.nom_conjoint}}</b>
+                      </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                      <div class="form-group">
+                        <label> Sexe:</label>
+                        <b>{{messageconjoint?.sexe_conjoint}}</b>
                       </div>
                     </div>
                     <!-- <div class="col-md-3 form-group">
@@ -306,7 +318,7 @@
                         <b>{{messageconjoint?.date_naiss_conj}}</b>
                       </div>
                     </div> -->
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-3 form-group">
                       <div class="form-group">
                         <label class="bmd-label-floating">Age:</label>
                         <b> {{AgeConjoint}}</b>
@@ -404,8 +416,8 @@
                     </div>
                     <div class="col-md-3 form-group">
                       <div class="form-group">
-                        <label class="bmd-label-floating">Date Naissance:</label>
-                        <b>{{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>
+                        <label class="bmd-label-floating">Sexe:</label>
+                        <b>{{messageenfant?.sexe_enfant}}</b>
                       </div>
                     </div>
                     <div class="col-md-3 form-group">
@@ -423,6 +435,12 @@
                     <b>{{messageenfant.date_nais}}</b>
                   </div>
                 </div> -->
+                <div class="col-md-3 form-group">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Date Naissance:</label>
+                    <b>{{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>
+                  </div>
+                </div>
                   <div class="col-md-4 form-group">
                     <div class="form-group">
                       <label class="bmd-label-floating">Lieu de Naissance:</label>

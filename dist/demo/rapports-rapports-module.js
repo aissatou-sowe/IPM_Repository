@@ -164,7 +164,7 @@ var SituationParPrestationComponent = /** @class */ (function () {
         var _this = this;
         this.rapportServ.getPrestation().subscribe(function (data) {
             _this.listPrestation = data;
-            //console.log(this.prestatonChoisi,presta.code_prestation)
+            console.log(_this.listPrestation);
         });
     };
     SituationParPrestationComponent.prototype.getprestation = function (presta) {
