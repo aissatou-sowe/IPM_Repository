@@ -133,7 +133,11 @@
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">local_offer</i> Tracked from Google Analytics
+                <button mat-raised-button data-toggle="modal"
+                data-target="#sexeConjoint" style="margin:10px;" type="button"  style="background-color: rgb(47, 47, 201);">
+                 <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>
+                   
+                </button>
               </div>
             </div>
           </div>
@@ -222,9 +226,42 @@ aria-hidden="true">
         <div class="modal-header" style="background-color: whitesmoke;"
         >
             <h3 class="modal-title" id="noticeModal" style="font-weight:bold; padding-bottom: 10px;">
-                Totals Enfants moins de 5 ans:  <span style="color:blue">{{this.agenfan}}</span>
+                Totals Enfants moins de 5 ans:  <span style="color:blue">{{this.agenfan}}</span><br>
                 Totals Enfants plus de 5 ans:  <span style="color:blue">{{this.agenfa}}</span>
             </h3>
+            <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <div class="container-fluid">
+          <form class="form-horizontal">
+        <div class="modal-body" style="width: 700px;">
+      
+            
+        </div>
+        <div class="text-center" style="margin-top: 40px; padding-bottom: 1cm;">
+      
+        </div>
+      </form>
+      </div>
+    </div>
+
+</div>
+</div>
+
+<!--fin modal-->
+
+<!--modal sexe conjoint -->
+<div class="modal fade" id="sexeConjoint" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" >
+    <div class="modal-content" style="background-color: whitesmoke;color: black;">
+        <div class="modal-header" style="background-color: whitesmoke;"
+        >
+        <h3 class="modal-title" id="noticeModal" style="font-weight:bold; padding-bottom: 10px;">
+          Totals Hommes: <span style="color:blue">{{nombreHommeConj}}</span><br>
+          Totals Femmes: <span style="color:blue">{{nombreFemmeConj}}</span>
+      </h3>
             <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                 <i class="material-icons">close</i>
             </button>

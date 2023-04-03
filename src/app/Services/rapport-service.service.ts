@@ -77,6 +77,12 @@ export class RapportServiceService {
   public CountAgesEnfant():Observable<any[]>{
     return this.http.get<any[]>(environment.URL+'allenfant');
   }
+  public CountSexeFemininConj():Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+'conjoint/countSexeF');
+  }
+  public CountSexeMasculinConj():Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+'conjoint/countSexeM');
+  }
 
 
   //////Bon par prestation

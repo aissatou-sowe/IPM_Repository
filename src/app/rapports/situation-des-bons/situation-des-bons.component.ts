@@ -114,6 +114,9 @@ export class SituationDesBonsComponent implements OnInit {
         '</div>'
     });
 }
+getDetBon(element){
+  console.log(element)
+}
 
 
 //Imprimer Situation Annuelle
