@@ -56,23 +56,24 @@
     </div>
   </div>
   <!--Modal cotisation Entité -->
-  <div class="modal fade" id="entite"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog cascading-modal" role="document">
-      <!--Content-->
-      <div class="modal-content" style="width: 1000px; " >
-        <div class="modal-header">
-          <h4 class="modal-title">Prise en Compte des Cotisations par entité</h4>
+  <div class="tab-pane" id="link1">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-icon card-header-rose">
+          <h4 class="card-title">Prise en Compte des Cotisations par entité</h4>
           <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="material-icons">clear</i>
           </button>
         </div>
        
-        <div class="modal-c-tabs">
+      
           
           <div class="tab-content" >
               <!--Body-->
-              <div class="modal-body mb-1">
-                <form #form="ngForm">
+
+                <!-- <form #form="ngForm">
                     <div class="row">
                         <div class="col-md-5" style="margin-top: -35px;">
                            
@@ -88,15 +89,9 @@
                           </div>
                         </div>
                      
-                </form>
+                </form> -->
                 
-                
-                
-                
-                
-              </div>
-            
-              
+          
               <div class="col-md-12" *ngIf="listCotisationEntity" >
                 <div class="card" >
                     <div class="card-header card-header-icon card-header-rose">
@@ -109,8 +104,11 @@
                         <h4 class="card-title">Liste prévisionnelle Des Cotisations de l'entité {{nomEntity}} </h4>
                         
                        
+          
                     </div>
+                   
                     <div [ngSwitch]="condition">
+                    
                       <div *ngSwitchCase="1">Contenu de remplacement 1
                         <div class="card-body table-full-width">
                           <div class="material-datatable">
@@ -158,6 +156,7 @@
                             </div>
                         </div>
                       </div>
+                      
                       <div *ngSwitchCase="2">Contenu de remplacement 2
                         <div class="card-body table-full-width">
                           <div class="material-datatable">
@@ -304,15 +303,13 @@
                         </div>
                         </div>
               <!--Footer-->
-              <div class="modal-footer">
-                
-       
-              </div>
+             
           </div>
   
-        </div>
       </div>
     </div>
+  </div>
+  </div>
   </div>
   <!--Fin-->
   <div class="main-content">
@@ -332,12 +329,25 @@
                         font-size: 16px;" data-toggle="modal" data-target="#bare" class="btn btn-success">
                             <i class="material-icons" >add_circle</i> Modifer Cotisations
                         </button>
-                        <button mat-raised-button type="button" style="float:right;margin-top:1cm; 
+                        <!-- <button mat-raised-button type="button" style="float:right;margin-top:1cm; 
                         font-size: 16px;" data-toggle="modal" data-target="#entite" class="btn btn-success">
                             <i class="material-icons" >edit</i> Cotisations Par Entité
-                        </button>
+                        </button> -->
+                     
                           <h4 class="card-title">Liste prévisionnelle Des Cotisations</h4>
-                          
+                          <div class="col-md-5" style="margin-top: -35px;">
+                           
+                            <mat-form-field>
+                             
+                              <mat-select name="entite"  id="entite" placeholder="Selectionner l'entité" [(ngModel)]="entite">
+                                <mat-option  *ngFor="let prest of listEntity" [value]="prest.idEntity" class="nav-link "
+                                data-toggle="tab" href="#link1" role="tablist"
+                                (click)="getnomEntity(prest);form.resetForm()">{{ prest.nom_entity }}
+                                  
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
                          
                       </div>
                           <div class="card-body table-full-width">

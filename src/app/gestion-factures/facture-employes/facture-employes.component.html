@@ -47,6 +47,15 @@
             [(ngModel)]="date_facture">
         </div>
       </div>
+        <div class="col-md-3" style="margin-top: 0px;">
+          <!-- <legend>date Facture</legend> -->
+          <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="date reception" id="reception" name="reception" [(ngModel)]="reception" (click)="picker.open()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year"></mat-datepicker>
+          </mat-form-field>
+      </div>
+      
       <div class="modal-footer justify-content-center">
         <button mat-raised-button class="btn btn-raised btn-round btn-success" (click)="findByMatricules()">recherche
         </button>

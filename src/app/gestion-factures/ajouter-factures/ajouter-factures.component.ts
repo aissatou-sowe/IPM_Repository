@@ -589,6 +589,7 @@ export class AjouterFacturesComponent implements OnInit {
     this.factureglobal.ipm_prestataire = JSON.parse(JSON.stringify(this.jsonPrest))
     
     this.factureglobal.dateFacture=this.dateFacture
+    this.factureglobal.DateReception=this.reception
     this.factureglobal.numerofacture =this.NumeroFacture
     this.jsonStat.idStatutFacture=1
     this.factureglobal.ipmStatutFacture =JSON.parse(JSON.stringify(this.jsonStat))
