@@ -32,6 +32,8 @@ nombreEnfantsAges:Enfant[]
   nombrecons: any
   nombrelettre: any
   nombrebonlunette: any
+  nombreFemmeConj: any[];
+  nombreHommeConj: any[];
   constructor(private rapportrSer:RapportServiceService) { }
   public tableData: TableData;
   startAnimationForLineChart(chart: any) {
@@ -104,6 +106,7 @@ nombreEnfantsAges:Enfant[]
      this.countBonCons();
      this.countBonlettre();
      this.countBonLunette();
+     this.countHommeFemmeConjoints();
       this.tableData = {
           headerRow: ['ID', 'Name', 'Salary', 'Country', 'City'],
           dataRows: [
@@ -304,6 +307,22 @@ countF(){
      console.log(this.nombreFemmes);
  
    });
+   
+
+}
+countHommeFemmeConjoints(){
+  this.rapportrSer.CountSexeFemininConj().subscribe(
+    (data) => {
+     this.nombreFemmeConj=data;
+      console.log(this.nombreFemmeConj);
+  
+    });
+    this.rapportrSer.CountSexeMasculinConj().subscribe(
+      (data) => {
+       this.nombreHommeConj=data;
+        console.log(this.nombreHommeConj);
+    
+      });
 
 }
 
